@@ -33,11 +33,11 @@
               -ms-transform: translate(-50%, -50%)
             }
 
-            .container:hover .image {
+            .figure:hover .image {
               opacity: 0.3;
             }
 
-            .container:hover .middle {
+            .figure:hover .middle {
               opacity: 1;
             }
 
@@ -52,15 +52,52 @@
                          
 </head>
 <body>
-
-    
-
     <br /><br /> 
-
     <center>
+
         <div class="container">
-            <div class="row">     
-                <div class="col">          
+            <div class="row">
+                <div class="col-xs-12">
+                    <figure class="figure">                       
+                            <img src="{{ url_for('static',filename="menu1.png")}}" class="figure-img img-fluid rounded image" alt="เพิ่มรายการยืม-คืน"/>                        
+                        <div class="middle">
+                            <a href="/lend">
+                                <div class="text">เพิ่มรายการยืม-คืน</div>
+                            </a>
+                        </div>                       
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row"> 
+                <div class="col-md-6">
+                    <figure class="figure">                       
+                            <img src="{{ url_for('static',filename="menu2.png")}}" class="figure-img img-fluid rounded image" alt="ค้นหาอุปกรณ์"/>                        
+                        <div class="middle">
+                            <a href="/equipment">
+                                <div class="text">ค้นหาอุปกรณ์</div>
+                            </a>
+                        </div>                       
+                    </figure>
+                </div>
+                <div class="col-md-6">
+                    <figure class="figure">                       
+                            <img src="{{ url_for('static',filename="menu3.png")}}" class="figure-img img-fluid rounded image" alt="หมวดหมู่"/>                        
+                        <div class="middle">
+                            <a href="/category">
+                                <div class="text">ค้นหาหมวดหมู่</div>
+                            </a>
+                        </div>                       
+                    </figure>
+                </div>
+            </div>
+        </div>
+        
+        <!-- <div class="container">
+            <div class="row">
+                <div class="col-10">
                     <figure class="figure">                       
                             <img src="{{ url_for('static',filename="item.png")}}" class="figure-img img-fluid rounded image" alt="ค้นหาอุปกรณ์"/>                        
                         <div class="middle">
@@ -68,14 +105,30 @@
                                 <div class="text">ค้นหาอุปกรณ์</div>
                             </a>
                         </div>
-                        <!-- <figcaption class="figure-caption">A caption for the above image.</figcaption> -->
+                        
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">     
+                <div class="col-5">          
+                    <figure class="figure">                       
+                            <img src="{{ url_for('static',filename="item.png")}}" class="figure-img img-fluid rounded image" alt="ค้นหาอุปกรณ์"/>                        
+                        <div class="middle">
+                            <a href="/equipment">
+                                <div class="text">ค้นหาอุปกรณ์</div>
+                            </a>
+                        </div>
+                        
                     </figure>
                 </div>              
             </div>
         </div>
         <div class="container">
             <div class="row">
-                 <div class="col iamge">            
+                <div class="col-5">            
                     <figure class="figure">                                                                     
                             <img src="{{ url_for('static',filename="categories.png")}}" class="figure-img img-fluid rounded image" alt="ค้นหาหมวดหมู่"/>
                         <div class="middle">
@@ -83,11 +136,13 @@
                                 <div class="text">ค้นหาหมวดหมู่</div>
                             </a>
                         </div>
-                        <!-- <figcaption class="figure-caption">A caption for the above image.</figcaption> -->
+                        
                     </figure>                   
                 </div>
             </div>
-        </div>
+        </div> -->
+
+         
     </center>
 
 </body>

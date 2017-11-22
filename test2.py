@@ -7,7 +7,22 @@ app = Flask(__name__)
 
 # api = Api(app)
 
-# -------------EQUIPMENT QUERY----------------
+@app.route('/login')
+def login():
+    return render_template("login.html")
+
+@app.route('/')
+def index():
+    return render_template("index.html")
+
+@app.route('/lend')
+def lend():
+    conn = db_connect.connect()
+    query = conn.execute("SELECT lh.LEND_DATE, ps.NAME, ps.SURNAME, ps.FACULTY, ps.CLASS, eq.SERIAL_NUMBER, eq.EQUIPMENT_NAME "
+                         "FROM LEND_HEAD lh, LEND_DETAIL ld, EQUIPMENT eq, STAFF s, PERSON ps "
+                         "WHERE lh.PERSON_ID = ps.PERSON_ID AND lh.STAFF_ID = s.STAFF_ID AND lh.LEND_NO = ld.LEND_NO AND ld.EQUIPMENT_ID = eq.EQUIPMENT_ID")
+    rows = query.fetchall();
+    return render_template("lend.html", rows=rows)
 
 # @app.route('add_category', methods=['POST'])
 # def add_category():
@@ -56,13 +71,9 @@ def category():
     rows = query.fetchall();
     return render_template("category.html", rows=rows)
 
-@app.route('/')
-def index():
-    return render_template("index.html")
 
-@app.route('/login')
-def login():
-    return render_template("login.html")
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

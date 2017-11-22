@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>lend</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+    <!-- data table style script -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
+
+    <script type="text/javascript">
+            $(document).ready(function() {
+    			$('#example').DataTable();
+				} );
+    </script>
+</head>
+<body>
+	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="Default.aspx">
+            <img src="{{ url_for('static',filename="band.png")}}" alt="Logo" width="45" height="30" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">หน้าหลัก <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="lend">เพิ่มรายการยืม-คืน</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="equipment">ค้นหาอุปกรณ์</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="category">ค้นหาตามหมวดหมู่</a>
+                </li>
+            </ul>
+                <!-- <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form> -->
+        </div>
+    </nav>
+    <!-- ++++++++++++++++++++++end navbar++++++++++++++++++++++ -->
+    <br /><br />
+
+    <div class="container">           
+        <div class="row">
+            <div class="col-6 col-sm-3">
+                <h3>เพิ่มรายการยืม - คืน</h3>
+            </div>           
+        </div>
+    </div>
+
+    <br />
+
+    <div class="container"> 	
+        <div class="row">
+	        <div class="col-3">
+	        	<div class="form-group">
+	        		<label for="name" class="form-control-label">ชื่อ</label>
+	        		<input type="text" class="form-control" id="name"></input>
+		        </div>	        	
+		    </div>
+	        <div class="col-3">
+	        	<div class="form-group">	        		
+	        		<label for="surname" class="form-control-label">นามสกุล</label>
+	        		<input type="text" class="form-control" id="surname"></input>
+	        	</div>
+	        </div>
+	        <div class="col-3">
+	        	<div class="form-group">	        		
+	        		<label for="faculty" class="form-control-label">สาขา</label>
+	        		<input type="text" class="form-control" id="faculty"></input>
+	        	</div>
+	        </div>
+	        <div class="col-3">
+	        	<div class="form-group">	        		
+	        		<label for="class" class="form-control-label">ชั้นปี</label>
+	        		<select class="form-control" id="class"></select>
+	        	</div>
+	        </div>		        
+	    </div>
+	    <div class="row">
+	        <div class="col-5">
+	        	<div class="form-group">
+	        		<label for="serial" class="form-control-label">เลขเครื่อง (serial number หรือ เลขตัวเครื่องโน๊ตบุ๊ค)</label>
+	        		<input type="text" class="form-control" id="serial"></input>
+	        	</div>
+	        </div>
+	        <div class="col-5">
+	        	<div class="form-group">
+	        		<label for="equipment" class="form-control-label">อุปกรณ์ (notebook, ปลั๊ก, raspberry pi ฯลฯ)</label>
+	        		<input type="text" class="form-control" id="equipment"></input>
+	        	</div>
+	        </div>
+	        <div class="col-2">
+	        	<div class="form-group">
+	        		<label for="status" class="form-control-label">สถานะ</label>
+	        		<select class="form-control" id="status"></select>
+	        	</div>
+	        </div>
+    	</div>	
+    	<div class="row">
+    		<div class="col-12">    			
+    				<button type="button" class="btn btn-danger">ล้าง</button>
+    				<button type="submit" value="submit" class="btn btn-success" id="btnSave">เพิ่ม</button>
+    		</div>
+    	</div>   	
+    </div>
+    <hr />
+
+    <div class="container">        	      
+        <table id="example" class="table table-striped table-bordered table-responsive table-hover" cellspacing="0" width="100%">
+            <thead>
+                <th>วันที่ยืม</th>
+                <th>ชื่อ</th>
+                <th>นามสกุล</th>
+                <th>สาขา</th>
+                <th>ชั้นปี</th>
+                <th>เลขเครื่อง</th>
+                <th>อุปกรณ์</th>
+            </thead>
+
+            {% for row in rows %}
+            <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+                <td>{{row[4]}}</td>                    
+                <td>{{row[5]}}</td>
+                <td>{{row[6]}}</td>
+            </tr>
+            {% endfor %}
+        </table>             
+    </div>
+
+</body>
+</html>
