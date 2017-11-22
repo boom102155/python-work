@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>login:ลงชื่อเข้าใช้งาน</title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<style>       
+		.container{
+		    position: absolute;
+		    top: 50%;
+		    left: 50%;
+		    right: 50%;
+		    transform: translateX(-50%) translateY(-50%);
+		}
+		.panel{
+		    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		}
+		img{
+		    width: 100%;
+		    height: auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+
+        <div class="row">
+            <div class="col-sm-5 col-sm-offset-3">           
+                <img src="{{ url_for('static',filename="logo.png")}}" alt="logo" width="450" height="110" />
+           </div>                           
+        </div> 
+
+        <br /> 
+
+        <div class="row">
+            <div class="col-sm-5 col-sm-offset-3">             
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">Login ลงชื่อเข้าใช้งาน</div>
+                    <div class="panel-body">
+                    	<form>
+	                        <div class="form-group">
+	                            <div>
+	                            	<label for="username" class="form-control-label">Username:</label>
+								    <input class="form-control" id="username" name="username"></input>
+	                            </div>                                                  
+	                        </div>
+	                        <div class="form-group">
+	                            <div>
+	                                <label for="password" class="form-control-label">Password:</label>
+								    <input class="form-control" id="password" name="password"></input>
+	                            </div>                         
+	                        </div>
+	                        <div class="form-group">                            
+	                            <div class="col-xs- text-center">
+	                            	<button type="button" class="btn btn-success">login</button> 
+	                            </div>
+	                        </div>
+                    	</form>
+                    </div>
+    	        </div>
+            </div>
+        </div> 
+
+	</div>
+</body>
+</html>
