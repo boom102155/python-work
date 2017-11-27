@@ -18,8 +18,17 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-    			$('#example').DataTable();
-				} );
+    			var table = $('#example').DataTable();
+    			$('#example tbody').on('click', 'tr', 'td', function () {
+			        $("#myModal").modal("show");
+			        $("#txtID").val($(this).closest('tr').children()[0].textContent);
+			        $("#txtEquipname").val($(this).closest('tr').children()[1].textContent);
+			        $("#sCategory").val($(this).closest('tr').children()[2].textContent);
+				    $("#txtCallnumber").val($(this).closest('tr').children()[3].textContent);
+				    $("#txtSerial").val($(this).closest('tr').children()[4].textContent);
+				    $("#sDate").val($(this).closest('tr').children()[5].textContent);
+			    });
+    		});
         </script> 
 </head>
 <body>
@@ -118,5 +127,31 @@
             {% endfor %}
         </table>             
     </div>
+
+    <div class="modal fade" id="myModal">
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	      			<h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          	<span aria-hidden="true">&times;</span>
+			        </button>	      
+	        	</div>
+	      	<div class="modal-body">	
+	      		<p><input type="text" class="form-control" readonly="readonly" id="txtID"/></p>        	
+	        	<p><input type="text" class="form-control" id="txtEquipname"/></p>
+	        	<p><select type="text" class="form-control" id="sCategory"></select></p>
+	        	<p><input type="text" class="form-control" id="txtCallnumber"/></p>
+	        	<p><input type="text" class="form-control" id="txtSerial"/></p>
+	        	<p><input type="date" class="form-control" id="txtDate"/></p>
+	      	</div>
+	      		<div class="modal-footer">
+	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        		<button type="button" class="btn btn-primary">Save changes</button>
+	      		</div>
+	    	</div><!-- /.modal-content -->
+  		</div><!-- /.modal-dialog -->
+  	</div><!-- /.modal -->
+
 </body>
 </html>

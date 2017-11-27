@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>lend</title>
+	<title>รายการยืม-คืนอุปกรณ์</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -18,8 +18,20 @@
 
     <script type="text/javascript">
             $(document).ready(function() {
-    			$('#example').DataTable();
-				} );
+    			var table = $('#example').DataTable();
+    			$('#example tbody').on('click', 'tr', 'td', function () {
+			        // var data = table.row( this ).data();
+			        // alert( 'You clicked on '+data[0]+'\'s row' );
+			        $("#myModal").modal("show");
+			        $("#sDate").val($(this).closest('tr').children()[0].textContent);
+				    $("#txtName").val($(this).closest('tr').children()[1].textContent);
+				    $("#txtSurname").val($(this).closest('tr').children()[2].textContent);
+				    $("#sFaculty").val($(this).closest('tr').children()[3].textContent);
+				    $("#sClass").val($(this).closest('tr').children()[4].textContent);
+				    $("#txtSerial").val($(this).closest('tr').children()[5].textContent);
+				    $("#txtEquipment").val($(this).closest('tr').children()[6].textContent);
+			    } );
+			} );
     </script>
 </head>
 <body>
@@ -66,6 +78,7 @@
 
     <br />
 
+    <!-- +++++++++++++++++++++ Input Form ++++++++++++++++++++++ -->
     <div class="container"> 	
         <div class="row">
 	        <div class="col-3">
@@ -96,7 +109,7 @@
 	    <div class="row">
 	        <div class="col-5">
 	        	<div class="form-group">
-	        		<label for="serial" class="form-control-label">เลขเครื่อง (serial number หรือ เลขตัวเครื่องโน๊ตบุ๊ค)</label>
+	        		<label for="serial" class="form-control-label">เลขเครื่อง (serial number หรือ เลขเครื่องโน๊ตบุ๊ค)</label>
 	        		<input type="text" class="form-control" id="serial"></input>
 	        	</div>
 	        </div>
@@ -113,12 +126,16 @@
 	        	</div>
 	        </div>
     	</div>	
+    	<!-- +++++++++++++++++++++ End Input Form ++++++++++++++++++++++ -->
+
+    	<!-- +++++++++++++++++++++ Button Add Lend ++++++++++++++++++++++ -->
     	<div class="row">
     		<div class="col-12">    			
-    				<button type="button" class="btn btn-danger">ล้าง</button>
-    				<button type="submit" value="submit" class="btn btn-success" id="btnSave">เพิ่ม</button>
+    				<button type="button" class="btn btn-default">ล้าง</button>
+    				<button type="submit" value="submit" class="btn btn-primary" id="btnSave">เพิ่ม</button>
     		</div>
-    	</div>   	
+    	</div> 
+    	<!-- +++++++++++++++++++++ End Button Add Lend ++++++++++++++++++++++ -->  	
     </div>
     <hr />
 
@@ -147,6 +164,32 @@
             {% endfor %}
         </table>             
     </div>
+
+    <div class="modal fade" id="myModal">
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	      			<h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          	<span aria-hidden="true">&times;</span>
+			        </button>	      
+	        	</div>
+	      	<div class="modal-body">
+	        	<p><input type="date" class="form-control" id="txtDate"/></p>
+	        	<p><input type="text" class="form-control" id="txtName"/></p>
+	        	<p><input type="text" class="form-control" id="txtSurname"/></p>
+	        	<p><select class="form-control" id="sFaculty"></select></p>
+	        	<p><select class="form-control" id="sClass"></select></p>
+	        	<p><input type="text" class="form-control" id="txtSerial"/></p>
+	        	<p><input type="text" class="form-control" id="txtEquipment"/></p>
+	      	</div>
+	      		<div class="modal-footer">
+	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        		<button type="button" class="btn btn-primary">Save changes</button>
+	      		</div>
+	    	</div><!-- /.modal-content -->
+  		</div><!-- /.modal-dialog -->
+  	</div><!-- /.modal -->
 
 </body>
 </html>
