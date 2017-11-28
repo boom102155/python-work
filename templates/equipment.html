@@ -3,33 +3,36 @@
 <head>
 	<title>equipment</title>
 	<meta charset="utf-8" />
-    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
-        <!-- data table style script -->
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
+    <!-- data table style script -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
+    
 
-        <script type="text/javascript">
-            $(document).ready(function() {
-    			var table = $('#example').DataTable();
-    			$('#example tbody').on('click', 'tr', 'td', function () {
-			        $("#myModal").modal("show");
-			        $("#txtID").val($(this).closest('tr').children()[0].textContent);
-			        $("#txtEquipname").val($(this).closest('tr').children()[1].textContent);
-			        $("#sCategory").val($(this).closest('tr').children()[2].textContent);
-				    $("#txtCallnumber").val($(this).closest('tr').children()[3].textContent);
-				    $("#txtSerial").val($(this).closest('tr').children()[4].textContent);
-				    $("#sDate").val($(this).closest('tr').children()[5].textContent);
-			    });
-    		});
-        </script> 
+    <!-- data table script -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+			var table = $('#example').DataTable();
+			$('#example tbody').on('click', 'tr', 'td', function () {
+		        $("#myModal").modal("show");
+		        $("#txtID").val($(this).closest('tr').children()[0].textContent);
+		        $("#txtEquipname").val($(this).closest('tr').children()[1].textContent);
+		        $("#sCategory").val($(this).closest('tr').children()[2].textContent);
+			    $("#txtCallnumber").val($(this).closest('tr').children()[3].textContent);
+			    $("#txtSerial").val($(this).closest('tr').children()[4].textContent);
+			    $("#txtDate").val($(this).closest('tr').children()[5].textContent);			    
+		    });
+		});
+    </script>
+   
 </head>
 <body>
 	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
@@ -73,32 +76,78 @@
         </div>
 
         <br /> 
-                  
-        <!-- <div class="row">
-            <div class="col-xs-6 col-sm-3">  
-                <input type="text" name="txtItemID" class="form-control" placeholder="รหัสอุปกรณ์" />                                                                                            
-            </div>
-            <div class="col-xs-6 col-sm-3">      
-                 <input type="text" name="txtItemName" class="form-control" placeholder="ชื่ออุปกรณ์" />                                            
-            </div>
-
-            <div class="clearfix visible-xs-block"></div>
-
-            <div class="col-xs-6 col-sm-3">
-                <div class="form-inline">
-                    <select class="form-control" name="ddCategory">
-                        <option value="1">เลือกหมวดหมู่</option>
-                    </select>      
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-3">
-                <div class="form-inline">
-                    <select class="form-control" name="ddStatus">
-                        <option value="1">เลือกสถานะ</option>
-                    </select>  
-                </div>
-            </div>
-        </div> -->    
+            
+        <!-- Button Add Category -->
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">เพิ่มอุปกรณ์</button>          
+        
+        <!-- Modal -->
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  	<div class="modal-dialog" role="document">	
+		  		<form>  			  		
+			    	<div class="modal-content">
+				      	<div class="modal-header">
+				        	<h5 class="modal-title" id="exampleModalLabel">กรอกข้อมูลหมวดหมู่</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          	<span aria-hidden="true">&times;</span>
+					        </button>
+				      	</div>
+					    <div class="modal-body">				    	
+					        <form>
+					        	<div class="form-group">
+						            <label for="equip-name" class="form-control-label">ชื่อุปกรณ์:</label>
+						            <input type="text" class="form-control" id="equip-name" name="equipname">
+						        </div>
+						        <div class="form-group">
+						        	<label for="category-name" class="form-control-label">ชื่อหมวดหมู่:</label>
+						            <select class="form-control" id="category-name" name="categoryname"></select>
+						            
+						        </div>
+						        <div class="form-group">
+						           	<label for="call-number" class="form-control-label">เลขครุภัณฑ์:</label>
+						            <input class="form-control" id="call-number" name="callnumber"></input>
+						        </div>
+						        <div class="form-group">
+						           	<label for="serial-number" class="form-control-label">เลขซีเรียล:</label>
+						            <input type="text" class="form-control" id="serial-number" name="serialnumber">
+						        </div>
+						        <div class="form-group">
+						            <label for="create-date" class="form-control-label">วันที่:</label>	
+						            <input type="date" class="form-control" id="create-date" name="createdate">   
+						            <script type="text/javascript">
+										var today = new Date();										
+										$("#create-date").val(getFormattedDate(today));										
+										// Get date formatted as YYYY-MM-DD
+										function getFormattedDate (date) {
+										    return date.getFullYear()
+										        + "-"
+										        + ("0" + (date.getMonth() + 1)).slice(-2)
+										        + "-"
+										        + ("0" + date.getDate()).slice(-2);
+										}
+						            </script>        
+						        </div>
+						        <div class="form-group">					     	
+						            <input type="date" class="form-control" id="update-date" name="updatedate" style="display: none;">
+						            <script type="text/javascript">
+						            	document.getElementById('update-date').valueAsDate = new Date()
+						            </script>					                    
+						        </div>
+						    </form>					    
+					    </div>
+					    <div class="modal-footer">
+					       	<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+					        <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>
+					        <script type="text/javascript">
+					        	$(document).on('click', '#btnSave', function(){
+	    							alert("The btn Save was clicked.");
+								});
+					        </script>
+					    </div>
+			    	</div>
+		    	</form>		    
+		  	</div>
+		</div>
+		<!-- ++++++++++++++++++End Modal++++++++++++++++++ -->
 
     </div> 
 
@@ -138,12 +187,47 @@
 			        </button>	      
 	        	</div>
 	      	<div class="modal-body">	
-	      		<p><input type="text" class="form-control" readonly="readonly" id="txtID"/></p>        	
-	        	<p><input type="text" class="form-control" id="txtEquipname"/></p>
-	        	<p><select type="text" class="form-control" id="sCategory"></select></p>
-	        	<p><input type="text" class="form-control" id="txtCallnumber"/></p>
-	        	<p><input type="text" class="form-control" id="txtSerial"/></p>
-	        	<p><input type="date" class="form-control" id="txtDate"/></p>
+	      		<form>
+	      			<div class="form-group">
+	      				<label for="txtID" class="form-control-label">รหัส:</label>
+	      				<input type="text" class="form-control" readonly="readonly" id="txtID"/>
+	      			</div>
+	      			<div class="form-group">
+	      			<label for="txtEquipname" class="form-control-label">ชื่อุปกรณ์:</label>
+	      				<input type="text" class="form-control" id="txtEquipname"/>
+	      			</div>
+	      			<div class="form-group">
+	      				<label for="sCategory" class="form-control-label">หมวดหมู่:</label>
+	      				<select type="text" class="form-control" id="sCategory"></select>
+	      			</div>
+	      			<div class="form-group">
+	      				<label for="txtCallnumber" class="form-control-label">เลขครุภัณ์:</label>
+	      				<input type="text" class="form-control" id="txtCallnumber"/>
+	      			</div>
+	      			<div class="form-group">
+	      				<label for="txtSerial" class="form-control-label">เลขซีเรียล:</label>
+	      				<input type="text" class="form-control" id="txtSerial"/>
+	      			</div>
+	      			<div class="form-group">
+	      				<label for="txtDate" class="form-control-label">วันที่:</label>
+	      				<input type="date" class="form-control" id="txtDate"/>
+	      			</div>	      			
+	      			<div class="form-group">					      					     	
+			            <input type="date" class="form-control" id="updatedate" style="display: none;" />         				                    
+			        </div>
+		        	<script type="text/javascript">
+						var today = new Date();										
+						$("#updatedate").val(getFormattedDate(today));										
+						// Get date formatted as YYYY-MM-DD
+						function getFormattedDate (date) {
+						    return date.getFullYear()
+						        + "-"
+						        + ("0" + (date.getMonth() + 1)).slice(-2)
+						        + "-"
+						        + ("0" + date.getDate()).slice(-2);
+						}
+		            </script>
+	      		</form>       		
 	      	</div>
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

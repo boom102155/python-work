@@ -27,9 +27,9 @@
 		        $("#txtShortname").val($(this).closest('tr').children()[2].textContent);
 			    $("#txtType").val($(this).closest('tr').children()[3].textContent);
 			    $("#txtDescription").val($(this).closest('tr').children()[4].textContent);
-			    $("#sDate").val($(this).closest('tr').children()[5].textContent);
-		    });
-		} );
+			    $("#txtDate").val($(this).closest('tr').children()[5].textContent);
+		    });		    
+		});
     </script>       
 
 </head>
@@ -76,78 +76,81 @@
         </div>
 
         <br /> 
-                  
-        <!-- <div class="row">           
-            <div class="col-xs-6 col-sm-3">
-                <div class="form-inline">
-                    <input type="submit" name="btnAdde" value="เพิ่มหมวดหมู่" class="btn btn-success" />
-                </div>
-            </div>           
-        </div> -->
 
-        <!-- Button trigger modal -->
-		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">เพิ่มเหมวดหมู่</button>
+        <!-- Button Add Category -->
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">เพิ่มหมวดหมู่</button>
 
         <!-- Modal -->
-			<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  	<div class="modal-dialog" role="document">	
-			  		<form>  			  		
-				    	<div class="modal-content">
-					      	<div class="modal-header">
-					        	<h5 class="modal-title" id="exampleModalLabel">กรอกข้อมูลหมวดหมู่</h5>
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						          	<span aria-hidden="true">&times;</span>
-						        </button>
-					      	</div>
-						    <div class="modal-body">				    	
-						        <form>
-						        	<div class="form-group">
-							            <label for="category-id" class="form-control-label">รหัสหมวดหมู่:</label>
-							            <input type="text" class="form-control" id="category-id" name="cateid">
-							        </div>
-							        <div class="form-group">
-							            <label for="category-name" class="form-control-label">ชื่อหมวดหมู่:</label>
-							            <input type="text" class="form-control" id="category-name" name="catename">
-							        </div>
-							        <div class="form-group">
-							           	<label for="short-name" class="form-control-label">ชื่อย่อ:</label>
-							            <input class="form-control" id="short-name" name="shortname"></input>
-							        </div>
-							        <div class="form-group">
-							           	<label for="category-type" class="form-control-label">ประเภท:</label>
-							            <select class="form-control" id="category-type" name="type"></select>
-							        </div>
-							        <div class="form-group">
-							            <label for="detail" class="form-control-label">รายละเอียด:</label>
-							            <textarea class="form-control" id="detail" name="detail"></textarea>
-							        </div>
-							        <div class="form-group">
-							            <label for="create-date" class="form-control-label">วันที่:</label>	
-							            <input type="date" class="form-control" id="create-date" name="createdate">            
-							        </div>
-							        <div class="form-group">					     	
-							            <input type="date" class="form-control" id="update-date" name="updatedate" style="display: none;">
-							            <script type="text/javascript">
-							            	document.getElementById('update-date').valueAsDate = new Date()
-							            </script>					                    
-							        </div>
-							    </form>					    
-						    </div>
-						    <div class="modal-footer">
-						       	<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-						        <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>
-						        <script type="text/javascript">
-						        	$(document).on('click', '#btnSave', function(){
-		    							alert("The btn Save was clicked.");
-									});
-						        </script>
-						    </div>
-				    	</div>
-			    	</form>		    
-			  	</div>
-			</div>
-	    </div> 
-
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  	<div class="modal-dialog" role="document">	
+		  		<form>  			  		
+			    	<div class="modal-content">
+				      	<div class="modal-header">
+				        	<h5 class="modal-title" id="exampleModalLabel">กรอกข้อมูลหมวดหมู่</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          	<span aria-hidden="true">&times;</span>
+					        </button>
+				      	</div>
+					    <div class="modal-body">				    	
+					        <form>
+					        	<div class="form-group">
+						            <label for="category-id" class="form-control-label">รหัสหมวดหมู่:</label>
+						            <input type="text" class="form-control" id="category-id" name="cateid">
+						        </div>
+						        <div class="form-group">
+						            <label for="category-name" class="form-control-label">ชื่อหมวดหมู่:</label>
+						            <input type="text" class="form-control" id="category-name" name="catename">
+						        </div>
+						        <div class="form-group">
+						           	<label for="short-name" class="form-control-label">ชื่อย่อ:</label>
+						            <input class="form-control" id="short-name" name="shortname"></input>
+						        </div>
+						        <div class="form-group">
+						           	<label for="category-type" class="form-control-label">ประเภท:</label>
+						            <select class="form-control" id="category-type" name="type"></select>
+						        </div>
+						        <div class="form-group">
+						            <label for="detail" class="form-control-label">รายละเอียด:</label>
+						            <textarea class="form-control" id="detail" name="detail"></textarea>
+						        </div>
+						        <div class="form-group">
+						            <label for="create-date" class="form-control-label">วันที่:</label>	
+						            <input type="date" class="form-control" id="create-date" name="createdate">   
+						            <script type="text/javascript">
+										var today = new Date();										
+										$("#create-date").val(getFormattedDate(today));										
+										// Get date formatted as YYYY-MM-DD
+										function getFormattedDate (date) {
+										    return date.getFullYear()
+										        + "-"
+										        + ("0" + (date.getMonth() + 1)).slice(-2)
+										        + "-"
+										        + ("0" + date.getDate()).slice(-2);
+										}
+						            </script>         
+						        </div>
+						        <div class="form-group">					     	
+						            <input type="date" class="form-control" id="update-date" name="updatedate" style="display: none;">
+						            <script type="text/javascript">
+						            	document.getElementById('update-date').valueAsDate = new Date()
+						            </script>					                    
+						        </div>
+						    </form>					    
+					    </div>
+					    <div class="modal-footer">
+					       	<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+					        <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>
+					        <script type="text/javascript">
+					        	$(document).on('click', '#btnSave', function(){
+	    							alert("The btn Save was clicked.");
+								});
+					        </script>
+					    </div>
+			    	</div>
+		    	</form>		    
+		  	</div>
+		</div>
+		<!-- ++++++++++++++++++End Modal++++++++++++++++++ -->
 	</div>
 
 	<hr />
@@ -185,19 +188,55 @@
 			          	<span aria-hidden="true">&times;</span>
 			        </button>	      
 	        	</div>
-	      	<div class="modal-body">	
-	      		<p><input type="text" class="form-control" readonly="readonly" id="txtID"/></p>        	
-	        	<p><input type="text" class="form-control" id="txtCatename"/></p>
-	        	<p><input type="text" class="form-control" id="txtShortname"/></p>
-	        	<p><input type="text" class="form-control" id="txtType"/></p>
-	        	<p><input type="text" class="form-control" id="txtDescription"/></p>
-	        	<p><input type="date" class="form-control" id="txtDate"/></p>
-	      	</div>
+		      	<div class="modal-body">	
+		      		<form>
+		      			<div class="form-group">
+		      				<label for="txtID" class="form-control-label">รหัส:</label>
+		      				<input type="text" class="form-control" readonly="readonly" id="txtID"/>
+		      			</div>
+		      			<div class="form-group">
+		      				<label for="txtCatename" class="form-control-label">ชื่อหมวดหมู่:</label>
+		      				<input type="text" class="form-control" id="txtCatename"/>
+		      			</div>
+		      			<div class="form-group">
+		      				<label for="txtShortname" class="form-control-label">ชื่อย่อ:</label>
+		      				<input type="text" class="form-control" id="txtShortname"/>
+		      			</div>
+		      			<div class="form-group">
+		      			<label for="txtType" class="form-control-label">ประเภท:</label>
+		      				<input type="text" class="form-control" id="txtType"/>
+		      			</div>
+		      			<div class="form-group">
+		      				<label for="txtDescription" class="form-control-label">รายละเอียด:</label>
+		      				<input type="text" class="form-control" id="txtDescription"/>		      				
+		      			</div>
+			      		<div class="form-group">
+			      			<label for="txtDate" class="form-control-label">วันที่:</label>
+			      			<input type="date" class="form-control" id="txtDate"/>
+			      		</div>  	
+			      		<div class="form-group">					      					     	
+			            	<input type="date" class="form-control" id="updatedate" style="display: none;" />         				                    
+				        </div>
+			        	<script type="text/javascript">
+							var today = new Date();										
+							$("#updatedate").val(getFormattedDate(today));										
+							// Get date formatted as YYYY-MM-DD
+							function getFormattedDate (date) {
+							    return date.getFullYear()
+							        + "-"
+							        + ("0" + (date.getMonth() + 1)).slice(-2)
+							        + "-"
+							        + ("0" + date.getDate()).slice(-2);
+							}
+			            </script>		        			        	
+			        </form>
+		      	</div>
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        		<button type="button" class="btn btn-primary">Save changes</button>
 	      		</div>
 	    	</div><!-- /.modal-content -->
+
   		</div><!-- /.modal-dialog -->
   	</div><!-- /.modal -->
 
