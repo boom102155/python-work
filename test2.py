@@ -18,7 +18,7 @@ def index():
 @app.route('/lend')
 def lend():
     conn = db_connect.connect()
-    query = conn.execute("SELECT to_char(lh.LEND_DATE, 'dd/mm/yyyy'), ps.NAME, ps.SURNAME, ps.FACULTY, ps.CLASS, eq.SERIAL_NUMBER, eq.EQUIPMENT_NAME "
+    query = conn.execute("SELECT to_char(lh.LEND_DATE, 'yyyy-mm-dd'), ps.NAME, ps.SURNAME, ps.FACULTY, ps.CLASS, eq.SERIAL_NUMBER, eq.EQUIPMENT_NAME "
                          "FROM LEND_HEAD lh, LEND_DETAIL ld, EQUIPMENT eq, STAFF s, PERSON ps "
                          "WHERE lh.PERSON_ID = ps.PERSON_ID AND lh.STAFF_ID = s.STAFF_ID AND lh.LEND_NO = ld.LEND_NO AND ld.EQUIPMENT_ID = eq.EQUIPMENT_ID")
     rows = query.fetchall();
