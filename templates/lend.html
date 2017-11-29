@@ -20,8 +20,6 @@
             $(document).ready(function() {
     			var table = $('#example').DataTable();
     			$('#example tbody').on('click', 'tr', 'td', function () {
-			        // var data = table.row( this ).data();
-			        // alert( 'You clicked on '+data[0]+'\'s row' );
 			        $("#myModal").modal("show");
 			        $("#sDate").val($(this).closest('tr').children()[0].textContent);
 				    $("#txtName").val($(this).closest('tr').children()[1].textContent);

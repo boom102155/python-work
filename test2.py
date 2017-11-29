@@ -59,7 +59,7 @@ def equipment():
                          "ca.CATEGORY_NAME, "
                          "eq.CALL_NUMBER, "
                          "eq.SERIAL_NUMBER, "
-                         "to_char(eq.CREATE_DATE, 'dd/mm/yyyy') "
+                         "to_char(eq.CREATE_DATE, 'yyyy-mm-dd') "
                          "FROM EQUIPMENT eq INNER JOIN CATEGORY ca ON eq.CATEGORY_ID = ca.CATEGORY_ID")
     rows = query.fetchall();
     return render_template("equipment.html", rows=rows)
@@ -72,7 +72,7 @@ def category():
                          "CATEGORY_NAME, "
                          "SHORT_NAME, TYPE, "
                          "DETAIL, "
-                         "to_char(CREATE_DATE, 'dd/mm/yyyy') FROM CATEGORY")
+                         "to_char(CREATE_DATE, 'yyyy-mm-dd') FROM CATEGORY")
     rows = query.fetchall();
     return render_template("category.html", rows=rows)
 
