@@ -54,15 +54,19 @@ def lend():
 @app.route('/equipment')
 def equipment():
     conn = db_connect.connect()
-    query = conn.execute("SELECT eq.EQUIPMENT_ID, "
+    query1 = conn.execute("SELECT eq.EQUIPMENT_ID, "
                          "eq.EQUIPMENT_NAME, "
                          "ca.CATEGORY_NAME, "
                          "eq.CALL_NUMBER, "
                          "eq.SERIAL_NUMBER, "
                          "to_char(eq.CREATE_DATE, 'yyyy-mm-dd') "
                          "FROM EQUIPMENT eq INNER JOIN CATEGORY ca ON eq.CATEGORY_ID = ca.CATEGORY_ID")
-    rows = query.fetchall();
-    return render_template("equipment.html", rows=rows)
+    rows1 = query1.fetchall();
+
+    query2 = conn.execute("SELECT CATEGORY_NAME FROM CATEGORY");
+    rows2 = query2.fetchall();
+
+    return render_template("equipment.html", rows1=rows1 , rows2=rows2)
 
 @app.route('/category')
 def category():
@@ -75,10 +79,6 @@ def category():
                          "to_char(CREATE_DATE, 'yyyy-mm-dd') FROM CATEGORY")
     rows = query.fetchall();
     return render_template("category.html", rows=rows)
-
-
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)

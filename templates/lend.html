@@ -82,25 +82,33 @@
 	        <div class="col-3">
 	        	<div class="form-group">
 	        		<label for="name" class="form-control-label">ชื่อ</label>
-	        		<input type="text" class="form-control" id="name"></input>
+	        		<input type="text" class="form-control" id="name" onkeyup="this.value=this.value.replace(/[^a-zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
 		        </div>	        	
 		    </div>
 	        <div class="col-3">
 	        	<div class="form-group">	        		
 	        		<label for="surname" class="form-control-label">นามสกุล</label>
-	        		<input type="text" class="form-control" id="surname"></input>
+	        		<input type="text" class="form-control" id="surname" onkeyup="this.value=this.value.replace(/[^a-zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
 	        	</div>
 	        </div>
 	        <div class="col-3">
 	        	<div class="form-group">	        		
 	        		<label for="faculty" class="form-control-label">สาขา</label>
-	        		<input type="text" class="form-control" id="faculty"></input>
-	        	</div>
+	        		<select type="text" class="form-control" id="faculty">
+	        			<option value="IT">IT</option>
+	        			<option value="CS">CS</option>
+	        		</select>
+	  	        </div>
 	        </div>
 	        <div class="col-3">
 	        	<div class="form-group">	        		
 	        		<label for="class" class="form-control-label">ชั้นปี</label>
-	        		<select class="form-control" id="class"></select>
+	        		<select class="form-control" id="class">
+	        			<option value="1">1</option>
+	        			<option value="2">2</option>
+	        			<option value="3">3</option>
+	        			<option value="4">4</option>
+	        		</select>
 	        	</div>
 	        </div>		        
 	    </div>
@@ -108,13 +116,13 @@
 	        <div class="col-5">
 	        	<div class="form-group">
 	        		<label for="serial" class="form-control-label">เลขเครื่อง (serial number หรือ เลขเครื่องโน๊ตบุ๊ค)</label>
-	        		<input type="text" class="form-control" id="serial"></input>
+	        		<input type="text" class="form-control" id="serial" onkeyup="this.value=this.value.replace(/[^a-z0-9-]/g,'');"></input>
 	        	</div>
 	        </div>
 	        <div class="col-5">
 	        	<div class="form-group">
-	        		<label for="equipment" class="form-control-label">อุปกรณ์ (notebook, ปลั๊ก, raspberry pi ฯลฯ)</label>
-	        		<input type="text" class="form-control" id="equipment"></input>
+	        		<label for="equipment" class="form-control-label">อุปกรณ์ (โน๊ตบุ๊ค, ปลั๊กไฟ, raspberry pi ฯลฯ)</label>
+	        		<input type="text" class="form-control" id="equipment" onkeyup="this.value=this.value.replace(/[^a-zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
 	        	</div>
 	        </div>
 	        <div class="col-2">
@@ -129,7 +137,12 @@
     	<!-- +++++++++++++++++++++ Button Add Lend ++++++++++++++++++++++ -->
     	<div class="row">
     		<div class="col-12">    			
-    				<button type="button" class="btn btn-default">ล้าง</button>
+    				<button type="button" class="btn btn-default" id="clear">ล้าง</button>
+    				<script type="text/javascript">
+    					$("#clear").on("click", function() {
+    						$('input[type="text"]').val('');
+						});
+    				</script>
     				<button type="submit" value="submit" class="btn btn-primary" id="btnSave">เพิ่ม</button>
     		</div>
     	</div> 
@@ -173,13 +186,44 @@
 			        </button>	      
 	        	</div>
 	      	<div class="modal-body">
-	        	<p><input type="date" class="form-control" id="txtDate"/></p>
-	        	<p><input type="text" class="form-control" id="txtName"/></p>
-	        	<p><input type="text" class="form-control" id="txtSurname"/></p>
-	        	<p><select class="form-control" id="sFaculty"></select></p>
-	        	<p><select class="form-control" id="sClass"></select></p>
-	        	<p><input type="text" class="form-control" id="txtSerial"/></p>
-	        	<p><input type="text" class="form-control" id="txtEquipment"/></p>
+	      		<form>
+	      			<div class="form-group">
+	      				<label for="txtDate" class="form-control-label">วันที่ยืม</label>
+	      				<input type="date" class="form-control" id="txtDate"/>
+	      			</div>
+	      			<div class="form-group">
+	      				<label for="txtName" class="form-control-label">ชื่อผู้ยืม</label>
+	      				<input type="text" class="form-control" id="txtName"/>
+	      			</div>
+	      			<div class="form-group">
+	      				<label for="txtSurname" class="form-control-label">นามสกุล</label>
+	      				<input type="text" class="form-control" id="txtSurname"/>
+	      			</div>
+	      			<div class="form-group">
+	      				<label for="sFaculty" class="form-control-label">สาขา</label>
+	      				<select class="form-control" id="sFaculty">
+	      					<option value="IT">IT</option>
+	      					<option value="CS">CS</option>
+	      				</select>
+	      			</div>
+	      			<div class="form-group">
+	      				<label for="sClass" class="form-control-label">ชั้นปี</label>
+	      				<select class="form-control" id="sClass">
+	      					<option value="1">1</option>
+	      					<option value="2">2</option>
+	      					<option value="3">3</option>
+	      					<option value="4">4</option>
+	      				</select>
+	      			</div>
+	      			<div class="form-group">
+	      				<label for="txtSerial" class="form-control-label">ซีเรียล</label>
+	      				<input type="text" class="form-control" id="txtSerial"/>
+	      			</div>
+	      			<div class="form-group">
+	      				<label for="txtEquipment" class="form-control-label">อุปกรณ์</label>
+	      				<input type="text" class="form-control" id="txtEquipment"/>
+	      			</div>		        	
+		        </form>
 	      	</div>
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
