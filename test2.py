@@ -15,7 +15,7 @@ def login():
 def index():
     return render_template("index.html")
 
-@app.route('/lend')
+@app.route('/lend', methods = ['POST', 'GET'])
 def lend():
     conn = db_connect.connect()
     query = conn.execute("SELECT to_char(lh.LEND_DATE, 'yyyy-mm-dd'), ps.NAME, ps.SURNAME, ps.FACULTY, ps.CLASS, eq.SERIAL_NUMBER, eq.EQUIPMENT_NAME "
@@ -24,34 +24,7 @@ def lend():
     rows = query.fetchall();
     return render_template("lend.html", rows=rows)
 
-# @app.route('add_category', methods=['POST'])
-# def add_category():
-#     if request.method == 'POST':
-#         try:
-#             cateid = request.form['cateid']
-#             catename = request.form['catename']
-#             shortname = request.form['shortname']
-#             type = request.form['type']
-#             detail = request.form['detail']
-#             createdate = request.form['createdate']
-#             updatedate = request.form['updatedate']
-#
-#             conn = db_connect.connect()
-#             conn.execute("INSERT INTO CATEGORY (CATEGORY_ID,CATEGORY_NAME,SHORT_NAME,TYPE,DETAIL,CREATE_DATE,UPDATE_DATE) VALUES(?, ?, ?, ?, ?, ?, ?)",
-#                          (cateid, catename, shortname,type, detail, createdate, updatedate))
-#
-#             conn.commit()
-#             msg = "Record successfully added"
-#         except:
-#             conn.rollback()
-#             msg = "error in insert operation"
-#
-#         finally:
-#             return render_template("category.html", msg=msg)
-#             conn.close()
-
-
-@app.route('/equipment')
+@app.route('/equipment', methods = ['POST', 'GET'])
 def equipment():
     conn = db_connect.connect()
     query1 = conn.execute("SELECT eq.EQUIPMENT_ID, "
@@ -68,7 +41,7 @@ def equipment():
 
     return render_template("equipment.html", rows1=rows1 , rows2=rows2)
 
-@app.route('/category')
+@app.route('/category', methods = ['POST', 'GET'])
 def category():
     conn = db_connect.connect()
     query = conn.execute("SELECT "
