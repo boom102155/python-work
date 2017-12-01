@@ -83,28 +83,42 @@
         <!-- Modal -->
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  	<div class="modal-dialog" role="document">	
-		  		<form>  			  		
+		  		<form action = "{{ url_for('equipment') }}" method = "POST">  			  		
 			    	<div class="modal-content">
 				      	<div class="modal-header">
-				        	<h5 class="modal-title" id="exampleModalLabel">กรอกข้อมูลหมวดหมู่</h5>
+				        	<h5 class="modal-title" id="exampleModalLabel">กรอกข้อมูลอุปกรณ์</h5>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          	<span aria-hidden="true">&times;</span>
 					        </button>
 				      	</div>
-					    <div class="modal-body">				    	
+					    <div class="modal-body">							    	    	
 					        <form>
 					        	<div class="form-group">
 						            <label for="equip-name" class="form-control-label">ชื่อุปกรณ์:</label>
 						            <input type="text" class="form-control" id="equip-name" name="equipname">
-						        </div>
+						        </div>								        
 						        <div class="form-group">
 						        	<label for="category-name" class="form-control-label">ชื่อหมวดหมู่:</label>
 						            <select class="form-control" id="category-name" name="categoryname">
-						            	{% for row in rows2 %}
-				  							<option value="{{ row[0] }}">{{ row[0] }}</option>
+						            	{% for row in rows3 %}
+				  							<option value="{{ row[0] }}">{{ row[1] }}</option>
 				  						{% endfor %}
 						            </select>						            
 						        </div>
+						        <div class="form-group">
+						        	<input type="text" class="form-control" id="getCateID" style="display: none;"></input>
+						        </div>
+						        <script>
+									function displayVals() {
+									  var singleValues = $( "#category-name" ).val();
+									  
+									  // $( "p" ).html( "<b>Single:</b> " + singleValues);
+									  $( "#getCateID" ).val(singleValues);
+									}
+									 
+									$( "select" ).change( displayVals );
+									displayVals();
+								</script>						        						       						       
 						        <div class="form-group">
 						           	<label for="call-number" class="form-control-label">เลขครุภัณฑ์:</label>
 						            <input class="form-control" id="call-number" name="callnumber"></input>
@@ -114,8 +128,8 @@
 						            <input type="text" class="form-control" id="serial-number" name="serialnumber">
 						        </div>
 						        <div class="form-group">
-						            <label for="create-date" class="form-control-label">วันที่:</label>	
-						            <input type="date" class="form-control" id="create-date" name="createdate">   
+						            <label for="create-date" class="form-control-label">วันที่สร้าง:</label>	
+						            <input type="date" class="form-control" id="create-date" name="createdate" readonly="readonly">   
 						            <script type="text/javascript">
 										var today = new Date();										
 										$("#create-date").val(getFormattedDate(today));										
@@ -140,11 +154,11 @@
 					    <div class="modal-footer">
 					       	<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
 					        <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>
-					        <script type="text/javascript">
+					        <!--<script type="text/javascript">
 					        	$(document).on('click', '#btnSave', function(){
 	    							alert("The btn Save was clicked.");
 								});
-					        </script>
+					        </script> -->
 					    </div>
 			    	</div>
 		    	</form>		    

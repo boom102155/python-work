@@ -39,7 +39,22 @@ def equipment():
     query2 = conn.execute("SELECT CATEGORY_NAME FROM CATEGORY");
     rows2 = query2.fetchall();
 
-    return render_template("equipment.html", rows1=rows1 , rows2=rows2)
+    query3 = conn.execute("SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY")
+    rows3 = query3.fetchall();
+
+    if request.method == 'POST':
+        equipname = request.form['equipname']
+        categoryname = request.form['getCateID']
+        callnumber = request.form['callnumber']
+        serialnumber = request.form['serialnumber']
+        createdate = request.form['createdate']
+        updatedate = request.form['updatedate']
+
+        conn.execute("INSERT INTO CATEGORY (EQUIPMENT_NAME, CATEGORY_ID, CALL_NUMBER, SERIAL_NUMBER, to_char(CREATE_DATE, 'yyyy-mm-dd'), to_char(UPDATE_DATE, 'yyyy-mm-dd')) "
+                     "VALUES(?, ?, ?, ?, ?, ?)",(equipname,categoryname,callnumber,serialnumber,createdate,updatedate))
+        conn.commit()
+
+    return render_template("equipment.html", rows1=rows1 , rows2=rows2 , rows3=rows3)
 
 @app.route('/category', methods = ['POST', 'GET'])
 def category():
