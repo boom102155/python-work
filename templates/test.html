@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+			
+	<form action = "{{ url_for('test') }}" method = "POST">							    	    					        
+		<div class="form-group">
+	        <label for="equip-name" class="form-control-label">ชื่อุปกรณ์:</label>
+	        <input type="text" class="form-control" id="equip-name" name="equipname">
+	    </div>								        
+	    <div class="form-group">
+	    	<label for="category-name" class="form-control-label">ชื่อหมวดหมู่:</label>
+	        <select class="form-control" id="category-name" name="categoryname">
+	        	{% for row in rows4 %}
+						<option value="{{ row[0] }}">{{ row[1] }}</option>
+					{% endfor %}
+	        </select>						            
+	    </div>
+	    <div class="form-group">
+	    	<input type="text" class="form-control" id="getCateID" style="display: none;"></input>
+	    </div>
+	    <script>
+			function displayVals() {
+			  var singleValues = $( "#category-name" ).val();
+			  
+			  // $( "p" ).html( "<b>Single:</b> " + singleValues);
+			  $( "#getCateID" ).val(singleValues);
+			}
+			 
+			$( "select" ).change( displayVals );
+			displayVals();
+		</script>						        						       						       
+	    <div class="form-group">
+	       	<label for="call-number" class="form-control-label">เลขครุภัณฑ์:</label>
+	        <input class="form-control" id="call-number" name="callnumber"></input>
+	    </div>
+	    <div class="form-group">
+	       	<label for="serial-number" class="form-control-label">เลขซีเรียล:</label>
+	        <input type="text" class="form-control" id="serial-number" name="serialnumber">
+	    </div>
+	    <div class="form-group">
+	        <label for="create-date" class="form-control-label">วันที่สร้าง:</label>	
+	        <input type="date" class="form-control" id="create-date" name="createdate" readonly="readonly">   
+	        <script type="text/javascript">
+				var today = new Date();										
+				$("#create-date").val(getFormattedDate(today));										
+				// Get date formatted as YYYY-MM-DD
+				function getFormattedDate (date) {
+				    return date.getFullYear()
+				        + "-"
+				        + ("0" + (date.getMonth() + 1)).slice(-2)
+				        + "-"
+				        + ("0" + date.getDate()).slice(-2);
+				}
+	        </script>        
+	    </div>
+	    <div class="form-group">					     	
+	        <input type="date" class="form-control" id="update-date" name="updatedate" style="display: none;">
+	        <script type="text/javascript">
+	        	document.getElementById('update-date').valueAsDate = new Date()
+	        </script>					                    
+	    </div>					    
+
+	   	<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+	    <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>					       
+	</form>		    
+	</div>  
+</body>
+</html>

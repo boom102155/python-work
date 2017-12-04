@@ -42,6 +42,16 @@ def equipment():
     query3 = conn.execute("SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY")
     rows3 = query3.fetchall();
 
+
+
+    return render_template("equipment.html", rows1=rows1 , rows2=rows2 , rows3=rows3)
+
+@app.route('/test' , methods = ['POST' , 'GET'])
+def test():
+    conn = db_connect.connect()
+    query4 = conn.execute("SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY")
+    rows4 = query4.fetchall();
+
     if request.method == 'POST':
         equipname = request.form['equipname']
         categoryname = request.form['getCateID']
@@ -54,7 +64,7 @@ def equipment():
                      "VALUES(?, ?, ?, ?, ?, ?)",(equipname,categoryname,callnumber,serialnumber,createdate,updatedate))
         conn.commit()
 
-    return render_template("equipment.html", rows1=rows1 , rows2=rows2 , rows3=rows3)
+    return render_template("test.html" , rows4 = rows4)
 
 @app.route('/category', methods = ['POST', 'GET'])
 def category():
