@@ -9,6 +9,8 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+    
 </head>
 <body>
 	<div class="container">
@@ -72,7 +74,20 @@
 	    </div>					    
 
 	   	<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-	    <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>					       
+	    <button type="submit" value="submit" class="btn btn-primary" id="btnSave" >บันทึก</button>
+
+   		<!-- <script type="text/javascript">
+		  	$("#btnSave").click(function () {
+		  		var a = document.getElementById("equip-name").value;
+				var b = document.getElementById("getCateID").value;
+				var c = document.getElementById("call-number").value;
+				var d = document.getElementById("serial-number").value;
+				var e = document.getElementById("create-date").value;
+				var f = document.getElementById("update-date").value;
+		       	alert(" ชื่ออุปกรณ์: " + a + " \n " + "รหัส: " + b + " \n " + "เลขครุภัณ์: " + c + " \n " + "ซีเรียล: " + d + " \n " + "วันที่สร้าง: " + e + " \n " + "อัพเดท: " + f);
+
+		   	});
+		</script> -->       
 	</form>		    
 	</div>  
 </body>

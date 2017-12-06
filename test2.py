@@ -52,27 +52,53 @@ def test():
     query4 = conn.execute("SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY")
     rows4 = query4.fetchall();
 
+    # if request.method == 'POST':
+    #
+    #     equipname = request.form['equipname']
+    #     categoryname = request.form['getCateID']
+    #     callnumber = request.form['callnumber']
+    #     serialnumber = request.form['serialnumber']
+    #     createdate = request.form['createdate']
+    #     updatedate = request.form['updatedate']
+    #
+    #     conn.execute("INSERT INTO CATEGORY (EQUIPMENT_NAME, CATEGORY_ID, CALL_NUMBER, SERIAL_NUMBER, to_char(CREATE_DATE, 'yyyy-mm-dd'), to_char(UPDATE_DATE, 'yyyy-mm-dd')) "
+    #                  "VALUES(?, ?, ?, ?, ?, ?)",(equipname,categoryname,callnumber,serialnumber,createdate,updatedate))
+    #
+    #     conn.execute("INSERT INTO CATEGORY (EQUIPMENT_NAME, CATEGORY_ID, CALL_NUMBER, SERIAL_NUMBER, to_char(CREATE_DATE, 'yyyy-mm-dd'), to_char(UPDATE_DATE, 'yyyy-mm-dd')) "
+    #         "VALUES(?, ?, ?, ?, ?, ?)", [request.form['equipname'],
+    #                                      request.form['getCateID'],
+    #                                      request.form['callnumber'],
+    #                                      request.form['serialnumber'],
+    #                                      request.form['createdate'],
+    #                                      request.form['updatedate']])
+    #     conn.commit()
+
     if request.method == 'POST':
-        # equipname = request.form['equipname']
-        # categoryname = request.form['getCateID']
-        # callnumber = request.form['callnumber']
-        # serialnumber = request.form['serialnumber']
-        # createdate = request.form['createdate']
-        # updatedate = request.form['updatedate']
+        try:
+            equipname = request.form['equip-name']
+            categoryname = request.form['getCateID']
+            callnumber = request.form['call-number']
+            serialnumber = request.form['serial-number']
+            createdate = request.form['create-date']
+            updatedate = request.form['update-date']
 
-        # conn.execute("INSERT INTO CATEGORY (EQUIPMENT_NAME, CATEGORY_ID, CALL_NUMBER, SERIAL_NUMBER, to_char(CREATE_DATE, 'yyyy-mm-dd'), to_char(UPDATE_DATE, 'yyyy-mm-dd')) "
-        #              "VALUES(?, ?, ?, ?, ?, ?)",(equipname,categoryname,callnumber,serialnumber,createdate,updatedate))
+            print(equipname)
+            print(categoryname)
+            print(callnumber)
+            print(serialnumber)
+            print(createdate)
+            print(updatedate)
 
-        conn.execute("INSERT INTO CATEGORY (EQUIPMENT_NAME, CATEGORY_ID, CALL_NUMBER, SERIAL_NUMBER, to_char(CREATE_DATE, 'yyyy-mm-dd'), to_char(UPDATE_DATE, 'yyyy-mm-dd')) "
-            "VALUES(?, ?, ?, ?, ?, ?)", [request.form['equipname'],
-                                         request.form['getCateID'],
-                                         request.form['callnumber'],
-                                         request.form['serialnumber'],
-                                         request.form['createdate'],
-                                         request.form['updatedate']])
-        conn.commit()
+            msg = "Record successfully added"
 
-    return render_template("test.html" , rows4 = rows4)
+        except:
+            msg = "error in insert operation"
+
+        finally:
+            return render_template("test.html" , rows4=rows4)
+
+
+    # return render_template("test.html", rows4=rows4)
 
 @app.route('/category', methods = ['POST', 'GET'])
 def category():
