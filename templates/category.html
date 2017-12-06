@@ -95,15 +95,15 @@
 					        <form>
 					        	<div class="form-group">
 						            <label for="category-id" class="form-control-label">รหัสหมวดหมู่:</label>
-						            <input type="text" class="form-control" id="category-id" name="cateid">
+						            <input type="text" class="form-control" id="category-id" name="cateid" autocomplete="off"></input>
 						        </div>
 						        <div class="form-group">
 						            <label for="category-name" class="form-control-label">ชื่อหมวดหมู่:</label>
-						            <input type="text" class="form-control" id="category-name" name="catename">
+						            <input type="text" class="form-control" id="category-name" name="catename" autocomplete="off"></input>					            
 						        </div>
 						        <div class="form-group">
 						           	<label for="short-name" class="form-control-label">ชื่อย่อ:</label>
-						            <input class="form-control" id="short-name" name="shortname"></input>
+						            <input class="form-control" id="short-name" name="shortname" autocomplete="off"></input>
 						        </div>
 						        <div class="form-group">
 						           	<label for="category-type" class="form-control-label">ประเภท:</label>
@@ -111,11 +111,11 @@
 						        </div>
 						        <div class="form-group">
 						            <label for="detail" class="form-control-label">รายละเอียด:</label>
-						            <textarea class="form-control" id="detail" name="detail"></textarea>
+						            <textarea class="form-control" id="detail" name="detail" autocomplete="off"></textarea>
 						        </div>
 						        <div class="form-group">
 						            <label for="create-date" class="form-control-label">วันที่:</label>	
-						            <input type="date" class="form-control" id="create-date" name="createdate" readonly="readonly">   
+						            <input type="date" class="form-control" id="create-date" name="createdate" readonly="readonly"></input>
 						            <script type="text/javascript">
 										var today = new Date();										
 										$("#create-date").val(getFormattedDate(today));										
@@ -192,23 +192,23 @@
 		      		<form>
 		      			<div class="form-group">
 		      				<label for="txtID" class="form-control-label">รหัส:</label>
-		      				<input type="text" class="form-control" readonly="readonly" id="txtID"/>
+		      				<input type="text" class="form-control" readonly="readonly" id="txtID" autocomplete="off"/>
 		      			</div>
 		      			<div class="form-group">
 		      				<label for="txtCatename" class="form-control-label">ชื่อหมวดหมู่:</label>
-		      				<input type="text" class="form-control" id="txtCatename"/>
+		      				<input type="text" class="form-control" id="txtCatename" autocomplete="off"/>
 		      			</div>
 		      			<div class="form-group">
 		      				<label for="txtShortname" class="form-control-label">ชื่อย่อ:</label>
-		      				<input type="text" class="form-control" id="txtShortname"/>
+		      				<input type="text" class="form-control" id="txtShortname" autocomplete="off"/>
 		      			</div>
 		      			<div class="form-group">
-		      			<label for="txtType" class="form-control-label">ประเภท:</label>
-		      				<input type="text" class="form-control" id="txtType"/>
+		      				<label for="txtType" class="form-control-label">ประเภท:</label>
+		      				<input type="text" class="form-control" id="txtType" autocomplete="off"/>
 		      			</div>
 		      			<div class="form-group">
 		      				<label for="txtDescription" class="form-control-label">รายละเอียด:</label>
-		      				<input type="text" class="form-control" id="txtDescription"/>		      				
+		      				<input type="text" class="form-control" id="txtDescription" autocomplete="off"/>		      				
 		      			</div>
 			      		<div class="form-group">
 			      			<label for="txtDate" class="form-control-label">วันที่สร้าง:</label>

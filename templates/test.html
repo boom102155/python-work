@@ -16,11 +16,11 @@
 	<form action = "{{ url_for('test') }}" method = "POST">							    	    					        
 		<div class="form-group">
 	        <label for="equip-name" class="form-control-label">ชื่อุปกรณ์:</label>
-	        <input type="text" class="form-control" id="equip-name" name="equipname">
+	        <input type="text" class="form-control" id="equip-name" name="equipname" autocomplete="off">
 	    </div>								        
 	    <div class="form-group">
 	    	<label for="category-name" class="form-control-label">ชื่อหมวดหมู่:</label>
-	        <select class="form-control" id="category-name" name="categoryname">
+	        <select class="form-control" id="category-name" name="categoryname" >
 	        	{% for row in rows4 %}
 						<option value="{{ row[0] }}">{{ row[1] }}</option>
 					{% endfor %}
@@ -42,11 +42,11 @@
 		</script>						        						       						       
 	    <div class="form-group">
 	       	<label for="call-number" class="form-control-label">เลขครุภัณฑ์:</label>
-	        <input class="form-control" id="call-number" name="callnumber"></input>
+	        <input class="form-control" id="call-number" name="callnumber" autocomplete="off"></input>
 	    </div>
 	    <div class="form-group">
 	       	<label for="serial-number" class="form-control-label">เลขซีเรียล:</label>
-	        <input type="text" class="form-control" id="serial-number" name="serialnumber">
+	        <input type="text" class="form-control" id="serial-number" name="serialnumber" autocomplete="off">
 	    </div>
 	    <div class="form-group">
 	        <label for="create-date" class="form-control-label">วันที่สร้าง:</label>	
