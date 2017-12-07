@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, json
 from flask_restful import Api
 from sqlalchemy import create_engine
 
@@ -48,9 +48,9 @@ def equipment():
 
 @app.route('/test' , methods = ['POST' , 'GET'])
 def test():
-    conn = db_connect.connect()
-    query4 = conn.execute("SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY")
-    rows4 = query4.fetchall();
+    # conn = db_connect.connect()
+    # query4 = conn.execute("SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY")
+    # rows4 = query4.fetchall();
 
     # if request.method == 'POST':
     #
@@ -73,29 +73,29 @@ def test():
     #                                      request.form['updatedate']])
     #     conn.commit()
 
-    if request.method == 'POST':
-        try:
-            equipname = request.form['equip-name']
-            categoryname = request.form['getCateID']
-            callnumber = request.form['call-number']
-            serialnumber = request.form['serial-number']
-            createdate = request.form['create-date']
-            updatedate = request.form['update-date']
+    # if request.method == 'POST':
+    #     try:
+    equipname = request.get_json()
+    categoryname = request.get_json()
+    callnumber = request.get_json()
+    serialnumber = request.get_json()
+    createdate = request.get_json()
+    updatedate = request.get_json()
 
-            print(equipname)
-            print(categoryname)
-            print(callnumber)
-            print(serialnumber)
-            print(createdate)
-            print(updatedate)
+    print(equipname)
+    print(categoryname)
+    print(callnumber)
+    print(serialnumber)
+    print(createdate)
+    print(updatedate)
 
-            msg = "Record successfully added"
+        #     msg = "Record successfully added"
 
-        except:
-            msg = "error in insert operation"
-
-        finally:
-            return render_template("test.html" , rows4=rows4)
+        # except:
+        #     msg = "error in insert operation"
+        #
+        # finally:
+    return json.dumps({equipname,categoryname,callnumber,serialnumber,createdate,updatedate})
 
 
     # return render_template("test.html", rows4=rows4)

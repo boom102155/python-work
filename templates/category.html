@@ -17,27 +17,14 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
 
     <!-- data table script -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-			var table = $('#example').DataTable();
-			$('#example tbody').on('click', 'tr', 'td', function () {
-		        $("#myModal").modal("show");
-		        $("#txtID").val($(this).closest('tr').children()[0].textContent);
-		        $("#txtCatename").val($(this).closest('tr').children()[1].textContent);
-		        $("#txtShortname").val($(this).closest('tr').children()[2].textContent);
-			    $("#txtType").val($(this).closest('tr').children()[3].textContent);
-			    $("#txtDescription").val($(this).closest('tr').children()[4].textContent);
-			    $("#txtDate").val($(this).closest('tr').children()[5].textContent);
-		    });		    
-		});
-    </script>       
+    <script type="text/javascript" src="{{ url_for('static',filename="js/categoryTable.js")}}"></script>      
 
 </head>
 <body>
 	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="Default.aspx">
-            <img src="{{ url_for('static',filename="band.png")}}" alt="Logo" width="45" height="30" />
+            <img src="{{ url_for('static',filename="imgs/band.png")}}" alt="Logo" width="45" height="30" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

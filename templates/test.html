@@ -15,7 +15,7 @@
 <body>
 	<div class="container">
 			
-	<form action = "{{ url_for('test') }}" method = "POST">							    	    					        
+	<!-- <form action = "{{ url_for('test') }}" method = "POST"> -->							    	    					        
 		<div class="form-group">
 	        <label for="equip-name" class="form-control-label">ชื่อุปกรณ์:</label>
 	        <input type="text" class="form-control" id="equip-name" name="equipname" autocomplete="off">
@@ -87,8 +87,29 @@
 		       	alert(" ชื่ออุปกรณ์: " + a + " \n " + "รหัส: " + b + " \n " + "เลขครุภัณ์: " + c + " \n " + "ซีเรียล: " + d + " \n " + "วันที่สร้าง: " + e + " \n " + "อัพเดท: " + f);
 
 		   	});
-		</script> -->       
-	</form>		    
+		</script> -->      
+		<script type="text/javascript">
+			$(function(){
+				$('#btnSave').click(function(){
+					var formData = new formData();
+					formData.append('equipname', $('#equipname').val());
+					$.ajax({
+						url: '/test',
+						data: JSON.stringify({"equipname" : $('#equipname').val}),
+						type: 'POST',
+						processData: false,
+						contentType: 'application/json; charset=utf-8',
+						success: function(response){
+							console.log(response);
+						},
+						error: function(error){
+							console.log(error);
+						}
+					});
+				});
+			});
+		</script> 
+	<!-- </form> -->
 	</div>  
 </body>
 </html>
