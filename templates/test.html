@@ -6,16 +6,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-
-    
+   
 </head>
 <body>
-	<div class="container">
-			
-	<!-- <form action = "{{ url_for('test') }}" method = "POST"> -->							    	    					        
+	<div class="container">										    	    					        
 		<div class="form-group">
 	        <label for="equip-name" class="form-control-label">ชื่อุปกรณ์:</label>
 	        <input type="text" class="form-control" id="equip-name" name="equipname" autocomplete="off">
@@ -23,7 +20,7 @@
 	    <div class="form-group">
 	    	<label for="category-name" class="form-control-label">ชื่อหมวดหมู่:</label>
 	        <select class="form-control" id="category-name" name="categoryname" >
-	        	{% for row in rows4 %}
+	        	{% for row in rows %}
 						<option value="{{ row[0] }}">{{ row[1] }}</option>
 					{% endfor %}
 	        </select>						            
@@ -74,28 +71,19 @@
 	    </div>					    
 
 	   	<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-	    <button type="submit" value="submit" class="btn btn-primary" id="btnSave" >บันทึก</button>
-
-   		<!-- <script type="text/javascript">
-		  	$("#btnSave").click(function () {
-		  		var a = document.getElementById("equip-name").value;
-				var b = document.getElementById("getCateID").value;
-				var c = document.getElementById("call-number").value;
-				var d = document.getElementById("serial-number").value;
-				var e = document.getElementById("create-date").value;
-				var f = document.getElementById("update-date").value;
-		       	alert(" ชื่ออุปกรณ์: " + a + " \n " + "รหัส: " + b + " \n " + "เลขครุภัณ์: " + c + " \n " + "ซีเรียล: " + d + " \n " + "วันที่สร้าง: " + e + " \n " + "อัพเดท: " + f);
-
-		   	});
-		</script> -->      
+	    <button type="submit" value="submit" class="btn btn-primary" id="btnSave" >บันทึก</button>  		     
 		<script type="text/javascript">
 			$(function(){
 				$('#btnSave').click(function(){
-					var formData = new formData();
-					formData.append('equipname', $('#equipname').val());
+			  		var a = document.getElementById("equip-name").value;
+					var b = document.getElementById("getCateID").value;
+					var c = document.getElementById("call-number").value;
+					var d = document.getElementById("serial-number").value;
+					var e = document.getElementById("create-date").value;
+					var f = document.getElementById("update-date").value;
 					$.ajax({
-						url: '/test',
-						data: JSON.stringify({"equipname" : $('#equipname').val}),
+						url: '/gettest',
+						data: JSON.stringify({"equipname" : a,"cateID" : b}),
 						type: 'POST',
 						processData: false,
 						contentType: 'application/json; charset=utf-8',
@@ -109,7 +97,18 @@
 				});
 			});
 		</script> 
-	<!-- </form> -->
+		<!-- <script type="text/javascript">
+		  	$("#btnSave").click(function () {
+		  		var a = document.getElementById("equip-name").value;
+				var b = document.getElementById("getCateID").value;
+				var c = document.getElementById("call-number").value;
+				var d = document.getElementById("serial-number").value;
+				var e = document.getElementById("create-date").value;
+				var f = document.getElementById("update-date").value;
+		       	alert(" ชื่ออุปกรณ์: " + a + " \n " + "รหัส: " + b + " \n " + "เลขครุภัณ์: " + c + " \n " + "ซีเรียล: " + d + " \n " + "วันที่สร้าง: " + e + " \n " + "อัพเดท: " + f);
+
+		   	});
+		</script> --> 
 	</div>  
 </body>
 </html>

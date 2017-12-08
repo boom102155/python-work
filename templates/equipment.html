@@ -18,20 +18,6 @@
     
 
     <!-- data table script -->
-    <!-- <script type="text/javascript">
-        $(document).ready(function() {
-			var table = $('#example').DataTable();			
-			$('#example tbody').on('click', 'tr', 'td', function () {
-		        $("#myModal").modal("show");
-		        $("#txtID").val($(this).closest('tr').children()[0].textContent);
-		        $("#txtEquipname").val($(this).closest('tr').children()[1].textContent);
-		        $("#sCategory").val($(this).closest('tr').children()[2].textContent);
-			    $("#txtCallnumber").val($(this).closest('tr').children()[3].textContent);
-			    $("#txtSerial").val($(this).closest('tr').children()[4].textContent);
-			    $("#txtDate").val($(this).closest('tr').children()[5].textContent);
-		    });
-		});
-    </script> -->
     <script type="text/javascript" src="{{ url_for('static',filename="js/equipmentTable.js")}}"></script>
    
 </head>
@@ -155,11 +141,25 @@
 					    <div class="modal-footer">
 					       	<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
 					        <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>
-					        <!--<script type="text/javascript">
-					        	$(document).on('click', '#btnSave', function(){
-	    							alert("The btn Save was clicked.");
+					        <script type="text/javascript">
+								$(function(){
+									$('#btnSave').click(function(){
+										$.ajax({
+											url: '/test',
+											data: JSON.stringify({"equipname" : $('#equipname').val}),
+											type: 'POST',
+											processData: false,
+											contentType: 'application/json; charset=utf-8',
+											success: function(response){
+												console.log(response);
+											},
+											error: function(error){
+												console.log(error);
+											}
+										});
+									});
 								});
-					        </script> -->
+							</script>
 					    </div>
 			    	</div>
 		    	</form>		    
@@ -252,7 +252,7 @@
 	      	</div>
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        		<button type="button" class="btn btn-primary">Save changes</button>
+	        		<button type="button" class="btn btn-primary">Save changes</button>	        		 
 	      		</div>
 	    	</div><!-- /.modal-content -->
   		</div><!-- /.modal-dialog -->

@@ -46,59 +46,18 @@ def equipment():
 
     return render_template("equipment.html", rows1=rows1 , rows2=rows2 , rows3=rows3)
 
+@app.route('/gettest' , methods = ['POST' , 'GET'])
+def gettest():
+    equipname = request.get_json()
+    print(equipname["cateID"])
+    return json.dumps(equipname)
+
 @app.route('/test' , methods = ['POST' , 'GET'])
 def test():
-    # conn = db_connect.connect()
-    # query4 = conn.execute("SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY")
-    # rows4 = query4.fetchall();
-
-    # if request.method == 'POST':
-    #
-    #     equipname = request.form['equipname']
-    #     categoryname = request.form['getCateID']
-    #     callnumber = request.form['callnumber']
-    #     serialnumber = request.form['serialnumber']
-    #     createdate = request.form['createdate']
-    #     updatedate = request.form['updatedate']
-    #
-    #     conn.execute("INSERT INTO CATEGORY (EQUIPMENT_NAME, CATEGORY_ID, CALL_NUMBER, SERIAL_NUMBER, to_char(CREATE_DATE, 'yyyy-mm-dd'), to_char(UPDATE_DATE, 'yyyy-mm-dd')) "
-    #                  "VALUES(?, ?, ?, ?, ?, ?)",(equipname,categoryname,callnumber,serialnumber,createdate,updatedate))
-    #
-    #     conn.execute("INSERT INTO CATEGORY (EQUIPMENT_NAME, CATEGORY_ID, CALL_NUMBER, SERIAL_NUMBER, to_char(CREATE_DATE, 'yyyy-mm-dd'), to_char(UPDATE_DATE, 'yyyy-mm-dd')) "
-    #         "VALUES(?, ?, ?, ?, ?, ?)", [request.form['equipname'],
-    #                                      request.form['getCateID'],
-    #                                      request.form['callnumber'],
-    #                                      request.form['serialnumber'],
-    #                                      request.form['createdate'],
-    #                                      request.form['updatedate']])
-    #     conn.commit()
-
-    # if request.method == 'POST':
-    #     try:
-    equipname = request.get_json()
-    categoryname = request.get_json()
-    callnumber = request.get_json()
-    serialnumber = request.get_json()
-    createdate = request.get_json()
-    updatedate = request.get_json()
-
-    print(equipname)
-    print(categoryname)
-    print(callnumber)
-    print(serialnumber)
-    print(createdate)
-    print(updatedate)
-
-        #     msg = "Record successfully added"
-
-        # except:
-        #     msg = "error in insert operation"
-        #
-        # finally:
-    return json.dumps({equipname,categoryname,callnumber,serialnumber,createdate,updatedate})
-
-
-    # return render_template("test.html", rows4=rows4)
+    conn = db_connect.connect()
+    query = conn.execute("SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY")
+    rows = query.fetchall();
+    return render_template("test.html" , rows=rows)
 
 @app.route('/category', methods = ['POST', 'GET'])
 def category():
