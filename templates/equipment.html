@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
@@ -82,11 +82,11 @@
 					        <form>
 					        	<div class="form-group">
 						            <label for="equip-name" class="form-control-label">ชื่อุปกรณ์:</label>
-						            <input type="text" class="form-control" id="equip-name" name="equipname" autocomplete="off">
+						            <input type="text" class="form-control" id="equip-name" autocomplete="off">
 						        </div>								        
 						        <div class="form-group">
 						        	<label for="category-name" class="form-control-label">ชื่อหมวดหมู่:</label>
-						            <select class="form-control" id="category-name" name="categoryname">
+						            <select class="form-control" id="category-name">
 						            	{% for row in rows3 %}
 				  							<option value="{{ row[0] }}">{{ row[1] }}</option>
 				  						{% endfor %}
@@ -108,15 +108,15 @@
 								</script>						        						       						       
 						        <div class="form-group">
 						           	<label for="call-number" class="form-control-label">เลขครุภัณฑ์:</label>
-						            <input class="form-control" id="call-number" name="callnumber" autocomplete="off"></input>
+						            <input class="form-control" id="call-number" autocomplete="off"></input>
 						        </div>
 						        <div class="form-group">
 						           	<label for="serial-number" class="form-control-label">เลขซีเรียล:</label>
-						            <input type="text" class="form-control" id="serial-number" name="serialnumber" autocomplete="off">
+						            <input type="text" class="form-control" id="serial-number" autocomplete="off">
 						        </div>
 						        <div class="form-group">
 						            <label for="create-date" class="form-control-label">วันที่สร้าง:</label>	
-						            <input type="date" class="form-control" id="create-date" name="createdate" readonly="readonly">   
+						            <input type="date" class="form-control" id="create-date" readonly="readonly">   
 						            <script type="text/javascript">
 										var today = new Date();										
 										$("#create-date").val(getFormattedDate(today));										
@@ -131,7 +131,7 @@
 						            </script>        
 						        </div>
 						        <div class="form-group">					     	
-						            <input type="date" class="form-control" id="update-date" name="updatedate" style="display: none;">
+						            <input type="date" class="form-control" id="update-date" style="display: none;">
 						            <script type="text/javascript">
 						            	document.getElementById('update-date').valueAsDate = new Date()
 						            </script>					                    
@@ -144,9 +144,15 @@
 					        <script type="text/javascript">
 								$(function(){
 									$('#btnSave').click(function(){
+								  		var ename = document.getElementById("equip-name").value;
+										var cateid = document.getElementById("getCateID").value;
+										var cnumber = document.getElementById("call-number").value;
+										var snumber = document.getElementById("serial-number").value;
+										var cdate = document.getElementById("create-date").value;
+										var udate = document.getElementById("update-date").value;
 										$.ajax({
-											url: '/test',
-											data: JSON.stringify({"equipname" : $('#equipname').val}),
+											url: '/addequipment',
+											data: JSON.stringify({"equipname" : ename ,"cateID" : cateid , "callnumber" : cnumber , "serialnumber" : snumber , "createdate" : cdate , "update" : udate}),
 											type: 'POST',
 											processData: false,
 											contentType: 'application/json; charset=utf-8',

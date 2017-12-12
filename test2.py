@@ -46,18 +46,23 @@ def equipment():
 
     return render_template("equipment.html", rows1=rows1 , rows2=rows2 , rows3=rows3)
 
-@app.route('/gettest' , methods = ['POST' , 'GET'])
-def gettest():
-    equipname = request.get_json()
-    print(equipname["cateID"])
-    return json.dumps(equipname)
-
-@app.route('/test' , methods = ['POST' , 'GET'])
-def test():
+@app.route('/addequipment' , methods = ['POST' , 'GET'])
+def addequipment():
+    data = request.get_json()
     conn = db_connect.connect()
-    query = conn.execute("SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY")
-    rows = query.fetchall();
-    return render_template("test.html" , rows=rows)
+    conn.execute("INSERT INTO EQUIPMENT (EQUIPMENT_NAME, CATEGORY_ID, CALL_NUMBER, SERIAL_NUMBER, CREATE_DATE, UPDATE_DATE) VALUES " ,
+                 (data["equipname"],data["cateID"],data["callnumber"],data["serialnumber"],data["createdate"],data["update"]))
+    conn.commit()
+
+    print(data["equipname"],data["cateID"],data["callnumber"],data["serialnumber"],data["createdate"],data["update"])
+    return json.dumps(data)
+
+# @app.route('/test' , methods = ['POST' , 'GET'])
+# def test():
+#     conn = db_connect.connect()
+#     query = conn.execute("SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY")
+#     rows = query.fetchall();
+#     return render_template("test.html" , rows=rows)
 
 @app.route('/category', methods = ['POST', 'GET'])
 def category():
