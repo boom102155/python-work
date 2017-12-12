@@ -71,7 +71,20 @@ def addequipment():
 def delequipment():
     data = request.get_json()
     conn = db_connect.connect()
-    conn.execute("DELETE FROM EQUIPMENT WHERE EQUIPMENT_ID = ", (data["equipmentid"]))
+    conn.execute("DELETE FROM EQUIPMENT WHERE EQUIPMENT_ID = "+ (data["equipmentid"]))
+    return json.dumps(data)
+
+@app.route('/editequipment' , methods = ['POST' , 'GET'])
+def editequipment():
+    data = request.get_json()
+    conn = db_connect.connect()
+    conn.execute("UPDATE EQUIPMENT "
+                 "SET EQUIPMENT_NAME = '" + (data["equipname"]) + "', " +
+                 "CATEGORY_ID = " + (data["cateID"]) + ", " +
+                 "CALL_NUMBER = '" + (data["callnumber"]) + "', " +
+                 "SERIAL_NUMBER = '" + (data["serialnumber"]) + "', " +
+                 "UPDATE_DATE = " + "to_date('"+(data["update"])+"','yyyy-mm-dd')" +
+                 " WHERE EQUIPMENT_ID = " + (data["equipmentid"]))
     return json.dumps(data)
 
 @app.route('/category', methods = ['POST', 'GET'])

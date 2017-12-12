@@ -82,7 +82,17 @@
 					        <form>
 					        	<div class="form-group">
 						            <label for="equip-name" class="form-control-label">ชื่อุปกรณ์:</label>
-						            <input type="text" class="form-control" id="equip-name" autocomplete="off">
+						            <input type="text" class="form-control" id="equip-name" autocomplete="off"><div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#equip-name").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error1").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error1").fadeOut();
+						            		}
+						               	})
+						            </script>
 						        </div>								        
 						        <div class="form-group">
 						        	<label for="category-name" class="form-control-label">ชื่อหมวดหมู่:</label>
@@ -108,11 +118,31 @@
 								</script>						        						       						       
 						        <div class="form-group">
 						           	<label for="call-number" class="form-control-label">เลขครุภัณฑ์:</label>
-						            <input class="form-control" id="call-number" autocomplete="off"></input>
+						            <input class="form-control" id="call-number" autocomplete="off"></input><div id="error2" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#call-number").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error2").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error2").fadeOut();
+						            		}
+						               	})
+						            </script>
 						        </div>
 						        <div class="form-group">
 						           	<label for="serial-number" class="form-control-label">เลขซีเรียล:</label>
-						            <input type="text" class="form-control" id="serial-number" autocomplete="off">
+						            <input type="text" class="form-control" id="serial-number" autocomplete="off"><div id="error3" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#call-number").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error3").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error3").fadeOut();
+						            		}
+						               	})
+						            </script>
 						        </div>
 						        <div class="form-group">
 						            <label for="create-date" class="form-control-label">วันที่สร้าง:</label>	
@@ -142,14 +172,20 @@
 					       	<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
 					        <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>
 					        <script type="text/javascript">
-								$(function(){
-									$('#btnSave').click(function(){
-								  		var ename = document.getElementById("equip-name").value;
-										var cateid = document.getElementById("getCateID").value;
-										var cnumber = document.getElementById("call-number").value;
-										var snumber = document.getElementById("serial-number").value;
-										var cdate = document.getElementById("create-date").value;
-										var udate = document.getElementById("update-date").value;
+								$('#btnSave').click(function(){
+							  		var ename = document.getElementById("equip-name").value;
+									var cateid = document.getElementById("getCateID").value;
+									var cnumber = document.getElementById("call-number").value;
+									var snumber = document.getElementById("serial-number").value;
+									var cdate = document.getElementById("create-date").value;
+									var udate = document.getElementById("update-date").value;
+
+									if (ename == "" || cnumber == "" || snumber == "") {
+										alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+            							return false;
+									}
+									else{
+										alert("บันทึกข้อมูลเรียบร้อย");
 										$.ajax({
 											url: '/addequipment',
 											data: JSON.stringify({"equipname" : ename ,"cateID" : cateid , "callnumber" : cnumber , "serialnumber" : snumber , "createdate" : cdate , "update" : udate}),
@@ -163,7 +199,7 @@
 												console.log(error);
 											}
 										});
-									});
+									}									
 								});
 							</script>
 					    </div>
@@ -223,11 +259,25 @@
       			<div class="form-group">
       				<label for="sCategory" class="form-control-label">หมวดหมู่:</label>     				
   					<select type="text" class="form-control" id="sCategory" name="sCategory">
-  						{% for row in rows2 %}
-  							<option value="{{ row[0] }}">{{ row[0] }}</option>
+  						{% for row in rows3 %}
+  							<option value="{{ row[0] }}">{{ row[1] }}</option>
   						{% endfor %}
   					</select> 					
       			</div>
+      			<div class="form-group">
+		        	<input type="text" class="form-control" id="cateID" style="display: none;"></input>
+		        </div>
+		        <script>
+					function displayVals() {
+					  var singleValues = $( "#sCategory" ).val();
+					  
+					  // $( "p" ).html( "<b>Single:</b> " + singleValues);
+					  $( "#cateID" ).val(singleValues);
+					}
+					 
+					$( "select" ).change( displayVals );
+					displayVals();
+				</script>
       			<div class="form-group">
       				<label for="txtCallnumber" class="form-control-label">เลขครุภัณ์:</label>
       				<input type="text" class="form-control" id="txtCallnumber" autocomplete="off"/>
@@ -258,10 +308,10 @@
 	      	</div>
 	      		<div class="modal-footer">	        		
 	        		<button type="submit" value="submit" class="btn btn-danger" id="btnDelete">Delete</button>
-	        		<script type="text/javascript">	        			
-	        			$(function(){
-							$('#btnDelete').click(function(){
-						  		var equipid = document.getElementById("txtID").value;
+	        		<script type="text/javascript">
+						$('#btnDelete').click(function(){
+							if (confirm("ต้องการลบใช่หรือไม่")) {
+								var equipid = document.getElementById("txtID").value;
 								$.ajax({
 									url: '/delequipment',
 									data: JSON.stringify({"equipmentid" : equipid}),
@@ -275,10 +325,44 @@
 										console.log(error);
 									}
 								});
-							});
+								location.reload();
+							}
+							return false;
+						});					
+	        		</script>
+	        		<button type="submit" value="submit" class="btn btn-primary" id="btnUpdate">Save changes</button>	    
+	        		<script type="text/javascript">
+	        			$('#btnUpdate').click(function(){
+	        				var equipid = document.getElementById("txtID").value;
+					  		var ename = document.getElementById("txtEquipname").value;
+							var cateid = document.getElementById("cateID").value;
+							var cnumber = document.getElementById("txtCallnumber").value;
+							var snumber = document.getElementById("txtSerial").value;
+							var udate = document.getElementById("updatedate").value;
+
+							if (ename == "" || cnumber == "" || snumber == "") {
+								alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+    							return false;
+							}
+							else{
+								alert("อัพเดทข้อมูลเรียบร้อย");
+								$.ajax({
+									url: '/editequipment',
+									data: JSON.stringify({"equipmentid" : equipid , "equipname" : ename ,"cateID" : cateid , "callnumber" : cnumber , "serialnumber" : snumber  , "update" : udate}),
+									type: 'POST',
+									processData: false,
+									contentType: 'application/json; charset=utf-8',
+									success: function(response){
+										console.log(response);
+									},
+									error: function(error){
+										console.log(error);
+									}
+								});
+								location.reload();
+							}									
 						});
 	        		</script>
-	        		<button type="button" class="btn btn-primary">Save changes</button>	    
 	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>    		 
 	      		</div>
 	    	</div><!-- /.modal-content -->

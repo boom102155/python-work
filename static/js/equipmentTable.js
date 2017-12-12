@@ -1,3 +1,4 @@
+// script table
 $(document).ready(function() {
 	$('#example').DataTable();			
 	$('#example tbody').on('click', 'tr', 'td', function () {
@@ -10,3 +11,6 @@ $(document).ready(function() {
 	    $("#txtDate").val($(this).closest('tr').children()[5].textContent);
     });
 });
+	        			
+
+
