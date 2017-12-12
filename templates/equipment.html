@@ -185,7 +185,7 @@
                 <th>ชื่อหมวดหมู่</th>
                 <th>เลขครุภัณฑ์</th>
                 <th>เลขซีเรียล</th>
-                <th>วันที่สร้าง</th>
+                <th>วันที่สร้าง</th>               
             </thead>
 
             {% for row in rows1 %}
@@ -195,7 +195,7 @@
                 <td>{{row[2]}}</td>
                 <td>{{row[3]}}</td>
                 <td>{{row[4]}}</td>                    
-                <td>{{row[5]}}</td>
+                <td>{{row[5]}}</td>               
             </tr>
             {% endfor %}
         </table>             
@@ -205,7 +205,7 @@
 	  	<div class="modal-dialog">
 	    	<div class="modal-content">
 	      		<div class="modal-header">
-	      			<h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+	      			<h5 class="modal-title" id="exampleModalLabel">Edit / Delete</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          	<span aria-hidden="true">&times;</span>
 			        </button>	      
@@ -256,9 +256,30 @@
 					}
 	            </script>      		      		
 	      	</div>
-	      		<div class="modal-footer">
-	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        		<button type="button" class="btn btn-primary">Save changes</button>	        		 
+	      		<div class="modal-footer">	        		
+	        		<button type="submit" value="submit" class="btn btn-danger" id="btnDelete">Delete</button>
+	        		<script type="text/javascript">	        			
+	        			$(function(){
+							$('#btnDelete').click(function(){
+						  		var equipid = document.getElementById("txtID").value;
+								$.ajax({
+									url: '/delequipment',
+									data: JSON.stringify({"equipmentid" : equipid}),
+									type: 'POST',
+									processData: false,
+									contentType: 'application/json; charset=utf-8',
+									success: function(response){
+										console.log(response);
+									},
+									error: function(error){
+										console.log(error);
+									}
+								});
+							});
+						});
+	        		</script>
+	        		<button type="button" class="btn btn-primary">Save changes</button>	    
+	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>    		 
 	      		</div>
 	    	</div><!-- /.modal-content -->
   		</div><!-- /.modal-dialog -->

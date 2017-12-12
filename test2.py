@@ -48,21 +48,31 @@ def equipment():
 
 @app.route('/addequipment' , methods = ['POST' , 'GET'])
 def addequipment():
+    try:
+        data = request.get_json()
+        conn = db_connect.connect()
+        conn.execute("INSERT INTO EQUIPMENT "
+                     "(EQUIPMENT_NAME, "
+                     "CATEGORY_ID, "
+                     "CALL_NUMBER, "
+                     "SERIAL_NUMBER, "
+                     "CREATE_DATE, "
+                     "UPDATE_DATE) "
+                     "VALUES (:2, :3, :4, :5, to_date(:7, 'yyyy-mm-dd'), to_date(:8, 'yyyy-mm-dd'))",
+                     (data["equipname"], data["cateID"], data["callnumber"], data["serialnumber"], data["createdate"], data["update"]))
+        conn.commit()
+    except:
+        conn.rollback()
+    finally:
+        return json.dumps(data)
+        conn.close()
+
+@app.route('/delequipment' , methods = ['POST' , 'GET'])
+def delequipment():
     data = request.get_json()
     conn = db_connect.connect()
-    conn.execute("INSERT INTO EQUIPMENT (EQUIPMENT_NAME, CATEGORY_ID, CALL_NUMBER, SERIAL_NUMBER, CREATE_DATE, UPDATE_DATE) VALUES " ,
-                 (data["equipname"],data["cateID"],data["callnumber"],data["serialnumber"],data["createdate"],data["update"]))
-    conn.commit()
-
-    print(data["equipname"],data["cateID"],data["callnumber"],data["serialnumber"],data["createdate"],data["update"])
+    conn.execute("DELETE FROM EQUIPMENT WHERE EQUIPMENT_ID = ", (data["equipmentid"]))
     return json.dumps(data)
-
-# @app.route('/test' , methods = ['POST' , 'GET'])
-# def test():
-#     conn = db_connect.connect()
-#     query = conn.execute("SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY")
-#     rows = query.fetchall();
-#     return render_template("test.html" , rows=rows)
 
 @app.route('/category', methods = ['POST', 'GET'])
 def category():
