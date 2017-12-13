@@ -16,9 +16,23 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
     
-
     <!-- data table script -->
-    <script type="text/javascript" src="{{ url_for('static',filename="js/equipmentTable.js")}}"></script>
+    <!-- <script type="text/javascript" src="{{ url_for('static',filename="js/equipmentTable.js")}}"></script> -->
+    <script type="text/javascript">
+    	$(document).ready(function() {
+			$('#example').DataTable();			
+			$('#example tbody').on('click', 'tr', 'td', function () {
+			    $("#myModal").modal("show");
+			    $("#txtID").val($(this).closest('tr').children()[0].textContent);
+			    $("#txtEquipname").val($(this).closest('tr').children()[1].textContent);
+			    $("#cateID").val($(this).closest('tr').children()[3].textContent);
+			    $("#sCategory").val($(this).closest('tr').children()[3].textContent);
+			    $("#txtCallnumber").val($(this).closest('tr').children()[4].textContent);
+			    $("#txtSerial").val($(this).closest('tr').children()[5].textContent);
+			    $("#txtDate").val($(this).closest('tr').children()[6].textContent);
+		    });
+		});
+    </script>
    
 </head>
 <body>
@@ -219,6 +233,7 @@
                 <th>ID</th>
                 <th>ชื่ออุปกรณ์</th>
                 <th>ชื่อหมวดหมู่</th>
+                <th>รหัสหมวดหมู่</th>
                 <th>เลขครุภัณฑ์</th>
                 <th>เลขซีเรียล</th>
                 <th>วันที่สร้าง</th>               
@@ -230,8 +245,9 @@
                 <td>{{row[1]}}</td>
                 <td>{{row[2]}}</td>
                 <td>{{row[3]}}</td>
-                <td>{{row[4]}}</td>                    
-                <td>{{row[5]}}</td>               
+                <td>{{row[4]}}</td>
+                <td>{{row[5]}}</td>                    
+                <td>{{row[6]}}</td>               
             </tr>
             {% endfor %}
         </table>             
@@ -253,18 +269,18 @@
       				<input type="text" class="form-control" readonly="readonly" id="txtID" autocomplete="off"/>
       			</div>
       			<div class="form-group">
-      			<label for="txtEquipname" class="form-control-label">ชื่อุปกรณ์:</label>
+      				<label for="txtEquipname" class="form-control-label">ชื่อุปกรณ์:</label>
       				<input type="text" class="form-control" id="txtEquipname" autocomplete="off"/>
-      			</div> 			
+      			</div>			
       			<div class="form-group">
       				<label for="sCategory" class="form-control-label">หมวดหมู่:</label>     				
-  					<select type="text" class="form-control" id="sCategory" name="sCategory">
+  					<select type="text" class="form-control" id="sCategory">
   						{% for row in rows3 %}
   							<option value="{{ row[0] }}">{{ row[1] }}</option>
   						{% endfor %}
   					</select> 					
-      			</div>
-      			<div class="form-group">
+      			</div>     			
+      			<div class="form-group">					
 		        	<input type="text" class="form-control" id="cateID" style="display: none;"></input>
 		        </div>
 		        <script>
@@ -278,6 +294,7 @@
 					$( "select" ).change( displayVals );
 					displayVals();
 				</script>
+
       			<div class="form-group">
       				<label for="txtCallnumber" class="form-control-label">เลขครุภัณ์:</label>
       				<input type="text" class="form-control" id="txtCallnumber" autocomplete="off"/>

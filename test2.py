@@ -30,6 +30,7 @@ def equipment():
     query1 = conn.execute("SELECT eq.EQUIPMENT_ID, "
                          "eq.EQUIPMENT_NAME, "
                          "ca.CATEGORY_NAME, "
+                         "ca.CATEGORY_ID, "
                          "eq.CALL_NUMBER, "
                          "eq.SERIAL_NUMBER, "
                          "to_char(eq.CREATE_DATE, 'yyyy-mm-dd') "
