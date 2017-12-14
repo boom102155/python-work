@@ -18,11 +18,15 @@ def index():
 @app.route('/lend', methods = ['POST', 'GET'])
 def lend():
     conn = db_connect.connect()
-    query = conn.execute("SELECT to_char(lh.LEND_DATE, 'yyyy-mm-dd'), ps.NAME, ps.SURNAME, ps.FACULTY, ps.CLASS, eq.SERIAL_NUMBER, eq.EQUIPMENT_NAME "
+    query1 = conn.execute("SELECT to_char(lh.LEND_DATE, 'yyyy-mm-dd'), ps.NAME, ps.SURNAME, ps.FACULTY, ps.CLASS, eq.SERIAL_NUMBER, eq.EQUIPMENT_NAME "
                          "FROM LEND_HEAD lh, LEND_DETAIL ld, EQUIPMENT eq, STAFF s, PERSON ps "
                          "WHERE lh.PERSON_ID = ps.PERSON_ID AND lh.STAFF_ID = s.STAFF_ID AND lh.LEND_NO = ld.LEND_NO AND ld.EQUIPMENT_ID = eq.EQUIPMENT_ID")
-    rows = query.fetchall();
-    return render_template("lend.html", rows=rows)
+    rows1 = query1.fetchall();
+
+    query2 = conn.execute("SELECT EQUIPMENT_NAME FROM EQUIPMENT")
+    rows2 = query2.fetchall();
+
+    return render_template("lend.html", rows1=rows1, rows2=rows2)
 
 @app.route('/equipment', methods = ['POST', 'GET'])
 def equipment():

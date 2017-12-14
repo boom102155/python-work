@@ -21,9 +21,8 @@
     
 </head>
 <body>
-	<iframe id="theFrame" src="{{ url_for('static',filename="navbar.html")}}" style="width:100%;" frameborder="0"></iframe>
 	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
-	<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="Default.aspx">
             <img src="{{ url_for('static',filename="imgs/band.png")}}" alt="Logo" width="45" height="30" />
         </a>
@@ -46,12 +45,12 @@
                     <a class="nav-link" href="category">ค้นหาตามหมวดหมู่</a>
                 </li>
             </ul>
-                 <form class="form-inline my-2 my-lg-0">
+                <!--  <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>        
+                </form> -->     
         </div>
-    </nav> -->
+    </nav>
     <!-- ++++++++++++++++++++++end navbar++++++++++++++++++++++ --> 
     <br /><br />
 
@@ -70,7 +69,7 @@
         <div class="row">
 	        <div class="col-3">
 	        	<div class="form-group">
-	        		<label for="name" class="form-control-label">ชื่อ</label>
+	        		<label for="name" class="form-control-label">ชื่อผู้ยืม</label>
 	        		<input type="text" class="form-control" id="name" onkeyup="this.value=this.value.replace(/[^a-zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
 		        </div>	        	
 		    </div>
@@ -86,6 +85,7 @@
 	        		<select type="text" class="form-control" id="faculty">
 	        			<option value="IT">IT</option>
 	        			<option value="CS">CS</option>
+	        			<option value="other">อื่นๆ</option>
 	        		</select>
 	  	        </div>
 	        </div>
@@ -97,7 +97,7 @@
 	        			<option value="2">2</option>
 	        			<option value="3">3</option>
 	        			<option value="4">4</option>
-	        			<option value="อื่นๆ">อื่นๆ</option>
+	        			<option value="other">อื่นๆ</option>
 	        		</select>
 	        	</div>
 	        </div>		        
@@ -112,13 +112,22 @@
 	        <div class="col-5">
 	        	<div class="form-group">
 	        		<label for="equipment" class="form-control-label">อุปกรณ์ (โน๊ตบุ๊ค, ปลั๊กไฟ, raspberry pi ฯลฯ)</label>
-	        		<input type="text" class="form-control" id="equipment" onkeyup="this.value=this.value.replace(/[^a-zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
+	        		<select class="form-control" id="class">
+	        				<option value="">---เลือกอุปกรณ์---</option>
+	        			{% for row in rows2 %}
+	        				<option value="{{ row[0] }}">{{ row[0] }}</option>
+	        			{% endfor %}
+	        		</select>	        		
 	        	</div>
 	        </div>
 	        <div class="col-2">
 	        	<div class="form-group">
 	        		<label for="status" class="form-control-label">สถานะ</label>
-	        		<select class="form-control" id="status"></select>
+	        		<select class="form-control" id="status">
+	        			<option value="I">I</option>
+	        			<option value="U">U</option>
+	        			<option value="D">D</option>
+	        		</select>
 	        	</div>
 	        </div>
     	</div>	
@@ -152,7 +161,7 @@
                 <th>อุปกรณ์</th>
             </thead>
 
-            {% for row in rows %}
+            {% for row in rows1 %}
             <tr>
                 <td>{{row[0]}}</td>
                 <td>{{row[1]}}</td>
