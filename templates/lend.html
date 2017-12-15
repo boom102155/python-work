@@ -18,6 +18,24 @@
 
     <!-- data table script -->
     <script type="text/javascript" src="{{ url_for('static',filename="js/lendTable.js")}}"></script>
+
+    <!-- script date picker -->   
+    <link rel="stylesheet" href="{{ url_for('static',filename="datepicker/dist/css/bootstrap-datepicker.css")}}">
+    <script type="text/javascript" src="{{ url_for('static',filename="datepicker/dist/js/bootstrap-datepicker-custom.js")}}"></script>
+    <!-- <link href="{{ url_for('static',filename="datepicker/bootstrap-3.3.7-dist/css/bootstrap.css")}}" rel="stylesheet" />
+    <link href="{{ url_for('static',filename="datepicker/bootstrap-3.3.7-dist/css/bootstrap-theme.css")}}" rel="stylesheet" />
+    <script src="{{ url_for('static',filename="datepicker/bootstrap-3.3.7-dist/js/bootstrap.js")}}"></script> -->
+
+    <script>
+  		 $(document).ready(function () {
+            $('#datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                todayBtn: true
+                // language: 'th',             //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
+                // thaiyear: true              //Set เป็นปี พ.ศ.
+            }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
+        }); 		
+  	</script>
     
 </head>
 <body>
@@ -65,8 +83,15 @@
     <br />
 
     <!-- +++++++++++++++++++++ Input Form ++++++++++++++++++++++ -->
-    <div class="container"> 	
+    <div class="container"> 
+			
         <div class="row">
+        	<div class="col-2">
+    		<div class="form-group">
+    			<label for="name" class="form-control-label">วันที่ยืม</label>
+    			<input type="text" class="form-control" id="datepicker" data-date-format="yyyy-mm-dd"></input>   
+    		</div>
+    		</div>
 	        <div class="col-3">
 	        	<div class="form-group">
 	        		<label for="name" class="form-control-label">ชื่อผู้ยืม</label>
@@ -79,7 +104,7 @@
 	        		<input type="text" class="form-control" id="surname" onkeyup="this.value=this.value.replace(/[^a-zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
 	        	</div>
 	        </div>
-	        <div class="col-3">
+	        <div class="col-2">
 	        	<div class="form-group">	        		
 	        		<label for="faculty" class="form-control-label">สาขา</label>
 	        		<select type="text" class="form-control" id="faculty">
@@ -89,7 +114,7 @@
 	        		</select>
 	  	        </div>
 	        </div>
-	        <div class="col-3">
+	        <div class="col-2">
 	        	<div class="form-group">	        		
 	        		<label for="class" class="form-control-label">ชั้นปี</label>
 	        		<select class="form-control" id="class">
@@ -153,8 +178,8 @@
         <table id="example" class="table table-striped table-bordered table-responsive table-hover" cellspacing="0" width="100%">
             <thead>
                 <th>วันที่ยืม</th>
-                <th>ชื่อ</th>
-                <th>นามสกุล</th>
+                <th>ผู้ให้ยืม</th>
+                <th>ผู้ยืม</th>
                 <th>สาขา</th>
                 <th>ชั้นปี</th>
                 <th>เลขเครื่อง</th>
@@ -167,8 +192,8 @@
                 <td>{{row[1]}}</td>
                 <td>{{row[2]}}</td>
                 <td>{{row[3]}}</td>
-                <td>{{row[4]}}</td>                    
-                <td>{{row[5]}}</td>
+                <td>{{row[4]}}</td>
+                <td>{{row[5]}}</td>                    
                 <td>{{row[6]}}</td>
             </tr>
             {% endfor %}
@@ -188,7 +213,17 @@
 	      		<form>
 	      			<div class="form-group">
 	      				<label for="txtDate" class="form-control-label">วันที่ยืม</label>
-	      				<input type="date" class="form-control" id="txtDate"/>
+	      				<input type="text" class="form-control" id="txtDate"/>	  
+	      				<script>
+					  		 $(document).ready(function () {
+					            $('#txtDate').datepicker({
+					                format: 'yyyy-mm-dd',
+					                todayBtn: true
+					                // language: 'th',             //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
+					                // thaiyear: true              //Set เป็นปี พ.ศ.
+					            }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
+					        }); 		
+					  	</script>    				    				
 	      			</div>
 	      			<div class="form-group">
 	      				<label for="txtName" class="form-control-label">ชื่อผู้ยืม</label>
@@ -225,8 +260,9 @@
 		        </form>
 	      	</div>
 	      		<div class="modal-footer">
-	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        		<button type="button" class="btn btn-primary">Save changes</button>
+	        		<button type="button" class="btn btn-danger">ลบ</button>
+	        		<button type="button" class="btn btn-primary">อัพเดท</button>
+	        		<button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
 	      		</div>
 	    	</div><!-- /.modal-content -->
   		</div><!-- /.modal-dialog -->
