@@ -25,6 +25,7 @@ def lend():
                           "ps.SURNAME), "
                           "ps.FACULTY, "
                           "ps.CLASS, "
+                          "eq.EQUIPMENT_ID, "
                           "eq.SERIAL_NUMBER, "
                           "eq.EQUIPMENT_NAME "
                          "FROM LEND_HEAD lh, LEND_DETAIL ld, EQUIPMENT eq, STAFF s, PERSON ps "
@@ -35,6 +36,13 @@ def lend():
     rows2 = query2.fetchall();
 
     return render_template("lend.html", rows1=rows1, rows2=rows2)
+
+@app.route('/inspection', methods = ['POST', 'GET'])
+def inspection():
+    conn = db_connect.connect()
+    query = conn.execute("")
+    rows = query.fetchall();
+    return json.dumps()
 
 @app.route('/equipment', methods = ['POST', 'GET'])
 def equipment():

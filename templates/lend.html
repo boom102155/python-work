@@ -17,7 +17,24 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
 
     <!-- data table script -->
-    <script type="text/javascript" src="{{ url_for('static',filename="js/lendTable.js")}}"></script>
+    <!-- <script type="text/javascript" src="{{ url_for('static',filename="js/lendTable.js")}}"></script> -->
+    <script type="text/javascript">
+	    $(document).ready(function() {
+			var table = $('#example').DataTable();
+			$('#example tbody').on('click', 'tr', 'td', function () {
+		        $("#myModal").modal("show");
+		        $("#txtDate").val($(this).closest('tr').children()[0].textContent);
+			    $("#txtName").val($(this).closest('tr').children()[1].textContent);
+			    $("#txtSurname").val($(this).closest('tr').children()[2].textContent);
+			    $("#sFaculty").val($(this).closest('tr').children()[3].textContent);
+			    $("#sClass").val($(this).closest('tr').children()[4].textContent);
+			    $("#txtEID").val($(this).closest('tr').children()[5].textContent);
+			    $("#txtIeid").val($(this).closest('tr').children()[5].textContent);
+			    $("#txtSerial").val($(this).closest('tr').children()[6].textContent);
+			    $("#txtEquipment").val($(this).closest('tr').children()[7].textContent);
+		    });
+		});
+	</script>   
 
     <!-- script date picker -->   
     <link rel="stylesheet" href="{{ url_for('static',filename="datepicker/dist/css/bootstrap-datepicker.css")}}">
@@ -36,7 +53,11 @@
             }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
         }); 		
   	</script>
-    
+    <style type="text/css">
+    	.mycontent-left {
+		  border-right: 1px solid #EEEEEE;
+		}
+    </style>
 </head>
 <body>
 	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
@@ -128,13 +149,13 @@
 	        </div>		        
 	    </div>
 	    <div class="row">
-	        <div class="col-5">
+	        <div class="col-6">
 	        	<div class="form-group">
 	        		<label for="serial" class="form-control-label">เลขเครื่อง (serial number หรือ เลขเครื่องโน๊ตบุ๊ค)</label>
 	        		<input type="text" class="form-control" id="serial" onkeyup="this.value=this.value.replace(/[^a-z0-9-]/g,'');"></input>
 	        	</div>
 	        </div>
-	        <div class="col-5">
+	        <div class="col-6">
 	        	<div class="form-group">
 	        		<label for="equipment" class="form-control-label">อุปกรณ์ (โน๊ตบุ๊ค, ปลั๊กไฟ, raspberry pi ฯลฯ)</label>
 	        		<select class="form-control" id="class">
@@ -143,16 +164,6 @@
 	        				<option value="{{ row[0] }}">{{ row[0] }}</option>
 	        			{% endfor %}
 	        		</select>	        		
-	        	</div>
-	        </div>
-	        <div class="col-2">
-	        	<div class="form-group">
-	        		<label for="status" class="form-control-label">สถานะ</label>
-	        		<select class="form-control" id="status">
-	        			<option value="I">I</option>
-	        			<option value="U">U</option>
-	        			<option value="D">D</option>
-	        		</select>
 	        	</div>
 	        </div>
     	</div>	
@@ -182,8 +193,9 @@
                 <th>ผู้ยืม</th>
                 <th>สาขา</th>
                 <th>ชั้นปี</th>
-                <th>เลขเครื่อง</th>
-                <th>อุปกรณ์</th>
+                <th>รหัสอุปกรณ์</th>
+                <th>เลขเซีเรียล</th>
+                <th>ชื่ออุปกรณ์</th>
             </thead>
 
             {% for row in rows1 %}
@@ -193,74 +205,120 @@
                 <td>{{row[2]}}</td>
                 <td>{{row[3]}}</td>
                 <td>{{row[4]}}</td>
-                <td>{{row[5]}}</td>                    
-                <td>{{row[6]}}</td>
+                <td>{{row[5]}}</td> 
+                <td>{{row[6]}}</td>                    
+                <td>{{row[7]}}</td>
             </tr>
             {% endfor %}
         </table>             
     </div>
 
     <div class="modal fade" id="myModal">
-	  	<div class="modal-dialog">
+	  	<div class="modal-dialog modal-lg">
 	    	<div class="modal-content">
 	      		<div class="modal-header">
-	      			<h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+	      			<h5 class="modal-title" id="exampleModalLabel">แก้ไข ข้อมูลการยืม - คืน</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          	<span aria-hidden="true">&times;</span>
 			        </button>	      
 	        	</div>
-	      	<div class="modal-body">
-	      		<form>
-	      			<div class="form-group">
-	      				<label for="txtDate" class="form-control-label">วันที่ยืม</label>
-	      				<input type="text" class="form-control" id="txtDate"/>	  
-	      				<script>
-					  		 $(document).ready(function () {
-					            $('#txtDate').datepicker({
-					                format: 'yyyy-mm-dd',
-					                todayBtn: true
-					                // language: 'th',             //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
-					                // thaiyear: true              //Set เป็นปี พ.ศ.
-					            }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
-					        }); 		
-					  	</script>    				    				
-	      			</div>
-	      			<div class="form-group">
-	      				<label for="txtName" class="form-control-label">ชื่อผู้ยืม</label>
-	      				<input type="text" class="form-control" id="txtName"/>
-	      			</div>
-	      			<div class="form-group">
-	      				<label for="txtSurname" class="form-control-label">นามสกุล</label>
-	      				<input type="text" class="form-control" id="txtSurname"/>
-	      			</div>
-	      			<div class="form-group">
-	      				<label for="sFaculty" class="form-control-label">สาขา</label>
-	      				<select class="form-control" id="sFaculty">
-	      					<option value="IT">IT</option>
-	      					<option value="CS">CS</option>
-	      				</select>
-	      			</div>
-	      			<div class="form-group">
-	      				<label for="sClass" class="form-control-label">ชั้นปี</label>
-	      				<select class="form-control" id="sClass">
-	      					<option value="1">1</option>
-	      					<option value="2">2</option>
-	      					<option value="3">3</option>
-	      					<option value="4">4</option>
-	      				</select>
-	      			</div>
-	      			<div class="form-group">
-	      				<label for="txtSerial" class="form-control-label">ซีเรียล</label>
-	      				<input type="text" class="form-control" id="txtSerial"/>
-	      			</div>
-	      			<div class="form-group">
-	      				<label for="txtEquipment" class="form-control-label">อุปกรณ์</label>
-	      				<input type="text" class="form-control" id="txtEquipment"/>
-	      			</div>		        	
-		        </form>
-	      	</div>
+		      	<div class="modal-body">
+			      	<div class="row">
+			      		<!-- ++++++++++++++++LEND Column++++++++++++++++++ -->
+			      		<div class="col-6 mycontent-left">
+			      			<form>
+			      				<h4 style="text-align: center;">ข้อมูลการยืม</h4>
+				      			<div class="form-group">
+				      				<label for="txtDate" class="form-control-label">วันที่ยืม</label>
+				      				<input type="text" class="form-control" id="txtDate" readonly="readonly" />	  
+				      				<script>
+								  		 $(document).ready(function () {
+								            $('#txtDate').datepicker({
+								                format: 'yyyy-mm-dd',
+								                todayBtn: true
+								                // language: 'th',             //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
+								                // thaiyear: true              //Set เป็นปี พ.ศ.
+								            }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
+								        }); 		
+								  	</script>    				    				
+				      			</div>
+				      			<div class="form-group">
+				      				<label for="txtName" class="form-control-label">ผู้ให้ยืม</label>
+				      				<input type="text" class="form-control" id="txtName" readonly="readonly" />
+				      			</div>
+				      			<div class="form-group">
+				      				<label for="txtSurname" class="form-control-label">ผู้ยืม</label>
+				      				<input type="text" class="form-control" id="txtSurname" readonly="readonly" />
+				      			</div>
+				      			<div class="form-group">
+				      				<label for="sFaculty" class="form-control-label">สาขา</label>
+				      				<input type="text" class="form-control" id="sFaculty" readonly="readonly"></input>
+				      				<!-- <select class="form-control" id="sFaculty" readonly="readonly">
+				      					<option value="IT">IT</option>
+				      					<option value="CS">CS</option>
+				      				</select> -->
+				      			</div>
+				      			<div class="form-group">
+				      				<label for="sClass" class="form-control-label">ชั้นปี</label>
+				      				<input type="text" class="form-control" id="sClass" readonly="readonly"></input>
+				      				<!-- <select class="form-control" id="sClass" readonly="readonly">
+				      					<option value="1">1</option>
+				      					<option value="2">2</option>
+				      					<option value="3">3</option>
+				      					<option value="4">4</option>
+				      				</select> -->
+				      			</div>
+				      			<div class="form-group">
+				      				<label for="txtEID" class="form-control-label">รหัสอุปกรณ์</label>
+				      				<input type="text" class="form-control" id="txtEID" readonly="readonly" />
+				      			</div>
+				      			<div class="form-group">
+				      				<label for="txtSerial" class="form-control-label">ซีเรียล</label>
+				      				<input type="text" class="form-control" id="txtSerial" readonly="readonly" />
+				      			</div>
+				      			<div class="form-group">
+				      				<label for="txtEquipment" class="form-control-label">ชื่ออุปกรณ์</label>
+				      				<input type="text" class="form-control" id="txtEquipment" readonly="readonly" />
+				      			</div>		        	
+			        		</form>
+			      		</div>
+			      		<!-- ++++++++++++++++Inspection Column++++++++++++++++++ -->
+			      		<div class="col-6">
+			      			<form>
+			      				<h4 style="text-align: center;">ข้อมูลการคืน</h4>
+			      				<div class="form-group">
+				      				<label for="txtDate" class="form-control-label">วันที่คืน</label>
+				      				<input type="text" class="form-control" id="txtInspecDate"/>
+				      				<script>
+								  		 $(document).ready(function () {
+								            $('#txtInspecDate').datepicker({
+								                format: 'yyyy-mm-dd',
+								                todayBtn: true
+								                // language: 'th',             //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
+								                // thaiyear: true              //Set เป็นปี พ.ศ.
+								            }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
+								        }); 		
+								  	</script>    				    				
+				      			</div>
+				      			<div class="form-group">
+				      				<label for="txtIeid" class="form-control-label">รหัสอุปกรณ์</label>
+				      				<input type="text" class="form-control" id="txtIeid" readonly="readonly"/>				      				
+				      			</div>
+				      			<div class="form-group">
+				      				<label for="" class="form-control-label">ผู้รับคืน</label>
+				      				<input type="text" class="form-control" id="" readonly="readonly"/>
+				      			</div>
+				      			<div class="form-group">
+				      				<label for="" class="form-control-label">รายละเอียด</label>
+				      				<textarea class="form-control" id=""></textarea>  
+				      			</div>
+			      			</form>
+			      		</div>
+			      	</div>
+		      		
+		      	</div>
 	      		<div class="modal-footer">
-	        		<button type="button" class="btn btn-danger">ลบ</button>
+	        		<!-- <button type="button" class="btn btn-danger">ลบ</button> -->
 	        		<button type="button" class="btn btn-primary">อัพเดท</button>
 	        		<button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
 	      		</div>
