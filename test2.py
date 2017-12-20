@@ -106,6 +106,7 @@ def editequipment():
                  "SERIAL_NUMBER = '" + (data["serialnumber"]) + "', " +
                  "UPDATE_DATE = " + "to_date('"+(data["update"])+"','yyyy-mm-dd')" +
                  " WHERE EQUIPMENT_ID = " + (data["equipmentid"]))
+    conn.commit()
     return json.dumps(data)
 
 @app.route('/category', methods = ['POST', 'GET'])
@@ -120,5 +121,51 @@ def category():
     rows = query.fetchall();
     return render_template("category.html", rows=rows)
 
+@app.route('/addcategory', methods = ['POST', 'GET'])
+def addcategory():
+    try:
+        data = request.get_json()
+        conn = db_connect.connect()
+        print(data["categoryname"], data["shortname"], data["categorytype"], data["detail"], data["createdate"], data["update"])
+        conn.execute("INSERT INTO CATEGORY "
+                     "(CATEGORY_ID, "
+                     "CATEGORY_NAME, "
+                     "SHORT_NAME, "
+                     "TYPE, "
+                     "DETAIL, "
+                     "CREATE_DATE, "
+                     "UPDATE_DATE) "
+                     "VALUES (:1, :2, :3, :4, :5, to_date(:6, 'yyyy-mm-dd'), to_date(:7, 'yyyy-mm-dd'))",
+                     (data["cateid"], data["categoryname"], data["shortname"], data["categorytype"], data["detail"], data["createdate"], data["update"]))
+        conn.commit()
+    except:
+        conn.rollback()
+    finally:
+        return json.dumps(data)
+        conn.close()
+
+@app.route('/delcategory' , methods = ['POST' , 'GET'])
+def delcategory():
+    data = request.get_json()
+    conn = db_connect.connect()
+    conn.execute("DELETE FROM CATEGORY WHERE CATEGORY_ID = "+ (data["categoryid"]))
+    return json.dumps(data)
+
+@app.route('/editcategory' , methods = ['POST' , 'GET'])
+def editcategory():
+    data = request.get_json()
+    conn = db_connect.connect()
+    conn.execute("UPDATE CATEGORY "
+                 "SET CATEGORY_ID = " + (data["cateid"]) + ", " +
+                 "CATEGORY_NAME = '" + (data["categoryname"]) + "', " +
+                 "SHORT_NAME = '" + (data["shortname"]) + "', " +
+                 "TYPE = '" + (data["categorytype"]) + "', " +
+                 "DETAIL = '" + (data["detail"]) + "', " +
+                 "UPDATE_DATE = " + "to_date('"+(data["update"])+"','yyyy-mm-dd')" +
+                 " WHERE CATEGORY_ID = " + (data["cateid"]))
+    conn.commit()
+    return json.dumps(data)
+
 if __name__ == '__main__':
     app.run(debug=True)
+

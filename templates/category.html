@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
@@ -82,27 +82,30 @@
 					        <form>
 					        	<div class="form-group">
 						            <label for="category-id" class="form-control-label">รหัสหมวดหมู่:</label>
-						            <input type="text" class="form-control" id="category-id" name="cateid" autocomplete="off"></input>
+						            <input type="text" class="form-control" id="category-id" autocomplete="off" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></input> 
 						        </div>
 						        <div class="form-group">
 						            <label for="category-name" class="form-control-label">ชื่อหมวดหมู่:</label>
-						            <input type="text" class="form-control" id="category-name" name="catename" autocomplete="off"></input>					            
+						            <input type="text" class="form-control" id="category-name" autocomplete="off" 
+						            onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>					            
 						        </div>
 						        <div class="form-group">
 						           	<label for="short-name" class="form-control-label">ชื่อย่อ:</label>
-						            <input class="form-control" id="short-name" name="shortname" autocomplete="off"></input>
+						            <input class="form-control" id="short-name" autocomplete="off" 
+						            onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
 						        </div>
 						        <div class="form-group">
 						           	<label for="category-type" class="form-control-label">ประเภท:</label>
-						            <select class="form-control" id="category-type" name="type"></select>
+						            <input class="form-control" id="category-type" autocomplete="off" 
+						            onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
 						        </div>
 						        <div class="form-group">
 						            <label for="detail" class="form-control-label">รายละเอียด:</label>
-						            <textarea class="form-control" id="detail" name="detail" autocomplete="off"></textarea>
+						            <textarea class="form-control" id="de-tail" autocomplete="off"></textarea>
 						        </div>
 						        <div class="form-group">
-						            <label for="create-date" class="form-control-label">วันที่:</label>	
-						            <input type="date" class="form-control" id="create-date" name="createdate" readonly="readonly"></input>
+						            <label for="create-date" class="form-control-label">วันที่สร้าง:</label>	
+						            <input type="date" class="form-control" id="create-date" readonly="readonly"></input>
 						            <script type="text/javascript">
 										var today = new Date();										
 										$("#create-date").val(getFormattedDate(today));										
@@ -117,7 +120,7 @@
 						            </script>         
 						        </div>
 						        <div class="form-group">					     	
-						            <input type="date" class="form-control" id="update-date" name="updatedate" style="display: none;">
+						            <input type="date" class="form-control" id="update-date" readonly="readonly" style="display: none;">
 						            <script type="text/javascript">
 						            	document.getElementById('update-date').valueAsDate = new Date()
 						            </script>					                    
@@ -128,10 +131,37 @@
 					       	<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
 					        <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>
 					        <script type="text/javascript">
-					        	$(document).on('click', '#btnSave', function(){
-	    							alert("The btn Save was clicked.");
+								$('#btnSave').click(function(){
+							  		var cid = document.getElementById("category-id").value;
+									var cname = document.getElementById("category-name").value;
+									var sname = document.getElementById("short-name").value;
+									var etype = document.getElementById("category-type").value;
+									var detail = document.getElementById("de-tail").value;
+									var cdate = document.getElementById("create-date").value;
+									var udate = document.getElementById("update-date").value;
+
+									if (cid == "" || cname == "" || sname == "" || etype == "") {
+										alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+            							return false;
+									}
+									else{
+										alert("บันทึกข้อมูลเรียบร้อย");
+										$.ajax({
+											url: '/addcategory',
+											data: JSON.stringify({"cateid" : cid , "categoryname" : cname , "shortname" : sname , "categorytype" : etype , "detail" : detail , "createdate" : cdate , "update" : udate}),
+											type: 'POST',
+											processData: false,
+											contentType: 'application/json; charset=utf-8',
+											success: function(response){
+												console.log(response);
+											},
+											error: function(error){
+												console.log(error);
+											}
+										});
+									}									
 								});
-					        </script>
+							</script>
 					    </div>
 			    	</div>
 		    	</form>		    
@@ -179,19 +209,19 @@
 		      		<form>
 		      			<div class="form-group">
 		      				<label for="txtID" class="form-control-label">รหัส:</label>
-		      				<input type="text" class="form-control" readonly="readonly" id="txtID" autocomplete="off"/>
+		      				<input type="text" class="form-control" id="txtID" autocomplete="off" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
 		      			</div>
 		      			<div class="form-group">
 		      				<label for="txtCatename" class="form-control-label">ชื่อหมวดหมู่:</label>
-		      				<input type="text" class="form-control" id="txtCatename" autocomplete="off"/>
+		      				<input type="text" class="form-control" id="txtCatename" autocomplete="off" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />
 		      			</div>
 		      			<div class="form-group">
 		      				<label for="txtShortname" class="form-control-label">ชื่อย่อ:</label>
-		      				<input type="text" class="form-control" id="txtShortname" autocomplete="off"/>
+		      				<input type="text" class="form-control" id="txtShortname" autocomplete="off" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />
 		      			</div>
 		      			<div class="form-group">
 		      				<label for="txtType" class="form-control-label">ประเภท:</label>
-		      				<input type="text" class="form-control" id="txtType" autocomplete="off"/>
+		      				<input type="text" class="form-control" id="txtType" autocomplete="off" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />
 		      			</div>
 		      			<div class="form-group">
 		      				<label for="txtDescription" class="form-control-label">รายละเอียด:</label>
@@ -219,8 +249,62 @@
 			        </form>
 		      	</div>
 	      		<div class="modal-footer">
-	      			<button type="submit" value="submit" class="btn btn-danger" id="btnDelete">ลบ</button>	        			        		
-	        		<button type="button" class="btn btn-primary">อัพเดท</button>
+	      			<button type="submit" value="submit" class="btn btn-danger" id="btnDelete">ลบ</button>	
+	      			<script type="text/javascript">
+						$('#btnDelete').click(function(){
+							if (confirm("ต้องการลบใช่หรือไม่")) {
+								var cid = document.getElementById("txtID").value;
+								$.ajax({
+									url: '/delcategory',
+									data: JSON.stringify({"categoryid" : cid}),
+									type: 'POST',
+									processData: false,
+									contentType: 'application/json; charset=utf-8',
+									success: function(response){
+										console.log(response);
+									},
+									error: function(error){
+										console.log(error);
+									}
+								});
+								location.reload();
+							}
+							return false;
+						});					
+	        		</script>        			        		
+	        		<button type="submit" value="submit" class="btn btn-primary" id="btnUpdate">อัพเดท</button>
+	        		<script type="text/javascript">
+						$('#btnUpdate').click(function(){
+					  		var cid = document.getElementById("txtID").value;
+							var cname = document.getElementById("txtCatename").value;
+							var sname = document.getElementById("txtShortname").value;
+							var etype = document.getElementById("txtType").value;
+							var detail = document.getElementById("txtDescription").value;							
+							var udate = document.getElementById("updatedate").value;
+
+							if (cid == "" || cname == "" || sname == "" || etype == "") {
+								alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+    							return false;
+							}
+							else{
+								alert("อัพเดทข้อมูลเรียบร้อย");
+								$.ajax({
+									url: '/editcategory',
+									data: JSON.stringify({"cateid" : cid , "categoryname" : cname , "shortname" : sname , "categorytype" : etype , "detail" : detail , "update" : udate}),
+									type: 'POST',
+									processData: false,
+									contentType: 'application/json; charset=utf-8',
+									success: function(response){
+										console.log(response);
+									},
+									error: function(error){
+										console.log(error);
+									}
+								});
+								location.reload();
+							}									
+						});
+					</script>
 	        		<button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
 	      		</div>
 	    	</div><!-- /.modal-content -->
