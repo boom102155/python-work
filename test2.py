@@ -18,7 +18,8 @@ def index():
 @app.route('/lend', methods = ['POST', 'GET'])
 def lend():
     conn = db_connect.connect()
-    query1 = conn.execute("SELECT to_char(lh.LEND_DATE, 'yyyy-mm-dd'), "
+    query1 = conn.execute("SELECT lh.LEND_NO, "
+                          "to_char(lh.LEND_DATE, 'yyyy-mm-dd'), "
                           "(s.NAME || ' ' || "
                           "s.SURNAME), "
                           "(ps.NAME || ' ' || "
