@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
@@ -327,12 +327,12 @@
 				      				<input type="text" class="form-control" id="txtIeid" readonly="readonly"/>				      				
 				      			</div>
 				      			<div class="form-group">
-				      				<label for="" class="form-control-label">ผู้รับคืน(ID)</label>
-				      				<input type="text" class="form-control" id="" readonly="readonly"/>
+				      				<label for="txtStaffID" class="form-control-label">ผู้รับคืน(ID)</label>
+				      				<input type="text" class="form-control" id="txtStaffID" />
 				      			</div>
 				      			<div class="form-group">
-				      				<label for="" class="form-control-label">รายละเอียด</label>
-				      				<textarea class="form-control" id=""></textarea>  
+				      				<label for="txtInspection" class="form-control-label">รายละเอียด</label>
+				      				<textarea class="form-control" id="txtInspection"></textarea>  
 				      			</div>
 				      			<div class="form-group">
 						            <!-- <label for="create-date" class="form-control-label">วันที่สร้าง:</label>	 -->
@@ -363,7 +363,42 @@
 		      	</div>
 	      		<div class="modal-footer">
 	        		<!-- <button type="button" class="btn btn-danger">ลบ</button> -->
-	        		<button type="button" class="btn btn-primary">อัพเดท</button>
+	        		<button type="summit" value="summit" class="btn btn-primary" id="btnUpdate">อัพเดท</button>
+	        		<script type="text/javascript">
+	        			$('#btnUpdate').click(function(){
+	        				var lno = document.getElementById("txtILendNO").value;
+					  		var inspecdate = document.getElementById("txtInspecDate").value;
+							var status = document.getElementById("sStatus").value;
+							var leid = document.getElementById("txtIeid").value;
+							var staffid = document.getElementById("txtStaffID").value;
+							var inspec = document.getElementById("txtInspection").value;
+							var cdate = document.getElementById("create-date").value;
+							var udate = document.getElementById("update-date").value;
+
+							if (inspec == "") {
+								alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+    							return false;
+							}
+							else{
+								alert("อัพเดทข้อมูลเรียบร้อย");
+								$.ajax({
+									url: '/addinspection',
+									data: JSON.stringify({"lendno" : lno , "inspdate" : inspecdate , "sta" : status , "leid" : leid , "staff" : staffid  , "inspection" : inspec , 
+										"createdate" : cdate , "update" : udate}),
+									type: 'POST',
+									processData: false,
+									contentType: 'application/json; charset=utf-8',
+									success: function(response){
+										console.log(response);
+									},
+									error: function(error){
+										console.log(error);
+									}
+								});
+								location.reload();
+							}									
+						});
+	        		</script>
 	        		<button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
 	      		</div>
 	    	</div><!-- /.modal-content -->
