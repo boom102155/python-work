@@ -40,17 +40,22 @@ def lend():
 
 @app.route('/addinspection', methods = ['POST', 'GET'])
 def addinspection():
-    data = request.get_json()
-    conn = db_connect.connect()
-    conn.execute("INSERT INTO LEND_INSPECTION (LEND_NO, INSPECTION_DATE, INSPECTION_STATUS, STAFF_ID, CREATE_DATE, UPDATE_DATE) "
-                 "VALUES (:1, TO_DATE(:2, 'yyyy-mm-dd'), :3, :4, TO_DATE(:5, 'yyyy-mm-dd'), TO_DATE(:6, 'yyyy-mm-dd'))",
-                 (data["lendno"], data["inspdate"], data["sta"], data["staff"], data["createdate"], data["update"]))
+    try:
+        data = request.get_json()
+        conn = db_connect.connect()
+        conn.execute("INSERT INTO LEND_INSPECTION (LEND_NO, INSPECTION_DATE, INSPECTION_STATUS, STAFF_ID, CREATE_DATE, UPDATE_DATE) "
+                     "VALUES (:1, TO_DATE(:2, 'yyyy-mm-dd'), :3, :4, TO_DATE(:5, 'yyyy-mm-dd'), TO_DATE(:6, 'yyyy-mm-dd'))",
+                     (data["lendno"], data["inspdate"], data["sta"], data["staff"], data["createdate"], data["update"]))
 
-    conn.execute("INSERT INTO INSPECTION_DETAIL (LEND_NO, EQUIPMENT_ID, INSPECTION, CREATE_DATE, UPDATE_DATE) "
-                 "VALUES (:1, :2, :3, TO_DATE(:4, 'yyyy-mm-dd'), TO_DATE(:5, 'yyyy-mm-dd'))",
-                 (data["lendno"], data["leid"], data["inspection"], data["createdate"], data["update"]))
-    conn.commit()
-    return json.dumps(data)
+        conn.execute("INSERT INTO INSPECTION_DETAIL (LEND_NO, EQUIPMENT_ID, INSPECTION, CREATE_DATE, UPDATE_DATE) "
+                     "VALUES (:1, :2, :3, TO_DATE(:4, 'yyyy-mm-dd'), TO_DATE(:5, 'yyyy-mm-dd'))",
+                     (data["lendno"], data["leid"], data["inspection"], data["createdate"], data["update"]))
+        conn.commit()
+    except:
+        conn.rollback()
+    finally:
+        return json.dumps(data)
+        conn.close()
 
 @app.route('/equipment', methods = ['POST', 'GET'])
 def equipment():
