@@ -274,6 +274,17 @@
       			<div class="form-group">
       				<label for="txtEquipname" class="form-control-label">ชื่อุปกรณ์:</label>
       				<input type="text" class="form-control" id="txtEquipname" autocomplete="off" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />
+      				<div id="error4" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+		            <script type="text/javascript">
+		            	$("#txtEquipname").blur(function(){
+		            		if (this.value == '') {
+		            			$("#error4").fadeIn("show");
+		            		}
+		            		if (this.value != '') {
+		            			$("#error4").fadeOut();
+		            		}
+		               	})
+		            </script>
       			</div>			
       			<div class="form-group">
       				<label for="sCategory" class="form-control-label">หมวดหมู่:</label>     				
@@ -301,10 +312,32 @@
       			<div class="form-group">
       				<label for="txtCallnumber" class="form-control-label">เลขครุภัณ์:</label>
       				<input type="text" class="form-control" id="txtCallnumber" autocomplete="off" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />
+      				<div id="error5" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+      				<script type="text/javascript">
+		            	$("#txtCallnumber").blur(function(){
+		            		if (this.value == '') {
+		            			$("#error5").fadeIn("show");
+		            		}
+		            		if (this.value != '') {
+		            			$("#error5").fadeOut();
+		            		}
+		               	})
+		            </script>
       			</div>
       			<div class="form-group">
       				<label for="txtSerial" class="form-control-label">เลขซีเรียล:</label>
       				<input type="text" class="form-control" id="txtSerial" autocomplete="off" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />
+      				<div id="error6" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+      				<script type="text/javascript">
+		            	$("#txtSerial").blur(function(){
+		            		if (this.value == '') {
+		            			$("#error6").fadeIn("show");
+		            		}
+		            		if (this.value != '') {
+		            			$("#error6").fadeOut();
+		            		}
+		               	})
+		            </script>
       			</div>
       			<div class="form-group">
       				<label for="txtDate" class="form-control-label">วันที่สร้าง:</label>

@@ -82,22 +82,63 @@
 					        <form>
 					        	<div class="form-group">
 						            <label for="category-id" class="form-control-label">รหัสหมวดหมู่:</label>
-						            <input type="text" class="form-control" id="category-id" autocomplete="off" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></input> 
+						            <input type="text" class="form-control" id="category-id" autocomplete="off" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></input>
+						            <div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#category-id").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error1").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error1").fadeOut();
+						            		}
+						               	})
+						            </script>
 						        </div>
 						        <div class="form-group">
 						            <label for="category-name" class="form-control-label">ชื่อหมวดหมู่:</label>
-						            <input type="text" class="form-control" id="category-name" autocomplete="off" 
-						            onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>					            
+						            <input type="text" class="form-control" id="category-name" autocomplete="off" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
+						            <div id="error2" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#category-name").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error2").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error2").fadeOut();
+						            		}
+						               	})
+						            </script>					            
 						        </div>
 						        <div class="form-group">
 						           	<label for="short-name" class="form-control-label">ชื่อย่อ:</label>
-						            <input class="form-control" id="short-name" autocomplete="off" 
-						            onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
+						            <input class="form-control" id="short-name" autocomplete="off" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
+						            <div id="error3" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#short-name").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error3").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error3").fadeOut();
+						            		}
+						               	})
+						            </script>
 						        </div>
 						        <div class="form-group">
 						           	<label for="category-type" class="form-control-label">ประเภท:</label>
-						            <input class="form-control" id="category-type" autocomplete="off" 
-						            onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
+						            <input class="form-control" id="category-type" autocomplete="off" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
+						            <div id="error4" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#category-type").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error4").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error4").fadeOut();
+						            		}
+						               	})
+						            </script>
 						        </div>
 						        <div class="form-group">
 						            <label for="detail" class="form-control-label">รายละเอียด:</label>
@@ -210,18 +251,62 @@
 		      			<div class="form-group">
 		      				<label for="txtID" class="form-control-label">รหัส:</label>
 		      				<input type="text" class="form-control" id="txtID" autocomplete="off" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+		      				<div id="error5" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+				            <script type="text/javascript">
+				            	$("#txtID").blur(function(){
+				            		if (this.value == '') {
+				            			$("#error5").fadeIn("show");
+				            		}
+				            		if (this.value != '') {
+				            			$("#error5").fadeOut();
+				            		}
+				               	})
+				            </script>
 		      			</div>
 		      			<div class="form-group">
 		      				<label for="txtCatename" class="form-control-label">ชื่อหมวดหมู่:</label>
 		      				<input type="text" class="form-control" id="txtCatename" autocomplete="off" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />
+		      				<div id="error6" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+				            <script type="text/javascript">
+				            	$("#txtCatename").blur(function(){
+				            		if (this.value == '') {
+				            			$("#error6").fadeIn("show");
+				            		}
+				            		if (this.value != '') {
+				            			$("#error6").fadeOut();
+				            		}
+				               	})
+				            </script>
 		      			</div>
 		      			<div class="form-group">
 		      				<label for="txtShortname" class="form-control-label">ชื่อย่อ:</label>
 		      				<input type="text" class="form-control" id="txtShortname" autocomplete="off" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />
+		      				<div id="error7" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+				            <script type="text/javascript">
+				            	$("#txtShortname").blur(function(){
+				            		if (this.value == '') {
+				            			$("#error7").fadeIn("show");
+				            		}
+				            		if (this.value != '') {
+				            			$("#error7").fadeOut();
+				            		}
+				               	})
+				            </script>
 		      			</div>
 		      			<div class="form-group">
 		      				<label for="txtType" class="form-control-label">ประเภท:</label>
 		      				<input type="text" class="form-control" id="txtType" autocomplete="off" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />
+		      				<div id="error8" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+				            <script type="text/javascript">
+				            	$("#txtType").blur(function(){
+				            		if (this.value == '') {
+				            			$("#error8").fadeIn("show");
+				            		}
+				            		if (this.value != '') {
+				            			$("#error8").fadeOut();
+				            		}
+				               	})
+				            </script>
 		      			</div>
 		      			<div class="form-group">
 		      				<label for="txtDescription" class="form-control-label">รายละเอียด:</label>
@@ -279,7 +364,7 @@
 							var cname = document.getElementById("txtCatename").value;
 							var sname = document.getElementById("txtShortname").value;
 							var etype = document.getElementById("txtType").value;
-							var detail = document.getElementById("txtDescription").value;							
+							var detail = document.getElementById("txtDescription").value;						
 							var udate = document.getElementById("updatedate").value;
 
 							if (cid == "" || cname == "" || sname == "" || etype == "") {
