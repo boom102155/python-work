@@ -35,16 +35,13 @@
 			    $("#txtIeid").val($(this).closest('tr').children()[6].textContent);
 			    $("#txtSerial").val($(this).closest('tr').children()[7].textContent);
 			    $("#txtEquipment").val($(this).closest('tr').children()[8].textContent);
-		    });
+		    });		    
 		});
 	</script>   
 
     <!-- script date picker -->   
     <link rel="stylesheet" href="{{ url_for('static',filename="datepicker/dist/css/bootstrap-datepicker.css")}}">
     <script type="text/javascript" src="{{ url_for('static',filename="datepicker/dist/js/bootstrap-datepicker-custom.js")}}"></script>
-    <!-- <link href="{{ url_for('static',filename="datepicker/bootstrap-3.3.7-dist/css/bootstrap.css")}}" rel="stylesheet" />
-    <link href="{{ url_for('static',filename="datepicker/bootstrap-3.3.7-dist/css/bootstrap-theme.css")}}" rel="stylesheet" />
-    <script src="{{ url_for('static',filename="datepicker/bootstrap-3.3.7-dist/js/bootstrap.js")}}"></script> -->
 
     <script>
   		 $(document).ready(function () {
@@ -62,9 +59,9 @@
 		}
     </style>
 </head>
-<body>
+<body style="padding-top: 5rem;">
 	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="Default.aspx">
             <img src="{{ url_for('static',filename="imgs/band.png")}}" alt="Logo" width="45" height="30" />
         </a>
@@ -94,8 +91,6 @@
         </div>
     </nav>
     <!-- ++++++++++++++++++++++end navbar++++++++++++++++++++++ --> 
-    <br /><br />
-
     <div class="container">           
         <div class="row">
             <div class="col-6 col-sm-3">
@@ -107,10 +102,9 @@
     <br />
 
     <!-- +++++++++++++++++++++ Input Form ++++++++++++++++++++++ -->
-    <div class="container"> 
-			
-        <div class="row">
-        	<div class="col-2">
+    <div class="container"> 			
+        <div class="row" style="border-style: solid; border-radius: 5px; border-color: #44CAF2; background-color: #B2F3FF">
+        	<div class="col-3">
     		<div class="form-group">
     			<label for="name" class="form-control-label">วันที่ยืม</label>
     			<input type="text" class="form-control" id="datepicker" data-date-format="yyyy-mm-dd"></input>   
@@ -128,7 +122,26 @@
 	        		<input type="text" class="form-control" id="surname" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
 	        	</div>
 	        </div>
-	        <div class="col-2">
+	        <div class="col-3">
+	        	<div class="form-group">
+	        		<label for="pstatus" class="form-control-label">สถานะ</label>
+	        		<select type="text" class="form-control" id="pstatus">
+	        			<option value="นักศึกษา">นักศึกษา</option>
+	        			<option value="อาจารย์">อาจารย์</option>
+	        		</select>	        		
+	        	</div>
+
+	        </div>	        	        		        
+	    <!-- </div> -->
+
+	    <!-- <div class="row"> -->
+	    	<div class="col-3">
+	        	<div class="form-group">
+	        		<label for="stuID" class="form-control-label">รหัสนักศึกษา / รหัสอาจารย์</label>
+	        		<input type="text" class="form-control" id="stuID" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></input>
+	        	</div>
+	        </div>
+	    	<div class="col-2">
 	        	<div class="form-group">	        		
 	        		<label for="faculty" class="form-control-label">สาขา</label>
 	        		<select type="text" class="form-control" id="faculty">
@@ -138,7 +151,7 @@
 	        		</select>
 	  	        </div>
 	        </div>
-	        <div class="col-2">
+	        <div class="col-1">
 	        	<div class="form-group">	        		
 	        		<label for="class" class="form-control-label">ชั้นปี</label>
 	        		<select class="form-control" id="class">
@@ -149,18 +162,13 @@
 	        			<option value="other">อื่นๆ</option>
 	        		</select>
 	        	</div>
-	        </div>		        
+	        </div>   
 	    </div>
-	    <div class="row">
+	    <br/>
+	    <div class="row" style="border-style: solid; border-radius: 5px; border-color: #F6E687; background-color: #FFF6B2">	    	
 	        <div class="col-6">
 	        	<div class="form-group">
-	        		<label for="serial" class="form-control-label">เลขเครื่อง (serial number หรือ เลขเครื่องโน๊ตบุ๊ค)</label>
-	        		<input type="text" class="form-control" id="serial" onkeyup="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'');"></input>
-	        	</div>
-	        </div>
-	        <div class="col-6">
-	        	<div class="form-group">
-	        		<label for="equipment" class="form-control-label">อุปกรณ์ (โน๊ตบุ๊ค, ปลั๊กไฟ, raspberry pi ฯลฯ)</label>
+	        		<label for="equipment" class="form-control-label">ยืมอุปกรณ์ (โน๊ตบุ๊ค, ปลั๊กไฟ, raspberry pi ฯลฯ)</label>
 	        		<select class="form-control" id="class">
 	        				<option value="">---เลือกอุปกรณ์---</option>
 	        			{% for row in rows2 %}
@@ -169,9 +177,16 @@
 	        		</select>	        		
 	        	</div>
 	        </div>
+	        <div class="col-6">
+	        	<div class="form-group">
+	        		<label for="ldetail" class="form-control-label">รายละเอียด</label>
+	        		<textarea id="" class="form-control"></textarea>
+	        	</div>
+	        </div>
+	        
     	</div>	
     	<!-- +++++++++++++++++++++ End Input Form ++++++++++++++++++++++ -->
-
+    	<br/>
     	<!-- +++++++++++++++++++++ Button Add Lend ++++++++++++++++++++++ -->
     	<div class="row">
     		<div class="col-12">    			
@@ -217,7 +232,7 @@
             {% endfor %}
         </table>             
     </div>
-
+    <br/><br/>
     <div class="modal fade" id="myModal">
 	  	<div class="modal-dialog modal-lg">
 	    	<div class="modal-content">
@@ -404,6 +419,5 @@
 	    	</div><!-- /.modal-content -->
   		</div><!-- /.modal-dialog -->
   	</div><!-- /.modal -->
-
 </body>
 </html>
