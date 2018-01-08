@@ -33,7 +33,7 @@ def lend():
                          "WHERE lh.PERSON_ID = ps.PERSON_ID AND lh.STAFF_ID = s.STAFF_ID AND lh.LEND_NO = ld.LEND_NO AND ld.EQUIPMENT_ID = eq.EQUIPMENT_ID")
     rows1 = query1.fetchall();
 
-    query2 = conn.execute("SELECT EQUIPMENT_NAME FROM EQUIPMENT")
+    query2 = conn.execute("SELECT EQUIPMENT_ID, EQUIPMENT_NAME FROM EQUIPMENT")
     rows2 = query2.fetchall();
 
     return render_template("lend.html", rows1=rows1, rows2=rows2)
@@ -178,6 +178,28 @@ def editcategory():
                  " WHERE CATEGORY_ID = " + (data["cateid"]))
     conn.commit()
     return json.dumps(data)
+
+@app.route('/addlend' , methods = ['POST' , 'GET'])
+def addlend():
+
+    data = request.get_json()
+    conn = db_connect.connect()
+
+    conn.execute("INSERT INTO PERSON (PERSON_ID, NAME, SURNAME, TYPE, FACULTY, CLASS) "
+                 "VALUES (:1, :2, :3, :4, :5, :6)",
+                 (data["pid"], data["pname"], data["psurname"], data["pstatus"], data["pfaculty"], data["pclass"]))
+
+    conn.execute("INSERT INTO LEND_HEAD (PERSON_ID, STAFF_ID, LEND_DATE, DETAIL, CREATE_DATE, UPDATE_DATE) "
+                 "VALUES (:1, :2, TO_DATE(:3, 'yyyy-mm-dd'), :4, TO_DATE(:5, 'yyyy-mm-dd'), TO_DATE(:6, 'yyyy-mm-dd'))",
+                 (data["pid"], data["sid"], data["ldate"], data["ldetail"], data["cdate"], data["udate"]))
+
+    conn.execute("INSERT INTO LEND_DETAIL (LEND_NO, EQUIPMENT_ID, CREATE_DATE, UPDATE_DATE) "
+                 "SELECT MAX(LEND_NO)as LEND_NO, :3, TO_DATE(:4, 'yyyy-mm-dd'), TO_DATE(:5, 'yyyy-mm-dd') FROM LEND_HEAD",
+                 (data["eid"], data["cdate"], data["udate"]))
+    conn.commit()
+    return json.dumps(data)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

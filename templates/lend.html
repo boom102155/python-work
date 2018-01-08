@@ -125,7 +125,7 @@
 	        <div class="col-3">
 	        	<div class="form-group">
 	        		<label for="pstatus" class="form-control-label">สถานะ</label>
-	        		<select type="text" class="form-control" id="pstatus">
+	        		<select type="text" class="form-control" id="status">
 	        			<option value="นักศึกษา">นักศึกษา</option>
 	        			<option value="อาจารย์">อาจารย์</option>
 	        		</select>	        		
@@ -138,7 +138,7 @@
 	    	<div class="col-3">
 	        	<div class="form-group">
 	        		<label for="stuID" class="form-control-label">รหัสนักศึกษา / รหัสอาจารย์</label>
-	        		<input type="text" class="form-control" id="stuID" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></input>
+	        		<input type="text" class="form-control" id="PID" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></input>
 	        	</div>
 	        </div>
 	    	<div class="col-2">
@@ -163,16 +163,34 @@
 	        		</select>
 	        	</div>
 	        </div>   
+	        <div class="col-3">
+	        	<div class="form-group">	        		
+	        		<label for="class" class="form-control-label">ผู้ให้ยืม(ID)</label>
+	        		<input type="text" class="form-control" id="staffID" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></input>
+	        	</div>
+	        </div> 
+	        <div class="form-group">					     	
+	            <input type="date" class="form-control" id="create-date" style="display: none;">
+	            <script type="text/javascript">
+	            	document.getElementById('create-date').valueAsDate = new Date()
+	            </script>					                    
+	        </div>
+	        <div class="form-group">					     	
+	            <input type="date" class="form-control" id="update-date" style="display: none;">
+	            <script type="text/javascript">
+	            	document.getElementById('update-date').valueAsDate = new Date()
+	            </script>					                    
+	        </div>
 	    </div>
 	    <br/>
 	    <div class="row" style="border-style: solid; border-radius: 5px; border-color: #F6E687; background-color: #FFF6B2">	    	
 	        <div class="col-6">
 	        	<div class="form-group">
 	        		<label for="equipment" class="form-control-label">ยืมอุปกรณ์</label>
-	        		<select class="form-control" id="class">
+	        		<select class="form-control" id="sequip">
 	        				<option value="">---เลือกอุปกรณ์---</option>
 	        			{% for row in rows2 %}
-	        				<option value="{{ row[0] }}">{{ row[0] }}</option>
+	        				<option value="{{ row[0] }}">{{ row[1] }}</option>
 	        			{% endfor %}
 	        		</select>	        		
 	        	</div>
@@ -180,7 +198,7 @@
 	        <div class="col-6">
 	        	<div class="form-group">
 	        		<label for="ldetail" class="form-control-label">รายละเอียด</label>
-	        		<textarea id="" class="form-control"></textarea>
+	        		<textarea id="ldetail" class="form-control"></textarea>
 	        	</div>
 	        </div>
 	        
@@ -190,13 +208,58 @@
     	<!-- +++++++++++++++++++++ Button Add Lend ++++++++++++++++++++++ -->
     	<div class="row">
     		<div class="col-12">    			
-    				<button type="button" class="btn btn-default" id="clear">ล้าง</button>
-    				<script type="text/javascript">
-    					$("#clear").on("click", function() {
-    						$('input[type="text"]').val('');
-						});
-    				</script>
-    				<button type="submit" value="submit" class="btn btn-primary" id="btnSave">เพิ่ม</button>
+				<button type="button" class="btn btn-default" id="clear">ล้าง</button>
+				<script type="text/javascript">
+					$("#clear").on("click", function() {
+						$('input[type="text"]').val('');
+					});
+				</script>
+				<button type="submit" value="submit" class="btn btn-primary" id="btnSave">เพิ่ม</button>
+				<script type="text/javascript">
+					$('#btnSave').click(function(){
+						// person table
+				  		var pid = document.getElementById("PID").value;
+						var pname = document.getElementById("name").value;
+						var psurname = document.getElementById("surname").value;
+						var pstatus = document.getElementById("status").value;
+						var pfaculty = document.getElementById("faculty").value;
+						var pclass = document.getElementById("class").value;
+
+						// lend-head table
+						var sid = document.getElementById("staffID").value;
+						var ldate = document.getElementById("datepicker").value;
+						var ldetail = document.getElementById("ldetail").value;
+						var cdate = document.getElementById("create-date").value;
+						var udate = document.getElementById("update-date").value;
+
+						// lend-detail
+						var eid = document.getElementById("sequip").value;
+
+
+						if (pid == "" || pname == "" || psurname == "") {
+							alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+							return false;
+						}
+						else{
+							alert("บันทึกข้อมูลเรียบร้อย");
+							$.ajax({
+								url: '/addlend',
+								data: JSON.stringify({"pid" : pid ,"pname" : pname , "psurname" : psurname , "pstatus" : pstatus , "pfaculty" : pfaculty , "pclass" : pclass , 
+													"sid" : sid , "ldate" : ldate , "ldetail" : ldetail , "cdate" : cdate , "udate" : udate , "eid" : eid}),
+								type: 'POST',
+								processData: false,
+								contentType: 'application/json; charset=utf-8',
+								success: function(response){
+									console.log(response);
+								},
+								error: function(error){
+									console.log(error);
+								}
+							});
+							location.reload();
+						}									
+					});
+				</script>
     		</div>
     	</div> 
     	<!-- +++++++++++++++++++++ End Button Add Lend ++++++++++++++++++++++ -->  	
