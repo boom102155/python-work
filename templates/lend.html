@@ -451,10 +451,32 @@
 				      			<div class="form-group">
 				      				<label for="txtStaffID" class="form-control-label">ผู้รับคืน(ID)</label>
 				      				<input type="text" class="form-control" id="txtStaffID" />
+				      				<div id="error5" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#txtStaffID").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error5").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error5").fadeOut();
+						            		}
+						               	})
+						            </script>
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="txtInspection" class="form-control-label">รายละเอียด</label>
 				      				<textarea class="form-control" id="txtInspection"></textarea>  
+				      				<div id="error6" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#txtInspection").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error6").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error6").fadeOut();
+						            		}
+						               	})
+						            </script>
 				      			</div>
 				      			<div class="form-group">
 						            <!-- <label for="create-date" class="form-control-label">วันที่สร้าง:</label>	 -->
