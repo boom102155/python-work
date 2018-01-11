@@ -27,14 +27,15 @@
 		        $("#txtDate").val($(this).closest('tr').children()[1].textContent);
 			    $("#txtName").val($(this).closest('tr').children()[2].textContent);
 			    $("#txtSurname").val($(this).closest('tr').children()[3].textContent);
-			    $("#sFaculty").val($(this).closest('tr').children()[4].textContent);
-			    $("#sClass").val($(this).closest('tr').children()[5].textContent);
+			    $("#txtType").val($(this).closest('tr').children()[4].textContent);
+			    $("#sFaculty").val($(this).closest('tr').children()[5].textContent);
+			    $("#sClass").val($(this).closest('tr').children()[6].textContent);
 
 			    $("#txtILendNO").val($(this).closest('tr').children()[0].textContent);
-			    $("#txtEID").val($(this).closest('tr').children()[6].textContent);
-			    $("#txtIeid").val($(this).closest('tr').children()[6].textContent);
-			    $("#txtSerial").val($(this).closest('tr').children()[7].textContent);
-			    $("#txtEquipment").val($(this).closest('tr').children()[8].textContent);
+			    $("#txtEID").val($(this).closest('tr').children()[7].textContent);
+			    $("#txtIeid").val($(this).closest('tr').children()[7].textContent);
+			    $("#txtSerial").val($(this).closest('tr').children()[8].textContent);
+			    $("#txtEquipment").val($(this).closest('tr').children()[9].textContent);
 		    });		    
 		});
 	</script>   
@@ -280,7 +281,7 @@
 						var eid = document.getElementById("sequip").value;
 
 
-						if (pid == "" || pname == "" || psurname == "" || sid) {
+						if (pid == "" || pname == "" || psurname == "" || sid == "") {
 							alert("กรุณากรอกข้อมูลให้ครบถ้วน");
 							return false;
 						}
@@ -317,6 +318,7 @@
                 <th>วันที่ยืม</th>
                 <th>ผู้ให้ยืม</th>
                 <th>ผู้ยืม</th>
+                <th>สถานะ</th>
                 <th>สาขา</th>
                 <th>ชั้นปี</th>
                 <th>รหัสอุปกรณ์</th>
@@ -332,9 +334,10 @@
                 <td>{{row[3]}}</td>
                 <td>{{row[4]}}</td>
                 <td>{{row[5]}}</td>
-                <td>{{row[6]}}</td> 
-                <td>{{row[7]}}</td>                    
-                <td>{{row[8]}}</td>
+                <td>{{row[6]}}</td>
+                <td>{{row[7]}}</td> 
+                <td>{{row[8]}}</td>                    
+                <td>{{row[9]}}</td>
             </tr>
             {% endfor %}
         </table>             
@@ -382,22 +385,16 @@
 				      				<input type="text" class="form-control" id="txtSurname" readonly="readonly" />
 				      			</div>
 				      			<div class="form-group">
+				      				<label for="txtSurname" class="form-control-label">สถานะ</label>
+				      				<input type="text" class="form-control" id="txtType" readonly="readonly" />
+				      			</div>
+				      			<div class="form-group">
 				      				<label for="sFaculty" class="form-control-label">สาขา</label>
 				      				<input type="text" class="form-control" id="sFaculty" readonly="readonly"></input>
-				      				<!-- <select class="form-control" id="sFaculty" readonly="readonly">
-				      					<option value="IT">IT</option>
-				      					<option value="CS">CS</option>
-				      				</select> -->
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="sClass" class="form-control-label">ชั้นปี</label>
-				      				<input type="text" class="form-control" id="sClass" readonly="readonly"></input>
-				      				<!-- <select class="form-control" id="sClass" readonly="readonly">
-				      					<option value="1">1</option>
-				      					<option value="2">2</option>
-				      					<option value="3">3</option>
-				      					<option value="4">4</option>
-				      				</select> -->
+				      				<input type="text" class="form-control" id="sClass" readonly="readonly"></input>				      				
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="txtEID" class="form-control-label">รหัสอุปกรณ์</label>
@@ -450,7 +447,7 @@
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="txtStaffID" class="form-control-label">ผู้รับคืน(ID)</label>
-				      				<input type="text" class="form-control" id="txtStaffID" />
+				      				<input type="text" class="form-control" id="txtStaffID" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
 				      				<div id="error5" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
 						            <script type="text/javascript">
 						            	$("#txtStaffID").blur(function(){

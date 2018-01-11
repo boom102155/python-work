@@ -24,6 +24,7 @@ def lend():
                           "s.SURNAME), "
                           "(ps.NAME || ' ' || "
                           "ps.SURNAME), "
+                          "ps.TYPE, "
                           "ps.FACULTY, "
                           "ps.CLASS, "
                           "eq.EQUIPMENT_ID, "
@@ -139,7 +140,6 @@ def addcategory():
     try:
         data = request.get_json()
         conn = db_connect.connect()
-        print(data["categoryname"], data["shortname"], data["categorytype"], data["detail"], data["createdate"], data["update"])
         conn.execute("INSERT INTO CATEGORY "
                      "(CATEGORY_ID, "
                      "CATEGORY_NAME, "
