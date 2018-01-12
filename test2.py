@@ -203,10 +203,21 @@ def addlend():
 
     data = request.get_json()
     conn = db_connect.connect()
-
-    conn.execute("INSERT INTO PERSON (PERSON_ID, NAME, SURNAME, TYPE, FACULTY, CLASS) "
-                 "VALUES (:1, :2, :3, :4, :5, :6)",
-                 (data["pid"], data["pname"], data["psurname"], data["pstatus"], data["pfaculty"], data["pclass"]))
+    conn.execute("MERGE INTO PERSON P USING (SELECT " + (data["pid"]) + " PERSON_ID," +
+                                             "'" + (data["pname"]) + "' NAME," +
+                                             "'" + (data["psurname"]) + "' SURNAME," +
+                                             "'" + (data["pstatus"]) + "' TYPE," +
+                                             "'" + (data["pfaculty"]) + "' FACULTY," +
+                                             "'" + (data["pclass"]) + "' CLASS" +
+                                             " FROM DUAL) val "
+                 "ON ( P.PERSON_ID = " + (data["pid"]) + ") "
+                 "WHEN MATCHED THEN UPDATE SET P.NAME = '" + (data["pname"]) + "', " +
+                                                "P.SURNAME = '" + (data["psurname"]) + "', " +
+                                                "P.TYPE = '" + (data["pstatus"]) + "', " +
+                                                "P.FACULTY = '" + (data["pfaculty"]) + "', " +
+                                                "P.CLASS = '" + (data["pclass"]) + "'" +
+                 " WHEN NOT MATCHED THEN INSERT (PERSON_ID, NAME, SURNAME, TYPE, FACULTY, CLASS) "
+                 "VALUES (val.PERSON_ID, val.NAME, val.SURNAME, val.TYPE, val.FACULTY, val.CLASS)")
 
     conn.execute("INSERT INTO LEND_HEAD (PERSON_ID, STAFF_ID, LEND_DATE, DETAIL, CREATE_DATE, UPDATE_DATE) "
                  "VALUES (:1, :2, TO_DATE(:3, 'yyyy-mm-dd'), :4, TO_DATE(:5, 'yyyy-mm-dd'), TO_DATE(:6, 'yyyy-mm-dd'))",
