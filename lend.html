@@ -63,7 +63,7 @@
 <body style="padding-top: 5rem;">
 	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="\">
+        <a class="navbar-brand" href="Default.aspx">
             <img src="{{ url_for('static',filename="imgs/band.png")}}" alt="Logo" width="45" height="30" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,350 +99,215 @@
             </div>           
         </div>
 
-    	<br />
-    	<!-- +++++++++++++++++++++ Input Form ++++++++++++++++++++++ -->
-		<div class="row" style="border-style: solid; border-radius: 5px; border-color: #44CAF2; background-color: #B2F3FF">
-		    <div class="col col-lg-3">
-		    	<div class="form-group">
-		    		<label for="name" class="form-control-label">วันที่ยืม</label>
-	    			<input type="text" class="form-control" id="datepicker" data-date-format="yyyy-mm-dd" />
-		    	</div> 
-		    </div>
-		    <div class="col-12 col-md-3">
-		    	<div class="form-group">
-		    		<label for="name" class="form-control-label">ชื่อผู้ยืม</label>
-	        		<input type="text" class="form-control" id="name" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />
-	        		<div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
-		            <script type="text/javascript">
-		            	$("#name").blur(function(){
-		            		if (this.value == '') {
-		            			$("#error1").fadeIn("show");
-		            		}
-		            		if (this.value != '') {
-		            			$("#error1").fadeOut();
-		            		}
-		               	})
-		            </script>
-		    	</div>    
-		    </div>
-		    <div class="col-12 col-md-3">
-		      	<div class="form-group">
-		      		<label for="surname" class="form-control-label">นามสกุล</label>
-	        		<input type="text" class="form-control" id="surname" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />
-	        		<div id="error2" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
-		            <script type="text/javascript">
-		            	$("#surname").blur(function(){
-		            		if (this.value == '') {
-		            			$("#error2").fadeIn("show");
-		            		}
-		            		if (this.value != '') {
-		            			$("#error2").fadeOut();
-		            		}
-		               	})
-		            </script>
-		      	</div>
-		    </div>
-		    <div class="col-12 col-md-3">
-		    	<div class="form-group">
-		    		<label for="pstatus" class="form-control-label">สถานะ</label>
-	        		<select type="text" class="form-control" id="status">
-	        			<option value="นักศึกษา">นักศึกษา</option>
-	        			<option value="อาจารย์">อาจารย์</option>
-	        		</select>
-		    	</div>
-		    </div>
-		    <div class="col col-lg-3">
-		    	<div class="form-group">
-		    		<label for="stuID" class="form-control-label">รหัสนักศึกษา / รหัสอาจารย์</label>
-	        		<input type="text" class="form-control" id="PID" maxlength="13" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
-	        		<div id="error3" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
-		            <script type="text/javascript">
-		            	$("#PID").blur(function(){
-		            		if (this.value == '') {
-		            			$("#error3").fadeIn("show");
-		            		}
-		            		if (this.value != '') {
-		            			$("#error3").fadeOut();
-		            		}
-		               	})
-		            </script>
-		    	</div>
-		    </div>
-		    <div class="col-12 col-md-2">
-		    	<div class="form-group">
-		    		<label for="faculty" class="form-control-label">สาขา</label>
-	        		<select type="text" class="form-control" id="faculty">
-	        			<option value="IT">IT</option>
-	        			<option value="CS">CS</option>
-	        			<option value="other">อื่นๆ</option>
-	        		</select>
-		    	</div>
-		    </div>
-		    <div class="col-12 col-md-1">
-		    	<div class="form-group">
-		    		<label for="class" class="form-control-label">ชั้นปี</label>
-	        		<select class="form-control" id="class">
-	        			<option value="1">1</option>
-	        			<option value="2">2</option>
-	        			<option value="3">3</option>
-	        			<option value="4">4</option>
-	        			<option value="other">อื่นๆ</option>
-	        		</select>
-		    	</div>
-		    </div>
-		    <div class="col-12 col-md-3">
-		    	<div class="form-group">
-		    		<label for="class" class="form-control-label">ผู้ให้ยืม(ID)</label>
-	        		<input type="text" class="form-control" id="staffID" maxlength="3" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
-	        		<div id="error4" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
-		            <script type="text/javascript">
-		            	$("#staffID").blur(function(){
-		            		if (this.value == '') {
-		            			$("#error4").fadeIn("show");
-		            		}
-		            		if (this.value != '') {
-		            			$("#error4").fadeOut();
-		            		}
-		               	})
-		            </script>
-		    	</div>
-		    </div>
-		    <div class="form-group">					     	
-	            <input type="date" class="form-control" id="create-date" style="display: none;">
-	            <script type="text/javascript">
-	            	document.getElementById('create-date').valueAsDate = new Date()
-	            </script>					                    
-	        </div>
-	        <div class="form-group">					     	
-	            <input type="date" class="form-control" id="update-date" style="display: none;">
-	            <script type="text/javascript">
-	            	document.getElementById('update-date').valueAsDate = new Date()
-	            </script>					                    
-	        </div>
-		</div>
-		<br />
-		<div class="row" style="border-style: solid; border-radius: 5px; border-color: #F6E687; background-color: #FFF6B2">
-		    <div class="col-12 col-md-6">
-		      	<div class="form-group">
-		      		<label for="equipment" class="form-control-label">ยืมอุปกรณ์</label>
-	        		<select class="form-control" id="sequip">
-	        				<option value="">เลือกอุปกรณ์</option>
-	        			{% for row in rows2 %}
-	        				<option value="{{ row[0] }}">{{ row[1] }}</option>
-	        			{% endfor %}
-	        		</select>
-		      	</div>
-		    </div>
-		    <div class="col-12 col-md-6">
-		      	<label for="ldetail" class="form-control-label">รายละเอียด</label>
-	        	<textarea id="ldetail" class="form-control"></textarea><br/>
-		    </div>		   
-		</div>
+    <br />
 
-    	
-        <!-- <div class="row" style="border-style: solid; border-radius: 5px; border-color: #44CAF2; background-color: #B2F3FF">
-        	<div class="col-3">
+    	<!-- +++++++++++++++++++++ Input Form ++++++++++++++++++++++ -->
+	    <div class="container"> 			
+	        <div class="row" style="border-style: solid; border-radius: 5px; border-color: #44CAF2; background-color: #B2F3FF">
+	        	<div class="col-3">
 	    		<div class="form-group">
 	    			<label for="name" class="form-control-label">วันที่ยืม</label>
-	    			<input type="text" class="form-control" id="datepicker" data-date-format="yyyy-mm-dd" />
+	    			<input type="text" class="form-control" id="datepicker" data-date-format="yyyy-mm-dd"></input>   
 	    		</div>
-    		</div>
-	        <div class="col-3">
-	        	<div class="form-group">
-	        		<label for="name" class="form-control-label">ชื่อผู้ยืม</label>
-	        		<input type="text" class="form-control" id="name" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />
-	        		<div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+	    		</div>
+		        <div class="col-3">
+		        	<div class="form-group">
+		        		<label for="name" class="form-control-label">ชื่อผู้ยืม</label>
+		        		<input type="text" class="form-control" id="name" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
+		        		<div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+			            <script type="text/javascript">
+			            	$("#name").blur(function(){
+			            		if (this.value == '') {
+			            			$("#error1").fadeIn("show");
+			            		}
+			            		if (this.value != '') {
+			            			$("#error1").fadeOut();
+			            		}
+			               	})
+			            </script>
+			        </div>	        	
+			    </div>
+		        <div class="col-3">
+		        	<div class="form-group">	        		
+		        		<label for="surname" class="form-control-label">นามสกุล</label>
+		        		<input type="text" class="form-control" id="surname" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');"></input>
+		        		<div id="error2" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+			            <script type="text/javascript">
+			            	$("#surname").blur(function(){
+			            		if (this.value == '') {
+			            			$("#error2").fadeIn("show");
+			            		}
+			            		if (this.value != '') {
+			            			$("#error2").fadeOut();
+			            		}
+			               	})
+			            </script>
+		        	</div>
+		        </div>
+		        <div class="col-3">
+		        	<div class="form-group">
+		        		<label for="pstatus" class="form-control-label">สถานะ</label>
+		        		<select type="text" class="form-control" id="status">
+		        			<option value="นักศึกษา">นักศึกษา</option>
+		        			<option value="อาจารย์">อาจารย์</option>
+		        		</select>	        		
+		        	</div>
+
+		        </div>	        	        		        
+
+		    	<div class="col-3">
+		        	<div class="form-group">
+		        		<label for="stuID" class="form-control-label">รหัสนักศึกษา / รหัสอาจารย์</label>
+		        		<input type="text" class="form-control" id="PID" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></input>
+		        		<div id="error3" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+			            <script type="text/javascript">
+			            	$("#PID").blur(function(){
+			            		if (this.value == '') {
+			            			$("#error3").fadeIn("show");
+			            		}
+			            		if (this.value != '') {
+			            			$("#error3").fadeOut();
+			            		}
+			               	})
+			            </script>
+		        	</div>
+		        </div>
+		    	<div class="col-2">
+		        	<div class="form-group">	        		
+		        		<label for="faculty" class="form-control-label">สาขา</label>
+		        		<select type="text" class="form-control" id="faculty">
+		        			<option value="IT">IT</option>
+		        			<option value="CS">CS</option>
+		        			<option value="other">อื่นๆ</option>
+		        		</select>
+		  	        </div>
+		        </div>
+		        <div class="col-1">
+		        	<div class="form-group">	        		
+		        		<label for="class" class="form-control-label">ชั้นปี</label>
+		        		<select class="form-control" id="class">
+		        			<option value="1">1</option>
+		        			<option value="2">2</option>
+		        			<option value="3">3</option>
+		        			<option value="4">4</option>
+		        			<option value="other">อื่นๆ</option>
+		        		</select>
+		        	</div>
+		        </div>   
+		        <div class="col-3">
+		        	<div class="form-group">	        		
+		        		<label for="class" class="form-control-label">ผู้ให้ยืม(ID)</label>
+		        		<input type="text" class="form-control" id="staffID" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></input>
+		        		<div id="error4" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+			            <script type="text/javascript">
+			            	$("#staffID").blur(function(){
+			            		if (this.value == '') {
+			            			$("#error4").fadeIn("show");
+			            		}
+			            		if (this.value != '') {
+			            			$("#error4").fadeOut();
+			            		}
+			               	})
+			            </script>
+		        	</div>
+		        </div> 
+		        <div class="form-group">					     	
+		            <input type="date" class="form-control" id="create-date" style="display: none;">
 		            <script type="text/javascript">
-		            	$("#name").blur(function(){
-		            		if (this.value == '') {
-		            			$("#error1").fadeIn("show");
-		            		}
-		            		if (this.value != '') {
-		            			$("#error1").fadeOut();
-		            		}
-		               	})
-		            </script>
-		        </div>	        	
+		            	document.getElementById('create-date').valueAsDate = new Date()
+		            </script>					                    
+		        </div>
+		        <div class="form-group">					     	
+		            <input type="date" class="form-control" id="update-date" style="display: none;">
+		            <script type="text/javascript">
+		            	document.getElementById('update-date').valueAsDate = new Date()
+		            </script>					                    
+		        </div>
 		    </div>
-	        <div class="col-3">
-	        	<div class="form-group">	        		
-	        		<label for="surname" class="form-control-label">นามสกุล</label>
-	        		<input type="text" class="form-control" id="surname" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />
-	        		<div id="error2" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
-		            <script type="text/javascript">
-		            	$("#surname").blur(function(){
-		            		if (this.value == '') {
-		            			$("#error2").fadeIn("show");
-		            		}
-		            		if (this.value != '') {
-		            			$("#error2").fadeOut();
-		            		}
-		               	})
-		            </script>
-	        	</div>
-	        </div>
-	        <div class="col-3">
-	        	<div class="form-group">
-	        		<label for="pstatus" class="form-control-label">สถานะ</label>
-	        		<select type="text" class="form-control" id="status">
-	        			<option value="นักศึกษา">นักศึกษา</option>
-	        			<option value="อาจารย์">อาจารย์</option>
-	        		</select>	        		
-	        	</div>
-	        </div>	        	        		        
-	    	<div class="col-3">
-	        	<div class="form-group">
-	        		<label for="stuID" class="form-control-label">รหัสนักศึกษา / รหัสอาจารย์</label>
-	        		<input type="text" class="form-control" id="PID" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
-	        		<div id="error3" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
-		            <script type="text/javascript">
-		            	$("#PID").blur(function(){
-		            		if (this.value == '') {
-		            			$("#error3").fadeIn("show");
-		            		}
-		            		if (this.value != '') {
-		            			$("#error3").fadeOut();
-		            		}
-		               	})
-		            </script>
-	        	</div>
-	        </div>
-	    	<div class="col-2">
-	        	<div class="form-group">	        		
-	        		<label for="faculty" class="form-control-label">สาขา</label>
-	        		<select type="text" class="form-control" id="faculty">
-	        			<option value="IT">IT</option>
-	        			<option value="CS">CS</option>
-	        			<option value="other">อื่นๆ</option>
-	        		</select>
-	  	        </div>
-	        </div>
-	        <div class="col-1">
-	        	<div class="form-group">	        		
-	        		<label for="class" class="form-control-label">ชั้นปี</label>
-	        		<select class="form-control" id="class">
-	        			<option value="1">1</option>
-	        			<option value="2">2</option>
-	        			<option value="3">3</option>
-	        			<option value="4">4</option>
-	        			<option value="other">อื่นๆ</option>
-	        		</select>
-	        	</div>
-	        </div>   
-	        <div class="col-3">
-	        	<div class="form-group">	        		
-	        		<label for="class" class="form-control-label">ผู้ให้ยืม(ID)</label>
-	        		<input type="text" class="form-control" id="staffID" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
-	        		<div id="error4" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
-		            <script type="text/javascript">
-		            	$("#staffID").blur(function(){
-		            		if (this.value == '') {
-		            			$("#error4").fadeIn("show");
-		            		}
-		            		if (this.value != '') {
-		            			$("#error4").fadeOut();
-		            		}
-		               	})
-		            </script>
-	        	</div>
-	        </div> 
-	        <div class="form-group">					     	
-	            <input type="date" class="form-control" id="create-date" style="display: none;">
-	            <script type="text/javascript">
-	            	document.getElementById('create-date').valueAsDate = new Date()
-	            </script>					                    
-	        </div>
-	        <div class="form-group">					     	
-	            <input type="date" class="form-control" id="update-date" style="display: none;">
-	            <script type="text/javascript">
-	            	document.getElementById('update-date').valueAsDate = new Date()
-	            </script>					                    
-	        </div>
+
+		    <br/>
+
+		    <div class="row" style="border-style: solid; border-radius: 5px; border-color: #F6E687; background-color: #FFF6B2">	    	
+		        <div class="col-6">
+		        	<div class="form-group">
+		        		<label for="equipment" class="form-control-label">ยืมอุปกรณ์</label>
+		        		<select class="form-control" id="sequip">
+		        				<option value="">==เลือกอุปกรณ์==</option>
+		        			{% for row in rows2 %}
+		        				<option value="{{ row[0] }}">{{ row[1] }}</option>
+		        			{% endfor %}
+		        		</select>	        		
+		        	</div>
+		        </div>
+		        <div class="col-6">
+		        	<div class="form-group">
+		        		<label for="ldetail" class="form-control-label">รายละเอียด</label>
+		        		<textarea id="ldetail" class="form-control"></textarea>
+		        	</div>
+		        </div>	        
+	    	</div>	
+	    	
+	    	<br/>
+
+	    	<div class="row">
+	    		<div class="col-12">    			
+					<button type="button" class="btn btn-default" id="clear">ล้าง</button>
+					<script type="text/javascript">
+						$("#clear").on("click", function() {
+							$('input[type="text"]').val('');
+						});
+					</script>
+					<button type="submit" value="submit" class="btn btn-primary" id="btnSave">เพิ่ม</button>
+					<script type="text/javascript">
+						$('#btnSave').click(function(){
+							// person table
+					  		var pid = document.getElementById("PID").value;
+							var pname = document.getElementById("name").value;
+							var psurname = document.getElementById("surname").value;
+							var pstatus = document.getElementById("status").value;
+							var pfaculty = document.getElementById("faculty").value;
+							var pclass = document.getElementById("class").value;
+
+							// lend-head table
+							var sid = document.getElementById("staffID").value;
+							var ldate = document.getElementById("datepicker").value;
+							var ldetail = document.getElementById("ldetail").value;
+							var cdate = document.getElementById("create-date").value;
+							var udate = document.getElementById("update-date").value;
+
+							// lend-detail
+							var eid = document.getElementById("sequip").value;
+
+
+							if (pid == "" || pname == "" || psurname == "" || sid == "") {
+								alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+								return false;
+							}
+							else{
+								alert("บันทึกข้อมูลเรียบร้อย");
+								$.ajax({
+									url: '/addlend',
+									data: JSON.stringify({"pid" : pid ,"pname" : pname , "psurname" : psurname , "pstatus" : pstatus , "pfaculty" : pfaculty , "pclass" : pclass , 
+														"sid" : sid , "ldate" : ldate , "ldetail" : ldetail , "cdate" : cdate , "udate" : udate , "eid" : eid}),
+									type: 'POST',
+									processData: false,
+									contentType: 'application/json; charset=utf-8',
+									success: function(response){
+										console.log(response);
+									},
+									error: function(error){
+										console.log(error);
+									}
+								});
+								location.reload();
+							}									
+						});
+					</script>
+	    		</div>
+	    	</div> 	    	
 	    </div>
-
-	    <br/>
-
-	    <div class="row" style="border-style: solid; border-radius: 5px; border-color: #F6E687; background-color: #FFF6B2">	    	
-	        <div class="col-6">
-	        	<div class="form-group">
-	        		<label for="equipment" class="form-control-label">ยืมอุปกรณ์</label>
-	        		<select class="form-control" id="sequip">
-	        				<option value="">==เลือกอุปกรณ์==</option>
-	        			{% for row in rows2 %}
-	        				<option value="{{ row[0] }}">{{ row[1] }}</option>
-	        			{% endfor %}
-	        		</select>	        		
-	        	</div>
-	        </div>
-	        <div class="col-6">
-	        	<div class="form-group">
-	        		<label for="ldetail" class="form-control-label">รายละเอียด</label>
-	        		<textarea id="ldetail" class="form-control"></textarea>
-	        	</div>
-	        </div>	        
-    	</div> -->
-    	
-    	<br/>
-
-    	<div class="row">
-    		<div class="col-12">    			
-				<button type="button" class="btn btn-default" id="clear">ล้าง</button>
-				<script type="text/javascript">
-					$("#clear").on("click", function() {
-						$('input[type="text"]').val('');
-					});
-				</script>
-				<button type="submit" value="submit" class="btn btn-primary" id="btnSave">เพิ่ม</button>
-				<script type="text/javascript">
-					$('#btnSave').click(function(){
-						// person table
-				  		var pid = document.getElementById("PID").value;
-						var pname = document.getElementById("name").value;
-						var psurname = document.getElementById("surname").value;
-						var pstatus = document.getElementById("status").value;
-						var pfaculty = document.getElementById("faculty").value;
-						var pclass = document.getElementById("class").value;
-
-						// lend-head table
-						var sid = document.getElementById("staffID").value;
-						var ldate = document.getElementById("datepicker").value;
-						var ldetail = document.getElementById("ldetail").value;
-						var cdate = document.getElementById("create-date").value;
-						var udate = document.getElementById("update-date").value;
-
-						// lend-detail
-						var eid = document.getElementById("sequip").value;
-
-
-						if (pid == "" || pname == "" || psurname == "" || sid == "") {
-							alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-							return false;
-						}
-						else{
-							alert("บันทึกข้อมูลเรียบร้อย");
-							$.ajax({
-								url: '/addlend',
-								data: JSON.stringify({"pid" : pid ,"pname" : pname , "psurname" : psurname , "pstatus" : pstatus , "pfaculty" : pfaculty , "pclass" : pclass , 
-													"sid" : sid , "ldate" : ldate , "ldetail" : ldetail , "cdate" : cdate , "udate" : udate , "eid" : eid}),
-								type: 'POST',
-								processData: false,
-								contentType: 'application/json; charset=utf-8',
-								success: function(response){
-									console.log(response);
-								},
-								error: function(error){
-									console.log(error);
-								}
-							});
-							location.reload();
-						}									
-					});
-				</script>
-    		</div>
-    	</div> 	    	
-	</div>
 	    <!-- +++++++++++++++++++++ End Button Add Lend ++++++++++++++++++++++ -->  	
-
+    </div>
     <hr />
 
     <div class="container">        	       
