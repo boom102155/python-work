@@ -29,7 +29,7 @@
 			    $("#sCategory").val($(this).closest('tr').children()[3].textContent);
 			    $("#txtCallnumber").val($(this).closest('tr').children()[4].textContent);
 			    $("#txtSerial").val($(this).closest('tr').children()[5].textContent);
-			    $("#txtDate").val($(this).closest('tr').children()[6].textContent);
+			    $("#txtQTY").val($(this).closest('tr').children()[6].textContent);
 		    });
 		});
     </script>
@@ -161,8 +161,12 @@
 						            </script>
 						        </div>
 						        <div class="form-group">
-						            <label for="create-date" class="form-control-label">วันที่สร้าง:</label>	
-						            <input type="date" class="form-control" id="create-date" readonly="readonly"></input>
+						        	<label for="QTY" class="form-control-label">จำนวน:</label>
+      								<input type="text" class="form-control" id="QTY" autocomplete="off" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+						        </div>
+						        <div class="form-group">
+						            <!-- <label for="create-date" class="form-control-label">วันที่สร้าง:</label>	 -->
+						            <input type="date" class="form-control" id="create-date" style="display: none;"></input>
 						            <script type="text/javascript">
 										var today = new Date();										
 										$("#create-date").val(getFormattedDate(today));										
@@ -192,11 +196,12 @@
 							  		var ename = document.getElementById("equip-name").value;
 									var cateid = document.getElementById("getCateID").value;
 									var cnumber = document.getElementById("call-number").value;
-									var snumber = document.getElementById("serial-number").value;
+									var snumber = document.getElementById("serial-number").value;									
 									var cdate = document.getElementById("create-date").value;
 									var udate = document.getElementById("update-date").value;
+									var eqty = document.getElementById("QTY").value;
 
-									if (ename == "" || cnumber == "" || snumber == "") {
+									if (ename == "" || cnumber == "" || snumber == "" || eqty == "") {
 										alert("กรุณากรอกข้อมูลให้ครบถ้วน");
             							return false;
 									}
@@ -204,7 +209,8 @@
 										alert("บันทึกข้อมูลเรียบร้อย");
 										$.ajax({
 											url: '/addequipment',
-											data: JSON.stringify({"equipname" : ename ,"cateID" : cateid , "callnumber" : cnumber , "serialnumber" : snumber , "createdate" : cdate , "update" : udate}),
+											data: JSON.stringify({"equipname" : ename ,"cateID" : cateid , "callnumber" : cnumber , "serialnumber" : snumber , "createdate" : cdate , 
+												"update" : udate , "eqty" : eqty}),
 											type: 'POST',
 											processData: false,
 											contentType: 'application/json; charset=utf-8',
@@ -238,7 +244,7 @@
                 <th>รหัสหมวดหมู่</th>
                 <th>เลขครุภัณฑ์</th>
                 <th>เลขซีเรียล</th>
-                <th>วันที่สร้าง</th>               
+                <th>จำนวน</th>               
             </thead>
 
             {% for row in rows1 %}
@@ -340,8 +346,12 @@
 		            </script>
       			</div>
       			<div class="form-group">
-      				<label for="txtDate" class="form-control-label">วันที่สร้าง:</label>
-      				<input type="date" class="form-control" id="txtDate" readonly="readonly" />
+      				<label for="txtQTY" class="form-control-label">จำนวน:</label>
+      				<input type="text" class="form-control" id="txtQTY" autocomplete="off" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+      			</div>
+      			<div class="form-group">
+      				<!-- <label for="txtDate" class="form-control-label">วันที่สร้าง:</label> -->
+      				<input type="date" class="form-control" id="txtDate" style="display: none;" />
       			</div>	      			
       			<div class="form-group">					      					     	
 		            <input type="date" class="form-control" id="updatedate" style="display: none;" />         				                    
@@ -392,6 +402,7 @@
 							var cnumber = document.getElementById("txtCallnumber").value;
 							var snumber = document.getElementById("txtSerial").value;
 							var udate = document.getElementById("updatedate").value;
+							var quantity = document.getElementById("txtQTY").value;
 
 							if (ename == "" || cnumber == "" || snumber == "") {
 								alert("กรุณากรอกข้อมูลให้ครบถ้วน");
@@ -401,7 +412,8 @@
 								alert("อัพเดทข้อมูลเรียบร้อย");
 								$.ajax({
 									url: '/editequipment',
-									data: JSON.stringify({"equipmentid" : equipid , "equipname" : ename ,"cateID" : cateid , "callnumber" : cnumber , "serialnumber" : snumber  , "update" : udate}),
+									data: JSON.stringify({"equipmentid" : equipid , "equipname" : ename ,"cateID" : cateid , "callnumber" : cnumber , "serialnumber" : snumber  , 
+										"update" : udate , "quantity" : quantity}),
 									type: 'POST',
 									processData: false,
 									contentType: 'application/json; charset=utf-8',

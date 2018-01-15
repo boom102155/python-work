@@ -17,7 +17,20 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
 
     <!-- data table script -->
-    <script type="text/javascript" src="{{ url_for('static',filename="js/categoryTable.js")}}"></script>      
+    <!-- <script type="text/javascript" src="{{ url_for('static',filename="js/categoryTable.js")}}"></script>       -->
+    <script type="text/javascript">
+    	$(document).ready(function() {
+			var table = $('#example').DataTable();
+			$('#example tbody').on('click', 'tr', 'td', function () {
+		        $("#myModal").modal("show");
+		        $("#txtID").val($(this).closest('tr').children()[0].textContent);
+		        $("#txtCatename").val($(this).closest('tr').children()[1].textContent);
+		        $("#txtShortname").val($(this).closest('tr').children()[2].textContent);
+			    $("#txtType").val($(this).closest('tr').children()[3].textContent);
+			    $("#txtDescription").val($(this).closest('tr').children()[4].textContent);			    
+		    });		    
+		});
+    </script>
 
 </head>
 <body style="padding-top: 5rem;">
@@ -143,8 +156,8 @@
 						            <textarea class="form-control" id="de-tail" autocomplete="off"></textarea>
 						        </div>
 						        <div class="form-group">
-						            <label for="create-date" class="form-control-label">วันที่สร้าง:</label>	
-						            <input type="date" class="form-control" id="create-date" readonly="readonly"></input>
+						            <!-- <label for="create-date" class="form-control-label">วันที่สร้าง:</label>	 -->
+						            <input type="date" class="form-control" id="create-date" style="display: none;"></input>
 						            <script type="text/javascript">
 										var today = new Date();										
 										$("#create-date").val(getFormattedDate(today));										
@@ -219,7 +232,6 @@
                 <th>ชื่อย่อ</th>
                 <th>ประเภท</th>
                 <th>เรายละเอียด</th>
-                <th>วันที่สร้าง</th>
             </thead>
 
             {% for row in rows %}
@@ -229,7 +241,6 @@
                 <td>{{row[2]}}</td>
                 <td>{{row[3]}}</td>
                 <td>{{row[4]}}</td>                    
-                <td>{{row[5]}}</td>
             </tr>
             {% endfor %}
         </table>             
@@ -311,8 +322,8 @@
 		      				<input type="text" class="form-control" id="txtDescription" autocomplete="off"/>		      				
 		      			</div>
 			      		<div class="form-group">
-			      			<label for="txtDate" class="form-control-label">วันที่สร้าง:</label>
-			      			<input type="date" class="form-control" id="txtDate" readonly="readonly" />
+			      			<!-- <label for="txtDate" class="form-control-label">วันที่สร้าง:</label> -->
+			      			<input type="date" class="form-control" id="txtDate" style="display: none;" />
 			      		</div>  	
 			      		<div class="form-group">					      					     	
 			            	<input type="date" class="form-control" id="updatedate" style="display: none;" />         				                    

@@ -80,14 +80,15 @@ def addinspection():
 @app.route('/equipment', methods = ['POST', 'GET'])
 def equipment():
     conn = db_connect.connect()
-    query1 = conn.execute("SELECT eq.EQUIPMENT_ID, "
-                         "eq.EQUIPMENT_NAME, "
-                         "ca.CATEGORY_NAME, "
-                         "ca.CATEGORY_ID, "
-                         "eq.CALL_NUMBER, "
-                         "eq.SERIAL_NUMBER, "
-                         "to_char(eq.CREATE_DATE, 'yyyy-mm-dd') "
-                         "FROM EQUIPMENT eq INNER JOIN CATEGORY ca ON eq.CATEGORY_ID = ca.CATEGORY_ID")
+    query1 = conn.execute("SELECT te.equipment_id, "
+                          "te.equipment_name, "
+                          "c.CATEGORY_NAME, "
+                          "te.CATEGORY_ID, "
+                          "te.CALL_NUMBER, "
+                          "te.SERIAL_NUMBER, "
+                          "te.summary "
+                          "FROM CATEGORY c , TB_EQUIP te "
+                          "WHERE c.CATEGORY_ID = te.CATEGORY_ID")
     rows1 = query1.fetchall();
 
     query2 = conn.execute("SELECT CATEGORY_NAME FROM CATEGORY");
@@ -106,20 +107,23 @@ def addequipment():
         data = request.get_json()
         conn = db_connect.connect()
         conn.execute("INSERT INTO EQUIPMENT "
-                     "(EQUIPMENT_NAME, "
+                     "(EQUIPMENT_ID, "
+                     "EQUIPMENT_NAME, "
                      "CATEGORY_ID, "
                      "CALL_NUMBER, "
                      "SERIAL_NUMBER, "
                      "CREATE_DATE, "
-                     "UPDATE_DATE) "
-                     "VALUES (:2, :3, :4, :5, to_date(:7, 'yyyy-mm-dd'), to_date(:8, 'yyyy-mm-dd'))",
-                     (data["equipname"], data["cateID"], data["callnumber"], data["serialnumber"], data["createdate"], data["update"]))
+                     "UPDATE_DATE, "
+                     "QTY) "                   
+                     "VALUES (EQUIPMENT_SEQ.NEXTVAL, :2, :3, :4, :5, to_date(:7, 'yyyy-mm-dd'), to_date(:8, 'yyyy-mm-dd'), :9)",
+                     (data["equipname"], data["cateID"], data["callnumber"], data["serialnumber"], data["createdate"], data["update"], data["eqty"]))
         conn.commit()
     except:
         conn.rollback()
     finally:
         return json.dumps(data)
         conn.close()
+
 
 @app.route('/delequipment' , methods = ['POST' , 'GET'])
 def delequipment():
@@ -137,7 +141,8 @@ def editequipment():
                  "CATEGORY_ID = " + (data["cateID"]) + ", " +
                  "CALL_NUMBER = '" + (data["callnumber"]) + "', " +
                  "SERIAL_NUMBER = '" + (data["serialnumber"]) + "', " +
-                 "UPDATE_DATE = " + "to_date('"+(data["update"])+"','yyyy-mm-dd')" +
+                 "UPDATE_DATE = " + "to_date('"+(data["update"])+"','yyyy-mm-dd')," +
+                 "QTY = " + (data["quantity"]) +
                  " WHERE EQUIPMENT_ID = " + (data["equipmentid"]))
     conn.commit()
     return json.dumps(data)
