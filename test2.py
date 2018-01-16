@@ -51,10 +51,10 @@ def lend():
                           "AND   lh.lend_no = ld.lend_no "
                           "AND   ld.equipment_id = eq.equipment_id) tb "
                           "LEFT JOIN lend_inspection li ON li.lend_no = tb.lend_no")
-    rows1 = query1.fetchall();
+    rows1 = query1.fetchall()
 
     query2 = conn.execute("SELECT EQUIPMENT_ID, EQUIPMENT_NAME FROM EQUIPMENT")
-    rows2 = query2.fetchall();
+    rows2 = query2.fetchall()
 
     return render_template("lend.html", rows1=rows1, rows2=rows2)
 
@@ -89,15 +89,13 @@ def equipment():
                           "te.summary "
                           "FROM CATEGORY c , TB_EQUIP te "
                           "WHERE c.CATEGORY_ID = te.CATEGORY_ID")
-    rows1 = query1.fetchall();
+    rows1 = query1.fetchall()
 
-    query2 = conn.execute("SELECT CATEGORY_NAME FROM CATEGORY");
-    rows2 = query2.fetchall();
+    query2 = conn.execute("SELECT CATEGORY_NAME FROM CATEGORY")
+    rows2 = query2.fetchall()
 
     query3 = conn.execute("SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY")
-    rows3 = query3.fetchall();
-
-
+    rows3 = query3.fetchall()
 
     return render_template("equipment.html", rows1=rows1 , rows2=rows2 , rows3=rows3)
 
@@ -123,7 +121,6 @@ def addequipment():
     finally:
         return json.dumps(data)
         conn.close()
-
 
 @app.route('/delequipment' , methods = ['POST' , 'GET'])
 def delequipment():
@@ -154,9 +151,9 @@ def category():
                          "CATEGORY_ID, "
                          "CATEGORY_NAME, "
                          "SHORT_NAME, TYPE, "
-                         "DETAIL, "
-                         "to_char(CREATE_DATE, 'yyyy-mm-dd') FROM CATEGORY")
-    rows = query.fetchall();
+                         "DETAIL "
+                         "FROM CATEGORY")
+    rows = query.fetchall()
     return render_template("category.html", rows=rows)
 
 @app.route('/addcategory', methods = ['POST', 'GET'])
@@ -234,7 +231,12 @@ def addlend():
     conn.commit()
     return json.dumps(data)
 
-
+# @app.route('/searchstu' , methods = ['POST' , 'GET'])
+# def searchstu():
+#     data = request.get_json()
+#     conn = db_connect.connect()
+#     conn.execute("SELECT NAME, SURNAME, TYPE, FACULTY, CLASS FROM PERSON WHERE PERSON_ID = " + (data["pid"]))
+#     return json.dumps(data.fetchall())
 
 if __name__ == '__main__':
     app.run(debug=True)
