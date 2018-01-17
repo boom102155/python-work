@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, render_template, request, json
-from flask_restful import Api
 from sqlalchemy import create_engine
 
 db_connect = create_engine('oracle://ADBOOM:boom125478@127.0.0.1:1521/xe')
@@ -231,12 +230,21 @@ def addlend():
     conn.commit()
     return json.dumps(data)
 
-# @app.route('/searchstu' , methods = ['POST' , 'GET'])
-# def searchstu():
-#     data = request.get_json()
-#     conn = db_connect.connect()
-#     conn.execute("SELECT NAME, SURNAME, TYPE, FACULTY, CLASS FROM PERSON WHERE PERSON_ID = " + (data["pid"]))
-#     return json.dumps(data.fetchall())
+@app.route('/searchstu' , methods = ['POST' , 'GET'])
+def searchstu():
+    data = request.get_json()
+    conn = db_connect.connect()
+    query = conn.execute("SELECT NAME, SURNAME, TYPE, FACULTY, CLASS FROM PERSON WHERE PERSON_ID = " + (data["pid"]))
+    rows = query.fetchall()
+
+    for row in rows:
+        list1 = ["NAME", "SURNAME", "TYPE", "FACULTY", "CLASS"]
+        list2 = [row["name"], row["surname"], row["type"], row["faculty"], row["class"]]
+        data = zip(list1, list2)
+        d = dict(data)
+        print(d)
+
+    return jsonify(d)
 
 if __name__ == '__main__':
     app.run(debug=True)

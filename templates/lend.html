@@ -131,7 +131,7 @@
 		    <div class="col-12 col-md-3">
 		    	<div class="form-group">
 		    		<label for="name" class="form-control-label">ชื่อผู้ยืม</label>		    		
-	        		<input type="text" class="form-control" id="name" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />	        		
+	        		<input type="text" class="form-control" id="name" onkeyup="this.value=this.value.replace(/[^a-zA-Zก-ฮะ-า-ิ-ี-ึ-ื-ุ-ู-เ-แ-โ-ไ-ั-์-ำ]/g,'');" />			
 	        		<div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
 		            <script type="text/javascript">
 		            	$("#name").blur(function(){
@@ -227,7 +227,7 @@
 		            </script>
 		    	</div>
 		    </div>
-		    <!-- <div class="col-12 col-md-3">
+		    <div class="col-12 col-md-3">
 		    	<div class="form-group">
 		    		<label for="class" class="form-control-label">กรอกรหัสนักศึกษา/อาจารย์เพื่อค้นหา:</label>
 		    		<button type="submit" value="submit" id="btnSearch" class="btn btn-primary">ค้นหา</button>
@@ -249,7 +249,7 @@
 								processData: false,
 								contentType: 'application/json; charset=utf-8',
 								success: function(response){
-									console.log(response);
+									console.log(response);								
 								},
 								error: function(error){
 									console.log(error);
@@ -259,7 +259,7 @@
 					});
 		    		</script>
 		    	</div>
-		    </div> -->
+		    </div>
 		    <div class="form-group">					     	
 	            <input type="date" class="form-control" id="create-date" style="display: none;">
 	            <script type="text/javascript">
