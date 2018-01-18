@@ -264,7 +264,13 @@
 									document.getElementById("class").value = c;				
 								},
 								error: function(error){
+									alert("ไม่พบข้อมูล")
 									console.log(error);
+									document.getElementById("name").value = "";
+									document.getElementById("surname").value = "";
+									document.getElementById("status").value = "นักศึกษา";
+									document.getElementById("faculty").value = "IT";
+									document.getElementById("class").value = "1";
 								}
 							});							
 						}									
