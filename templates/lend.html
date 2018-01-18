@@ -249,7 +249,19 @@
 								processData: false,
 								contentType: 'application/json; charset=utf-8',
 								success: function(response){
-									console.log(response);								
+									console.log(response);
+									var n = (response['NAME']);
+									var sur = (response['SURNAME']);
+									var t = (response['TYPE']);
+									var fac = (response['FACULTY']);
+									var c = (response['CLASS']);
+									
+
+									document.getElementById("name").value = n;
+									document.getElementById("surname").value = sur;
+									document.getElementById("status").value = t;
+									document.getElementById("faculty").value = fac;
+									document.getElementById("class").value = c;				
 								},
 								error: function(error){
 									console.log(error);
