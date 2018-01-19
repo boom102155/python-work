@@ -48,7 +48,7 @@
           padding: 16px 32px;
         }
 
-        .content{
+        /*.content{
             display: none;
         }
 
@@ -59,15 +59,15 @@
             left: 50%;
             margin-right: -50%;
             transform: translate(-50%, -50%);
-        }
+        }*/
     </style>
 
                          
 </head>
 <body>
-    <div class="preload">
+    <!-- <div class="preload">
         <img src="{{ url_for('static',filename="imgs/loading.gif")}}" width="130px" height="100px">
-    </div>
+    </div> -->
     <br /><br /> 
     <center>
     <div class="content">
@@ -115,12 +115,12 @@
         </div>
     </div>             
     </center>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(function() {
             $(".preload").fadeOut(2000,function() {
                 $(".content").fadeIn(500);
             })
         })
-    </script>
+    </script> -->
 </body>
 </html>
