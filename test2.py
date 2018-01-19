@@ -10,11 +10,28 @@ app = Flask(__name__)
 def login():
     return render_template("login.html")
 
-@app.route('/')
+@app.route('/loginsubmit' , methods = ['POST' , 'GET'])
+def loginsubmit():
+    data = request.get_json()
+    conn = db_connect.connect()
+    query = conn.execute("SELECT NAME, SURNAME FROM STAFF "
+                         "WHERE USER_NAME = '" + (data["user"]) + "'" +
+                         " AND PASSWORD = '" + (data["pass"]) + "'")
+    rows = query.fetchall()
+    for row in rows:
+        list1 = ["NAME", "SURNAME"]
+        list2 = [row["name"], row["surname"]]
+        data = zip(list1, list2)
+        d = dict(data)
+        print(d)
+
+    return jsonify(d)
+
+@app.route('/index')
 def index():
     return render_template("index.html")
 
-@app.route('/lend', methods = ['POST', 'GET'])
+@app.route('/lend', methods = ['POST' , 'GET'])
 def lend():
     conn = db_connect.connect()
     query1 = conn.execute("SELECT tb.lend_no, "

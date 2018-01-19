@@ -5,9 +5,10 @@
 	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 	<style>       
 		.container{
 		    position: absolute;
@@ -16,8 +17,9 @@
 		    right: 50%;
 		    transform: translateX(-50%) translateY(-50%);
 		}
-		.panel{
+		.card{
 		    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		    padding: 10px;
 		}
 		img{
 		    width: 100%;
@@ -27,44 +29,103 @@
 </head>
 <body>
 	<div class="container">
-
         <div class="row">
-            <div class="col-sm-5 col-sm-offset-3">           
+        	<div class="col-12 col-md-4">
+        		<p> </p>
+        	</div>
+
+            <div class="col-12 col-md-4">           
                 <img src="{{ url_for('static',filename="imgs/logo.png")}}" alt="logo" width="450" height="110" />
-           </div>                           
+            </div>
+
+            <div class="col-12 col-md-4">
+        		<p> </p>
+        	</div>                           
         </div> 
 
         <br /> 
 
         <div class="row">
-            <div class="col-sm-5 col-sm-offset-3">             
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center">Login ลงชื่อเข้าใช้งาน</div>
-                    <div class="panel-body">
+        	<div class="col-12 col-md-4">
+        		<p> </p>
+        	</div>
+
+            <div class="col-12 col-md-4">             
+                <div class="card">
+                    <h4 class="card-title text-center">ลงชื่อเข้าใช้งาน</h4>
+                    <div class="card-text">
                     	<form>
 	                        <div class="form-group">
 	                            <div>
 	                            	<label for="username" class="form-control-label">Username:</label>
-								    <input class="form-control" id="username" name="username"></input>
+								    <input type="text" class="form-control" id="username" autocomplete="off" />
 	                            </div>                                                  
 	                        </div>
 	                        <div class="form-group">
 	                            <div>
 	                                <label for="password" class="form-control-label">Password:</label>
-								    <input class="form-control" id="password" name="password"></input>
+								    <input type="text" class="form-control" id="password" autocomplete="off" />
 	                            </div>                         
 	                        </div>
 	                        <div class="form-group">                            
 	                            <div class="col-xs- text-center">
-	                            	<button type="button" class="btn btn-success" onclick="">login</button> 
+	                            	<button type="submit" value="submit" class="btn btn-success" id="btnLogin">ลงชื่อเข้าใช้งาน</button> 
+	                            	<script type="text/javascript">
+						    			$('#btnLogin').click(function(){
+
+								  			var user = document.getElementById("username").value;
+								  			var pass = document.getElementById("password").value;
+																						
+											if (user == "" || pass == "") {
+												alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+												return false;
+											}
+											else{
+												$.ajax({
+													url: '/loginsubmit',
+													data: JSON.stringify({"user" : user , "pass" : pass}),
+													type: 'POST',
+													processData: false,
+													contentType: 'application/json; charset=utf-8',
+													success: function(response){
+														console.log(response);
+														
+														window.location.replace("index");
+
+														var n = (response['NAME']);
+														var sur = (response['SURNAME']);
+														
+														document.getElementById("name").value = n;
+														document.getElementById("surname").value = sur;
+
+
+																		
+													},
+													error: function(error){
+														alert("Username หรือ Password ไม่ถูกต้อง")
+														console.log(error);
+														document.getElementById("username").value = "";
+														document.getElementById("password").value = "";
+														
+													}
+												});							
+											}									
+										});
+						    		</script>
+
 	                            </div>
 	                        </div>
                     	</form>
                     </div>
     	        </div>
             </div>
-        </div> 
 
+            <div class="col-12 col-md-4">
+            	<p> </p>
+        	</div>
+
+        </div> 
 	</div>
+
 </body>
 </html>

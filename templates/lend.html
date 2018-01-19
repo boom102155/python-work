@@ -234,47 +234,46 @@
 		    		<script type="text/javascript">
 		    			$('#btnSearch').click(function(){
 
-				  		var pid = document.getElementById("PID").value;
+				  			var pid = document.getElementById("PID").value;
 																		
-						if (pid == "") {
-							alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-							return false;
-						}
-						else{
-							// alert("บันทึกข้อมูลเรียบร้อย");
-							$.ajax({
-								url: '/searchstu',
-								data: JSON.stringify({"pid" : pid}),
-								type: 'POST',
-								processData: false,
-								contentType: 'application/json; charset=utf-8',
-								success: function(response){
-									console.log(response);
-									var n = (response['NAME']);
-									var sur = (response['SURNAME']);
-									var t = (response['TYPE']);
-									var fac = (response['FACULTY']);
-									var c = (response['CLASS']);
-									
+							if (pid == "") {
+								alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+								return false;
+							}
+							else{
+								$.ajax({
+									url: '/searchstu',
+									data: JSON.stringify({"pid" : pid}),
+									type: 'POST',
+									processData: false,
+									contentType: 'application/json; charset=utf-8',
+									success: function(response){
+										console.log(response);
+										var n = (response['NAME']);
+										var sur = (response['SURNAME']);
+										var t = (response['TYPE']);
+										var fac = (response['FACULTY']);
+										var c = (response['CLASS']);
+										
 
-									document.getElementById("name").value = n;
-									document.getElementById("surname").value = sur;
-									document.getElementById("status").value = t;
-									document.getElementById("faculty").value = fac;
-									document.getElementById("class").value = c;				
-								},
-								error: function(error){
-									alert("ไม่พบข้อมูล")
-									console.log(error);
-									document.getElementById("name").value = "";
-									document.getElementById("surname").value = "";
-									document.getElementById("status").value = "นักศึกษา";
-									document.getElementById("faculty").value = "IT";
-									document.getElementById("class").value = "1";
-								}
-							});							
-						}									
-					});
+										document.getElementById("name").value = n;
+										document.getElementById("surname").value = sur;
+										document.getElementById("status").value = t;
+										document.getElementById("faculty").value = fac;
+										document.getElementById("class").value = c;				
+									},
+									error: function(error){
+										alert("ไม่พบข้อมูล")
+										console.log(error);
+										document.getElementById("name").value = "";
+										document.getElementById("surname").value = "";
+										document.getElementById("status").value = "นักศึกษา";
+										document.getElementById("faculty").value = "IT";
+										document.getElementById("class").value = "1";
+									}
+								});							
+							}									
+						});
 		    		</script>
 		    	</div>
 		    </div>
