@@ -89,24 +89,22 @@
 													contentType: 'application/json; charset=utf-8',
 													success: function(response){
 														console.log(response);
+														console.log(response['NAME']);
+														console.log(response['SURNAME']);
+
+														// window.location.replace("/");
+
+														// var n = (response['NAME']);
+														// var sur = (response['SURNAME']);
 														
-														window.location.replace("index");
-
-														var n = (response['NAME']);
-														var sur = (response['SURNAME']);
-														
-														document.getElementById("name").value = n;
-														document.getElementById("surname").value = sur;
-
-
-																		
+														// document.getElementById("name").value = n;
+														// document.getElementById("surname").value = sur;
 													},
 													error: function(error){
 														alert("Username หรือ Password ไม่ถูกต้อง")
 														console.log(error);
 														document.getElementById("username").value = "";
-														document.getElementById("password").value = "";
-														
+														document.getElementById("password").value = "";														
 													}
 												});							
 											}									

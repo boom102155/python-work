@@ -27,7 +27,7 @@ def loginsubmit():
 
     return jsonify(d)
 
-@app.route('/index')
+@app.route('/')
 def index():
     return render_template("index.html")
 
