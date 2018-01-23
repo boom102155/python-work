@@ -263,6 +263,10 @@ def searchstu():
 
     return jsonify(d)
 
+@app.route('/report' , methods = ['POST' , 'GET'])
+def report():
+    return render_template("report.html")
+
 if __name__ == '__main__':
     app.run(debug=True)
 
