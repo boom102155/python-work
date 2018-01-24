@@ -383,29 +383,33 @@
     		<button type="submit" value="submit" class="btn btn-danger" id="btnReport">จัดทำรายงาน</button>
     		<script type="text/javascript">
     			$('#btnReport').click(function(){  				
-					// window.location = "report";	
+					window.location = "report";	
 					var result = $("tr:has(:checked)")
 						if (result.length == 0) {
 							alert("กรุณาเลือกข้อมูลที่ต้องการทำรายงาน");
 						}else{
 							console.log(result);
 						}
-
-					    // if (result.length < 2) {
-					    //     alert("Please Select 2 to 4 Models");
-					    // } else if (result.length > 4) {
-					    //     alert("Please Select 2 to 4 Models");
-					    // } else {
-					    //     console.log(result);
-					    // }
-					    
-					    
-					    var json = result.map(function () {
-					        return [$(this).children().slice(1).map(function () {
-					            return $(this).text().trim()
-					        }).get()]
+					var json = result.map(function () {
+					    return [$(this).children().slice(1).map(function () {
+					    	return $(this).text().trim()}).get()]
 					    }).get()
 					    console.log(JSON.stringify(json,0,"\t"))
+
+					$.ajax({
+						url: '/getreport',
+						data: JSON.stringify({"reportdata" : json}),
+						type: 'POST',
+						processData: false,
+						contentType: 'application/json; charset=utf-8',
+						success: function(response){
+							console.log(response);
+						},
+						error: function(error){
+							console.log(error);
+						}
+					});
+
 				});
     		</script>
     	</div>  
@@ -433,9 +437,7 @@
 	                <th>รหัสอุปกรณ์</th>
 	                <th>เลขเซีเรียล</th>
 	                <th>ชื่ออุปกรณ์</th>
-	                <th>สถานะ</th>
-	                
-	               
+	                <th>สถานะ</th>	               
 	            </thead>
 
 	            {% for row in rows1 %}
@@ -451,10 +453,7 @@
 	                <td>{{row[7]}}</td> 
 	                <td>{{row[8]}}</td>                    
 	                <td>{{row[9]}}</td>
-	                <td>{{row[10]}}</td>
-	                
-	          
-	                
+	                <td>{{row[10]}}</td>	                
 	            </tr>
 	            {% endfor %}
 	        </table> 

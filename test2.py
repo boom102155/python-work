@@ -267,6 +267,15 @@ def searchstu():
 def report():
     return render_template("report.html")
 
+@app.route('/getreport' , methods = ['POST' , 'GET'])
+def getreport():
+    data = request.get_json()
+    # conn = db_connect.connect()
+    # conn.execute()
+    print(data)
+
+    return jsonify(data)
+
 if __name__ == '__main__':
     app.run(debug=True)
 
