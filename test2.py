@@ -1,9 +1,10 @@
-from flask import Flask, jsonify, render_template, request, json
+from flask import Flask, jsonify, render_template, request, json, redirect, url_for
 from sqlalchemy import create_engine
 
 db_connect = create_engine('oracle://ADBOOM:boom125478@127.0.0.1:1521/xe')
 app = Flask(__name__)
 
+datareport = {}
 # api = Api(app)
 
 @app.route('/login')
@@ -263,18 +264,20 @@ def searchstu():
 
     return jsonify(d)
 
-@app.route('/report' , methods = ['POST' , 'GET'])
+@app.route('/report')
 def report():
     return render_template("report.html")
 
-@app.route('/getreport' , methods = ['POST' , 'GET'])
+@app.route('/getreport' , methods = ['POST'])
 def getreport():
-    data = request.get_json()
-    # conn = db_connect.connect()
-    # conn.execute()
-    print(data)
 
-    return jsonify(data)
+    datareport = request.form
+    # print(json.loads(datareport[0])
+    for i in range(len(datareport)):
+        print(json.loads(datareport[str(i)]))
+
+
+    return redirect(url_for('report'))
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -33,7 +33,7 @@
 	        <th>สถานะ</th>	                
 	    </thead>	            
 	    <tr>      	
-	        <td>1</td>
+	        <!-- <td>1</td>
 	        <td>2018-01-23</td>
 	        <td>Boom</td>  
 	        <td>Robbin</td>   
@@ -43,14 +43,14 @@
 	        <td>1</td>
 	        <td>999-888-77</td> 
 	        <td>NB</td> 
-	        <td>คืนแล้ว</td> 
+	        <td>คืนแล้ว</td> --> 
 	    </tr>      
 	</table>
 
 	<script type="text/javascript">
 		$(document).ready(function () {
 			$.ajax({
-				url: '/getreport',
+				url: '/report',
 				data: JSON.stringify(),
 				type: 'POST',
 				processData: false,
@@ -64,6 +64,12 @@
 			});
 		});
 	</script>
+
+	<form action = "http://127.0.0.1:5000/report" method = "post">
+         <p>Enter Name:</p>
+         <p><input type = "text" name = "nm" /></p>
+         <p><input type = "submit" value = "submit" /></p>
+    </form>
 	
      	
 </body>

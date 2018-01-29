@@ -1,16 +1,19 @@
-# list = [1,'aaa',33,'ccccc']
-# data = {}
-# for i in range(len(list)):
-#     # print(i)
-#     data[i] = list[i]
-#
-# print(data)
+from flask import Flask, redirect, url_for, request
+app = Flask(__name__)
 
-list1 = ["NAME", "SURNAME", "TYPE", "FACULTY", "CLASS"]
+@app.route('/report')
+def success():
+   return 'welcome hello world'
 
-list2 = ['BOOM','SAMAN','นักศึกษา','IT','2']
+@app.route('/report',methods = ['POST', 'GET'])
+def report():
+   if request.method == 'POST':
+      user = request.form['nm']
+      return redirect(url_for('success'))
+   else:
+      user = request.args.get('nm')
+      return redirect(url_for('success'))
 
-data = zip(list1, list2)
-
-print(dict(data))
+if __name__ == '__main__':
+   app.run(debug = True)
 
