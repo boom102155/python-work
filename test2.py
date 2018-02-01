@@ -1,11 +1,12 @@
-from flask import Flask, jsonify, render_template, request, json, redirect, url_for
+from flask import Flask, jsonify, render_template, request, json, redirect, url_for, session
 from sqlalchemy import create_engine
+import os
 
+os.environ["NLS_LANG"] = ".UTF8"
 db_connect = create_engine('oracle://ADBOOM:boom125478@127.0.0.1:1521/xe')
 app = Flask(__name__)
-
+app.secret_key = os.urandom(24)
 datareport = {}
-# api = Api(app)
 
 @app.route('/login')
 def login():
@@ -15,22 +16,34 @@ def login():
 def loginsubmit():
     data = request.get_json()
     conn = db_connect.connect()
-    query = conn.execute("SELECT NAME, SURNAME FROM STAFF "
+    query = conn.execute("SELECT USER_NAME FROM STAFF "
                          "WHERE USER_NAME = '" + (data["user"]) + "'" +
                          " AND PASSWORD = '" + (data["pass"]) + "'")
     rows = query.fetchall()
     for row in rows:
-        list1 = ["NAME", "SURNAME"]
-        list2 = [row["name"], row["surname"]]
+        # list1 = ["NAME", "SURNAME"]
+        # list2 = [row["name"], row["surname"]]
+        list1 = ["USER_NAME"]
+        list2 = [row["user_name"]]
         data = zip(list1, list2)
         d = dict(data)
         print(d)
+        session['user'] = ''.join(list2)
 
     return jsonify(d)
 
-@app.route('/')
+
+@app.route('/index')
 def index():
-    return render_template("index.html")
+    if 'user' in session:
+        return render_template("index.html")
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+           "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return 'Dropped'
 
 @app.route('/lend', methods = ['POST' , 'GET'])
 def lend():
@@ -73,7 +86,22 @@ def lend():
     query2 = conn.execute("SELECT EQUIPMENT_ID, EQUIPMENT_NAME FROM EQUIPMENT")
     rows2 = query2.fetchall()
 
-    return render_template("lend.html", rows1=rows1, rows2=rows2)
+    if 'user' in session:
+        username = session['user']
+        query3 = conn.execute("SELECT STAFF_ID FROM STAFF "
+                              "WHERE USER_NAME = '" + username + "'")
+        rows = query3.fetchall()
+        for row in rows:
+            list1 = ["STAFF_ID"]
+            list2 = [row["staff_id"]]
+            data = zip(list1, list2)
+            d = dict(data)
+            print(', '.join(str(x) for x in list2))
+            staffid = ', '.join(str(x) for x in list2)
+        return render_template("lend.html", rows1=rows1, rows2=rows2, username=username, staffid=staffid)
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+           "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
 
 @app.route('/addinspection', methods = ['POST', 'GET'])
 def addinspection():
@@ -114,7 +142,11 @@ def equipment():
     query3 = conn.execute("SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY")
     rows3 = query3.fetchall()
 
-    return render_template("equipment.html", rows1=rows1 , rows2=rows2 , rows3=rows3)
+    if 'user' in session:
+        username = session['user']
+        return render_template("equipment.html", rows1=rows1 , rows2=rows2 , rows3=rows3, username=username)
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+      "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 
 @app.route('/addequipment' , methods = ['POST' , 'GET'])
 def addequipment():
@@ -171,7 +203,12 @@ def category():
                          "DETAIL "
                          "FROM CATEGORY")
     rows = query.fetchall()
-    return render_template("category.html", rows=rows)
+
+    if 'user' in session:
+        username = session['user']
+        return render_template("category.html", rows=rows, username=username)
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+           "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 
 @app.route('/addcategory', methods = ['POST', 'GET'])
 def addcategory():
@@ -275,7 +312,6 @@ def getreport():
     # print(json.loads(datareport[0])
     for i in range(len(datareport)):
         print(json.loads(datareport[str(i)]))
-
 
     return redirect(url_for('report'))
 

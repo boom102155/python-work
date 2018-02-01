@@ -75,10 +75,26 @@
                     <a class="nav-link" href="category">ค้นหาตามหมวดหมู่</a>
                 </li>
             </ul>
-                <!-- <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form> -->
+                <form class="form-inline my-2 my-lg-0">
+                    <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
+                    <label class="form-control-label mr-sm-2" style="color: white;">{{ username }}</label>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnLogout">ลงชื่อออก</button>
+                    <script type="text/javascript">
+                    	$('#btnLogout').click(function(){
+                    		$.ajax({
+								url: '/logout',
+								contentType: 'application/json; charset=utf-8',
+								success: function(response){
+									console.log(response);
+									window.location = "login";
+								},
+								error: function(error){
+									console.log(error);
+								}
+							});
+                    	});
+                    </script>
+                </form>
         </div>
     </nav>
     <!-- ++++++++++++++++++++++end navbar++++++++++++++++++++++ -->

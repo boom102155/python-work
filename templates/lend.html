@@ -120,10 +120,26 @@
                     <a class="nav-link" href="category">ค้นหาตามหมวดหมู่</a>
                 </li>
             </ul>
-                <!--  <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form> -->     
+                 <form class="form-inline my-2 my-lg-0">
+                    <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
+                    <label class="form-control-label mr-sm-2" style="color: white;">{{ username }}</label>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnLogout">ลงชื่อออก</button>
+                    <script type="text/javascript">
+                    	$('#btnLogout').click(function(){
+                    		$.ajax({
+								url: '/logout',
+								contentType: 'application/json; charset=utf-8',
+								success: function(response){
+									console.log(response);
+									window.location = "login";
+								},
+								error: function(error){
+									console.log(error);
+								}
+							});
+                    	});
+                    </script>                  
+                </form>     
         </div>
     </nav>
     <!-- ++++++++++++++++++++++end navbar++++++++++++++++++++++ --> 
@@ -228,7 +244,7 @@
 		    <div class="col-12 col-md-3">
 		    	<div class="form-group">
 		    		<label for="class" class="form-control-label">ผู้ให้ยืม(ID)</label>
-	        		<input type="text" class="form-control" id="staffID" maxlength="3" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+	        		<input type="text" class="form-control" id="staffID" value="{{ staffid }}" readonly="readonly" />
 	        		<div id="error4" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
 		            <script type="text/javascript">
 		            	$("#staffID").blur(function(){
@@ -580,7 +596,7 @@
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="txtStaffID" class="form-control-label">ผู้รับคืน(ID)</label>
-				      				<input type="text" class="form-control" id="txtStaffID" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+				      				<input type="text" class="form-control" id="txtStaffID" value="{{ staffid }}" readonly="readonly" />
 				      				<div id="error5" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
 						            <script type="text/javascript">
 						            	$("#txtStaffID").blur(function(){
