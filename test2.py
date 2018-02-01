@@ -32,6 +32,28 @@ def loginsubmit():
 
     return jsonify(d)
 
+@app.route('/profile' , methods = ['POST' , 'GET'])
+def profile():
+    conn = db_connect.connect()
+    if 'user' in session:
+        username = session['user']
+        query1 = conn.execute("SELECT NAME, SURNAME, USER_NAME, PASSWORD FROM STAFF "
+                              "WHERE USER_NAME = '" + username + "'")
+        rows = query1.fetchall()
+        for row in rows:
+            list1 = ["NAME", "SURNAME", "user_name", "password"]
+            list2 = [row["name"], row["surname"], row["user_name"], row["password"]]
+            # data = zip(list1, list2)
+            # d = dict(data)
+            name = row["name"]
+            surname = row["surname"]
+            usn = row["user_name"]
+            pw = row["password"]
+            print(name,surname,usn,pw)
+            return render_template("profile.html", username=username, name=name, surname=surname, usn=usn, pw=pw)
+
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+           "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 
 @app.route('/index')
 def index():
@@ -94,8 +116,8 @@ def lend():
         for row in rows:
             list1 = ["STAFF_ID"]
             list2 = [row["staff_id"]]
-            data = zip(list1, list2)
-            d = dict(data)
+            # data = zip(list1, list2)
+            # d = dict(data)
             print(', '.join(str(x) for x in list2))
             staffid = ', '.join(str(x) for x in list2)
         return render_template("lend.html", rows1=rows1, rows2=rows2, username=username, staffid=staffid)

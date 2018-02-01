@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>profile</title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+    <style>
+		.card {
+		  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+		  max-width: 300px;
+		  margin: auto;
+		  text-align: center;
+		  font-family: arial;
+		}
+	</style>
+	
+</head>
+<body style="padding-top: 5rem;">
+	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="\">
+            <img src="{{ url_for('static',filename="imgs/band.png")}}" alt="Logo" width="45" height="30" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index">หน้าหลัก <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="lend">เพิ่มรายการยืม-คืน</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="equipment">ค้นหาอุปกรณ์</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="category">ค้นหาตามหมวดหมู่</a>
+                </li>
+            </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
+                    <label class="form-control-label mr-sm-2" style="color: white;">{{ username }}</label>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnLogout">ลงชื่อออก</button>
+                    <script type="text/javascript">
+                    	$('#btnLogout').click(function(){
+                    		$.ajax({
+								url: '/logout',
+								contentType: 'application/json; charset=utf-8',
+								success: function(response){
+									console.log(response);
+									window.location = "login";
+								},
+								error: function(error){
+									console.log(error);
+								}
+							});
+                    	});
+                    </script>
+                </form>
+        </div>
+    </nav>
+    <!-- ++++++++++++++++++++++end navbar++++++++++++++++++++++ -->
+
+	<h2 style="text-align:center">Profile</h2>
+
+<div class="card">
+  	<img src="{{ url_for('static',filename="imgs/avapro.png")}}" alt="John" style="width:100%">
+  	
+  	<h4 style="padding-top: 20px;">
+  		<div id="n" style="display: inline;">
+  			{{ name }}
+  		</div> 
+  		<div id="surn" style="display: inline;">
+  			{{ surname }}
+  		</div>
+  	</h4>
+
+	<form class="form-inline">
+		<div class="form-group">
+	  		<input type="text" id="txtn" value="{{ name }}" class="form-control col-md-4" /> 					
+	  		<input type="text" id="txtsurn" value="{{ surname }}" class="form-control col-md-4" />
+		</div>
+	</form>
+  	
+  	
+  	<table width="100%">
+  		<tr>
+  			<td style="text-align: right; font-weight: bold;">Username:</td>
+  			<td style="text-align: left;">{{ usn }}</td>
+  		</tr>
+  		<tr>
+  			<td style="text-align: right; font-weight: bold;">Password:</td>
+  			<td style="text-align: left;"><div id="passw">{{ pw }}</div> 
+  				<input type="text" value="{{ pw }}" id="txtpw" class="form-control" />
+  			</td>
+  		</tr>
+  	</table>
+
+ 	<button class="btn btn-primary" id="btnEdit">Edit</button>
+ 	<script type="text/javascript">
+	 	$(document).ready(function () {
+	 		$("#txtpw").hide();
+	 		$("#txtn").hide();
+	 		$("#txtsurn").hide();
+	 	});
+		
+		$("#btnEdit").click(function(){
+
+			var showname = document.getElementById("n");
+			var showsurname = document.getElementById("surn");
+
+			var editname = document.getElementById("txtn");
+			var editsurname = document.getElementById("txtsurn");
+			
+		   	var x = document.getElementById("txtpw");
+		   	var t = document.getElementById("passw");
+
+		    if (x.style.display === "none") {
+		    	$("#btnEdit").text("Done");
+		        x.style.display = "block";
+
+		        showname.style.display = "none";
+		        showsurname.style.display = "none";
+
+		        editname.style.display = "block";
+		        editsurname.style.display = "block";
+
+		        t.style.display = "none";
+
+
+		    } else {
+		    	$("#btnEdit").text("Edit");
+		        x.style.display = "none";
+
+		        showname.style.display = "inline";
+		        showsurname.style.display = "inline";
+
+		        editname.style.display = "none";
+		        editsurname.style.display = "none";
+
+		        t.style.display = "block";
+		    }	    
+		});		
+	</script>
+</div>
+</body>
+</html>
