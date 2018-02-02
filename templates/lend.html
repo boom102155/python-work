@@ -117,12 +117,14 @@
                     <a class="nav-link" href="equipment">ค้นหาอุปกรณ์</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="category">ค้นหาตามหมวดหมู่</a>
+                    <a class="nav-link" href="category">หมวดหมู่</a>
                 </li>
             </ul>
                  <form class="form-inline my-2 my-lg-0">
                     <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
-                    <a href="profile"><label class="form-control-label mr-sm-2" style="color: white;">{{ username }}</label></a>
+                    <!-- <a href="profile"> -->
+                    	<label class="form-control-label mr-sm-2" style="color: white;">{{ username }}</label>
+                    <!-- </a> -->
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnLogout">ลงชื่อออก</button>
                     <script type="text/javascript">
                     	$('#btnLogout').click(function(){
@@ -219,17 +221,17 @@
 		            </script>
 		    	</div>
 		    </div>
-		    <div class="col-12 col-md-2">
+		    <div class="col-12 col-md-3">
 		    	<div class="form-group">
 		    		<label for="faculty" class="form-control-label">สาขา</label>
 	        		<select type="text" class="form-control" id="faculty">
 	        			<option value="IT">IT</option>
 	        			<option value="CS">CS</option>
-	        			<option value="other">อื่นๆ</option>
+	        			<option value="other">other</option>
 	        		</select>
 		    	</div>
 		    </div>
-		    <div class="col-12 col-md-1">
+		    <div class="col-12 col-md-2">
 		    	<div class="form-group">
 		    		<label for="class" class="form-control-label">ชั้นปี</label>
 	        		<select class="form-control" id="class">
@@ -237,13 +239,13 @@
 	        			<option value="2">2</option>
 	        			<option value="3">3</option>
 	        			<option value="4">4</option>
-	        			<option value="other">อื่นๆ</option>
+	        			<option value="other">other</option>
 	        		</select>
 		    	</div>
 		    </div>
-		    <div class="col-12 col-md-3">
+		    <div class="col-12 col-md-1">
 		    	<div class="form-group">
-		    		<label for="class" class="form-control-label">ผู้ให้ยืม(ID)</label>
+		    		<label for="staffID" class="form-control-label">ผู้ให้ยืม</label>
 	        		<input type="text" class="form-control" id="staffID" value="{{ staffid }}" readonly="readonly" />
 	        		<div id="error4" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
 		            <script type="text/javascript">
@@ -260,7 +262,7 @@
 		    </div>
 		    <div class="col-12 col-md-3">
 		    	<div class="form-group">
-		    		<label for="class" class="form-control-label">กรอกรหัสนักศึกษา/อาจารย์เพื่อค้นหา:</label>
+		    		<label for="btnSearch" class="form-control-label">ค้นหาข้อมูลนักศึกษา/อาจารย์:</label>
 		    		<button type="submit" value="submit" id="btnSearch" class="btn btn-primary">ค้นหา</button>
 		    		<script type="text/javascript">
 		    			$('#btnSearch').click(function(){
@@ -407,7 +409,7 @@
     	<!-- <div class="col-12 col-md-9"></div> -->
     	<div class="col-12 col-md-12" style="text-align: right; padding-right: 2rem;">
     		<button type="submit" value="submit" class="btn btn-danger" id="btnReport">จัดทำรายงาน</button>
-    		<script type="text/javascript">
+    		<!-- <script type="text/javascript">
     			$('#btnReport').click(function(){  				
 					//window.location = "report";	
 
@@ -448,7 +450,7 @@
 					
 
 				});
-    		</script>
+    		</script> -->
     	</div>  
     	<!-- <div class="col-12 col-md-1"></div> -->	
     </div>  
