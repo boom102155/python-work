@@ -27,7 +27,6 @@ def loginsubmit():
         list2 = [row["user_name"]]
         data = zip(list1, list2)
         d = dict(data)
-        print(d)
         session['user'] = ''.join(list2)
 
     return jsonify(d)
@@ -49,11 +48,19 @@ def profile():
             surname = row["surname"]
             usn = row["user_name"]
             pw = row["password"]
-            print(name,surname,usn,pw)
             return render_template("profile.html", username=username, name=name, surname=surname, usn=usn, pw=pw)
 
     return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
            "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
+@app.route('/editpassword' , methods = ['POST' , 'GET'])
+def editpassword():
+    data = request.get_json()
+    conn = db_connect.connect()
+    username = session['user']
+    conn.execute("UPDATE STAFF SET PASSWORD = '" + (data["confirmpw"]) + "' WHERE USER_NAME = '" + username + "'")
+    conn.commit()
+    return json.dumps(data)
 
 @app.route('/index')
 def index():
@@ -66,6 +73,17 @@ def index():
 def logout():
     session.pop('user', None)
     return 'Dropped'
+
+@app.route('/person')
+def person():
+    conn = db_connect.connect()
+    query = conn.execute("SELECT PERSON_ID, (NAME || ' ' || SURNAME) as n, TYPE, FACULTY, CLASS FROM PERSON")
+    rows = query.fetchall()
+    if 'user' in session:
+        username = session['user']
+        return render_template("person.html", rows=rows, username=username)
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+           "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 
 @app.route('/lend', methods = ['POST' , 'GET'])
 def lend():
@@ -118,7 +136,6 @@ def lend():
             list2 = [row["staff_id"]]
             # data = zip(list1, list2)
             # d = dict(data)
-            print(', '.join(str(x) for x in list2))
             staffid = ', '.join(str(x) for x in list2)
         return render_template("lend.html", rows1=rows1, rows2=rows2, username=username, staffid=staffid)
     return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
@@ -278,7 +295,6 @@ def editcategory():
 
 @app.route('/addlend' , methods = ['POST' , 'GET'])
 def addlend():
-
     data = request.get_json()
     conn = db_connect.connect()
     conn.execute("MERGE INTO PERSON P USING (SELECT " + (data["pid"]) + " PERSON_ID," +

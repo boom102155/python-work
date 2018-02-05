@@ -20,8 +20,17 @@
 		}
 	</style>
 	
+	<script type="text/javascript">
+	 	$(document).ready(function () {
+	 		$("#txtpw").hide();	 
+	 		$("#txtnewpw").hide();
+	 		$("#txtconfirmpw").hide();
+	 		$("#btnDone").hide(); 
+	 		$("#btnCancel").hide()	
+	 	});
+	</script>
 </head>
-<body style="padding-top: 5rem;">
+<body style="padding-top: 5rem; padding-bottom: 5rem;">
 	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="\">
@@ -45,12 +54,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="category">หมวดหมู่</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="person">รายชื่อนักศึกษา/อาจารย์</a>
+                </li>
             </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
-                    <!-- <a href="profile"> -->
+                    <a href="profile">
                     	<label class="form-control-label mr-sm-2" style="color: white;">{{ username }}</label>
-                    <!-- </a> -->
+                    </a>
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnLogout">ลงชื่อออก</button>
                     <script type="text/javascript">
                     	$('#btnLogout').click(function(){
@@ -75,7 +87,7 @@
 	<h2 style="text-align:center">Profile</h2>
 
 <div class="card">
-  	<img src="{{ url_for('static',filename="imgs/avapro.png")}}" alt="John" style="width:100%">
+  	<img src="{{ url_for('static',filename="imgs/avapro.png")}}" alt="profile image" style="width:100%">
   	
   	<h4 style="padding-top: 20px;">
   		<div id="n" style="display: inline;">
@@ -85,15 +97,7 @@
   			{{ surname }}
   		</div>
   	</h4>
-
-	<form class="form-inline">
-		<div class="form-group">
-	  		<input type="text" id="txtn" value="{{ name }}" class="form-control col-md-4" /> 					
-	  		<input type="text" id="txtsurn" value="{{ surname }}" class="form-control col-md-4" />
-		</div>
-	</form>
-  	
-  	
+  		
   	<table width="100%">
   		<tr>
   			<td style="text-align: right; font-weight: bold;">Username:</td>
@@ -101,57 +105,93 @@
   		</tr>
   		<tr>
   			<td style="text-align: right; font-weight: bold;">Password:</td>
-  			<td style="text-align: left;"><div id="passw">{{ pw }}</div> 
-  				<input type="text" value="{{ pw }}" id="txtpw" class="form-control" />
+  			<td style="text-align: left;">				
+  				<div id="passw">{{ pw }}</div>
+  				<input type="text" placeholder="รหัสผ่านปัจจุบัน" id="txtpw" class="form-control" autocomplete="off" />
   			</td>
+  		</tr>
+  		<tr>
+  			<td>&nbsp;</td>
+  			<td><input type="text" placeholder="รหัสผ่านใหม่" id="txtnewpw" class="form-control" autocomplete="off" /></td>
+  		</tr>
+  		<tr>
+  			<td>&nbsp;</td>
+  			<td><input type="text" placeholder="ยืนยันรหัสผ่าน" id="txtconfirmpw" class="form-control" autocomplete="off" /></td>
   		</tr>
   	</table>
 
- 	<button class="btn btn-primary" id="btnEdit">Edit</button>
- 	<script type="text/javascript">
-	 	$(document).ready(function () {
-	 		$("#txtpw").hide();
-	 		$("#txtn").hide();
-	 		$("#txtsurn").hide();
-	 	});
-		
-		$("#btnEdit").click(function(){
+ 	<button class="btn btn-primary" type="submit" value="submit" id="btnEdit">Edit Password</button>
+ 	<script type="text/javascript">	
+		$('#btnEdit').click(function() {		
+			var currentpw = document.getElementById("passw");
 
-			var showname = document.getElementById("n");
-			var showsurname = document.getElementById("surn");
+		   	var fieldpw = document.getElementById("txtpw");
+		   	var fieldnewpw = document.getElementById("txtnewpw");
+		   	var fieldconfirmpw = document.getElementById("txtconfirmpw");
 
-			var editname = document.getElementById("txtn");
-			var editsurname = document.getElementById("txtsurn");
-			
-		   	var x = document.getElementById("txtpw");
-		   	var t = document.getElementById("passw");
+		   	var btne = document.getElementById("btnEdit");
+		   	var btnd = document.getElementById("btnDone");
+		   	var btnc = document.getElementById("btnCancel");	
 
-		    if (x.style.display === "none") {
-		    	$("#btnEdit").text("Done");
-		        x.style.display = "block";
+		   	currentpw.style.display = "none";
+		   	fieldpw.style.display = "block";
+		   	fieldnewpw.style.display = "block";
+		   	fieldconfirmpw.style.display = "block";
 
-		        showname.style.display = "none";
-		        showsurname.style.display = "none";
+		   	btne.style.display = "none";
+		   	btnd.style.display = "block";
+		   	btnc.style.display = "block";
+		});	
+	</script>	
 
-		        editname.style.display = "block";
-		        editsurname.style.display = "block";
+	<div class="btn-group btn-group-justified">		
+		<button class="btn btn-success" type="submit" value="submit" id="btnDone" style="width: 150px;">Done</button>	
+		<button class="btn btn-danger" type="submit" value="submit" id="btnCancel" style="width: 150px;">Cancel</button>	
+	</div>
 
-		        t.style.display = "none";
-
-
-		    } else {
-		    	$("#btnEdit").text("Edit");
-		        x.style.display = "none";
-
-		        showname.style.display = "inline";
-		        showsurname.style.display = "inline";
-
-		        editname.style.display = "none";
-		        editsurname.style.display = "none";
-
-		        t.style.display = "block";
-		    }	    
-		});		
+	<script type="text/javascript">
+		$('#btnCancel').click(function() {
+			location.reload();
+		});
+	</script>
+	<script type="text/javascript">
+		$('#btnDone').click(function() {
+			var showpw = document.getElementById("passw").textContent;
+		    var pw = document.getElementById("txtpw").value;
+		   	var newpw = document.getElementById("txtnewpw").value;
+		   	var confirmpw = document.getElementById("txtconfirmpw").value;
+		   	
+		   	if (pw == "" || newpw == "" || confirmpw == "") {
+		   		alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+				return false;
+		   	}else{
+		   		if (pw == showpw) {
+			   		if (newpw != confirmpw) {
+			   			alert("password ไม่ตรงกัน");
+			   			return false;
+			   		}else{
+			   			alert("เปลี่ยน password เรียบร้อย");
+					   	$.ajax({
+							url: '/editpassword',
+							data: JSON.stringify({"confirmpw" : confirmpw}),
+							type: 'POST',
+							processData: false,
+							contentType: 'application/json; charset=utf-8',
+							success: function(response){
+								console.log(response);
+							},
+							error: function(error){								
+								console.log(error);
+							}
+						});
+						location.reload();
+			   		}
+			   	}else{
+			   		alert("password ไม่ถูกต้อง");
+			   		return false;
+			   	}		   		
+		  	}		
+		});
 	</script>
 </div>
 </body>
