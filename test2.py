@@ -123,7 +123,7 @@ def lend():
                           "LEFT JOIN lend_inspection li ON li.lend_no = tb.lend_no")
     rows1 = query1.fetchall()
 
-    query2 = conn.execute("SELECT EQUIPMENT_ID, EQUIPMENT_NAME FROM EQUIPMENT")
+    query2 = conn.execute("SELECT EQUIPMENT_ID, EQUIPMENT_NAME FROM EQUIPMENT ORDER BY EQUIPMENT_NAME ASC")
     rows2 = query2.fetchall()
 
     if 'user' in session:
