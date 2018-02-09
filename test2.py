@@ -343,7 +343,7 @@ def searchstu():
 def report():
     return render_template("report.html")
 
-@app.route('/getreport' , methods = ['POST'])
+@app.route('/getreport' , methods = ['POST' , 'GET'])
 def getreport():
 
     datareport = request.form
@@ -352,6 +352,117 @@ def getreport():
         print(json.loads(datareport[str(i)]))
 
     return redirect(url_for('report'))
+
+
+# ==================Room Checker===================
+
+@app.route('/room' , methods = ['POST' , 'GET'])
+def room():
+    if 'user' in session:
+        return render_template("room.html")
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+           "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
+# ================= 941 ===================
+@app.route('/room941' , methods = ['POST' , 'GET'])
+def room941():
+    conn = db_connect.connect()
+    if 'user' in session:
+        username = session['user']
+        query = conn.execute("SELECT STAFF_ID FROM STAFF "
+                              "WHERE USER_NAME = '" + username + "'")
+        rows = query.fetchall()
+        for row in rows:
+            list1 = ["STAFF_ID"]
+            list2 = [row["staff_id"]]
+            # data = zip(list1, list2)
+            # d = dict(data)
+            staffid = ', '.join(str(x) for x in list2)
+        return render_template("941.html", username=username, staffid=staffid)
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+           "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
+# ================= 953 ===================
+@app.route('/room953' , methods = ['POST' , 'GET'])
+def room953():
+    conn = db_connect.connect()
+    if 'user' in session:
+        username = session['user']
+        query = conn.execute("SELECT STAFF_ID FROM STAFF "
+                             "WHERE USER_NAME = '" + username + "'")
+        rows = query.fetchall()
+        for row in rows:
+            list1 = ["STAFF_ID"]
+            list2 = [row["staff_id"]]
+            # data = zip(list1, list2)
+            # d = dict(data)
+            staffid = ', '.join(str(x) for x in list2)
+        return render_template("953.html", username=username, staffid=staffid)
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+           "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
+# ================= 982 ===================
+@app.route('/room982' , methods = ['POST' , 'GET'])
+def room982():
+    conn = db_connect.connect()
+    if 'user' in session:
+        username = session['user']
+        query = conn.execute("SELECT STAFF_ID FROM STAFF "
+                             "WHERE USER_NAME = '" + username + "'")
+        rows = query.fetchall()
+        for row in rows:
+            list1 = ["STAFF_ID"]
+            list2 = [row["staff_id"]]
+            # data = zip(list1, list2)
+            # d = dict(data)
+            staffid = ', '.join(str(x) for x in list2)
+        return render_template("982.html", username=username, staffid=staffid)
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+           "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
+# ================= 983 ===================
+@app.route('/room983' , methods = ['POST' , 'GET'])
+def room983():
+    conn = db_connect.connect()
+    if 'user' in session:
+        username = session['user']
+        query = conn.execute("SELECT STAFF_ID FROM STAFF "
+                             "WHERE USER_NAME = '" + username + "'")
+        rows = query.fetchall()
+        for row in rows:
+            list1 = ["STAFF_ID"]
+            list2 = [row["staff_id"]]
+            # data = zip(list1, list2)
+            # d = dict(data)
+            staffid = ', '.join(str(x) for x in list2)
+        return render_template("983.html", username=username, staffid=staffid)
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+           "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
+# ================= checklist ===================
+@app.route('/roomchecklist' , methods = ['POST' , 'GET'])
+def roomchecklist():
+    conn = db_connect.connect()
+    query = conn.execute("SELECT * FROM ROOM_CHECKER")
+    rows = query.fetchall()
+    return render_template("room-check-list.html" , rows=rows)
+
+@app.route('/saveroom941' , methods = ['POST' , 'GET'])
+def saveroom941():
+    data = request.get_json()
+    conn = db_connect.connect()
+    conn.execute("INSERT INTO ROOM_CHECKER "
+                     "(ROOM_NAME, "
+                     "LOCATION, "
+                     "STATUS, "
+                     "DESCRIPTION, "
+                     "STAFF_ID, "
+                     "CHECK_DATE) "
+                     "VALUES (:1, :2, :3, :4, :5, to_date(:6, 'yyyy-mm-dd'))",
+                     (data["rname"], data["locate"], data["status"], data["description"], data["checker"], data["cdate"]))
+    conn.commit()
+    conn.rollback()
+    return json.dumps(data)
 
 if __name__ == '__main__':
     app.run(debug=True)

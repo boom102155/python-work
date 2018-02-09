@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ห้อง 983</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> 
+    <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
+    <style type="text/css">
+		.fixed-ratio-resize {
+			max-width: 100%;
+			height: auto;
+	    	width: auto\9;
+		}
+	</style>
+</head>
+<body style="padding-top: 5rem; padding-bottom: 5rem;">
+
+	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="\">
+            <img src="{{ url_for('static',filename="imgs/band.png")}}" alt="Logo" width="45" height="30" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index">หน้าหลัก <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="lend">เพิ่มรายการยืม-คืน</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="equipment">ค้นหาอุปกรณ์</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="category">หมวดหมู่</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="person">รายชื่อนักศึกษา/อาจารย์</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="room">ตรวจห้อง LAB</a>
+                </li>
+            </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
+                    <a href="profile">
+                    	<label class="form-control-label mr-sm-2" style="color: white;">{{ username }}</label>
+                    </a>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnLogout">ลงชื่อออก</button>
+                    <script type="text/javascript">
+                    	$('#btnLogout').click(function(){
+                    		$.ajax({
+								url: '/logout',
+								contentType: 'application/json; charset=utf-8',
+								success: function(response){
+									console.log(response);
+									window.location = "login";
+								},
+								error: function(error){
+									console.log(error);
+								}
+							});
+                    	});
+                    </script>
+                </form>
+        </div>
+    </nav>
+    <!-- ++++++++++++++++++++++end navbar++++++++++++++++++++++ -->
+	<div class="container">
+
+		<div style="padding-bottom: 3rem; text-align: center;">
+			<h4>รายงานการตรวจห้อง LAB 983</h4>
+		</div>
+		
+		<div class="row">
+			<div class="col-12 col-md-6">
+				<img class="fixed-ratio-resize" src="{{ url_for('static',filename="imgs/983.jpg")}}" alt="" />
+			</div>
+			<div class="col-12 col-md-6">
+				<div class="form-group">
+					<label for="" class="form-control-label">ห้อง:</label>
+					<input type="text" id="txtRoomName" class="form-control" value="983" readonly="readonly" />
+				</div>
+				<div class="form-group">
+					<label for="sTable" class="form-control-label">โต๊ะที่ :</label>
+					<select class="form-control" id="sTable">
+						<option value="teacher">โต๊ะอาจารย์</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<!-- <option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+
+						<option value="31">31</option>
+						<option value="32">32</option>
+						<option value="33">33</option>
+						<option value="34">34</option>
+						<option value="35">35</option>
+						<option value="36">36</option>
+						<option value="37">37</option>
+						<option value="38">38</option>
+						<option value="39">39</option>
+						<option value="40">40</option> -->
+						<option value="ohter">อื่นๆ</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="txtStatus" class="form-control-label">สถานะ :</label>
+					<select class="form-control" id="sStatus">
+						<option value="mMosue">ขาดเมาส์</option>
+						<option value="mKeyboard">ขาดคีบอร์ด</option>
+						<option value="bMouse">เมาส์เสีย</option>
+						<option value="bKeyboard">คีย์บอร์ดเสีย</option>
+						<option value="bMonitor">จอเสีย</option>
+						<option value="bComputer">คอมพิวเตอร์เสีย</option>
+						<option value="bUPS">เครื่องสำรองไฟเสีย</option>
+						<option value="ohter">อื่นๆ</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="txtDescription" class="form-control-label">รายละเอียด</label>
+					<textarea class="form-control" id="txtDescription"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="txtChecker" class="form-control-label">ผู้ตรวจ</label>
+					<input class="form-control" type="text" id="txtChecker" autocomplete="off" value="{{ staffid }}" readonly="readonly" />
+				</div>
+				<div class="form-group">
+					<label for="txtDate" class="form-control-label">วันที่ตรวจ :</label>
+					<input class="form-control" type="date" id="txtDate" readonly="readonly" />
+					<script type="text/javascript">
+		            	document.getElementById('txtDate').valueAsDate = new Date()
+		            </script>
+				</div>
+				<div class="form-group">
+					<div class="wrapper text-center">
+						<button id="btnSave" class="btn btn-success" type="submit" value="submit">บันทึก</button>
+						<script type="text/javascript">
+							$('#btnSave').click(function(){
+								// person table
+						  		var rname = document.getElementById("txtRoomName").value;
+								var locate = document.getElementById("sTable").value;
+								var status = document.getElementById("sStatus").value;
+								var description = document.getElementById("txtDescription").value;
+								var checker = document.getElementById("txtChecker").value;
+								var cdate = document.getElementById("txtDate").value;
+
+
+								if (description == "") {
+									alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+									return false;
+								}
+								else{
+									alert("บันทึกข้อมูลเรียบร้อย");
+									$.ajax({
+										url: '/saveroom941',
+										data: JSON.stringify({"rname" : rname ,"locate" : locate , "status" : status , "description" : description , "checker" : checker , "cdate" : cdate}),
+										type: 'POST',
+										processData: false,
+										contentType: 'application/json; charset=utf-8',
+										success: function(response){
+											console.log(response);
+										},
+										error: function(error){
+											console.log(error);
+										}
+									});
+									location.reload();
+								}									
+							});
+						</script>
+					</div>				
+				</div>
+			</div>
+		</div>
+	</div>		
+</body>
+</html>
