@@ -3,11 +3,12 @@
 <head>
 	<title>รายการตรวจห้อง</title>
 	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
     <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
     <!-- data table style script -->
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -62,8 +63,20 @@
                 <li class="nav-item">
                     <a class="nav-link" href="person">รายชื่อนักศึกษา/อาจารย์</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="room">ตรวจห้อง LAB</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      ตรวจห้อง LAB
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="room">รายชื่อห้อง</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="room941">ห้อง 941</a>
+                        <a class="dropdown-item" href="room953">ห้อง 953</a>
+                        <a class="dropdown-item" href="room982">ห้อง 982</a>
+                        <a class="dropdown-item" href="room983">ห้อง 983</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="roomchecklist">รายการตรวจห้อง</a>
+                    </div>
                 </li>
             </ul>
                 <form class="form-inline my-2 my-lg-0">

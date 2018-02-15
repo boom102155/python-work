@@ -1,29 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>หน้าหลัก</title>
+	<title></title>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
     <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="hover/hover.css")}}">
-    
-    <style type="text/css">
-    	.header{
-    		text-align: center;
-    		padding-bottom: 5rem;
-    	}
-    	.alert{
-    		text-align: center;   		
-    	}
-    </style>
 </head>
-<body style="padding-top: 5rem;">
-
+<body>
 	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="\">
@@ -91,27 +78,5 @@
         </div>
     </nav>
     <!-- ++++++++++++++++++++++end navbar++++++++++++++++++++++ -->
-	<div class="container">
-		<div class="header">
-			<h3>LAB's ROOM CHECKER</h3>
-		</div>
-	</div>
-	<div class="container">
-		<a href="room941" style="text-decoration: none;"><div class="alert alert-primary hvr-wobble-vertical" role="alert">
-		  <h4>ห้อง 941</h4>
-		</div></a>
-		<a href="room953" style="text-decoration: none;"><div class="alert alert-secondary hvr-wobble-vertical" role="alert">
-		  <h4>ห้อง 953</h4>
-		</div></a>
-		<a href="room982" style="text-decoration: none;"><div class="alert alert-success hvr-wobble-vertical" role="alert">
-		  <h4>ห้อง 982</h4>
-		</div></a>
-		<a href="room983" style="text-decoration: none;"><div class="alert alert-danger hvr-wobble-vertical" role="alert">
-		  <h4>ห้อง 983</h4>
-		</div></a>
-		<a href="roomchecklist" style="text-decoration: none;"><div class="alert alert-warning hvr-wobble-vertical" role="alert">
-		  <h4>รายการตรวจห้อง</h4>
-		</div></a>
-	</div>
 </body>
 </html>
