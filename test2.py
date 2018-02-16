@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, render_template, request, json, redirect, url_for, session
+from flask_cors import CORS
 from sqlalchemy import create_engine
 import os
 
@@ -7,6 +8,8 @@ db_connect = create_engine('oracle://ADBOOM:boom125478@127.0.0.1:1521/xe')
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 datareport = {}
+# cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 @app.route('/login')
 def login():
@@ -339,8 +342,12 @@ def searchstu():
 
     return jsonify(d)
 
-@app.route('/report')
+@app.route('/report' , methods = ['POST' , 'GET'])
 def report():
+    result = request.form
+    d = result["json"]
+    # d = json.loads(result["json"])
+    print(d)
     return render_template("report.html")
 
 @app.route('/getreport' , methods = ['POST' , 'GET'])

@@ -20,11 +20,20 @@
     <!-- <script type="text/javascript" src="{{ url_for('static',filename="js/lendTable.js")}}"></script> -->
     <script type="text/javascript">
 	    $(document).ready(function() {
-			var oTable = $('#example').DataTable({
+			var oTable = $('#example').dataTable({
 				"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [0] }],
 				stateSave: true
 			});
-			var allPages = oTable.cells().nodes();
+			
+			var allPages = oTable.fnGetNodes();
+			$('#checkAll').click(function () {
+		        if ($(this).hasClass('allChecked')) {
+		            $(allPages).find('input[type="checkbox"]').prop('checked', false);
+		        } else {
+		            $(allPages).find('input[type="checkbox"]').prop('checked', true);
+		        }
+		        $(this).toggleClass('allChecked');
+		    });
 			
 			$('#example tbody').on('click', 'tr', 'td', function () {
 		        $("#myModal").modal("show");
@@ -41,17 +50,7 @@
 			    $("#txtIeid").val($(this).closest('tr').children()[8].textContent);
 			    $("#txtSerial").val($(this).closest('tr').children()[9].textContent);
 			    $("#txtEquipment").val($(this).closest('tr').children()[10].textContent);
-		    });	
-
-
-			$('#checkAll').click(function () {
-		        if ($(this).hasClass('allChecked')) {
-		            $(allPages).find('input[type="checkbox"]').prop('checked', false);
-		        } else {
-		            $(allPages).find('input[type="checkbox"]').prop('checked', true);
-		        }
-		        $(this).toggleClass('allChecked');
-		    });
+		    });			
 		});
 	</script>   
 	
@@ -423,54 +422,64 @@
 
     <hr />
     
-    <div class="row" style="padding-bottom: 1rem;">
-    	<!-- <div class="col-12 col-md-9"></div> -->
-    	<div class="col-12 col-md-12" style="text-align: right; padding-right: 2rem;">
-    		<button type="submit" value="submit" class="btn btn-danger" id="btnReport">จัดทำรายงาน</button>
-    		<!-- <script type="text/javascript">
-    			$('#btnReport').click(function(){  				
-					//window.location = "report";	
-
-					var result = $("tr:has(:checked)")
-					if (result.length == 0) {
-						alert("กรุณาเลือกข้อมูลที่ต้องการทำรายงาน");
-					}else{
-						console.log(result);
-					}
-
+    <div class="row" style="padding-bottom: 1rem; padding-left: 2rem;">
+    	<div class="btn-group">
+		  	<button type="button" value="submit" class="btn btn-default" id="checkAll">เลือกทั้งหมด</button>
+		  	<button type="button" value="submit" class="btn btn-primary" id="btnReport">จัดทำรายงาน</button>
+		</div>
+    	
+		<script type="text/javascript">
+			$('#btnReport').click(function(){  				
+				//window.location = "report";	
 			
-
+				var result = $("tr:has(:checked)")
+				if (result.length == 0) {
+					alert("กรุณาเลือกข้อมูลที่ต้องการทำรายงาน");
+				}else{
+					// console.log(result);
 
 					var json = result.map(function () {
-					    return [$(this).children().slice(1).map(function () {
-					    	return $(this).text().trim()}).get()]
-					    }).get()
-					
+				 	return [$(this).children().slice(1).map(function () {
+				 	return $(this).text().trim()}).get()]
+				 	}).get()
+				
 					console.log(JSON.stringify(json,0,"\t"))
 
 
+					// var form = document.createElement("form");
+					// form.setAttribute("method", "post");
+					// form.setAttribute("action", "http://localhost:5000/report");
 
-					var formData = new FormData();
-					for(i = 0; i < json.length; i++){
-						formData.append(i,JSON.stringify(json[i]))
-					}
+					// var Field = document.createElement("input");
 
-					var xmlhttp = new XMLHttpRequest();   
-					xmlhttp.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-							// alert(this.responseText)
-						}
-					};
-					
-					
-					xmlhttp.open("POST", "/getreport")
-					xmlhttp.send(formData)
-					
+					// Field.setAttribute("type", "hidden");
+					// Field.setAttribute("name", "json");
+					// Field.setAttribute("value", "test");
 
-				});
-    		</script> -->
-    	</div>  
-    	<!-- <div class="col-12 col-md-1"></div> -->	
+
+					// form.appendChild(Field);
+
+					
+					// document.body.appendChild(form);
+					// form.submit();
+				}			
+				
+				// var formData = new FormData();
+				// for(i = 0; i < json.length; i++){
+				// 	formData.append(i,JSON.stringify(json[i]))
+				// }
+
+				// var xmlhttp = new XMLHttpRequest();   
+				// xmlhttp.onreadystatechange = function() {
+				// 	if (this.readyState == 4 && this.status == 200) {
+				// 		// alert(this.responseText)
+				// 	}
+				// };
+							
+				// xmlhttp.open("POST", "/getreport")
+				// xmlhttp.send(formData)								
+			});
+		</script>
     </div>  
 
     <div class="row">  
@@ -478,7 +487,9 @@
     	<div class="col-12 col-md-12">   	   	       
 	        <table id="example" class="table table-striped table-bordered table-responsive table-hover" cellspacing="0" width="100%">
 	            <thead>
-	            	<th><input type="checkbox" id="checkAll"></th>  
+	            	<th>
+	            		<!-- <input type="checkbox" id="checkAll"> -->
+	            	</th>  
 	            	<th>รหัสใบยืม</th>
 	                <th>วันที่ยืม</th>
 	                <th>ผู้ให้ยืม</th>
