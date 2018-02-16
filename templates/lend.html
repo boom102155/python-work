@@ -439,11 +439,28 @@
 					// console.log(result);
 
 					var json = result.map(function () {
-				 	return [$(this).children().slice(1).map(function () {
-				 	return $(this).text().trim()}).get()]
+				 		return [$(this).children().slice(1).map(function () {
+				 		return $(this).text().trim()}).get()]
 				 	}).get()
 				
 					console.log(JSON.stringify(json,0,"\t"))
+
+					// ========== send data to flask ===========
+					// var formData = new FormData();
+					// for(i = 0; i < json.length; i++){
+					// 	formData.append(i,JSON.stringify(json[i]))
+					// }
+
+					// var xmlhttp = new XMLHttpRequest();   
+					// xmlhttp.onreadystatechange = function() {
+					// 	if (this.readyState == 4 && this.status == 200) {
+					// 		// alert(this.responseText)
+					// 	}
+					// };
+								
+					// xmlhttp.open("POST", "/getreport")
+					// xmlhttp.send(formData)
+					// ================ end code =================
 
 
 					// var form = document.createElement("form");
@@ -456,28 +473,11 @@
 					// Field.setAttribute("name", "json");
 					// Field.setAttribute("value", "test");
 
-
 					// form.appendChild(Field);
 
-					
 					// document.body.appendChild(form);
 					// form.submit();
-				}			
-				
-				// var formData = new FormData();
-				// for(i = 0; i < json.length; i++){
-				// 	formData.append(i,JSON.stringify(json[i]))
-				// }
-
-				// var xmlhttp = new XMLHttpRequest();   
-				// xmlhttp.onreadystatechange = function() {
-				// 	if (this.readyState == 4 && this.status == 200) {
-				// 		// alert(this.responseText)
-				// 	}
-				// };
-							
-				// xmlhttp.open("POST", "/getreport")
-				// xmlhttp.send(formData)								
+				}														
 			});
 		</script>
     </div>  
