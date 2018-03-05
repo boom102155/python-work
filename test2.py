@@ -497,6 +497,12 @@ def saveroom941():
     conn.rollback()
     return json.dumps(data)
 
+@app.route('/preport' , methods = ['POST' , 'GET'])
+def preport():
+    return render_template("preport.html")
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 

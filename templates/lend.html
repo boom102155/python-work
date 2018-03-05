@@ -450,6 +450,7 @@
 
 					document.getElementById("txtlenddetails").value = JSON.stringify(json,0,"\t");
 
+
 					// ========== send data to flask ===========
 					// var formData = new FormData();
 					// for(i = 0; i < json.length; i++){
@@ -482,9 +483,45 @@
 
 					// document.body.appendChild(form);
 					// form.submit();
+
+
+					// var col = [];
+			  //       for (var i = 0; i < myjson.length; i++) {
+			  //           for (var key in myjson[i]) {
+			  //               if (col.indexOf(key) === -1) {
+			  //                   col.push(key);
+			  //               }
+			  //           }
+			  //       }
+
+					// var table = document.createElement("example");
+					// var tr = table.append(-1); 
+					// for (var i = 0; i < col.length; i++) {
+			  //           var th = document.createElement("th");      // TABLE HEADER.
+			  //           th.innerHTML = col[i];
+			  //           tr.appendChild(th);
+			  //       }
+
+			  //        for (var i = 0; i < myjson.length; i++) {
+
+			  //           tr = table.append(-1);
+
+			  //           for (var j = 0; j < col.length; j++) {
+			  //               var tabCell = tr.insertCell(-1);
+			  //               tabCell.innerHTML = myjson[i][col[j]];
+			  //           }
+			  //       }
+
+			  //       var divContainer = document.getElementById("showData");
+			  //       divContainer.innerHTML = "";
+			  //       divContainer.appendChild(table);
+
+
 				}														
 			});
 		</script>
+
+
     </div>  
 
     <div class="row">  
@@ -525,11 +562,13 @@
 	            {% endfor %}
 	        </table> 
 	    </div> 
-	    <!-- <div class="col-12 col-md-1"></div> -->
-	    <!-- <div class="container" style="padding-top: 2rem;">
-	    	<textarea id="txtlenddetails" class="form-control" style="height: 900px"></textarea>
-	    </div> -->     
+	    <!-- <div class="col-12 col-md-1"></div> -->     
     </div> 
+    
+	    <div class="container" style="padding-top: 2rem;">
+		    <textarea id="txtlenddetails" class="form-control" style="height: 800px;"></textarea>
+		</div>
+	
     <br/><br/>
     <div class="modal fade" id="myModal">
 	  	<div class="modal-dialog modal-lg">
