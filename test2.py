@@ -499,7 +499,19 @@ def saveroom941():
 
 @app.route('/preport' , methods = ['POST' , 'GET'])
 def preport():
-    return render_template("preport.html")
+    conn = db_connect.connect()
+    query1 = conn.execute("SELECT PERSON_ID, (NAME || ' ' || SURNAME) as perfessorname "
+                          "FROM person "
+                          "WHERE PERSON_ID BETWEEN 1001 and 1999")
+    query2 = conn.execute("SELECT PERSON_ID, (NAME || ' ' || SURNAME) as perfessorname "
+                          "FROM person "
+                          "WHERE PERSON_ID BETWEEN 2001 and 2999")
+    query3 = conn.execute("SELECT STAFF_ID, (NAME || ' ' || SURNAME) as staffname "
+                          "FROM STAFF")
+    rows1 = query1.fetchall()
+    rows2 = query2.fetchall()
+    rows3 = query3.fetchall()
+    return render_template("preport.html" , rows1=rows1 , rows2=rows2 , rows3=rows3)
 
 
 

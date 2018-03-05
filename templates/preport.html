@@ -14,8 +14,22 @@
 		  border-right: 1px solid #EEEEEE;
 		}
     </style>
+     <!-- script date picker -->   
+    <link rel="stylesheet" href="{{ url_for('static',filename="datepicker/dist/css/bootstrap-datepicker.css")}}">
+    <script type="text/javascript" src="{{ url_for('static',filename="datepicker/dist/js/bootstrap-datepicker-custom.js")}}"></script>
+
+    <script>
+  		 $(document).ready(function () {
+            $('#datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                todayBtn: true
+                // language: 'th',             //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
+                // thaiyear: true              //Set เป็นปี พ.ศ.
+            }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
+        }); 		
+  	</script>
 </head>
-<body style="padding-top: 5rem;">
+<body style="padding-top: 3rem; padding-bottom: 3rem;">
 	<div class="container">
 		<h4>จัดการเอกสารอาจารย์</h4>
 		<hr>
@@ -24,37 +38,135 @@
 				<div class="row">
 					<div class="col-12 col-md-6">
 						<p style="font-size: 20px;">อาจารย์สาขา IT</p>
-						<input type="checkbox" id="p1001" value="1001"> อ.พิเชษฐ์ มาเร็ว<br>
-						<input type="checkbox" id="p1002" value="1002"> รศ.ดร.ฤกษ์ชัย ฟูประทีปศิริ<br>
-						<input type="checkbox" id="p1003" value="1003"> อ.สุวนีย์ กุลกรินีธรรม<br>
-						<input type="checkbox" id="p1004" value="1004"> อ.วีระชาติ มัตติทานนท์<br>
-						<input type="checkbox" id="p1005" value="1005"> อ.อุโฆษ แปลงประสพโชค<br>
-						<input type="checkbox" id="p1006" value="1006"> อ.ชุมพล โมฆรัตน์<br>
-						<input type="checkbox" id="p1007" value="1007"> อ.ธนพล พึ่งตัวเอง<br>
-						<input type="checkbox" id="p1008" value="1008"> อ.เสาวคนธ์ หอมสุด<br>
-						<input type="checkbox" id="p1009" value="1009"> อ.พนา จันทิวาสน์<br>
-						<input type="checkbox" id="p1010" value="1010"> อ.วิริยา สุภาณิชย์<br>
-						<input type="checkbox" id="p1011" value="1011"> อ.วิภา ธนานันท์<br>
+						{% for row in rows1 %}
+							<input type="checkbox" id="" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
+						{% endfor %}
 					</div>
 					<div class="col-12 col-md-6">
 						<p style="font-size: 20px;">อาจารย์สาขา CS</p>
-						<input type="checkbox" id="p2001" value="2001"> อ.สุธีรา วงศ์อนันทรัพย์<br>
-						<input type="checkbox" id="p2002" value="2002"> ผศ.สมศักดิ์ รักเกียรติวินัย<br>
-						<input type="checkbox" id="p2003" value="2003"> อ.รัฐ บุรีรัตน์<br>
-						<input type="checkbox" id="p2004" value="2004"> อ.อรวรรณ มูสิกะ<br>
-						<input type="checkbox" id="p2005" value="2005"> อ.ต้องใจ แย้มผกา<br>
-						<input type="checkbox" id="p2006" value="2006"> อ.ปรินดา ลาภเจริญวงศ์<br>
-						<input type="checkbox" id="p2007" value="2007"> อ.ดวงใจ หนูเล็ก<br>
+						{% for row in rows2 %}
+							<input type="checkbox" id="" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
+						{% endfor %}
 					</div>
-				</div>						
+				</div>
+				<div class="text-center">
+					<p style="font-size: 20px;">เจ้าหน้าที่</p>
+					{% for row in rows3 %}
+						<input type="checkbox" id="" value="{{ row[0] }}"> {{ row[1] }}<br>
+					{% endfor %}
+				</div>
+				<br>
+				<div class="wrapper text-center">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">เพิ่มบุคคล</button>
+				</div>									
 			</div>
 			<div class="col-12 col-md-6" style="padding: 20px;">
 				<input type="file" id="myfile" accept="application/pdf">
 				<p style="color: red; padding-top: 1rem;">*เฉพาะไฟล์นามสกุล .pdf เท่านั้น</p>
 				<hr>
-				<button type="submit" class="btn btn-success">ส่ง</button>
+				<div class="row">
+					<div class="col-12 col-md-6">
+						<div class="form-froup" style="white-space: nowrap;">
+							<label for="txtnumber" class="form-control-label">เลขที่:</label>
+							<input type="text" id="txtnumber" placeholder="เลขที่ กรอกหรือไม่ก็ได้" class="form-control">	
+						</div>
+						<div class="form-froup">
+							<label for="txtstory" class="form-control-label">เรื่อง:</label>
+							<input type="text" id="txtstory" placeholder="ชื่อเรื่อง" class="form-control">	
+						</div>
+						<div class="form-froup">
+							<label for="txtdate" class="form-control-label">วันที่:</label>
+							<input type="text" id="datepicker" class="form-control" data-date-format="yyyy-mm-dd">
+						</div>
+					</div>
+				</div>
+				<br>
+				<button type="submit" value="submit" class="btn btn-success">บันทึก</button>
 			</div>
 		</div>
 	</div>
+	<!-- Modal -->
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  	<div class="modal-dialog" role="document">	
+		  		<form>  			  		
+			    	<div class="modal-content">
+				      	<div class="modal-header">
+				        	<h5 class="modal-title" id="exampleModalLabel">กรอกข้อมูลบุคคล</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          	<span aria-hidden="true">&times;</span>
+					        </button>
+				      	</div>
+					    <div class="modal-body">							    	    	
+					        <form>
+					        	<div class="form-group">
+						            <label for="equip-name" class="form-control-label">รหัสอาจารย์:</label>
+						            <p style="color: red">*อาจารย์สาขา IT เริ่มต้นรหัส 1000 สาขา CS เริ่มต้นรหัส 2000</p>
+						            <input type="text" class="form-control" id="equip-name" autocomplete="off" maxlength="50" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+						            <div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#equip-name").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error1").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error1").fadeOut();
+						            		}
+						               	})
+						            </script>
+						        </div>
+						        <div class="form-group">
+						            <label for="equip-name" class="form-control-label">ชื่อ:</label>
+						            <input type="text" class="form-control" id="equip-name" autocomplete="off" maxlength="50" />
+						            <div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#equip-name").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error1").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error1").fadeOut();
+						            		}
+						               	})
+						            </script>
+						        </div>
+						        <div class="form-group">
+						            <label for="equip-name" class="form-control-label">นามสกุล:</label>
+						            <input type="text" class="form-control" id="equip-name" autocomplete="off" maxlength="50" />
+						            <div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#equip-name").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error1").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error1").fadeOut();
+						            		}
+						               	})
+						            </script>
+						        </div>
+						        <div class="form-group">
+						            <label for="equip-name" class="form-control-label">อาจารย์สาขา:</label>
+						            <select type="text" class="form-control" id="faculty">
+					        			<option value="IT">IT</option>
+					        			<option value="CS">CS</option>
+					        			<option value="other">other</option>
+					        		</select>          
+						        </div>
+					        </form>		    
+					    </div>
+					    <div class="modal-footer">
+					       	<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+					        <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>
+					        <script type="text/javascript">
+								$('#btnSave').click(function(){
+							  										
+								});
+							</script>
+					    </div>
+			    	</div>
+		    	</form>		    
+		  	</div>
+		</div>
+		<!-- ++++++++++++++++++End Modal++++++++++++++++++ -->
 </body>
 </html>
