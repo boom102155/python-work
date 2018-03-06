@@ -39,20 +39,20 @@
 					<div class="col-12 col-md-6">
 						<p style="font-size: 20px;">อาจารย์สาขา IT</p>
 						{% for row in rows1 %}
-							<input type="checkbox" id="" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
+							<input type="checkbox" id="tbit" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
 						{% endfor %}
 					</div>
 					<div class="col-12 col-md-6">
 						<p style="font-size: 20px;">อาจารย์สาขา CS</p>
 						{% for row in rows2 %}
-							<input type="checkbox" id="" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
+							<input type="checkbox" id="tbcs" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
 						{% endfor %}
 					</div>
 				</div>
 				<div class="text-center">
 					<p style="font-size: 20px;">เจ้าหน้าที่</p>
 					{% for row in rows3 %}
-						<input type="checkbox" id="" value="{{ row[0] }}"> {{ row[1] }}<br>
+						<input type="checkbox" id="tbstaff" value="{{ row[0] }}"> {{ row[1] }}<br>
 					{% endfor %}
 				</div>
 				<br>
@@ -61,8 +61,8 @@
 				</div>									
 			</div>
 			<div class="col-12 col-md-6" style="padding: 20px;">
-				<input type="file" id="myfile" accept="application/pdf">
-				<p style="color: red; padding-top: 1rem;">*เฉพาะไฟล์นามสกุล .pdf เท่านั้น</p>
+				<input type="file" id="myfile" accept="image/jpeg,image/png,application/pdf">
+				<p style="color: red; padding-top: 1rem;">*เฉพาะไฟล์นามสกุล .pdf .jpeg และ .png เท่านั้น</p>
 				<hr>
 				<div class="row">
 					<div class="col-12 col-md-6">
@@ -72,7 +72,18 @@
 						</div>
 						<div class="form-froup">
 							<label for="txtstory" class="form-control-label">เรื่อง:</label>
-							<input type="text" id="txtstory" placeholder="ชื่อเรื่อง" class="form-control">	
+							<input type="text" id="txtstory" placeholder="ชื่อเรื่อง" class="form-control">
+							<div id="error" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+				            <script type="text/javascript">
+				            	$("#txtstory").blur(function(){
+				            		if (this.value == '') {
+				            			$("#error").fadeIn("show");
+				            		}
+				            		if (this.value != '') {
+				            			$("#error").fadeOut();
+				            		}
+				               	})
+				            </script>
 						</div>
 						<div class="form-froup">
 							<label for="txtdate" class="form-control-label">วันที่:</label>
@@ -99,12 +110,12 @@
 					    <div class="modal-body">							    	    	
 					        <form>
 					        	<div class="form-group">
-						            <label for="equip-name" class="form-control-label">รหัสอาจารย์:</label>
+						            <label for="txtperid" class="form-control-label">รหัสอาจารย์:</label>
 						            <p style="color: red">*อาจารย์สาขา IT เริ่มต้นรหัส 1000 สาขา CS เริ่มต้นรหัส 2000</p>
-						            <input type="text" class="form-control" id="equip-name" autocomplete="off" maxlength="50" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+						            <input type="text" class="form-control" id="txtperid" autocomplete="off" maxlength="50" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
 						            <div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
 						            <script type="text/javascript">
-						            	$("#equip-name").blur(function(){
+						            	$("#txtperid").blur(function(){
 						            		if (this.value == '') {
 						            			$("#error1").fadeIn("show");
 						            		}
@@ -115,42 +126,50 @@
 						            </script>
 						        </div>
 						        <div class="form-group">
-						            <label for="equip-name" class="form-control-label">ชื่อ:</label>
-						            <input type="text" class="form-control" id="equip-name" autocomplete="off" maxlength="50" />
-						            <div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <label for="txtname" class="form-control-label">ชื่อ:</label>
+						            <input type="text" class="form-control" id="txtname" autocomplete="off" maxlength="50" />
+						            <div id="error2" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
 						            <script type="text/javascript">
-						            	$("#equip-name").blur(function(){
+						            	$("#txtname").blur(function(){
 						            		if (this.value == '') {
-						            			$("#error1").fadeIn("show");
+						            			$("#error2").fadeIn("show");
 						            		}
 						            		if (this.value != '') {
-						            			$("#error1").fadeOut();
+						            			$("#error2").fadeOut();
 						            		}
 						               	})
 						            </script>
 						        </div>
 						        <div class="form-group">
-						            <label for="equip-name" class="form-control-label">นามสกุล:</label>
-						            <input type="text" class="form-control" id="equip-name" autocomplete="off" maxlength="50" />
-						            <div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <label for="txtsurname" class="form-control-label">นามสกุล:</label>
+						            <input type="text" class="form-control" id="txtsurname" autocomplete="off" maxlength="50" />
+						            <div id="error3" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
 						            <script type="text/javascript">
-						            	$("#equip-name").blur(function(){
+						            	$("#txtsurname").blur(function(){
 						            		if (this.value == '') {
-						            			$("#error1").fadeIn("show");
+						            			$("#error3").fadeIn("show");
 						            		}
 						            		if (this.value != '') {
-						            			$("#error1").fadeOut();
+						            			$("#error3").fadeOut();
 						            		}
 						               	})
 						            </script>
 						        </div>
 						        <div class="form-group">
-						            <label for="equip-name" class="form-control-label">อาจารย์สาขา:</label>
+						            <!-- <label for="txttype" class="form-control-label">สถานะ:</label> -->
+						            <input type="text" class="form-control" id="txttype" autocomplete="off" value="อาจารย์" style="display: none;" />
+						        </div>
+						        <div class="form-group">
+						            <label for="faculty" class="form-control-label">อาจารย์สาขา:</label>
 						            <select type="text" class="form-control" id="faculty">
 					        			<option value="IT">IT</option>
 					        			<option value="CS">CS</option>
 					        			<option value="other">other</option>
 					        		</select>          
+						        </div>
+						        <div class="form-group">
+						            <!-- <label for="txtclass" class="form-control-label">ชั้นปี:</label> -->
+						            <input type="text" class="form-control" id="txtclass" autocomplete="off" value="other" style="display: none;" />
 						        </div>
 					        </form>		    
 					    </div>
@@ -159,7 +178,34 @@
 					        <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>
 					        <script type="text/javascript">
 								$('#btnSave').click(function(){
-							  										
+							  		var pid = document.getElementById("txtperid").value;
+							  		var name = document.getElementById("txtname").value;
+							  		var sname = document.getElementById("txtsurname").value;
+							  		var type = document.getElementById("txttype").value;
+							  		var fac = document.getElementById("faculty").value;
+							  		var pclass = document.getElementById("txtclass").value;
+
+							  		if (pid == "" || name == "" || sname == "") {
+										alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+										return false;
+									}
+									else{
+										alert("บันทึกข้อมูลเรียบร้อย");
+										$.ajax({
+											url: '/addperson',
+											data: JSON.stringify({"pid" : pid ,"name" : name , "sname" : sname , "type" : type , "fac" : fac , "pclass" : pclass}),
+											type: 'POST',
+											processData: false,
+											contentType: 'application/json; charset=utf-8',
+											success: function(response){
+												console.log(response);
+											},
+											error: function(error){
+												console.log(error);
+											}
+										});
+										// location.reload();
+									}			
 								});
 							</script>
 					    </div>

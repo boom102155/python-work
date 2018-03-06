@@ -513,6 +513,27 @@ def preport():
     rows3 = query3.fetchall()
     return render_template("preport.html" , rows1=rows1 , rows2=rows2 , rows3=rows3)
 
+@app.route('/addperson' , methods  = ['POST' , 'GET'])
+def addperson():
+    try:
+        data = request.get_json()
+        conn = db_connect.connect()
+        conn.execute("INSERT INTO PERSON "
+                     "(PERSON_ID, "
+                     "NAME, "
+                     "SURNAME, "
+                     "TYPE, "
+                     "FACULTY, "
+                     "CLASS) "
+                     "VALUES (:1, :2, :3, :4, :5, :6)",
+                     (data["pid"], data["name"], data["sname"], data["type"], data["fac"], data["pclass"]))
+
+        conn.commit()
+    except:
+        conn.rollback()
+    finally:
+        return json.dumps(data)
+        conn.close()
 
 
 if __name__ == '__main__':
