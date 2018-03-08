@@ -1,14 +1,16 @@
 from flask import Flask, jsonify, render_template, request, json, redirect, url_for, session
-from flask_cors import CORS
 from sqlalchemy import create_engine
+from werkzeug.utils import secure_filename
 import os
+
 
 os.environ["NLS_LANG"] = ".UTF8"
 db_connect = create_engine('oracle://ADBOOM:boom125478@127.0.0.1:1521/xe')
+
 app = Flask(__name__)
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 app.secret_key = os.urandom(24)
 datareport = {}
-# cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.route('/login')
@@ -513,6 +515,31 @@ def preport():
     rows3 = query3.fetchall()
     return render_template("preport.html" , rows1=rows1 , rows2=rows2 , rows3=rows3)
 
+
+@app.route('/uploader', methods = ['GET', 'POST'])
+def upload():
+   if request.method == 'POST':
+      # f = request.files['file']
+      # f.save(secure_filename(f.filename))
+      # return 'file uploaded successfully'
+      target = os.path.join(APP_ROOT, 'UPLOAD')
+      print(target)
+      file = request.files['file']
+      if file.filename == '':
+          return 'no file selected'
+      if not os.path.isdir(target):
+          os.mkdir(target)
+
+      for file in request.files.getlist("file"):
+          print(file)
+          filename = file.filename
+          destination = "/".join([target, filename])
+          print("Accept incoming file:", filename)
+          print(destination)
+          file.save(destination)
+      return 'file uploaded successfully'
+
+
 @app.route('/addperson' , methods  = ['POST' , 'GET'])
 def addperson():
     try:
@@ -534,6 +561,7 @@ def addperson():
     finally:
         return json.dumps(data)
         conn.close()
+
 
 
 if __name__ == '__main__':
