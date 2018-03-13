@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template, request, json, redirect, url_for, session
 from sqlalchemy import create_engine
-from werkzeug.utils import secure_filename
+from time import gmtime, strftime
+import datetime
 import os
 
 
@@ -530,12 +531,21 @@ def upload():
       if not os.path.isdir(target):
           os.mkdir(target)
 
+      st = strftime("%d-%m-%Y", gmtime())
+      t1 = strftime("%H", gmtime())
+      t2 = strftime("%M", gmtime())
+      t3 = strftime("%S", gmtime())
+
+      t4 = strftime("%H:%M:%S", gmtime())
+
       for file in request.files.getlist("file"):
           print(file)
           filename = file.filename
-          destination = "/".join([target, filename])
+          destination = "/".join([target, st + '_' + t1 + t2 + t3 + '.jpg'])
           print("Accept incoming file:", filename)
           print(destination)
+          print(st)
+          print(t4)
           file.save(destination)
       return 'file uploaded successfully'
 

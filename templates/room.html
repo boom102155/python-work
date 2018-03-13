@@ -25,8 +25,8 @@
 <body style="padding-top: 5rem;">
 
 	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="\">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="\index">
             <img src="{{ url_for('static',filename="imgs/band.png")}}" alt="Logo" width="45" height="30" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,27 +65,30 @@
                         <a class="dropdown-item" href="roomchecklist">รายการตรวจห้อง</a>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="preport">จัดการเอกสาร</a>
+                </li>
             </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
                     <a href="profile">
-                    	<label class="form-control-label mr-sm-2" style="color: white;">{{ username }}</label>
+                        <label class="form-control-label mr-sm-2" style="color: white;">{{ username }}</label>
                     </a>
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnLogout">ลงชื่อออก</button>
                     <script type="text/javascript">
-                    	$('#btnLogout').click(function(){
-                    		$.ajax({
-								url: '/logout',
-								contentType: 'application/json; charset=utf-8',
-								success: function(response){
-									console.log(response);
-									window.location = "login";
-								},
-								error: function(error){
-									console.log(error);
-								}
-							});
-                    	});
+                        $('#btnLogout').click(function(){
+                            $.ajax({
+                                url: '/logout',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function(response){
+                                    console.log(response);
+                                    window.location = "login";
+                                },
+                                error: function(error){
+                                    console.log(error);
+                                }
+                            });
+                        });
                     </script>
                 </form>
         </div>
