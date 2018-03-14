@@ -96,6 +96,7 @@
 							});
                     	});
                     </script>
+
                 </form>
         </div>
     </nav>
@@ -104,25 +105,26 @@
 		<h4>จัดการเอกสารอาจารย์</h4>
 		<hr>
 		<div class="row" style="border-style: solid; border-radius: 5px; border-color: #D0D3D4; background-color: #F8F9F9;">
+			<!-- ========================= left column ========================= -->
 			<div class="col-12 col-md-6 mycontent-left" style="padding: 20px;">
 				<div class="row">
 					<div class="col-12 col-md-6">
 						<p style="font-size: 20px;">อาจารย์สาขา IT</p>
 						{% for row in rows1 %}
-							<input type="checkbox" id="tbit" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
+							<input type="checkbox" id="{{ row[0] }}" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
 						{% endfor %}
 					</div>
 					<div class="col-12 col-md-6">
 						<p style="font-size: 20px;">อาจารย์สาขา CS</p>
 						{% for row in rows2 %}
-							<input type="checkbox" id="tbcs" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
+							<input type="checkbox" id="{{ row[0] }}" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
 						{% endfor %}
 					</div>
 				</div>
 				<div class="text-center">
 					<p style="font-size: 20px;">เจ้าหน้าที่</p>
 					{% for row in rows3 %}
-						<input type="checkbox" id="tbstaff" value="{{ row[0] }}"> {{ row[1] }}<br>
+						<input type="checkbox" id="{{ row[0] }}" value="{{ row[0] }}"> {{ row[1] }}<br>
 					{% endfor %}
 				</div>
 				<br>
@@ -130,22 +132,55 @@
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">เพิ่มบุคคล</button>
 				</div>									
 			</div>
+			<!-- ========================= right column ========================= -->
 			<div class="col-12 col-md-6" style="padding: 20px;">
 				<form method="POST" action="http://localhost:5000/uploader" enctype="multipart/form-data">
 					
-					<input type="file" id="myfile" name="file"  accept="image/jpeg,image/png,application/pdf">
+					<div class="row">
+						<div class="col-12 col-md-6">
+							<input type="file" id="myfile" name="file" accept="image/jpeg,image/png,application/pdf">
+							<input type="text" id="getfilename" style="display: none;"></input>
+							<!-- <input type="" id="gettimename" value="{{ filenametime }}" style="display: none;">	-->
+							<script type="text/javascript">
+								$(function() {
+							     	$("input:file").change(function (){
+							       		// var fileName = $(this).val();
+							       		// var gtn = document.getElementById("gettimename").value;
+							       		var fileName = $('input[type=file]').val().split('\\').pop();
+							       		// $(".getfilename").html(fileName);
+							       		var filetype = fileName.split(".")[1];	
+							       		// var conStr = gtn + filetype;
+							       		document.getElementById("getfilename").value = filetype;
+							     	});
+							  	});
+							</script>
 
-
-					<button type="button" id="btnClearFile" class="btn btn-danger">ยกเลิก</button>
-
-
-					<script type="text/javascript">
-						$('#btnClearFile').click(function(){
-							document.getElementById("myfile").value = "";
-						});
-					</script>
+							<div id="error1" style="display: none; color: red;">กรุณาเลือกไฟล์</div>
+				            <script type="text/javascript">
+				            	$("#myfile").blur(function(){
+				            		if (this.value == '') {
+				            			$("#error1").fadeIn("show");
+				            		}
+				            		if (this.value != '') {
+				            			$("#error1").fadeOut();
+				            		}
+				               	})
+				            </script>
+						</div>
+						<div class="col-12 col-md-6" style="text-align: right;">
+							<button type="button" id="btnClearFile" class="btn btn-danger">ยกเลิก</button>
+							<script type="text/javascript">
+								$('#btnClearFile').click(function(){
+									document.getElementById("myfile").value = "";
+								});
+							</script>
+						</div>
+					</div>
+									
 					<p style="color: red; padding-top: 1rem;">*เฉพาะไฟล์นามสกุล .pdf .jpeg และ .png เท่านั้น</p>
+					<!-- ============================== end select file ============================== -->
 					<hr>
+
 					<div class="row">
 						<div class="col-12 col-md-6">
 							<div class="form-froup" style="white-space: nowrap;">
@@ -175,17 +210,23 @@
 					</div>
 					<br>
 					<button type="submit" class="btn btn-success" id="btnDocSave">บันทึก</button>
-					<!-- <script type="text/javascript">
+					<script type="text/javascript">
 						$('#btnDocSave').click(function(){
-					  		if () {
+							var pathpic = document.getElementById("getfilename").value;
+							var docnum = document.getElementById("txtnumber").value;
+					  		var docstory = document.getElementById("txtstory").value;
+					  		var docdate = document.getElementById("datepicker").value;
+		
+					  		if (docstory == "" || txtstory == "" || document.getElementById("myfile").files.length == 0) {
 								alert("กรุณากรอกข้อมูลให้ครบถ้วน");
 								return false;
 							}
 							else{
 								alert("บันทึกข้อมูลเรียบร้อย");
+
 								$.ajax({
-									url: '/addperson',
-									data: JSON.stringify({}),
+									url: '/adddocdata',
+									data: JSON.stringify({"docnum" : docnum , "docstory" : docstory , "docdate" : docdate , "pathpic" : pathpic}),
 									type: 'POST',
 									processData: false,
 									contentType: 'application/json; charset=utf-8',
@@ -199,7 +240,7 @@
 								// location.reload();
 							}			
 						});
-					</script> -->
+					</script>
 				</form>
 			</div>
 		</div>

@@ -13,7 +13,6 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 app.secret_key = os.urandom(24)
 datareport = {}
 
-
 @app.route('/login')
 def login():
     return render_template("login.html")
@@ -514,7 +513,14 @@ def preport():
     rows1 = query1.fetchall()
     rows2 = query2.fetchall()
     rows3 = query3.fetchall()
-    return render_template("preport.html" , rows1=rows1 , rows2=rows2 , rows3=rows3)
+
+    st = strftime("%d%m%Y", gmtime())
+    t1 = strftime("%H", gmtime())
+    t2 = strftime("%M", gmtime())
+    t3 = strftime("%S", gmtime())
+    filenametime = st + '_' + t1 + t2 + t3 + '.'
+
+    return render_template("preport.html" , rows1=rows1 , rows2=rows2 , rows3=rows3 , filenametime=filenametime)
 
 
 @app.route('/uploader', methods = ['GET', 'POST'])
@@ -528,27 +534,46 @@ def upload():
       file = request.files['file']
       if file.filename == '':
           return 'no file selected'
+
       if not os.path.isdir(target):
           os.mkdir(target)
 
-      st = strftime("%d-%m-%Y", gmtime())
+      st = strftime("%d%m%Y", gmtime())
       t1 = strftime("%H", gmtime())
       t2 = strftime("%M", gmtime())
       t3 = strftime("%S", gmtime())
 
-      t4 = strftime("%H:%M:%S", gmtime())
-
       for file in request.files.getlist("file"):
           print(file)
           filename = file.filename
-          destination = "/".join([target, st + '_' + t1 + t2 + t3 + '.jpg'])
-          print("Accept incoming file:", filename)
+          destination = "/".join([target, st + '_' + t1 + t2 + t3 + '.'+ filename.split('.')[1]])
+          print("Accept incoming file:", filename.split('.')[1])
           print(destination)
-          print(st)
-          print(t4)
           file.save(destination)
-      return 'file uploaded successfully'
+      return redirect("/preport")
 
+@app.route('/adddocdata', methods = ['GET' , 'POST'])
+def adddocdata():
+
+
+    data = request.get_json()
+
+    st = strftime("%d%m%Y", gmtime())
+    t1 = strftime("%H", gmtime())
+    t2 = strftime("%M", gmtime())
+    t3 = strftime("%S", gmtime())
+
+    constrname = st + '_' + t1 + t2 + t3 + '.' + (data['pathpic'])
+    conn = db_connect.connect()
+    conn.execute("INSERT INTO DOCUMENT "
+                 "(DOC_DATE, "
+                 "DOC_NO, "
+                 "TOPIC, "
+                 "PATH_PIC) "
+                 "VALUES (TO_DATE(:1, 'yyyy-mm-dd'), :2, :3, :4)",
+                 (data['docdate'], data['docnum'], data['docstory'], constrname))
+    conn.commit()
+    return json.dumps(data)
 
 @app.route('/addperson' , methods  = ['POST' , 'GET'])
 def addperson():
