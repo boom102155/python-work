@@ -18,18 +18,52 @@
     <link rel="stylesheet" href="{{ url_for('static',filename="datepicker/dist/css/bootstrap-datepicker.css")}}">
     <script type="text/javascript" src="{{ url_for('static',filename="datepicker/dist/js/bootstrap-datepicker-custom.js")}}"></script>
 
-    <script>
-  		 $(document).ready(function () {
-            $('#datepicker').datepicker({
-                format: 'yyyy-mm-dd',
-                todayBtn: true
-                // language: 'th',             //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
-                // thaiyear: true              //Set เป็นปี พ.ศ.
-            }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
-        }); 		
-  	</script>
+  	<!-- data table style script -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
+
+    <script type="text/javascript">
+    	$(document).ready(function() {
+			$('#example').DataTable();
+		});
+    </script>
+
+    <script type="text/javascript">
+    	
+    	$(document).ready(function(){
+    		var btns = document.getElementById("btnshowtable");
+			var btnh = document.getElementById("btnhidetable");	
+
+			var s1 = document.getElementById("sec1");
+			var s2 = document.getElementById("sec2");
+
+		   	btnh.style.display = "none";
+    		$('.sec2').hide();	
+
+    		$('#btnshowtable').click(function() {
+	    		btnh.style.display = "block";
+	    		btns.style.display = "none";	
+
+	    		$('.sec1').hide();
+	    		$('.sec2').show();
+			});	
+	    	$('#btnhidetable').click(function() {
+	    		btns.style.display = "block";
+	    		btnh.style.display = "none";	
+
+	    		$('.sec2').hide();
+	    		$('.sec1').show();
+	    		
+	    		//location.reload();
+	    	});
+    	});
+    	
+    </script>
+
 </head>
-<body style="padding-top: 5rem; padding-bottom: 3rem;">
+<body style="padding-top: 5rem;">
 	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="\index">
@@ -104,147 +138,206 @@
 	<div class="container">
 		<h4>จัดการเอกสารอาจารย์</h4>
 		<hr>
-		<div class="row" style="border-style: solid; border-radius: 5px; border-color: #D0D3D4; background-color: #F8F9F9;">
-			<!-- ========================= left column ========================= -->
-			<div class="col-12 col-md-6 mycontent-left" style="padding: 20px;">
-				<div class="row">
-					<div class="col-12 col-md-6">
-						<p style="font-size: 20px;">อาจารย์สาขา IT</p>
-						{% for row in rows1 %}
-							<input type="checkbox" id="{{ row[0] }}" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
-						{% endfor %}
-					</div>
-					<div class="col-12 col-md-6">
-						<p style="font-size: 20px;">อาจารย์สาขา CS</p>
-						{% for row in rows2 %}
-							<input type="checkbox" id="{{ row[0] }}" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
-						{% endfor %}
-					</div>
-				</div>
-				<div class="text-center">
-					<p style="font-size: 20px;">เจ้าหน้าที่</p>
-					{% for row in rows3 %}
-						<input type="checkbox" id="{{ row[0] }}" value="{{ row[0] }}"> {{ row[1] }}<br>
-					{% endfor %}
-				</div>
-				<br>
-				<div class="wrapper text-center">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">เพิ่มบุคคล</button>
-				</div>									
-			</div>
-			<!-- ========================= right column ========================= -->
-			<div class="col-12 col-md-6" style="padding: 20px;">
-				<form method="POST" action="http://localhost:5000/uploader" enctype="multipart/form-data">
-					
+		
+		<button class="btn btn-primary" type="button" id="btnhidetable">จัดการเอกสาร</button>
+		<!-- +++++++++++++++++ fade in fade out when scrolling +++++++++++++++++ -->
+		<div class="sec1">
+			<div class="row" style="border-style: solid; border-radius: 5px; border-color: #D0D3D4; background-color: #F8F9F9;">
+				<!-- ========================= left column ========================= -->
+				<div class="col-12 col-md-6 mycontent-left" style="padding: 20px;">
 					<div class="row">
 						<div class="col-12 col-md-6">
-							<input type="file" id="myfile" name="file" accept="image/jpeg,image/png,application/pdf">
-							<input type="text" id="getfilename" style="display: none;"></input>
-							<!-- <input type="" id="gettimename" value="{{ filenametime }}" style="display: none;">	-->
-							<script type="text/javascript">
-								$(function() {
-							     	$("input:file").change(function (){
-							       		// var fileName = $(this).val();
-							       		// var gtn = document.getElementById("gettimename").value;
-							       		var fileName = $('input[type=file]').val().split('\\').pop();
-							       		// $(".getfilename").html(fileName);
-							       		var filetype = fileName.split(".")[1];	
-							       		// var conStr = gtn + filetype;
-							       		document.getElementById("getfilename").value = filetype;
-							     	});
-							  	});
-							</script>
-
-							<div id="error1" style="display: none; color: red;">กรุณาเลือกไฟล์</div>
-				            <script type="text/javascript">
-				            	$("#myfile").blur(function(){
-				            		if (this.value == '') {
-				            			$("#error1").fadeIn("show");
-				            		}
-				            		if (this.value != '') {
-				            			$("#error1").fadeOut();
-				            		}
-				               	})
-				            </script>
+							<p style="font-size: 20px;">อาจารย์สาขา IT</p>
+							{% for row in rows1 %}
+								<input type="checkbox" id="{{ row[0] }}" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
+							{% endfor %}
 						</div>
-						<div class="col-12 col-md-6" style="text-align: right;">
-							<button type="button" id="btnClearFile" class="btn btn-danger">ยกเลิก</button>
-							<script type="text/javascript">
-								$('#btnClearFile').click(function(){
-									document.getElementById("myfile").value = "";
-								});
-							</script>
+						<div class="col-12 col-md-6">
+							<p style="font-size: 20px;">อาจารย์สาขา CS</p>
+							{% for row in rows2 %}
+								<input type="checkbox" id="{{ row[0] }}" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
+							{% endfor %}
 						</div>
 					</div>
-									
-					<p style="color: red; padding-top: 1rem;">*เฉพาะไฟล์นามสกุล .pdf .jpeg และ .png เท่านั้น</p>
-					<!-- ============================== end select file ============================== -->
-					<hr>
+					<div class="text-center">
+						<p style="font-size: 20px;">เจ้าหน้าที่</p>
+						{% for row in rows3 %}
+							<input type="checkbox" id="{{ row[0] }}" value="{{ row[0] }}"> {{ row[1] }}<br>
+						{% endfor %}
+					</div>
+					<br>
+					<div class="wrapper text-center">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">เพิ่มบุคคล</button>
+					</div>									
+				</div>
+				<!-- ========================= right column ========================= -->
+				<div class="col-12 col-md-6" style="padding: 20px;">
+					<form method="POST" action="http://localhost:5000/uploader" enctype="multipart/form-data">
+						
+						<div class="row">
+							<div class="col-12 col-md-6">
+								<input type="file" id="myfile" name="file" accept="image/jpeg,image/png,application/pdf">
+								<input type="text" id="getfilename" style="display: none;">
+								<!-- <input type="" id="gettimename" value="{{ filenametime }}" style="display: none;">	-->
+								<script type="text/javascript">
+									$(function() {
+								     	$("input:file").change(function (){
+								       		// var fileName = $(this).val();
+								       		// var gtn = document.getElementById("gettimename").value;
+								       		var fileName = $('input[type=file]').val().split('\\').pop();
+								       		// $(".getfilename").html(fileName);
+								       		var filetype = fileName.split(".")[1];	
+								       		// var conStr = gtn + filetype;
+								       		document.getElementById("getfilename").value = filetype;
+								     	});
+								  	});
+								</script>
 
-					<div class="row">
-						<div class="col-12 col-md-6">
-							<div class="form-froup" style="white-space: nowrap;">
-								<label for="txtnumber" class="form-control-label">เลขที่:</label>
-								<input type="text" id="txtnumber" placeholder="เลขที่ กรอกหรือไม่ก็ได้" class="form-control">	
-							</div>
-							<div class="form-froup">
-								<label for="txtstory" class="form-control-label">เรื่อง:</label>
-								<input type="text" id="txtstory" placeholder="ชื่อเรื่อง" class="form-control">
-								<div id="error" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+								<div id="error1" style="display: none; color: red;">กรุณาเลือกไฟล์</div>
 					            <script type="text/javascript">
-					            	$("#txtstory").blur(function(){
+					            	$("#myfile").blur(function(){
 					            		if (this.value == '') {
-					            			$("#error").fadeIn("show");
+					            			$("#error1").fadeIn("show");
 					            		}
 					            		if (this.value != '') {
-					            			$("#error").fadeOut();
+					            			$("#error1").fadeOut();
 					            		}
 					               	})
 					            </script>
 							</div>
-							<div class="form-froup">
-								<label for="txtdate" class="form-control-label">วันที่:</label>
-								<input type="text" id="datepicker" class="form-control" data-date-format="yyyy-mm-dd">
+							<div class="col-12 col-md-6" style="text-align: right;">
+								<button type="button" id="btnClearFile" class="btn btn-danger">ยกเลิก</button>
+								<script type="text/javascript">
+									$('#btnClearFile').click(function(){
+										document.getElementById("myfile").value = "";
+									});
+								</script>
 							</div>
 						</div>
-					</div>
-					<br>
-					<button type="submit" class="btn btn-success" id="btnDocSave">บันทึก</button>
-					<script type="text/javascript">
-						$('#btnDocSave').click(function(){
-							var pathpic = document.getElementById("getfilename").value;
-							var docnum = document.getElementById("txtnumber").value;
-					  		var docstory = document.getElementById("txtstory").value;
-					  		var docdate = document.getElementById("datepicker").value;
-		
-					  		if (docstory == "" || txtstory == "" || document.getElementById("myfile").files.length == 0) {
-								alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-								return false;
-							}
-							else{
-								alert("บันทึกข้อมูลเรียบร้อย");
+										
+						<p style="color: red; padding-top: 1rem;">*เฉพาะไฟล์นามสกุล .pdf .jpeg และ .png เท่านั้น</p>
+						<!-- ============================== end select file ============================== -->
+						<hr>
 
-								$.ajax({
-									url: '/adddocdata',
-									data: JSON.stringify({"docnum" : docnum , "docstory" : docstory , "docdate" : docdate , "pathpic" : pathpic}),
-									type: 'POST',
-									processData: false,
-									contentType: 'application/json; charset=utf-8',
-									success: function(response){
-										console.log(response);
-									},
-									error: function(error){
-										console.log(error);
-									}
-								});
-								// location.reload();
-							}			
-						});
-					</script>
-				</form>
+						<div class="row">
+							<div class="col-12 col-md-6">
+								<div class="form-froup" style="white-space: nowrap;">
+									<label for="txtnumber" class="form-control-label">เลขที่:</label>
+									<input type="text" id="txtnumber" placeholder="เลขที่ กรอกหรือไม่ก็ได้" class="form-control">	
+								</div>
+								<div class="form-froup">
+									<label for="txtstory" class="form-control-label">เรื่อง:</label>
+									<input type="text" id="txtstory" placeholder="ชื่อเรื่อง" class="form-control">
+									<div id="error" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#txtstory").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error").fadeOut();
+						            		}
+						               	})
+						            </script>
+								</div>
+								<div class="form-froup">
+									<label for="txtdate" class="form-control-label">วันที่:</label>
+									<input type="text" id="datepicker" class="form-control" data-date-format="yyyy-mm-dd">
+									<script>
+								  		$(document).ready(function () {
+								            $('#datepicker').datepicker({
+								                format: 'yyyy-mm-dd',
+								                todayBtn: true
+								                // language: 'th',             //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
+								                // thaiyear: true              //Set เป็นปี พ.ศ.
+								            }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
+								        }); 		
+								  	</script>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-12 col-md-2">
+								<button type="submit" class="btn btn-success" id="btnDocSave">บันทึก</button>
+								<script type="text/javascript">
+									$('#btnDocSave').click(function(){
+										var pathpic = document.getElementById("getfilename").value;
+										var docnum = document.getElementById("txtnumber").value;
+								  		var docstory = document.getElementById("txtstory").value;
+								  		var docdate = document.getElementById("datepicker").value;
+					
+								  		if (docstory == "" || txtstory == "" || document.getElementById("myfile").files.length == 0) {
+											alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+											return false;
+										}
+										else{
+											alert("บันทึกข้อมูลเรียบร้อย");
+
+											$.ajax({
+												url: '/adddocdata',
+												data: JSON.stringify({"docnum" : docnum , "docstory" : docstory , "docdate" : docdate , "pathpic" : pathpic}),
+												type: 'POST',
+												processData: false,
+												contentType: 'application/json; charset=utf-8',
+												success: function(response){
+													console.log(response);
+												},
+												error: function(error){
+													console.log(error);
+												}
+											});
+											// location.reload();
+										}			
+									});
+								</script>
+							</div>
+							<div class="col-12 col-md-10">
+								<button class="btn btn-primary" type="button" id="btnshowtable">ข้อมูลเอกสาร</button>
+							</div>
+						</div>					
+					</form>
+				</div>
 			</div>
 		</div>
+		<!-- +++++++++++++++++ End fade in fade out when scrolling +++++++++++++++++ -->
 	</div>
+	<br>
+	<div class="sec2">
+		
+	
+	<div class="container">
+		<div class="row">  
+	    	<!-- <div class="col-12 col-md-1"></div> -->   
+	    	<div class="col-12 col-md-12">   	   	       
+		        <table id="example" class="table table-striped table-bordered table-responsive table-hover" cellspacing="0" width="100%">
+		            <thead> 
+		            	<th>เลขใบ</th>
+		                <th>วันที่เอกสาร</th>
+		                <th>เลขที่เอกสาร</th>
+		                <th>หัวข้อเรื่อง</th>
+		                <th>ชื่อไฟล์</th>
+		                <th>ผู้เกี่ยวข้อง</th>
+		      	               
+		            </thead>
+		            {% for row in rows4 %}
+		            <tr>
+		            	<td>{{row[0]}}</td>
+		                <td>{{row[1]}}</td>
+		                <td>{{row[2]}}</td>
+		                <td>{{row[3]}}</td>
+		                <td>{{row[4]}}</td>
+		                <td>{{row[5]}}</td>                
+		            </tr>
+		            {% endfor %}
+		        </table> 
+		    </div> 
+		    <!-- <div class="col-12 col-md-1"></div> -->     
+	    </div> 
+    </div>
+    </div>
+    
+
 	<!-- Modal -->
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  	<div class="modal-dialog" role="document">	
@@ -261,7 +354,7 @@
 					        	<div class="form-group">
 						            <label for="txtperid" class="form-control-label">รหัสอาจารย์:</label>
 						            <p style="color: red">*อาจารย์สาขา IT เริ่มต้นรหัส 1000 สาขา CS เริ่มต้นรหัส 2000</p>
-						            <input type="text" class="form-control" id="txtperid" autocomplete="off" maxlength="50" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+						            <input type="text" class="form-control" id="txtperid" autocomplete="off" maxlength="50" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
 						            <div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
 						            <script type="text/javascript">
 						            	$("#txtperid").blur(function(){
@@ -276,7 +369,7 @@
 						        </div>
 						        <div class="form-group">
 						            <label for="txtname" class="form-control-label">ชื่อ:</label>
-						            <input type="text" class="form-control" id="txtname" autocomplete="off" maxlength="50" />
+						            <input type="text" class="form-control" id="txtname" autocomplete="off" maxlength="50">
 						            <div id="error2" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
 						            <script type="text/javascript">
 						            	$("#txtname").blur(function(){
@@ -291,7 +384,7 @@
 						        </div>
 						        <div class="form-group">
 						            <label for="txtsurname" class="form-control-label">นามสกุล:</label>
-						            <input type="text" class="form-control" id="txtsurname" autocomplete="off" maxlength="50" />
+						            <input type="text" class="form-control" id="txtsurname" autocomplete="off" maxlength="50">
 						            <div id="error3" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
 						            <script type="text/javascript">
 						            	$("#txtsurname").blur(function(){
@@ -306,7 +399,7 @@
 						        </div>
 						        <div class="form-group">
 						            <!-- <label for="txttype" class="form-control-label">สถานะ:</label> -->
-						            <input type="text" class="form-control" id="txttype" autocomplete="off" value="อาจารย์" style="display: none;" />
+						            <input type="text" class="form-control" id="txttype" autocomplete="off" value="อาจารย์" style="display: none;">
 						        </div>
 						        <div class="form-group">
 						            <label for="faculty" class="form-control-label">อาจารย์สาขา:</label>
@@ -318,7 +411,7 @@
 						        </div>
 						        <div class="form-group">
 						            <!-- <label for="txtclass" class="form-control-label">ชั้นปี:</label> -->
-						            <input type="text" class="form-control" id="txtclass" autocomplete="off" value="other" style="display: none;" />
+						            <input type="text" class="form-control" id="txtclass" autocomplete="off" value="other" style="display: none;">
 						        </div>
 					        </form>		    
 					    </div>

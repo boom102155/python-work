@@ -510,17 +510,16 @@ def preport():
                           "WHERE PERSON_ID BETWEEN 2001 and 2999")
     query3 = conn.execute("SELECT STAFF_ID, (NAME || ' ' || SURNAME) as staffname "
                           "FROM STAFF")
+    query4 = conn.execute("SELECT d.DOC_ID, TO_CHAR(d.DOC_DATE,'yyyy-mm-dd') as docdate, d.DOC_NO, d.TOPIC, d.PATH_PIC, (p.NAME || ' ' || p.SURNAME) as person "
+                          "FROM DOCUMENT d , PERSON_DOC pd , PERSON p "
+                          "WHERE d.DOC_ID = pd.DOC_ID AND pd.PERSON_ID = p.PERSON_ID")
+
     rows1 = query1.fetchall()
     rows2 = query2.fetchall()
     rows3 = query3.fetchall()
+    rows4 = query4.fetchall()
 
-    st = strftime("%d%m%Y", gmtime())
-    t1 = strftime("%H", gmtime())
-    t2 = strftime("%M", gmtime())
-    t3 = strftime("%S", gmtime())
-    filenametime = st + '_' + t1 + t2 + t3 + '.'
-
-    return render_template("preport.html" , rows1=rows1 , rows2=rows2 , rows3=rows3 , filenametime=filenametime)
+    return render_template("preport.html" , rows1=rows1 , rows2=rows2 , rows3=rows3, rows4=rows4)
 
 
 @app.route('/uploader', methods = ['GET', 'POST'])

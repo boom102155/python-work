@@ -92,6 +92,7 @@
 		  border-right: 1px solid #EEEEEE;
 		}
     </style>
+
 </head>
 <body style="padding-top: 5rem; overflow-x: hidden;">
 	<!-- <div class="preload">
@@ -170,16 +171,11 @@
     </nav>
     <!-- ++++++++++++++++++++++end navbar++++++++++++++++++++++ -->
     <div class="container">           
-        <div class="row">
-            <div class="col-12 col-md-12">
-                <h3>เพิ่มรายการยืม - คืน</h3>
-            </div>           
-        </div>
-
-    	<br />
-    	<!-- +++++++++++++++++++++ Input Form ++++++++++++++++++++++ -->
+        <h4>เพิ่มรายการยืม - คืน</h4>           
+        <hr>
+		<!-- +++++++++++++++++++++ Input Form ++++++++++++++++++++++ -->
 		<div class="row" style="border-style: solid; border-radius: 5px; border-color: #44CAF2; background-color: #B2F3FF">
-		    <div class="col col-lg-3">
+		    <div class="col-12 col-lg-3">
 		    	<div class="form-group">
 		    		<label for="name" class="form-control-label">วันที่ยืม</label>
 	    			<input type="text" class="form-control" id="datepicker" data-date-format="yyyy-mm-dd" />
@@ -229,7 +225,7 @@
 	        		</select>
 		    	</div>
 		    </div>
-		    <div class="col col-lg-3">
+		    <div class="col-12 col-lg-3">
 		    	<div class="form-group">
 		    		<label for="stuID" class="form-control-label">รหัสนักศึกษา / รหัสอาจารย์</label>
 	        		<input type="text" class="form-control" id="PID" maxlength="13" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
@@ -348,6 +344,7 @@
 	            </script>					                    
 	        </div>
 		</div>
+		
 		<br />
 		<div class="row" style="border-style: solid; border-radius: 5px; border-color: #F6E687; background-color: #FFF6B2">
 		    <div class="col-12 col-md-6">
@@ -426,153 +423,153 @@
     		</div>
     	</div> 	    	
 	</div>
-	    <!-- +++++++++++++++++++++ End Button Add Lend ++++++++++++++++++++++ -->  	
-    <hr />
-    <div class="row" style="padding-bottom: 1rem; padding-left: 2rem;">
-    	<div class="btn-group">
-		  	<button type="button" value="submit" class="btn btn-default" id="checkAll">เลือกทั้งหมด</button>
-		  	<button type="button" value="submit" class="btn btn-primary" id="btnReport">จัดทำรายงาน</button>
-		</div>
-    	
-		<script type="text/javascript">
-			$('#btnReport').click(function(){  				
-				//window.location = "report";	
-			
-				var result = $("tr:has(:checked)")
-				if (result.length == 0) {
-					alert("กรุณาเลือกข้อมูลที่ต้องการทำรายงาน");
-				}else{
-					// console.log(result);
-
-					var json = result.map(function () {
-				 		return [$(this).children().slice(1).map(function () {
-				 		return $(this).text().trim()}).get()]
-				 	}).get()
+	<!-- +++++++++++++++++++++ End Input Form ++++++++++++++++++++++ -->
+	<hr>
+	
+	<!-- <div class="container"> -->
+	    <div class="row" style="padding-bottom: 1rem; padding-left: 2rem;">
+	    	<div class="btn-group">
+			  	<button type="button" value="submit" class="btn btn-default" id="checkAll">เลือกทั้งหมด</button>
+			  	<button type="button" value="submit" class="btn btn-primary" id="btnReport">จัดทำรายงาน</button>
+			</div>
+	    	
+			<script type="text/javascript">
+				$('#btnReport').click(function(){  				
+					//window.location = "report";	
 				
-					console.log(JSON.stringify(json,0,"\t"))
+					var result = $("tr:has(:checked)")
+					if (result.length == 0) {
+						alert("กรุณาเลือกข้อมูลที่ต้องการทำรายงาน");
+					}else{
+						// console.log(result);
 
-					document.getElementById("txtlenddetails").value = JSON.stringify(json,0,"\t");
+						var json = result.map(function () {
+					 		return [$(this).children().slice(1).map(function () {
+					 		return $(this).text().trim()}).get()]
+					 	}).get()
+					
+						console.log(JSON.stringify(json,0,"\t"))
 
-
-					// ========== send data to flask ===========
-					// var formData = new FormData();
-					// for(i = 0; i < json.length; i++){
-					// 	formData.append(i,JSON.stringify(json[i]))
-					// }
-
-					// var xmlhttp = new XMLHttpRequest();   
-					// xmlhttp.onreadystatechange = function() {
-					// 	if (this.readyState == 4 && this.status == 200) {
-					// 		// alert(this.responseText)
-					// 	}
-					// };
-								
-					// xmlhttp.open("POST", "/getreport")
-					// xmlhttp.send(formData)
-					// ================ end code =================
+						document.getElementById("txtlenddetails").value = JSON.stringify(json,0,"\t");
 
 
-					// var form = document.createElement("form");
-					// form.setAttribute("method", "post");
-					// form.setAttribute("action", "http://localhost:5000/report");
+						// ========== send data to flask ===========
+						// var formData = new FormData();
+						// for(i = 0; i < json.length; i++){
+						// 	formData.append(i,JSON.stringify(json[i]))
+						// }
 
-					// var Field = document.createElement("input");
-
-					// Field.setAttribute("type", "hidden");
-					// Field.setAttribute("name", "json");
-					// Field.setAttribute("value", "test");
-
-					// form.appendChild(Field);
-
-					// document.body.appendChild(form);
-					// form.submit();
-
-
-					// var col = [];
-			  //       for (var i = 0; i < myjson.length; i++) {
-			  //           for (var key in myjson[i]) {
-			  //               if (col.indexOf(key) === -1) {
-			  //                   col.push(key);
-			  //               }
-			  //           }
-			  //       }
-
-					// var table = document.createElement("example");
-					// var tr = table.append(-1); 
-					// for (var i = 0; i < col.length; i++) {
-			  //           var th = document.createElement("th");      // TABLE HEADER.
-			  //           th.innerHTML = col[i];
-			  //           tr.appendChild(th);
-			  //       }
-
-			  //        for (var i = 0; i < myjson.length; i++) {
-
-			  //           tr = table.append(-1);
-
-			  //           for (var j = 0; j < col.length; j++) {
-			  //               var tabCell = tr.insertCell(-1);
-			  //               tabCell.innerHTML = myjson[i][col[j]];
-			  //           }
-			  //       }
-
-			  //       var divContainer = document.getElementById("showData");
-			  //       divContainer.innerHTML = "";
-			  //       divContainer.appendChild(table);
+						// var xmlhttp = new XMLHttpRequest();   
+						// xmlhttp.onreadystatechange = function() {
+						// 	if (this.readyState == 4 && this.status == 200) {
+						// 		// alert(this.responseText)
+						// 	}
+						// };
+									
+						// xmlhttp.open("POST", "/getreport")
+						// xmlhttp.send(formData)
+						// ================ end code =================
 
 
-				}														
-			});
-		</script>
+						// var form = document.createElement("form");
+						// form.setAttribute("method", "post");
+						// form.setAttribute("action", "http://localhost:5000/report");
+
+						// var Field = document.createElement("input");
+
+						// Field.setAttribute("type", "hidden");
+						// Field.setAttribute("name", "json");
+						// Field.setAttribute("value", "test");
+
+						// form.appendChild(Field);
+
+						// document.body.appendChild(form);
+						// form.submit();
 
 
-    </div>  
+						// var col = [];
+				  //       for (var i = 0; i < myjson.length; i++) {
+				  //           for (var key in myjson[i]) {
+				  //               if (col.indexOf(key) === -1) {
+				  //                   col.push(key);
+				  //               }
+				  //           }
+				  //       }
 
-    <div class="row">  
-    	<!-- <div class="col-12 col-md-1"></div> -->   
-    	<div class="col-12 col-md-12">   	   	       
-	        <table id="example" class="table table-striped table-bordered table-responsive table-hover" cellspacing="0" width="100%">
-	            <thead>
-	            	<th>
-	            		<!-- <input type="checkbox" id="checkAll"> -->
-	            	</th>  
-	            	<th>รหัสใบยืม</th>
-	                <th>วันที่ยืม</th>
-	                <th>ผู้ให้ยืม</th>
-	                <th>ผู้ยืม</th>
-	                <th>สถานะ</th>
-	                <th>สาขา</th>
-	                <th>ชั้นปี</th>
-	                <th>รหัสอุปกรณ์</th>
-	                <th>เลขเซีเรียล</th>
-	                <th>ชื่ออุปกรณ์</th>
-	                <th>สถานะ</th>	               
-	            </thead>
-	            {% for row in rows1 %}
-	            <tr>
-	            	<td style="text-align: center;"><input type="checkbox" id="eachCheck"></td>	
-	            	<td>{{row[0]}}</td>
-	                <td>{{row[1]}}</td>
-	                <td>{{row[2]}}</td>
-	                <td>{{row[3]}}</td>
-	                <td>{{row[4]}}</td>
-	                <td>{{row[5]}}</td>
-	                <td>{{row[6]}}</td>
-	                <td>{{row[7]}}</td> 
-	                <td>{{row[8]}}</td>                    
-	                <td>{{row[9]}}</td>
-	                <td>{{row[10]}}</td>	                
-	            </tr>
-	            {% endfor %}
-	        </table> 
+						// var table = document.createElement("example");
+						// var tr = table.append(-1); 
+						// for (var i = 0; i < col.length; i++) {
+				  //           var th = document.createElement("th");      // TABLE HEADER.
+				  //           th.innerHTML = col[i];
+				  //           tr.appendChild(th);
+				  //       }
+
+				  //        for (var i = 0; i < myjson.length; i++) {
+
+				  //           tr = table.append(-1);
+
+				  //           for (var j = 0; j < col.length; j++) {
+				  //               var tabCell = tr.insertCell(-1);
+				  //               tabCell.innerHTML = myjson[i][col[j]];
+				  //           }
+				  //       }
+
+				  //       var divContainer = document.getElementById("showData");
+				  //       divContainer.innerHTML = "";
+				  //       divContainer.appendChild(table);
+
+
+					}														
+				});
+			</script>
 	    </div> 
-	    <!-- <div class="col-12 col-md-1"></div> -->     
-    </div> 
     
+	    <div class="row">  
+	    	<!-- <div class="col-12 col-md-1"></div> -->   
+	    	<div class="col-12 col-md-12">   	   	       
+		        <table id="example" class="table table-striped table-bordered table-responsive table-hover" cellspacing="0" width="100%">
+		            <thead>
+		            	<th>
+		            		<!-- <input type="checkbox" id="checkAll"> -->
+		            	</th>  
+		            	<th>รหัสใบยืม</th>
+		                <th>วันที่ยืม</th>
+		                <th>ผู้ให้ยืม</th>
+		                <th>ผู้ยืม</th>
+		                <th>สถานะ</th>
+		                <th>สาขา</th>
+		                <th>ชั้นปี</th>
+		                <th>รหัสอุปกรณ์</th>
+		                <th>เลขเซีเรียล</th>
+		                <th>ชื่ออุปกรณ์</th>
+		                <th>สถานะ</th>	               
+		            </thead>
+		            {% for row in rows1 %}
+		            <tr>
+		            	<td style="text-align: center;"><input type="checkbox" id="eachCheck"></td>	
+		            	<td>{{row[0]}}</td>
+		                <td>{{row[1]}}</td>
+		                <td>{{row[2]}}</td>
+		                <td>{{row[3]}}</td>
+		                <td>{{row[4]}}</td>
+		                <td>{{row[5]}}</td>
+		                <td>{{row[6]}}</td>
+		                <td>{{row[7]}}</td> 
+		                <td>{{row[8]}}</td>                    
+		                <td>{{row[9]}}</td>
+		                <td>{{row[10]}}</td>	                
+		            </tr>
+		            {% endfor %}
+		        </table> 
+		    </div> 
+		    <!-- <div class="col-12 col-md-1"></div> -->     
+	    </div> 
+    <!-- </div> -->
+
     <!-- <div class="container" style="padding-top: 2rem;">
 	    <textarea id="txtlenddetails" class="form-control" style="height: 800px;"></textarea>
 	</div> -->
-	
-    <br/><br/>
+
     <div class="modal fade" id="myModal">
 	  	<div class="modal-dialog modal-lg">
 	    	<div class="modal-content">
@@ -590,11 +587,11 @@
 			      				<h4 style="text-align: center;">ข้อมูลการยืม</h4>
 			      				<div class="form-group">
 				      				<label for="txtLendNO" class="form-control-label">รหัสใบยืม</label>
-				      				<input type="text" class="form-control" id="txtLendNO" readonly="readonly" />
+				      				<input type="text" class="form-control" id="txtLendNO" readonly="readonly">
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="txtDate" class="form-control-label">วันที่ยืม</label>
-				      				<input type="text" class="form-control" id="txtDate" readonly="readonly" />	  
+				      				<input type="text" class="form-control" id="txtDate" readonly="readonly">	  
 				      				<script>
 								  		 $(document).ready(function () {
 								            $('#txtDate').datepicker({
@@ -608,35 +605,35 @@
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="txtName" class="form-control-label">ผู้ให้ยืม</label>
-				      				<input type="text" class="form-control" id="txtName" readonly="readonly" />
+				      				<input type="text" class="form-control" id="txtName" readonly="readonly">
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="txtSurname" class="form-control-label">ผู้ยืม</label>
-				      				<input type="text" class="form-control" id="txtSurname" readonly="readonly" />
+				      				<input type="text" class="form-control" id="txtSurname" readonly="readonly">
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="txtSurname" class="form-control-label">สถานะ</label>
-				      				<input type="text" class="form-control" id="txtType" readonly="readonly" />
+				      				<input type="text" class="form-control" id="txtType" readonly="readonly">
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="sFaculty" class="form-control-label">สาขา</label>
-				      				<input type="text" class="form-control" id="sFaculty" readonly="readonly"></input>
+				      				<input type="text" class="form-control" id="sFaculty" readonly="readonly">
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="sClass" class="form-control-label">ชั้นปี</label>
-				      				<input type="text" class="form-control" id="sClass" readonly="readonly"></input>				      				
+				      				<input type="text" class="form-control" id="sClass" readonly="readonly">				      				
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="txtEID" class="form-control-label">รหัสอุปกรณ์</label>
-				      				<input type="text" class="form-control" id="txtEID" readonly="readonly" />
+				      				<input type="text" class="form-control" id="txtEID" readonly="readonly">
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="txtSerial" class="form-control-label">ซีเรียล</label>
-				      				<input type="text" class="form-control" id="txtSerial" readonly="readonly" />
+				      				<input type="text" class="form-control" id="txtSerial" readonly="readonly">
 				      			</div>
 				      			<div class="form-group">
 				      				<label for="txtEquipment" class="form-control-label">ชื่ออุปกรณ์</label>
-				      				<input type="text" class="form-control" id="txtEquipment" readonly="readonly" />
+				      				<input type="text" class="form-control" id="txtEquipment" readonly="readonly">
 				      			</div>		        	
 			        		</form>
 			      		</div>
@@ -646,7 +643,7 @@
 			      				<h4 style="text-align: center;">ข้อมูลการคืน</h4>
 			      				<div class="form-group">
 				      				<label for="txtILendNO" class="form-control-label">รหัสใบยืม</label>
-				      				<input type="text" class="form-control" id="txtILendNO" readonly="readonly" />
+				      				<input type="text" class="form-control" id="txtILendNO" readonly="readonly">
 				      			</div>
 			      				<div class="form-group">
 				      				<label for="txtDate" class="form-control-label">วันที่คืน</label>
