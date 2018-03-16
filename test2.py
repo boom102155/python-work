@@ -553,26 +553,28 @@ def upload():
 
 @app.route('/adddocdata', methods = ['GET' , 'POST'])
 def adddocdata():
+    try:
+        data = request.get_json()
+        st = strftime("%d%m%Y", gmtime())
+        t1 = strftime("%H", gmtime())
+        t2 = strftime("%M", gmtime())
+        t3 = strftime("%S", gmtime())
 
-
-    data = request.get_json()
-
-    st = strftime("%d%m%Y", gmtime())
-    t1 = strftime("%H", gmtime())
-    t2 = strftime("%M", gmtime())
-    t3 = strftime("%S", gmtime())
-
-    constrname = st + '_' + t1 + t2 + t3 + '.' + (data['pathpic'])
-    conn = db_connect.connect()
-    conn.execute("INSERT INTO DOCUMENT "
-                 "(DOC_DATE, "
-                 "DOC_NO, "
-                 "TOPIC, "
-                 "PATH_PIC) "
-                 "VALUES (TO_DATE(:1, 'yyyy-mm-dd'), :2, :3, :4)",
-                 (data['docdate'], data['docnum'], data['docstory'], constrname))
-    conn.commit()
-    return json.dumps(data)
+        constrname = st + '_' + t1 + t2 + t3 + '.' + (data['pathpic'])
+        conn = db_connect.connect()
+        conn.execute("INSERT INTO DOCUMENT "
+                     "(DOC_DATE, "
+                     "DOC_NO, "
+                     "TOPIC, "
+                     "PATH_PIC) "
+                     "VALUES (TO_DATE(:1, 'yyyy-mm-dd'), :2, :3, :4)",
+                     (data['docdate'], data['docnum'], data['docstory'], constrname))
+        conn.commit()
+    except:
+        conn.rollback()
+    finally:
+        return json.dumps(data)
+        conn.close()
 
 @app.route('/addperson' , methods  = ['POST' , 'GET'])
 def addperson():
@@ -596,7 +598,14 @@ def addperson():
         return json.dumps(data)
         conn.close()
 
-
+@app.route('/testadd' , methods = ['POST' , 'GET'])
+def testadd():
+    data = request.get_json()
+    # conn = db_connect.connect()
+    # conn.execute()
+    # conn.commit()
+    print(data["getcheckdata"])
+    return  json.dumps(data)
 
 if __name__ == '__main__':
     app.run(debug=True)

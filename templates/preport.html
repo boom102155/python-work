@@ -149,20 +149,20 @@
 						<div class="col-12 col-md-6">
 							<p style="font-size: 20px;">อาจารย์สาขา IT</p>
 							{% for row in rows1 %}
-								<input type="checkbox" id="{{ row[0] }}" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
+								<input type="checkbox" class="myCheckbox" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
 							{% endfor %}
 						</div>
 						<div class="col-12 col-md-6">
 							<p style="font-size: 20px;">อาจารย์สาขา CS</p>
 							{% for row in rows2 %}
-								<input type="checkbox" id="{{ row[0] }}" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
+								<input type="checkbox" class="myCheckbox" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
 							{% endfor %}
 						</div>
 					</div>
 					<div class="text-center">
 						<p style="font-size: 20px;">เจ้าหน้าที่</p>
 						{% for row in rows3 %}
-							<input type="checkbox" id="{{ row[0] }}" value="{{ row[0] }}"> {{ row[1] }}<br>
+							<input type="checkbox" class="myCheckbox" value="{{ row[0] }}"> {{ row[1] }}<br>
 						{% endfor %}
 					</div>
 					<br>
@@ -293,7 +293,39 @@
 								</script>
 							</div>
 							<div class="col-12 col-md-10">
+
 								<button class="btn btn-primary" type="button" id="btnshowtable">ข้อมูลเอกสาร</button>
+								<button class="btn btn-default" type="button" id="btntest">test</button>
+								<script type="text/javascript">
+									$('#btntest').click(function(){										
+
+								  		if (!$('input[type="checkbox"]').is(':checked')) {
+									        alert("กรุณาเลือกบุคคล");
+									        return false;
+									    }
+										else{
+											var val = [];
+									        	$(':checkbox:checked').each(function(i){
+									          		val[i] = $(this).val();
+									          		console.log(val[i]);
+									        });
+											alert("บันทึกข้อมูลเรียบร้อย");
+											$.ajax({
+												url: '/testadd',												
+												data: JSON.stringify({"getcheckdata" : val}),
+												type: 'POST',
+												processData: false,
+												contentType: 'application/json; charset=utf-8',
+												success: function(response){
+													console.log(response);
+												},
+												error: function(error){
+													console.log(error);
+												}
+											});
+										}			
+									});
+								</script>
 							</div>
 						</div>					
 					</form>
