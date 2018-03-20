@@ -7,6 +7,7 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
     <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
@@ -15,6 +16,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- data table script -->
     <!-- <script type="text/javascript" src="{{ url_for('static',filename="js/lendTable.js")}}"></script> -->
@@ -90,6 +92,18 @@
     <style type="text/css">
     	.mycontent-left {
 		  border-right: 1px solid #EEEEEE;
+		}
+		.ui-autocomplete {
+			max-height: 100px;
+			overflow-y: auto;
+			/* prevent horizontal scrollbar */
+			overflow-x: hidden;
+		}
+		/* IE 6 doesn't support max-height
+		 * we use height instead, but this forces the menu to always be this tall
+		 */
+		* html .ui-autocomplete {
+			height: 100px;
 		}
     </style>
 
@@ -238,8 +252,19 @@
 		            		if (this.value != '') {
 		            			$("#error3").fadeOut();
 		            		}
-		               	})
+		               	});
+		               	$( function() {
+				    		var datapid = [
+				    			{% for row in rows3 %}
+	        						"{{ row[0] }}",
+	        					{% endfor %}];	
+				    						    	
+						    $( "#PID" ).autocomplete({
+						      source: datapid
+						    });
+					  	});
 		            </script>
+
 		    	</div>
 		    </div>
 		    <div class="col-12 col-md-3">

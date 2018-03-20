@@ -131,6 +131,9 @@ def lend():
     query2 = conn.execute("SELECT EQUIPMENT_ID, EQUIPMENT_NAME FROM EQUIPMENT ORDER BY EQUIPMENT_NAME ASC")
     rows2 = query2.fetchall()
 
+    pidautocomplete = conn.execute("SELECT PERSON_ID FROM PERSON")
+    rows3 = pidautocomplete.fetchall()
+
     if 'user' in session:
         username = session['user']
         query3 = conn.execute("SELECT STAFF_ID FROM STAFF "
@@ -142,7 +145,7 @@ def lend():
             # data = zip(list1, list2)
             # d = dict(data)
             staffid = ', '.join(str(x) for x in list2)
-        return render_template("lend.html", rows1=rows1, rows2=rows2, username=username, staffid=staffid)
+        return render_template("lend.html", rows1=rows1, rows2=rows2, rows3=rows3, username=username, staffid=staffid)
     return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
            "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 
@@ -341,7 +344,6 @@ def searchstu():
         data = zip(list1, list2)
         d = dict(data)
         print(d)
-
     return jsonify(d)
 
 @app.route('/report' , methods = ['POST' , 'GET'])
