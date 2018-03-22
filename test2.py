@@ -571,6 +571,13 @@ def adddocdata():
                      "PATH_PIC) "
                      "VALUES (TO_DATE(:1, 'yyyy-mm-dd'), :2, :3, :4)",
                      (data['docdate'], data['docnum'], data['docstory'], constrname))
+
+        for i in data["getcheckdata"]:
+            conn.execute("INSERT INTO PERSON_DOC "
+                         "(PERSON_ID, "
+                         "DOC_ID) "
+                         "VALUES (:1, :2)",
+                         (i),data[""])
         conn.commit()
     except:
         conn.rollback()
@@ -606,7 +613,16 @@ def testadd():
     # conn = db_connect.connect()
     # conn.execute()
     # conn.commit()
-    print(data["getcheckdata"])
+    for i in data["getcheckdata"]:
+        print("INSERT INTO PERSON "
+                     "(PERSON_ID, "
+                     "NAME, "
+                     "SURNAME, "
+                     "TYPE, "
+                     "FACULTY, "
+                     "CLASS) "
+                     "VALUES (:1)",
+                     (i))
     return  json.dumps(data)
 
 if __name__ == '__main__':

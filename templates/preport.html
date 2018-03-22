@@ -267,16 +267,20 @@
 								  		var docstory = document.getElementById("txtstory").value;
 								  		var docdate = document.getElementById("datepicker").value;
 					
-								  		if (docstory == "" || txtstory == "" || document.getElementById("myfile").files.length == 0) {
+								  		if (docstory == "" || txtstory == "" || document.getElementById("myfile").files.length == 0 || !$('input[type="checkbox"]').is(':checked')) {
 											alert("กรุณากรอกข้อมูลให้ครบถ้วน");
 											return false;
 										}
 										else{
+											var val = [];
+									        	$(':checkbox:checked').each(function(i){
+									          		val[i] = $(this).val();
+									          		console.log(val[i]);
+									        });
 											alert("บันทึกข้อมูลเรียบร้อย");
-
 											$.ajax({
 												url: '/adddocdata',
-												data: JSON.stringify({"docnum" : docnum , "docstory" : docstory , "docdate" : docdate , "pathpic" : pathpic}),
+												data: JSON.stringify({"docnum" : docnum , "docstory" : docstory , "docdate" : docdate , "pathpic" : pathpic , "getcheckdata" : val}),
 												type: 'POST',
 												processData: false,
 												contentType: 'application/json; charset=utf-8',
@@ -295,7 +299,7 @@
 							<div class="col-12 col-md-10">
 
 								<button class="btn btn-primary" type="button" id="btnshowtable">ข้อมูลเอกสาร</button>
-								<button class="btn btn-default" type="button" id="btntest">test</button>
+								<!-- <button class="btn btn-default" type="button" id="btntest">test</button>
 								<script type="text/javascript">
 									$('#btntest').click(function(){										
 
@@ -325,7 +329,7 @@
 											});
 										}			
 									});
-								</script>
+								</script> -->
 							</div>
 						</div>					
 					</form>
