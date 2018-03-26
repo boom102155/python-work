@@ -91,12 +91,8 @@
 					<div class="text-center">
 						<p style="font-size: 20px;">เจ้าหน้าที่</p>
 						{% for row in rows3 %}
-							<input type="checkbox" class="myCheckbox" value="{{ row[0] }}"> {{ row[1] }}<br>
+							<input type="checkbox" class="myCheckbox" value="{{ row[0] }}"> {{ row[0] }} {{ row[1] }}<br>
 						{% endfor %}
-					</div>
-					<br>
-					<div class="wrapper text-center">
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">เพิ่มบุคคล</button>
 					</div>									
 				</div>
 				<!-- ========================= right column ========================= -->
@@ -226,39 +222,7 @@
 								</script>
 							</div>
 							<div class="col-12 col-md-10">
-
 								<button class="btn btn-primary" type="button" id="btnshowtable">ข้อมูลเอกสาร</button>
-								<!-- <button class="btn btn-default" type="button" id="btntest">test</button>
-								<script type="text/javascript">
-									$('#btntest').click(function(){										
-
-								  		if (!$('input[type="checkbox"]').is(':checked')) {
-									        alert("กรุณาเลือกบุคคล");
-									        return false;
-									    }
-										else{
-											var val = [];
-									        	$(':checkbox:checked').each(function(i){
-									          		val[i] = $(this).val();
-									          		console.log(val[i]);
-									        });
-											alert("บันทึกข้อมูลเรียบร้อย");
-											$.ajax({
-												url: '/testadd',												
-												data: JSON.stringify({"getcheckdata" : val}),
-												type: 'POST',
-												processData: false,
-												contentType: 'application/json; charset=utf-8',
-												success: function(response){
-													console.log(response);
-												},
-												error: function(error){
-													console.log(error);
-												}
-											});
-										}			
-									});
-								</script> -->
 							</div>
 						</div>					
 					</form>
@@ -275,7 +239,7 @@
 		<div class="row">  
 	    	<!-- <div class="col-12 col-md-1"></div> -->   
 	    	<div class="col-12 col-md-12">   	   	       
-		        <table id="example" class="table table-striped table-bordered table-responsive table-hover" cellspacing="0" width="100%">
+		        <table id="example" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 		            <thead> 
 		            	<th>เลขใบ</th>
 		                <th>วันที่เอกสาร</th>
@@ -301,125 +265,5 @@
 	    </div> 
     </div>
     </div>
-    
-
-	<!-- Modal -->
-		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  	<div class="modal-dialog" role="document">	
-		  		<form>  			  		
-			    	<div class="modal-content">
-				      	<div class="modal-header">
-				        	<h5 class="modal-title" id="exampleModalLabel">กรอกข้อมูลบุคคล</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          	<span aria-hidden="true">&times;</span>
-					        </button>
-				      	</div>
-					    <div class="modal-body">							    	    	
-					        <form>
-					        	<div class="form-group">
-						            <label for="txtperid" class="form-control-label">รหัสอาจารย์:</label>
-						            <p style="color: red">*อาจารย์สาขา IT เริ่มต้นรหัส 1000 สาขา CS เริ่มต้นรหัส 2000</p>
-						            <input type="text" class="form-control" id="txtperid" autocomplete="off" maxlength="50" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-						            <div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
-						            <script type="text/javascript">
-						            	$("#txtperid").blur(function(){
-						            		if (this.value == '') {
-						            			$("#error1").fadeIn("show");
-						            		}
-						            		if (this.value != '') {
-						            			$("#error1").fadeOut();
-						            		}
-						               	})
-						            </script>
-						        </div>
-						        <div class="form-group">
-						            <label for="txtname" class="form-control-label">ชื่อ:</label>
-						            <input type="text" class="form-control" id="txtname" autocomplete="off" maxlength="50">
-						            <div id="error2" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
-						            <script type="text/javascript">
-						            	$("#txtname").blur(function(){
-						            		if (this.value == '') {
-						            			$("#error2").fadeIn("show");
-						            		}
-						            		if (this.value != '') {
-						            			$("#error2").fadeOut();
-						            		}
-						               	})
-						            </script>
-						        </div>
-						        <div class="form-group">
-						            <label for="txtsurname" class="form-control-label">นามสกุล:</label>
-						            <input type="text" class="form-control" id="txtsurname" autocomplete="off" maxlength="50">
-						            <div id="error3" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
-						            <script type="text/javascript">
-						            	$("#txtsurname").blur(function(){
-						            		if (this.value == '') {
-						            			$("#error3").fadeIn("show");
-						            		}
-						            		if (this.value != '') {
-						            			$("#error3").fadeOut();
-						            		}
-						               	})
-						            </script>
-						        </div>
-						        <div class="form-group">
-						            <!-- <label for="txttype" class="form-control-label">สถานะ:</label> -->
-						            <input type="text" class="form-control" id="txttype" autocomplete="off" value="อาจารย์" style="display: none;">
-						        </div>
-						        <div class="form-group">
-						            <label for="faculty" class="form-control-label">อาจารย์สาขา:</label>
-						            <select type="text" class="form-control" id="faculty">
-					        			<option value="IT">IT</option>
-					        			<option value="CS">CS</option>
-					        			<option value="other">other</option>
-					        		</select>          
-						        </div>
-						        <div class="form-group">
-						            <!-- <label for="txtclass" class="form-control-label">ชั้นปี:</label> -->
-						            <input type="text" class="form-control" id="txtclass" autocomplete="off" value="other" style="display: none;">
-						        </div>
-					        </form>		    
-					    </div>
-					    <div class="modal-footer">
-					       	<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-					        <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>
-					        <script type="text/javascript">
-								$('#btnSave').click(function(){
-							  		var pid = document.getElementById("txtperid").value;
-							  		var name = document.getElementById("txtname").value;
-							  		var sname = document.getElementById("txtsurname").value;
-							  		var type = document.getElementById("txttype").value;
-							  		var fac = document.getElementById("faculty").value;
-							  		var pclass = document.getElementById("txtclass").value;
-
-							  		if (pid == "" || name == "" || sname == "") {
-										alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-										return false;
-									}
-									else{
-										alert("บันทึกข้อมูลเรียบร้อย");
-										$.ajax({
-											url: '/addperson',
-											data: JSON.stringify({"pid" : pid ,"name" : name , "sname" : sname , "type" : type , "fac" : fac , "pclass" : pclass}),
-											type: 'POST',
-											processData: false,
-											contentType: 'application/json; charset=utf-8',
-											success: function(response){
-												console.log(response);
-											},
-											error: function(error){
-												console.log(error);
-											}
-										});
-										// location.reload();
-									}			
-								});
-							</script>
-					    </div>
-			    	</div>
-		    	</form>		    
-		  	</div>
-		</div>
-		<!-- ++++++++++++++++++End Modal++++++++++++++++++ -->
 </body>
 </html>

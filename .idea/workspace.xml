@@ -3,12 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="c20361aa-bc4c-4168-96a9-abe8686d6c37" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/UPLOAD/14032018_050117.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UPLOAD/16032018_013222.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UPLOAD/16032018_013504.pdf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UPLOAD/22032018_041937.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/templates/category.html" afterPath="$PROJECT_DIR$/templates/category.html" />
+      <change beforePath="$PROJECT_DIR$/templates/equipment.html" afterPath="$PROJECT_DIR$/templates/equipment.html" />
       <change beforePath="$PROJECT_DIR$/templates/lend.html" afterPath="$PROJECT_DIR$/templates/lend.html" />
+      <change beforePath="$PROJECT_DIR$/templates/person.html" afterPath="$PROJECT_DIR$/templates/person.html" />
+      <change beforePath="$PROJECT_DIR$/templates/preport.html" afterPath="$PROJECT_DIR$/templates/preport.html" />
+      <change beforePath="$PROJECT_DIR$/templates/room-check-list.html" afterPath="$PROJECT_DIR$/templates/room-check-list.html" />
       <change beforePath="$PROJECT_DIR$/test2.py" afterPath="$PROJECT_DIR$/test2.py" />
+      <change beforePath="$PROJECT_DIR$/test3.py" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,8 +31,8 @@
       <file leaf-file-name="test2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="605" column="31" lean-forward="true" selection-start-line="605" selection-start-column="31" selection-end-line="605" selection-end-column="31" />
+            <state relative-caret-position="373">
+              <caret line="514" column="61" lean-forward="false" selection-start-line="514" selection-start-column="61" selection-end-line="514" selection-end-column="61" />
               <folding>
                 <element signature="e#0#92#0" expanded="true" />
               </folding>
@@ -103,7 +105,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -120,6 +121,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -418,40 +420,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/schedule.png" />
     <entry file="file://$PROJECT_DIR$/UPLOAD/test.jpg" />
-    <entry file="file://$PROJECT_DIR$/UPLOAD/14032018_050117.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UPLOAD/16032018_013222.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UPLOAD/22032018_041937.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UPLOAD/26032018_015623.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UPLOAD/26032018_030346.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UPLOAD/26032018_030608.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/UPLOAD/14032018_050117.jpg" />
+    <entry file="file://$PROJECT_DIR$/UPLOAD/16032018_013222.png" />
+    <entry file="file://$PROJECT_DIR$/UPLOAD/22032018_041937.jpg" />
+    <entry file="file://$PROJECT_DIR$/UPLOAD/26032018_015623.png" />
+    <entry file="file://$PROJECT_DIR$/UPLOAD/26032018_030346.jpg" />
+    <entry file="file://$PROJECT_DIR$/UPLOAD/26032018_030608.jpg" />
     <entry file="file://$PROJECT_DIR$/test2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="605" column="31" lean-forward="true" selection-start-line="605" selection-start-column="31" selection-end-line="605" selection-end-column="31" />
+        <state relative-caret-position="373">
+          <caret line="514" column="61" lean-forward="false" selection-start-line="514" selection-start-column="61" selection-end-line="514" selection-end-column="61" />
           <folding>
             <element signature="e#0#92#0" expanded="true" />
           </folding>

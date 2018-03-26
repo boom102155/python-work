@@ -510,8 +510,9 @@ def preport():
     query2 = conn.execute("SELECT PERSON_ID, (NAME || ' ' || SURNAME) as perfessorname "
                           "FROM person "
                           "WHERE PERSON_ID BETWEEN 2001 and 2999")
-    query3 = conn.execute("SELECT STAFF_ID, (NAME || ' ' || SURNAME) as staffname "
-                          "FROM STAFF")
+    query3 = conn.execute("SELECT PERSON_ID, (NAME || ' ' || SURNAME) as perfessorname "
+                          "FROM person "
+                          "WHERE PERSON_ID BETWEEN 3001 and 3999")
     query4 = conn.execute("SELECT d.DOC_ID, TO_CHAR(d.DOC_DATE,'yyyy-mm-dd') as docdate, d.DOC_NO, d.TOPIC, d.PATH_PIC, (p.NAME || ' ' || p.SURNAME) as person "
                           "FROM DOCUMENT d , PERSON_DOC pd , PERSON p "
                           "WHERE d.DOC_ID = pd.DOC_ID AND pd.PERSON_ID = p.PERSON_ID")
@@ -606,20 +607,12 @@ def addperson():
         return json.dumps(data)
         conn.close()
 
-# @app.route('/testadd' , methods = ['POST' , 'GET'])
-# def testadd():
-#     data = request.get_json()
-#     for i in data["getcheckdata"]:
-#         print("INSERT INTO PERSON "
-#                      "(PERSON_ID, "
-#                      "NAME, "
-#                      "SURNAME, "
-#                      "TYPE, "
-#                      "FACULTY, "
-#                      "CLASS) "
-#                      "VALUES (:1)",
-#                      (i))
-#     return  json.dumps(data)
+@app.route('/delperson' , methods = ['POST' , 'GET'])
+def delperson():
+    data = request.get_json()
+    conn = db_connect.connect()
+    conn.execute("DELETE FROM PERSON WHERE PERSON_ID = "+ (data["pid"]))
+    return json.dumps(data)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -11,16 +11,62 @@
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
     <!-- data table style script -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.5/css/select.bootstrap4.min.css"> 
+    
+    
 
     <script type="text/javascript">
-    	$(document).ready(function() {
-			$('#example').DataTable();
-		});
+        $(document).ready(function() {
+            var table = $('#example').DataTable({
+                select: true
+            });
+            $('#example tbody').on( 'click', 'tr', function () {
+                if ( $(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            } );
+         
+            $('#btndel').click( function () {
+                // table.row('.selected').remove().draw(false);
+                var rowid = $.map(table.rows('.selected').data(), function (item) {
+                    return item[0]
+                });
+                console.log(rowid);
+                // alert(rowid);
+                if (confirm("ต้องการลบใช่หรือไม่")) {
+                    var pid = rowid.join();
+                    $.ajax({
+                        url: '/delperson',
+                        data: JSON.stringify({"pid" : pid}),
+                        type: 'POST',
+                        processData: false,
+                        contentType: 'application/json; charset=utf-8',
+                        success: function(response){
+                            console.log(response);
+                        },
+                        error: function(error){
+                            console.log(error);
+                        }
+                    });
+                    location.reload();
+                }
+                return false;
+            });
+        });
     </script>
+
+
 </head>
 <body style="padding-top: 5rem; padding-bottom: 5rem;">
 	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
@@ -101,17 +147,18 @@
         </div>
 
         <hr/>
-
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">เพิ่มบุคคล</button>
+        <button type="button" class="btn btn-danger" id="btndel">ลบข้อมูล</button>
+        <br><br>
         <div class="container">   
-	        <table id="example" class="table table-striped table-bordered table-responsive table-hover" cellspacing="0" width="100%">
+	        <table id="example" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	            <thead>
 	                <th>รหัส</th>
 	                <th>ชื่อ-นามสกุล</th>
 	                <th>สถานะ</th>
 	                <th>สาขา</th>
-	                <th>ชั้นปี</th>               
+	                <th>ชั้นปี</th>              
 	            </thead>
-
 	            {% for row in rows %}
 	            <tr>
 	                <td>{{row[0]}}</td>
@@ -123,6 +170,135 @@
 	            {% endfor %}
 	        </table>             
     	</div>
-    </div>
+    </div>    
+    <!-- Modal -->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">  
+                <form>                      
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">กรอกข้อมูลบุคคล</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">                                            
+                            <form>
+                                <div class="form-group">
+                                    <label for="txtperid" class="form-control-label">รหัสนักศึกษา/อาจารย์:</label>
+                                    <p style="color: red">*อาจารย์สาขา IT ใช้รหัส 1000 ถึง 1999</p>
+                                    <p style="color: red">*อาจารย์สาขา CS ใช้รหัส 2000 ถึง 2999</p>
+                                    <p style="color: red">*เจ้าหน้าที่ ใช้รหัส 3000 ถึง 3999</p>
+                                    <input type="text" class="form-control" id="txtperid" autocomplete="off" maxlength="50" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                                    <div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+                                    <script type="text/javascript">
+                                        $("#txtperid").blur(function(){
+                                            if (this.value == '') {
+                                                $("#error1").fadeIn("show");
+                                            }
+                                            if (this.value != '') {
+                                                $("#error1").fadeOut();
+                                            }
+                                        })
+                                    </script>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtname" class="form-control-label">ชื่อ:</label>
+                                    <input type="text" class="form-control" id="txtname" autocomplete="off" maxlength="50">
+                                    <div id="error2" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+                                    <script type="text/javascript">
+                                        $("#txtname").blur(function(){
+                                            if (this.value == '') {
+                                                $("#error2").fadeIn("show");
+                                            }
+                                            if (this.value != '') {
+                                                $("#error2").fadeOut();
+                                            }
+                                        })
+                                    </script>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtsurname" class="form-control-label">นามสกุล:</label>
+                                    <input type="text" class="form-control" id="txtsurname" autocomplete="off" maxlength="50">
+                                    <div id="error3" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+                                    <script type="text/javascript">
+                                        $("#txtsurname").blur(function(){
+                                            if (this.value == '') {
+                                                $("#error3").fadeIn("show");
+                                            }
+                                            if (this.value != '') {
+                                                $("#error3").fadeOut();
+                                            }
+                                        })
+                                    </script>
+                                </div>
+                                <div class="form-group">
+                                    <label for="stype" class="form-control-label">สถานะ:</label>
+                                    <select type="text" class="form-control" id="stype">
+                                        <option value="อาจารย์">อาจารย์</option>
+                                        <option value="นักศึกษา">นักศึกษา</option>
+                                        <option value="เจ้าหน้าที่">เจ้าหน้าที่</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="faculty" class="form-control-label">อาจารย์สาขา:</label>
+                                    <select type="text" class="form-control" id="faculty">
+                                        <option value="IT">IT</option>
+                                        <option value="CS">CS</option>
+                                        <option value="other">other</option>
+                                    </select>          
+                                </div>
+                                <div class="form-group">
+                                    <label for="sclass" class="form-control-label">ชั้นปี:</label>
+                                    <select type="text" class="form-control" id="sclass">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="other">other</option>
+                                    </select>  
+                                </div>
+                            </form>         
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                            <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>
+                            <script type="text/javascript">
+                                $('#btnSave').click(function(){
+                                    var pid = document.getElementById("txtperid").value;
+                                    var name = document.getElementById("txtname").value;
+                                    var sname = document.getElementById("txtsurname").value;
+                                    var type = document.getElementById("stype").value;
+                                    var fac = document.getElementById("faculty").value;
+                                    var pclass = document.getElementById("sclass").value;
+
+                                    if (pid == "" || name == "" || sname == "") {
+                                        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+                                        return false;
+                                    }
+                                    else{
+                                        alert("บันทึกข้อมูลเรียบร้อย");
+                                        $.ajax({
+                                            url: '/addperson',
+                                            data: JSON.stringify({"pid" : pid ,"name" : name , "sname" : sname , "type" : type , "fac" : fac , "pclass" : pclass}),
+                                            type: 'POST',
+                                            processData: false,
+                                            contentType: 'application/json; charset=utf-8',
+                                            success: function(response){
+                                                console.log(response);
+                                            },
+                                            error: function(error){
+                                                console.log(error);
+                                            }
+                                        });
+                                        // location.reload();
+                                    }           
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </form>         
+            </div>
+        </div><!-- ++++++++++++++++++End Modal++++++++++++++++++ -->  
 </body>
 </html>
