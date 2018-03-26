@@ -466,16 +466,36 @@
 					if (result.length == 0) {
 						alert("กรุณาเลือกข้อมูลที่ต้องการทำรายงาน");
 					}else{
-						// console.log(result);
+						console.log(result);
 
-						var json = result.map(function () {
-					 		return [$(this).children().slice(1).map(function () {
-					 		return $(this).text().trim()}).get()]
-					 	}).get()
-					
-						console.log(JSON.stringify(json,0,"\t"))
+						var json = result.map(function () { 
+							return [$(this).children().slice(1).map(function () { 
+								return $(this).text().trim()
+							}).get()];
+						}).get();
 
-						document.getElementById("txtlenddetails").value = JSON.stringify(json,0,"\t");
+
+						// console.log(JSON.stringify(json,0,"\t"))
+
+
+						// var obj = {};
+						// 	obj['รหัสใบยืม'] = JSON.stringify(json[0]);
+						// 	obj['วันที่ยืม'] = JSON.stringify(json[1]);
+						// 	obj['ผู้ให้ยืม'] = JSON.stringify(json[2]);
+						// 	obj['ผู้ยืม'] = JSON.stringify(json[3]);
+						// 	obj['สถานะ'] = JSON.stringify(json[4]);
+						// 	obj['สาขา'] = JSON.stringify(json[5]);
+						// 	obj['ชั้นปี'] = JSON.stringify(json[6]);
+						// 	obj['รหัสอุปกรณ์'] = JSON.stringify(json[7]);
+						// 	obj['เลขซีเรียล'] = JSON.stringify(json[8]);
+						// 	obj['ชื่ออุปกรณ์'] = JSON.stringify(json[9]);
+						// 	obj['สถานะ'] = JSON.stringify(json[10]);
+
+						var myJsonData = {};
+						myJsonData = JSON.stringify(json,0,"\t");
+						document.getElementById("txtlenddetails").value = myJsonData;
+
+
 
 
 						// ========== send data to flask ===========

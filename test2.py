@@ -576,8 +576,7 @@ def adddocdata():
             conn.execute("INSERT INTO PERSON_DOC "
                          "(PERSON_ID, "
                          "DOC_ID) "
-                         "VALUES (:1, :2)",
-                         (i),data[""])
+                         "(SELECT "+ i +" ,MAX(DOC_ID) FROM DOCUMENT)")
         conn.commit()
     except:
         conn.rollback()
@@ -607,23 +606,20 @@ def addperson():
         return json.dumps(data)
         conn.close()
 
-@app.route('/testadd' , methods = ['POST' , 'GET'])
-def testadd():
-    data = request.get_json()
-    # conn = db_connect.connect()
-    # conn.execute()
-    # conn.commit()
-    for i in data["getcheckdata"]:
-        print("INSERT INTO PERSON "
-                     "(PERSON_ID, "
-                     "NAME, "
-                     "SURNAME, "
-                     "TYPE, "
-                     "FACULTY, "
-                     "CLASS) "
-                     "VALUES (:1)",
-                     (i))
-    return  json.dumps(data)
+# @app.route('/testadd' , methods = ['POST' , 'GET'])
+# def testadd():
+#     data = request.get_json()
+#     for i in data["getcheckdata"]:
+#         print("INSERT INTO PERSON "
+#                      "(PERSON_ID, "
+#                      "NAME, "
+#                      "SURNAME, "
+#                      "TYPE, "
+#                      "FACULTY, "
+#                      "CLASS) "
+#                      "VALUES (:1)",
+#                      (i))
+#     return  json.dumps(data)
 
 if __name__ == '__main__':
     app.run(debug=True)
