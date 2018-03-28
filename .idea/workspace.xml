@@ -3,14 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c20361aa-bc4c-4168-96a9-abe8686d6c37" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/templates/category.html" afterPath="$PROJECT_DIR$/templates/category.html" />
-      <change beforePath="$PROJECT_DIR$/templates/equipment.html" afterPath="$PROJECT_DIR$/templates/equipment.html" />
-      <change beforePath="$PROJECT_DIR$/templates/lend.html" afterPath="$PROJECT_DIR$/templates/lend.html" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
       <change beforePath="$PROJECT_DIR$/templates/person.html" afterPath="$PROJECT_DIR$/templates/person.html" />
-      <change beforePath="$PROJECT_DIR$/templates/preport.html" afterPath="$PROJECT_DIR$/templates/preport.html" />
-      <change beforePath="$PROJECT_DIR$/templates/room-check-list.html" afterPath="$PROJECT_DIR$/templates/room-check-list.html" />
       <change beforePath="$PROJECT_DIR$/test2.py" afterPath="$PROJECT_DIR$/test2.py" />
-      <change beforePath="$PROJECT_DIR$/test3.py" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,8 +26,8 @@
       <file leaf-file-name="test2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="514" column="61" lean-forward="false" selection-start-line="514" selection-start-column="61" selection-end-line="514" selection-end-column="61" />
+            <state relative-caret-position="272">
+              <caret line="73" column="62" lean-forward="false" selection-start-line="73" selection-start-column="62" selection-end-line="73" selection-end-column="62" />
               <folding>
                 <element signature="e#0#92#0" expanded="true" />
               </folding>
@@ -397,13 +392,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="31" lean-forward="false" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test3.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/flask/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -428,8 +417,8 @@
     <entry file="file://$PROJECT_DIR$/UPLOAD/26032018_030608.jpg" />
     <entry file="file://$PROJECT_DIR$/test2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="514" column="61" lean-forward="false" selection-start-line="514" selection-start-column="61" selection-end-line="514" selection-end-column="61" />
+        <state relative-caret-position="272">
+          <caret line="73" column="62" lean-forward="false" selection-start-line="73" selection-start-column="62" selection-end-line="73" selection-end-column="62" />
           <folding>
             <element signature="e#0#92#0" expanded="true" />
           </folding>

@@ -70,7 +70,8 @@ def editpassword():
 @app.route('/index')
 def index():
     if 'user' in session:
-        return render_template("index.html")
+        username = session['user']
+        return render_template("index.html", username=username)
     return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
            "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 

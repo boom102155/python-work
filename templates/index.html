@@ -5,13 +5,16 @@
     <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
+    <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
     <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="hover/hover.css")}}">
+
     <style>
-        .container{
+        /*.container{
           position: relative;
         }
         .image {
@@ -46,8 +49,59 @@
           color: white;
           font-size: 16px;
           padding: 16px 32px;
+        }*/
+
+        img {
+            max-width: 100%;
+            height: auto;
         }
 
+        .wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-auto-rows: minmax(200px, auto);
+            grid-gap: 0.5em;
+            justify-content: stretch;  
+
+            color: white;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        .wrapper > div {
+            padding: 0.5em;
+        }
+
+        .box1 {
+            background-color: #E36623;
+            grid-column: 1/3;
+        }
+
+        .box2 {
+            background-color: #17AB1D;
+            
+        }
+
+        .box3 {
+            background-color: #2386E3;
+            
+        }
+
+        .box4 {
+            background-color: #9DC927;
+            grid-column: 2/4;
+        }
+
+        .box5 {
+            background-color: #C92767;
+            
+        }
+
+        .box6 {
+            background-color: #8C23E3;
+            grid-column: 2/4;
+        }
+
+        
         /*.content{
             display: none;
         }
@@ -64,14 +118,77 @@
 
                          
 </head>
-<body>
+<body style="background-color: #3A0E61;">
     <!-- <div class="preload">
         <img src="{{ url_for('static',filename="imgs/loading.gif")}}" width="130px" height="100px">
     </div> -->
     <br /><br /> 
     <center>
     <div class="content">
+
         <div class="container">
+            
+            <div class="wrapper">     
+                <div class="box1 hvr-grow" style="cursor: pointer;" onclick="window.location='/lend';">
+                    <div style="text-align: left; padding-bottom: 1rem;">
+                        <h4>เพิ่มรายการยืม-คืน</h4>
+                    </div>
+                    <img src="{{ url_for('static',filename="imgs/newmenu1.png")}}" alt="เพิ่มรายการยืม-คืน" width="300" >
+                </div>
+                
+                <div class="box2">
+                    <div style="text-align: left; padding-bottom: 1rem;">
+                        <h4>สวัสดี</h4>
+                    </div>
+                    <h4 style="padding-bottom: 2rem;">{{ username }}</h4>
+                    <button class="btn btn-default hvr-grow" type="submit" id="btnLogout">ลงชื่อออก</button>
+                    <script type="text/javascript">
+                        $('#btnLogout').click(function(){
+                            $.ajax({
+                                url: '/logout',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function(response){
+                                    console.log(response);
+                                    window.location = "login";
+                                },
+                                error: function(error){
+                                    console.log(error);
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+
+                <div class="box3 hvr-grow" style="cursor: pointer;" onclick="window.location='/equipment';">
+                    <div style="text-align: left; padding-bottom: 1rem;">
+                        ค้นหาอุปกรณ์
+                    </div>
+                    <img src="{{ url_for('static',filename="imgs/newmenu2.png")}}" alt="เพิ่มรายการยืม-คืน" width="100" >
+                </div>
+                <div class="box4 hvr-grow" style="cursor: pointer;" onclick="window.location='/category';">
+                    <div style="text-align: left; padding-bottom: 1rem;">
+                        หมวดหมู่
+                    </div>
+                    <img src="{{ url_for('static',filename="imgs/newmenu3.png")}}" alt="หมวดหมู่" width="100" >
+                </div>
+                <div class="box5 hvr-grow" style="cursor: pointer;" onclick="window.location='/room';">
+                    <div style="text-align: left; padding-bottom: 1rem;">
+                        ตรวจห้อง
+                    </div>
+                    <img src="{{ url_for('static',filename="imgs/newmenu4.png")}}" alt="ตรวจห้อง" width="100" >
+                </div>
+                <div class="box6 hvr-grow" style="cursor: pointer;" onclick="window.location='/preport';">
+                    <div style="text-align: left; padding-bottom: 1rem;">
+                        จัดการเอกสาร
+                    </div>
+                    <img src="{{ url_for('static',filename="imgs/newmenu5.png")}}" alt="จัดการเอกสาร" width="100" >
+                </div>
+            </div>
+        </div>
+
+       
+ 
+        <!-- <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <figure class="figure">                       
@@ -87,7 +204,7 @@
             </div>
         </div>
 
-        <div class="container">
+         <div class="container">
             <div class="row"> 
                 <div class="col-md-6">
                     <figure class="figure">                       
@@ -136,9 +253,10 @@
                     </figure>
                 </div>
             </div>
-        </div>
+        </div> -->
+
     </div>             
-    </center>
+    
     <!-- <script type="text/javascript">
         $(function() {
             $(".preload").fadeOut(2000,function() {
