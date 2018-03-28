@@ -5,6 +5,7 @@
 	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
+    <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
     <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
@@ -18,6 +19,11 @@
 		  text-align: center;
 		  font-family: arial;
 		}
+
+		body {
+			padding-top: 5rem; 
+			padding-bottom: 5rem;
+		}
 	</style>
 	
 	<script type="text/javascript">
@@ -30,7 +36,7 @@
 	 	});
 	</script>
 </head>
-<body style="padding-top: 5rem; padding-bottom: 5rem;">
+<body>
 	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="\index">
@@ -107,38 +113,50 @@
 <div class="card">
   	<img src="{{ url_for('static',filename="imgs/avapro.png")}}" alt="profile image" style="width:100%">
   	
-  	<h4 style="padding-top: 20px;">
-  		<div id="n" style="display: inline;">
+  	<h4 style="padding-top: 2rem; padding-bottom: 2rem;">
+  		<div id="n" style="display: inline; font-family: 'Prompt', sans-serif;">
   			{{ name }}
   		</div> 
-  		<div id="surn" style="display: inline;">
+  		<div id="surn" style="display: inline; font-family: 'Prompt', sans-serif;">
   			{{ surname }}
   		</div>
   	</h4>
-  		
-  	<table width="100%">
-  		<tr>
-  			<td style="text-align: right; font-weight: bold;">Username:</td>
-  			<td style="text-align: left;">{{ usn }}</td>
-  		</tr>
-  		<tr>
-  			<td style="text-align: right; font-weight: bold;">Password:</td>
-  			<td style="text-align: left;">				
-  				<div id="passw">{{ pw }}</div>
-  				<input type="text" placeholder="รหัสผ่านปัจจุบัน" id="txtpw" class="form-control" autocomplete="off" />
-  			</td>
-  		</tr>
-  		<tr>
-  			<td>&nbsp;</td>
-  			<td><input type="password" placeholder="รหัสผ่านใหม่" id="txtnewpw" class="form-control" autocomplete="off" /></td>
-  		</tr>
-  		<tr>
-  			<td>&nbsp;</td>
-  			<td><input type="password" placeholder="ยืนยันรหัสผ่าน" id="txtconfirmpw" class="form-control" autocomplete="off" /></td>
-  		</tr>
-  	</table>
 
- 	<button class="btn btn-primary" type="submit" value="submit" id="btnEdit">Edit Password</button>
+  	<div class="row" style="font-family: 'Prompt', sans-serif;">
+  		<div class="col-12 col-md-6" style="text-align: right; font-weight: bold;">
+  			Username:
+  		</div>
+  		<div class="col-12 col-md-6" style="text-align: left;">
+  			{{ usn }}
+  		</div>
+  	</div>
+  	<div class="row">
+  		<div class="col-12 col-md-6" style="font-family: 'Prompt', sans-serif; text-align: right; font-weight: bold;">
+  			Password:
+  		</div>
+  		<div class="col-12 col-md-6" style="text-align: left;">
+  			<div id="passw" style="font-family: 'Prompt', sans-serif;">{{ pw }}</div>
+  			<input type="text" placeholder="รหัสผ่านปัจจุบัน" id="txtpw" class="form-control" autocomplete="off" />
+  		</div>
+  	</div>
+  	<div class="row">
+  		<div class="col-12 col-md-6">
+  			&nbsp;
+  		</div>
+  		<div class="col-12 col-md-6">
+  			<input type="password" placeholder="รหัสผ่านใหม่" id="txtnewpw" class="form-control" autocomplete="off" />
+  		</div>
+  	</div>
+  	<div class="row">
+  		<div class="col-12 col-md-6">
+  			&nbsp;
+  		</div>
+  		<div class="col-12 col-md-6">
+  			<input type="password" placeholder="ยืนยันรหัสผ่าน" id="txtconfirmpw" class="form-control" autocomplete="off" />
+  		</div>
+  	</div>
+
+ 	<button class="btn btn-primary" type="submit" value="submit" id="btnEdit">แก้ไขรหัสผ่าน</button>
  	<script type="text/javascript">	
 		$('#btnEdit').click(function() {		
 			var currentpw = document.getElementById("passw");
@@ -163,8 +181,8 @@
 	</script>	
 
 	<div class="btn-group btn-group-justified">		
-		<button class="btn btn-success" type="submit" value="submit" id="btnDone" style="width: 150px;">Done</button>	
-		<button class="btn btn-danger" type="submit" value="submit" id="btnCancel" style="width: 150px;">Cancel</button>	
+		<button class="btn btn-success" type="submit" value="submit" id="btnDone" style="width: 150px;">ตกลง</button>	
+		<button class="btn btn-danger" type="submit" value="submit" id="btnCancel" style="width: 150px;">ยกเลิก</button>	
 	</div>
 
 	<script type="text/javascript">
