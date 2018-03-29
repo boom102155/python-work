@@ -92,13 +92,18 @@
         }
 
         .box5 {
-            background-color: #C92767;
+            background-color: #F5C71B;
             
         }
 
         .box6 {
+            background-color: #C92767;
+            
+        }
+
+        .box7 {
             background-color: #8C23E3;
-            grid-column: 2/4;
+            /*grid-column: 2/4;*/
         }
 
         
@@ -118,7 +123,7 @@
 
                          
 </head>
-<body style="background-color: #3A0E61;">
+<body style="background-color: #3A0E61; padding-bottom: 3rem;">
     <!-- <div class="preload">
         <img src="{{ url_for('static',filename="imgs/loading.gif")}}" width="130px" height="100px">
     </div> -->
@@ -169,21 +174,27 @@
                 </div>
                 <div class="box4 hvr-grow" style="cursor: pointer;" onclick="window.location='/category';">
                     <div style="text-align: left; padding-bottom: 1rem;">
-                        หมวดหมู่
+                        หมวดหมู่อุปกรณ์
                     </div>
                     <img src="{{ url_for('static',filename="imgs/newmenu3.png")}}" alt="หมวดหมู่" width="100" >
                 </div>
-                <div class="box5 hvr-grow" style="cursor: pointer;" onclick="window.location='/room';">
+                <div class="box5 hvr-grow" style="cursor: pointer;" onclick="window.location='/person';">
+                    <div style="text-align: left; padding-bottom: 1rem;">
+                        รายชื่อบุคคล
+                    </div>
+                    <img src="{{ url_for('static',filename="imgs/newmenu4.png")}}" alt="บุคคล" width="100" >
+                </div>
+                <div class="box6 hvr-grow" style="cursor: pointer;" onclick="window.location='/room';">
                     <div style="text-align: left; padding-bottom: 1rem;">
                         ตรวจห้อง
                     </div>
-                    <img src="{{ url_for('static',filename="imgs/newmenu4.png")}}" alt="ตรวจห้อง" width="100" >
+                    <img src="{{ url_for('static',filename="imgs/newmenu5.png")}}" alt="ตรวจห้อง" width="100" >
                 </div>
-                <div class="box6 hvr-grow" style="cursor: pointer;" onclick="window.location='/preport';">
+                <div class="box7 hvr-grow" style="cursor: pointer;" onclick="window.location='/preport';">
                     <div style="text-align: left; padding-bottom: 1rem;">
                         จัดการเอกสาร
                     </div>
-                    <img src="{{ url_for('static',filename="imgs/newmenu5.png")}}" alt="จัดการเอกสาร" width="100" >
+                    <img src="{{ url_for('static',filename="imgs/newmenu6.png")}}" alt="จัดการเอกสาร" width="100" >
                 </div>
             </div>
         </div>
