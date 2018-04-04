@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>สถานที่ตั้งอุปกรณ์</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
+    <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+    <!-- data table style script -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script type="text/javascript">
+    	$(document).ready(function() {
+			$('#example').DataTable();			
+			$('#example tbody').on('click', 'tr', 'td', function () {
+			    $("#myModal").modal("show");
+			    $("#txtID").val($(this).closest('tr').children()[0].textContent);
+			    $("#txtEquipname").val($(this).closest('tr').children()[1].textContent);
+			    $("#txtCallnumber").val($(this).closest('tr').children()[2].textContent);
+			    $("#txtLocate").val($(this).closest('tr').children()[3].textContent);
+			    $("#txtDescription").val($(this).closest('tr').children()[4].textContent);
+		    });
+		});
+    </script>
+
+    <style type="text/css">
+		.ui-autocomplete {
+			max-height: 100px;
+			overflow-y: auto;
+			/* prevent horizontal scrollbar */
+			overflow-x: hidden;
+		}
+		/* IE 6 doesn't support max-height
+		 * we use height instead, but this forces the menu to always be this tall
+		 */
+		* html .ui-autocomplete {
+			height: 100px;
+		}
+    </style>
+</head>
+<body style="padding-top: 5rem;">
+	<div class="container">
+		<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
+		<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+	        <a class="navbar-brand" href="\index">
+	            <img src="{{ url_for('static',filename="imgs/band.png")}}" alt="Logo" width="45" height="30" />
+	        </a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
+
+	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	            <ul class="navbar-nav mr-auto">
+	                <li class="nav-item active">
+	                    <a class="nav-link" href="index">หน้าหลัก <span class="sr-only">(current)</span></a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="lend">เพิ่มรายการยืม-คืน</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="equipment">ค้นหาอุปกรณ์</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="category">หมวดหมู่</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="person">รายชื่อนักศึกษา/อาจารย์</a>
+	                </li>
+	                <li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          ตรวจห้อง LAB
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				        	<a class="dropdown-item" href="room">รายชื่อห้อง</a>
+				        	<div class="dropdown-divider"></div>
+				          	<a class="dropdown-item" href="room941">ห้อง 941</a>
+				          	<a class="dropdown-item" href="room953">ห้อง 953</a>
+				          	<a class="dropdown-item" href="room982">ห้อง 982</a>
+				          	<a class="dropdown-item" href="room983">ห้อง 983</a>
+				          	<div class="dropdown-divider"></div>
+				          	<a class="dropdown-item" href="roomchecklist">รายการตรวจห้อง</a>
+				        </div>
+				    </li>
+				    <li class="nav-item">
+	                    <a class="nav-link" href="preport">จัดการเอกสาร</a>
+	                </li>
+	            </ul>
+	                <form class="form-inline my-2 my-lg-0">
+	                    <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
+	                    <a href="profile">
+	                    	<label class="form-control-label mr-sm-2" style="color: white;">{{ username }}</label>
+	                    </a>
+	                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnLogout">ลงชื่อออก</button>
+	                    <script type="text/javascript">
+	                    	$('#btnLogout').click(function(){
+	                    		$.ajax({
+									url: '/logout',
+									contentType: 'application/json; charset=utf-8',
+									success: function(response){
+										console.log(response);
+										window.location = "login";
+									},
+									error: function(error){
+										console.log(error);
+									}
+								});
+	                    	});
+	                    </script>
+	                </form>
+	        </div>
+	    </nav>
+	    <!-- ++++++++++++++++++++++end navbar++++++++++++++++++++++ -->
+
+	    <div class="row">
+	        <div class="col-12 col-md-12">
+	            <h3>อุปกรณ์ และสถานที่ตั้ง</h3>
+	        </div>           
+	    </div>
+	    <br>
+
+	    <div class="row" style="border-style: solid; border-radius: 5px; border-color: #92B945; background-color: #D4F88B">
+	    	<div class="col-12 col-lg-5">
+		    	<div class="form-group">
+		            <label for="equipname" class="form-control-label">ชื่ออุปกรณ์:</label>
+		            <input type="text" class="form-control" id="equipname" maxlength="100">
+		            <div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+		            <script type="text/javascript">
+		            	$("#equipname").blur(function(){
+		            		if (this.value == '') {
+		            			$("#error1").fadeIn("show");
+		            		}
+		            		if (this.value != '') {
+		            			$("#error1").fadeOut();
+		            		}
+		               	});
+		               	$( function() {
+				    		var datapid = [
+				    			{% for row in rows1 %}
+	        						"{{ row[1] }}",
+	        					{% endfor %}];			    	
+						    $( "#equipname" ).autocomplete({
+						      source: datapid
+						    });
+					  	});
+		            </script>					            
+		        </div>
+		    </div>
+		    <div class="col-12 col-lg-5">
+		    	 <div class="form-group">
+		           	<label for="equipcall" class="form-control-label">เลขครุภัณฑ์:</label>
+		            <input type="text" class="form-control" id="equipcall" autocomplete="off" maxlength="100">
+		            <div id="error2" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+		            <script type="text/javascript">
+		            	$("#equipcall").blur(function(){
+		            		if (this.value == '') {
+		            			$("#error2").fadeIn("show");
+		            		}
+		            		if (this.value != '') {
+		            			$("#error2").fadeOut();
+		            		}
+		               	});
+		               	$( function() {
+				    		var datapid = [
+				    			{% for row in rows1 %}
+	        						"{{ row[2] }}",
+	        					{% endfor %}];			    	
+						    $( "#equipcall" ).autocomplete({
+						      source: datapid
+						    });
+					  	});
+		            </script>
+		        </div>
+		    </div>
+		    <div class="col-12 col-lg-2">
+		    	<div class="form-group">
+		           	<label for="equiplocate" class="form-control-label">ตำแหน่งที่ตั้ง:</label>
+		            <select class="form-control" id="equiplocate">
+		            	<option value="941">941</option>
+		            	<option value="953">953</option>
+		            	<option value="982">982</option>
+		            	<option value="983">983</option>
+		            	<option value="other">other</option>
+		            </select>
+		        </div>
+		    </div>
+		    <div class="col-12 col-lg-6">
+		    	<div class="form-group">
+		            <label for="equipdetails" class="form-control-label">หมายเหตุ:</label>
+		            <textarea class="form-control" id="equipdetails" autocomplete="off" maxlength="500"></textarea>
+		        </div> 
+		    </div>
+		    <div class="col-12 col-lg-6">
+		    	<div class="form-group">
+			    	<label for="btnSave" class="form-control-label">&nbsp;</label><br>
+			    	<button type="submit" value="submit" class="btn btn-success" id="btnSave">บันทึก</button>
+			        <script type="text/javascript">
+						$('#btnSave').click(function(){
+							var elname = document.getElementById("equipname").value;
+							var elcall = document.getElementById("equipcall").value;
+							var elocate = document.getElementById("equiplocate").value;
+							var edetail = document.getElementById("equipdetails").value;					
+							if (elname == "" || elcall == "") {
+								alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+								return false;
+							}
+							else{
+								alert("บันทึกข้อมูลเรียบร้อย");
+								$.ajax({
+									url: '/addequiplocate',
+									data: JSON.stringify({"elname" : elname , "elcall" : elcall , "elocate" : elocate , "edetail" : edetail}),
+									type: 'POST',
+									processData: false,
+									contentType: 'application/json; charset=utf-8',
+									success: function(response){
+										console.log(response);
+									},
+									error: function(error){
+										console.log(error);
+									}
+								});
+								location.reload();
+							}									
+						});
+					</script>
+				</div>
+		    </div>
+	    </div>
+	    
+		<hr>
+
+		<div class="container">   
+	        <table id="example" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+	            <thead>
+	                <th>ID</th>
+	                <th>ชื่ออุปกรณ์</th>
+	                <th>เลขครุภัณ์</th>
+	                <th>ตำแหน่งที่ตั้ง</th>
+	                <th>หมายเหตุ</th>    
+	            </thead>
+
+	            {% for row in rows1 %}
+	            <tr>
+	                <td>{{row[0]}}</td>
+	                <td>{{row[1]}}</td>
+	                <td>{{row[2]}}</td>
+	                <td>{{row[3]}}</td>
+	                <td>{{row[4]}}</td>              
+	            </tr>
+	            {% endfor %}
+	        </table>             
+	    </div>
+
+	    <div class="modal fade" id="myModal">
+		  	<div class="modal-dialog">
+		    	<div class="modal-content">
+		      		<div class="modal-header">
+		      			<h5 class="modal-title" id="exampleModalLabel">ลบ / แก้ไข</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          	<span aria-hidden="true">&times;</span>
+				        </button>	      
+		        	</div>
+		      	<div class="modal-body">	
+		      		
+	      			<div class="form-group">
+	      				<label for="txtID" class="form-control-label">รหัส:</label>
+	      				<input type="text" class="form-control" readonly="readonly" id="txtID" autocomplete="off" />
+	      			</div>
+	      			<div class="form-group">
+	      				<label for="txtEquipname" class="form-control-label">ชื่อุปกรณ์:</label>
+	      				<input type="text" class="form-control" id="txtEquipname" autocomplete="off" maxlength="100" />
+	      				<div id="error3" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+			            <script type="text/javascript">
+			            	$("#txtEquipname").blur(function(){
+			            		if (this.value == '') {
+			            			$("#error3").fadeIn("show");
+			            		}
+			            		if (this.value != '') {
+			            			$("#error3").fadeOut();
+			            		}
+			               	})
+			            </script>
+	      			</div>			    			
+	      			<div class="form-group">
+	      				<label for="txtCallnumber" class="form-control-label">เลขครุภัณ์:</label>
+	      				<input type="text" class="form-control" id="txtCallnumber" autocomplete="off" maxlength="100" />
+	      				<div id="error4" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+	      				<script type="text/javascript">
+			            	$("#txtCallnumber").blur(function(){
+			            		if (this.value == '') {
+			            			$("#error4").fadeIn("show");
+			            		}
+			            		if (this.value != '') {
+			            			$("#error4").fadeOut();
+			            		}
+			               	})
+			            </script>
+	      			</div>
+	      			<div class="form-group">
+	      				<label for="txtLocate" class="form-control-label">ตำแหน่งที่ตั้ง:</label>
+	      				<select class="form-control" id="txtLocate">
+	      					<option value="941">941</option>
+	      					<option value="953">953</option>
+	      					<option value="982">982</option>
+	      					<option value="983">983</option>
+	      					<option value="other">other</option>
+	      				</select>
+	      			</div>
+	      			<div class="form-group">
+	      				<label for="txtDescription" class="form-control-label">หมายเหตุ:</label>
+						<textarea class="form-control" id="txtDescription" autocomplete="off" maxlength="500"></textarea>
+	      			</div>	      		      		
+		      	</div>
+		      		<div class="modal-footer">	        		
+		        		<button type="submit" value="submit" class="btn btn-danger" id="btnDelete">ลบ</button>
+		        		<script type="text/javascript">
+							$('#btnDelete').click(function(){
+								if (confirm("ต้องการลบใช่หรือไม่")) {
+									var equipid = document.getElementById("txtID").value;
+									$.ajax({
+										url: '/delequiplocate',
+										data: JSON.stringify({"equipid" : equipid}),
+										type: 'POST',
+										processData: false,
+										contentType: 'application/json; charset=utf-8',
+										success: function(response){
+											console.log(response);
+										},
+										error: function(error){
+											console.log(error);
+										}
+									});
+									location.reload();
+								}
+								return false;
+							});					
+		        		</script>
+		        		<button type="submit" value="submit" class="btn btn-primary" id="btnUpdate">อัพเดท</button>	    
+		        		<script type="text/javascript">
+		        			$('#btnUpdate').click(function(){
+		        				var equipid = document.getElementById("txtID").value;
+						  		var ename = document.getElementById("txtEquipname").value;
+								var ecall = document.getElementById("txtCallnumber").value;
+								var elo = document.getElementById("txtLocate").value;
+								var ede = document.getElementById("txtDescription").value;
+
+
+								if (ename == "" || ecall == "") {
+									alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+	    							return false;
+								}
+								else{
+									alert("อัพเดทข้อมูลเรียบร้อย");
+									$.ajax({
+										url: '/editequiplocate',
+										data: JSON.stringify({"equipid" : equipid , "ename" : ename , "ecall" : ecall , "elo" : elo , "ede" : ede}),
+										type: 'POST',
+										processData: false,
+										contentType: 'application/json; charset=utf-8',
+										success: function(response){
+											console.log(response);
+										},
+										error: function(error){
+											console.log(error);
+										}
+									});
+									location.reload();
+								}									
+							});
+		        		</script>
+		        		<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>    		 
+		      		</div>
+		    	</div><!-- /.modal-content -->
+	  		</div><!-- /.modal-dialog -->
+	  	</div><!-- /.modal -->
+
+	</div>
+
+</body>
+</html>

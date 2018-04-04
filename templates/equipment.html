@@ -134,7 +134,13 @@
         <br /> 
             
         <!-- Button Add Category -->
-		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">เพิ่มอุปกรณ์</button>          
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">เพิ่มอุปกรณ์</button> 
+		<button type="button" class="btn btn-default" id="btnEquiplocate">ครุภัณฑ์และสถานที่ตั้ง</button>
+		<script type="text/javascript">
+			$('#btnEquiplocate').click(function(){
+				window.location = "/equiplocate";
+			});
+		</script>        
         
         <!-- Modal -->
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

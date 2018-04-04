@@ -240,6 +240,56 @@ def editequipment():
     conn.commit()
     return json.dumps(data)
 
+@app.route('/equiplocate' , methods = ['POST' , 'GET'])
+def equiplocate():
+    conn = db_connect.connect()
+    query1 = conn.execute("SELECT EQUIP_L_ID, E_NAME, E_CALLNUMBER, LOCATION, DESCRIPTION FROM EQUIPMENT_LOCATION")
+    rows1 = query1.fetchall()
+    if 'user' in session:
+        username = session['user']
+        return render_template("equipmentlocate.html", rows1=rows1, username=username)
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+      "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
+@app.route('/addequiplocate' , methods = ['POST' , 'GET'])
+def addequiplocate():
+    try:
+        data = request.get_json()
+        conn = db_connect.connect()
+        conn.execute("INSERT INTO EQUIPMENT_LOCATION "
+                     "(E_NAME, "
+                     "E_CALLNUMBER, "
+                     "LOCATION, "
+                     "DESCRIPTION) "                  
+                     "VALUES (:1, :2, :3, :4)",
+                     (data["elname"], data["elcall"], data["elocate"], data["edetail"]))
+        conn.commit()
+    except:
+        conn.rollback()
+    finally:
+        return json.dumps(data)
+        conn.close()
+
+@app.route('/delequiplocate' , methods = ['POST' , 'GET'])
+def delequiplocate():
+    data = request.get_json()
+    conn = db_connect.connect()
+    conn.execute("DELETE FROM EQUIPMENT_LOCATION WHERE EQUIP_L_ID = "+ (data["equipid"]))
+    return json.dumps(data)
+
+@app.route('/editequiplocate' , methods = ['POST' , 'GET'])
+def editequiplocate():
+    data = request.get_json()
+    conn = db_connect.connect()
+    conn.execute("UPDATE EQUIPMENT_LOCATION "
+                 "SET E_NAME = '" + (data["ename"]) + "', " +
+                 "E_CALLNUMBER = '" + (data["ecall"]) + "', " +
+                 "LOCATION = '" + (data["elo"]) + "', " +
+                 "DESCRIPTION = '" + (data["ede"]) + "'" +
+                 " WHERE EQUIP_L_ID = " + (data["equipid"]))
+    conn.commit()
+    return json.dumps(data)
+
 @app.route('/category', methods = ['POST', 'GET'])
 def category():
     conn = db_connect.connect()
