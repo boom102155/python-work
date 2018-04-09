@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c20361aa-bc4c-4168-96a9-abe8686d6c37" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/imgs/loading.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/equipment.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/equipment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/preport.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/preport.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
     </list>
@@ -29,8 +26,8 @@
       <file leaf-file-name="test2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="577">
-              <caret line="669" selection-start-line="669" selection-end-line="669" />
+            <state relative-caret-position="322">
+              <caret line="642" lean-forward="true" selection-start-line="642" selection-end-line="642" />
               <folding>
                 <element signature="e#0#92#0" expanded="true" />
               </folding>
@@ -291,7 +288,7 @@
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15525982" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3287037" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2782258" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.31048387" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.3287037" />
       <window_info anchor="bottom" id="Python Console" order="8" weight="0.3287037" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -345,8 +342,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RestFul.py" />
-    <entry file="file://$PROJECT_DIR$/test" />
     <entry file="file://$PROJECT_DIR$/RestFul.py" />
     <entry file="file://$PROJECT_DIR$/RestFul.py" />
     <entry file="file://$PROJECT_DIR$/RestFul.py" />
@@ -434,10 +429,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/UPLOAD/09042018_032423.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/UPLOAD/09042018_043124.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/test2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="669" selection-start-line="669" selection-end-line="669" />
+        <state relative-caret-position="322">
+          <caret line="642" lean-forward="true" selection-start-line="642" selection-end-line="642" />
           <folding>
             <element signature="e#0#92#0" expanded="true" />
           </folding>

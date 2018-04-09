@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ส่วนการจัดการแอดมิน</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">        
+    <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+    <!-- data table style script -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script type="text/javascript">
+    	$(document).ready(function() {
+			$('#example').DataTable();			
+			$('#example tbody').on('click', 'tr', 'td', function () {
+		        $("#myModal").modal("show");
+		        $("#txtID").val($(this).closest('tr').children()[0].textContent);
+		        $("#txtname").val($(this).closest('tr').children()[1].textContent);
+		        $("#txtsurname").val($(this).closest('tr').children()[2].textContent);
+		        $("#txtusername").val($(this).closest('tr').children()[3].textContent);
+			    $("#txttype").val($(this).closest('tr').children()[4].textContent);
+			    $("#txtpassword").val($(this).closest('tr').children()[5].textContent);			    
+		    });	
+		});
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+        	var alertdisplay = document.getElementById("alertnotadmin");
+            var usertype = "{{ utype }}";
+            if (usertype != 'Admin') {
+                $("#adminonly").hide(); 
+                alertdisplay.style.display = "block";
+            }else{
+                $("#adminonly").show();
+                alertdisplay.style.display = "none";
+            }
+        });
+    </script>
+
+</head>
+<body style="padding-top: 5rem;">
+	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="\index">
+            <img src="{{ url_for('static',filename="imgs/band.png")}}" alt="Logo" width="45" height="30" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index">หน้าหลัก <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="lend">เพิ่มรายการยืม-คืน</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="equipment">ค้นหาอุปกรณ์</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="category">หมวดหมู่</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="person">รายชื่อนักศึกษา/อาจารย์</a>
+                </li>
+                <li class="nav-item dropdown">
+			        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			          ตรวจห้อง LAB
+			        </a>
+			        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+			        	<a class="dropdown-item" href="room">รายชื่อห้อง</a>
+			        	<div class="dropdown-divider"></div>
+			          	<a class="dropdown-item" href="room941">ห้อง 941</a>
+			          	<a class="dropdown-item" href="room953">ห้อง 953</a>
+			          	<a class="dropdown-item" href="room982">ห้อง 982</a>
+			          	<a class="dropdown-item" href="room983">ห้อง 983</a>
+			          	<div class="dropdown-divider"></div>
+			          	<a class="dropdown-item" href="roomchecklist">รายการตรวจห้อง</a>
+			        </div>
+			    </li>
+			    <li class="nav-item">
+                    <a class="nav-link" href="preport">จัดการเอกสาร</a>
+                </li>
+            </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
+                    <a href="profile">
+                    	<label class="form-control-label mr-sm-2" style="color: white;">{{ username }}</label>
+                    </a>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnLogout">ลงชื่อออก</button>
+                    <script type="text/javascript">
+                    	$('#btnLogout').click(function(){
+                    		$.ajax({
+								url: '/logout',
+								contentType: 'application/json; charset=utf-8',
+								success: function(response){
+									console.log(response);
+									window.location = "login";
+								},
+								error: function(error){
+									console.log(error);
+								}
+							});
+                    	});
+                    </script>
+                </form>
+        </div>
+    </nav>
+    <!-- ++++++++++++++++++++++end navbar++++++++++++++++++++++ -->
+	<div id="alertnotadmin">
+		คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ หรือไม่มีสิทธิ์ใช้งานในส่วนนี้
+		<a href="/index">กลับไปหน้าหลัก</a>
+	</div>
+	<div id="adminonly">
+		<div class="container">
+			<h4>ข้อมูลผู้ใช้งานระบบ</h4>
+			<br>
+
+			<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addModal">เพิ่มผู้ใช้งาน</button>
+			<!-- Modal -->
+			<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  	<div class="modal-dialog" role="document">	
+			  		<form>  			  		
+				    	<div class="modal-content">
+					      	<div class="modal-header">
+					        	<h5 class="modal-title" id="exampleModalLabel">กรอกข้อมูลผู้ใช้งาน</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          	<span aria-hidden="true">&times;</span>
+						        </button>
+					      	</div>
+						    <div class="modal-body">							    	    	
+						        <form>
+						        	<div class="form-group">
+							            <label for="uid" class="form-control-label">ID:</label>
+							            <input type="text" class="form-control" id="uid" autocomplete="off" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+							            <div id="error1" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+							            <script type="text/javascript">
+							            	$("#uid").blur(function(){
+							            		if (this.value == '') {
+							            			$("#error1").fadeIn("show");
+							            		}
+							            		if (this.value != '') {
+							            			$("#error1").fadeOut();
+							            		}
+							               	})
+							            </script>
+							        </div>						       						       
+							        <div class="form-group">
+							           	<label for="name" class="form-control-label">ชื่อ:</label>
+							            <input class="form-control" id="name" autocomplete="off" maxlength="50">
+							            <div id="error2" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+							            <script type="text/javascript">
+							            	$("#name").blur(function(){
+							            		if (this.value == '') {
+							            			$("#error2").fadeIn("show");
+							            		}
+							            		if (this.value != '') {
+							            			$("#error2").fadeOut();
+							            		}
+							               	})
+							            </script>
+							        </div>
+							        <div class="form-group">
+							           	<label for="surname" class="form-control-label">นามสกุล:</label>
+							            <input type="text" class="form-control" id="surname" autocomplete="off" maxlength="50">
+							            <div id="error3" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+							            <script type="text/javascript">
+							            	$("#surname").blur(function(){
+							            		if (this.value == '') {
+							            			$("#error3").fadeIn("show");
+							            		}
+							            		if (this.value != '') {
+							            			$("#error3").fadeOut();
+							            		}
+							               	})
+							            </script>
+							        </div>
+							        <div class="form-group">
+							           	<label for="username" class="form-control-label">Username:</label>
+							            <input type="text" class="form-control" id="username" autocomplete="off" maxlength="50">
+							            <div id="error4" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+							            <script type="text/javascript">
+							            	$("#username").blur(function(){
+							            		if (this.value == '') {
+							            			$("#error4").fadeIn("show");
+							            		}
+							            		if (this.value != '') {
+							            			$("#error4").fadeOut();
+							            		}
+							               	})
+							            </script>
+							        </div>
+							        <div class="form-group">
+							           	<label for="type" class="form-control-label">สถานะ:</label>
+							            <select class="form-control" id="type">
+							            	<option value="User">User</option>
+							            	<option value="Admin">Admin</option>					            	
+							            </select>
+							        </div>
+							      	<div class="form-group">
+							           	<label for="password" class="form-control-label">Password:</label>
+							            <input type="text" class="form-control" id="password" autocomplete="off" maxlength="50">
+							            <div id="error6" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+							            <script type="text/javascript">
+							            	$("#password").blur(function(){
+							            		if (this.value == '') {
+							            			$("#error6").fadeIn("show");
+							            		}
+							            		if (this.value != '') {
+							            			$("#error6").fadeOut();
+							            		}
+							               	})
+							            </script>
+							        </div>
+							    </form>					    
+						    </div>
+						    <div class="modal-footer">
+						       	<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+						        <button type="submit" value="submit" class="btn btn-primary" id="btnSave">บันทึก</button>
+						        <script type="text/javascript">
+									$('#btnSave').click(function(){
+								  		var uid = document.getElementById("uid").value;
+										var uname = document.getElementById("name").value;
+										var usurname = document.getElementById("surname").value;
+										var usern = document.getElementById("username").value;									
+										var utype = document.getElementById("type").value;
+										var upass = document.getElementById("password").value;
+
+										if (uid == "" || uname == "" || username == "" || usern == "" || utype == "" || upass == "") {
+											alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+	            							return false;
+										}
+										else{
+											alert("บันทึกข้อมูลเรียบร้อย");
+											$.ajax({
+												url: '/adduser',
+												data: JSON.stringify({"uid" : uid ,"uname" : uname , "usurname" : usurname , "usern" : usern , "utype" : utype , 
+													"upass" : upass}),
+												type: 'POST',
+												processData: false,
+												contentType: 'application/json; charset=utf-8',
+												success: function(response){
+													console.log(response);
+												},
+												error: function(error){												
+													console.log(error);
+												}
+											});
+										}									
+									});
+								</script>
+						    </div>
+				    	</div>
+			    	</form>		    
+			  	</div>
+			</div>
+			<!-- ++++++++++++++++++End Modal++++++++++++++++++ -->
+			<hr>
+
+			<table id="example" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+	            <thead>
+	                <th>ID</th>
+	                <th>ชื่อ</th>
+	                <th>นามสกุล</th>
+	                <th>ชื่อผู้ใช้งาน</th>
+	                <th>สถานะ</th>
+	                <th>พาสเวิร์ด</th>               
+	            </thead>
+
+	            {% for row in rows1 %}
+	            <tr>
+	                <td>{{row[0]}}</td>
+	                <td>{{row[1]}}</td>
+	                <td>{{row[2]}}</td>
+	                <td>{{row[3]}}</td>
+	                <td>{{row[4]}}</td>
+	                <td>{{row[5]}}</td>                                 
+	            </tr>
+	            {% endfor %}
+	        </table>
+
+	        <div class="modal fade" id="myModal">
+			  	<div class="modal-dialog">
+			    	<div class="modal-content">
+			      		<div class="modal-header">
+			      			<h5 class="modal-title" id="exampleModalLabel">ลบ / แก้ไข</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          	<span aria-hidden="true">&times;</span>
+					        </button>	      
+			        	</div>
+				      	<div class="modal-body">	
+				      		<form>
+				      			<div class="form-group">
+				      				<label for="txtID" class="form-control-label">รหัส:</label>
+				      				<input type="text" class="form-control" id="txtID" autocomplete="off" readonly="readonly" />
+				      				<div id="error5" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#txtID").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error5").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error5").fadeOut();
+						            		}
+						               	})
+						            </script>
+				      			</div>
+				      			<div class="form-group">
+						           	<label for="txtname" class="form-control-label">ชื่อ:</label>
+						            <input class="form-control" id="txtname" autocomplete="off" maxlength="50">
+						            <div id="error2" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#txtname").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error2").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error2").fadeOut();
+						            		}
+						               	})
+						            </script>
+						        </div>
+						        <div class="form-group">
+						           	<label for="txtsurname" class="form-control-label">นามสกุล:</label>
+						            <input type="text" class="form-control" id="txtsurname" autocomplete="off" maxlength="50">
+						            <div id="error3" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#txtsurname").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error3").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error3").fadeOut();
+						            		}
+						               	})
+						            </script>
+						        </div>
+						        <div class="form-group">
+						           	<label for="txtusername" class="form-control-label">Username:</label>
+						            <input type="text" class="form-control" id="txtusername" autocomplete="off" maxlength="50">
+						            <div id="error4" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#txtusername").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error4").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error4").fadeOut();
+						            		}
+						               	})
+						            </script>
+						        </div>
+						        <div class="form-group">
+						           	<label for="txttype" class="form-control-label">สถานะ:</label>
+						            <select class="form-control" id="txttype">
+						            	<option value="User">User</option>
+						            	<option value="Admin">Admin</option>					            	
+						            </select>
+						        </div>
+						      	<div class="form-group">
+						           	<label for="txtpassword" class="form-control-label">Password:</label>
+						            <input type="text" class="form-control" id="txtpassword" autocomplete="off" maxlength="50">
+						            <div id="error6" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
+						            <script type="text/javascript">
+						            	$("#txtpassword").blur(function(){
+						            		if (this.value == '') {
+						            			$("#error6").fadeIn("show");
+						            		}
+						            		if (this.value != '') {
+						            			$("#error6").fadeOut();
+						            		}
+						               	})
+						            </script>
+						        </div>		        			        	
+					        </form>
+				      	</div>
+			      		<div class="modal-footer">
+			      			<button type="submit" value="submit" class="btn btn-danger" id="btnDelete">ลบ</button>	
+			      			<script type="text/javascript">
+								$('#btnDelete').click(function(){
+									if (confirm("ต้องการลบใช่หรือไม่")) {
+										var staffid = document.getElementById("txtID").value;
+										$.ajax({
+											url: '/deluser',
+											data: JSON.stringify({"staffid" : staffid}),
+											type: 'POST',
+											processData: false,
+											contentType: 'application/json; charset=utf-8',
+											success: function(response){
+												console.log(response);
+											},
+											error: function(error){
+												console.log(error);
+											}
+										});
+										location.reload();
+									}
+									return false;
+								});					
+			        		</script>        			        		
+			        		<button type="submit" value="submit" class="btn btn-primary" id="btnUpdate">อัพเดท</button>
+			        		<script type="text/javascript">
+								$('#btnUpdate').click(function(){
+							  		var staffid = document.getElementById("txtID").value;
+									var tuname = document.getElementById("txtname").value;
+									var tusurname = document.getElementById("txtsurname").value;
+									var tusern = document.getElementById("txtusername").value;
+									var tutype = document.getElementById("txttype").value;						
+									var tupass = document.getElementById("txtpassword").value;
+
+									if (staffid == "" || tuname == "" || tusurname == "" || tusern == "" || tutype == "" || tupass == "") {
+										alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+		    							return false;
+									}
+									else{
+										alert("อัพเดทข้อมูลเรียบร้อย");
+										$.ajax({
+											url: '/edituser',
+											data: JSON.stringify({"staffid" : staffid , "tuname" : tuname , "tusurname" : tusurname , "tusern" : tusern , "tutype" : tutype , "tupass" : tupass}),
+											type: 'POST',
+											processData: false,
+											contentType: 'application/json; charset=utf-8',
+											success: function(response){
+												console.log(response);
+											},
+											error: function(error){
+												console.log(error);
+											}
+										});
+										location.reload();
+									}									
+								});
+							</script>
+			        		<button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+			      		</div>
+			    	</div><!-- /.modal-content -->
+		  		</div><!-- /.modal-dialog -->
+		  	</div><!-- /.modal -->
+		</div>
+	</div>
+</body>
+</html>

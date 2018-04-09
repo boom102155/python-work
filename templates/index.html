@@ -120,7 +120,16 @@
             transform: translate(-50%, -50%);
         }*/
     </style>
-
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var usertype = "{{ utype }}";
+            if (usertype != 'Admin') {
+                $("#btnAdminManage").hide();
+            }else{
+                $("#btnAdminManage").show();
+            }
+        });
+    </script>
                          
 </head>
 <body style="background-color: #3A0E61; padding-bottom: 3rem;">
@@ -148,22 +157,30 @@
                         <h4 style="padding-bottom: 2rem;">
                             <a href="profile" style="text-decoration: none; color: #EEEEEE;">{{ username }}</a>
                         </h4>
-                    <button class="btn btn-default hvr-grow" type="submit" id="btnLogout">ลงชื่อออก</button>
-                    <script type="text/javascript">
-                        $('#btnLogout').click(function(){
-                            $.ajax({
-                                url: '/logout',
-                                contentType: 'application/json; charset=utf-8',
-                                success: function(response){
-                                    console.log(response);
-                                    window.location = "login";
-                                },
-                                error: function(error){
-                                    console.log(error);
-                                }
+                    <div class="btn-group">
+                        <button class="btn btn-default hvr-grow" type="submit" id="btnLogout">ลงชื่อออก</button>
+                        <script type="text/javascript">
+                            $('#btnLogout').click(function(){
+                                $.ajax({
+                                    url: '/logout',
+                                    contentType: 'application/json; charset=utf-8',
+                                    success: function(response){
+                                        console.log(response);
+                                        window.location = "login";
+                                    },
+                                    error: function(error){
+                                        console.log(error);
+                                    }
+                                });
                             });
-                        });
-                    </script>
+                        </script>
+                        <button class="btn btn-default hvr-grow" type="button" id="btnAdminManage">ส่วนของแอดมิน</button>
+                        <script type="text/javascript">
+                            $('#btnAdminManage').click(function(){
+                                window.location = "/adminmanagement";
+                            });
+                        </script>
+                    </div>
                 </div>
 
                 <div class="box3 hvr-grow" style="cursor: pointer;" onclick="window.location='/equipment';">

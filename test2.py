@@ -12,6 +12,64 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 app.secret_key = os.urandom(24)
 datareport = {}
 
+@app.route('/adminmanagement')
+def adminmanagement():
+    conn = db_connect.connect()
+    if 'user' in session:
+        username = session['user']
+        query1 = conn.execute("SELECT STAFF_ID, NAME, SURNAME, USER_NAME, TYPE, PASSWORD FROM STAFF")
+        query2 = conn.execute("SELECT TYPE FROM STAFF WHERE USER_NAME = '" + username + "'")
+        rows1 = query1.fetchall()
+        rows2 = query2.fetchall()
+        for row in rows2:
+            utype = row["type"]
+        return render_template("adminmanagement.html", username=username, rows1=rows1, utype=utype)
+
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+           "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
+@app.route('/adduser' , methods = ['POST' , 'GET'])
+def adduser():
+    try:
+        data = request.get_json()
+        conn = db_connect.connect()
+        conn.execute("INSERT INTO STAFF "
+                     "(STAFF_ID, "
+                     "NAME, "
+                     "SURNAME, "
+                     "USER_NAME, "
+                     "TYPE, "
+                     "PASSWORD) "
+                     "VALUES (:1, :2, :3, :4, :5, :6)",
+                     (data["uid"], data["uname"], data["usurname"], data["usern"], data["utype"], data["upass"]))
+        conn.commit()
+    except:
+        conn.rollback()
+    finally:
+        return json.dumps(data)
+        conn.close()
+
+@app.route('/deluser' , methods = ['POST' , 'GET'])
+def deluser():
+    data = request.get_json()
+    conn = db_connect.connect()
+    conn.execute("DELETE FROM STAFF WHERE STAFF_ID = "+ (data["staffid"]))
+    return json.dumps(data)
+
+@app.route('/edituser' , methods = ['POST' , 'GET'])
+def edituser():
+    data = request.get_json()
+    conn = db_connect.connect()
+    conn.execute("UPDATE STAFF SET "
+                 "NAME = '" + (data["tuname"]) + "', " +
+                 "SURNAME = '" + (data["tusurname"]) + "', " +
+                 "USER_NAME = '" + (data["tusern"]) + "', " +
+                 "TYPE = '" + (data["tutype"]) + "', " +
+                 "PASSWORD = '" + (data["tupass"]) + "'" +
+                 " WHERE STAFF_ID = " + (data["staffid"]))
+    conn.commit()
+    return json.dumps(data)
+
 @app.route('/login')
 def login():
     return render_template("login.html")
@@ -68,9 +126,14 @@ def editpassword():
 
 @app.route('/index')
 def index():
+    conn = db_connect.connect()
     if 'user' in session:
         username = session['user']
-        return render_template("index.html", username=username)
+        query = conn.execute("SELECT TYPE FROM STAFF WHERE USER_NAME = '" + username + "'")
+        rows = query.fetchall()
+        for row in rows:
+            utype = row["type"]
+            return render_template("index.html", username=username, utype=utype)
     return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
            "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 
@@ -572,8 +635,11 @@ def preport():
     rows3 = query3.fetchall()
     rows4 = query4.fetchall()
 
-    return render_template("preport.html" , rows1=rows1 , rows2=rows2 , rows3=rows3, rows4=rows4)
-
+    if 'user' in session:
+        username = session['user']
+        return render_template("preport.html", rows1=rows1, rows2=rows2, rows3=rows3, rows4=rows4, username=username)
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+      "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload():
@@ -581,7 +647,7 @@ def upload():
       # f = request.files['file']
       # f.save(secure_filename(f.filename))
       # return 'file uploaded successfully'
-      target = os.path.join(APP_ROOT, 'UPLOAD')
+      target = os.path.join(APP_ROOT, 'static/UPLOAD')
       print(target)
       file = request.files['file']
       if file.filename == '':

@@ -64,11 +64,80 @@
     </script>
 
 </head>
-<body style="padding-top: 5rem;">
+<body style="padding-top: 5rem; padding-bottom: 3rem;">
 	<div class="container">
+		<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
+		<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+	        <a class="navbar-brand" href="\index">
+	            <img src="{{ url_for('static',filename="imgs/band.png")}}" alt="Logo" width="45" height="30" />
+	        </a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
 
-		<a data-toggle="modal" data-target="#popup_img">Click to see image</a>
-		<!-- popup contain -->
+	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	            <ul class="navbar-nav mr-auto">
+	                <li class="nav-item active">
+	                    <a class="nav-link" href="index">หน้าหลัก <span class="sr-only">(current)</span></a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="lend">เพิ่มรายการยืม-คืน</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="equipment">ค้นหาอุปกรณ์</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="category">หมวดหมู่</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="person">รายชื่อนักศึกษา/อาจารย์</a>
+	                </li>
+	                <li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          ตรวจห้อง LAB
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				        	<a class="dropdown-item" href="room">รายชื่อห้อง</a>
+				        	<div class="dropdown-divider"></div>
+				          	<a class="dropdown-item" href="room941">ห้อง 941</a>
+				          	<a class="dropdown-item" href="room953">ห้อง 953</a>
+				          	<a class="dropdown-item" href="room982">ห้อง 982</a>
+				          	<a class="dropdown-item" href="room983">ห้อง 983</a>
+				          	<div class="dropdown-divider"></div>
+				          	<a class="dropdown-item" href="roomchecklist">รายการตรวจห้อง</a>
+				        </div>
+				    </li>
+				    <li class="nav-item">
+	                    <a class="nav-link" href="preport">จัดการเอกสาร</a>
+	                </li>
+	            </ul>
+	                <form class="form-inline my-2 my-lg-0">
+	                    <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
+	                    <a href="profile">
+	                    	<label class="form-control-label mr-sm-2" style="color: white;">{{ username }}</label>
+	                    </a>
+	                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnLogout">ลงชื่อออก</button>
+	                    <script type="text/javascript">
+	                    	$('#btnLogout').click(function(){
+	                    		$.ajax({
+									url: '/logout',
+									contentType: 'application/json; charset=utf-8',
+									success: function(response){
+										console.log(response);
+										window.location = "login";
+									},
+									error: function(error){
+										console.log(error);
+									}
+								});
+	                    	});
+	                    </script>
+	                </form>
+	        </div>
+	    </nav>
+	    <!-- ++++++++++++++++++++++end navbar++++++++++++++++++++++ -->
+		<!-- <a data-toggle="modal" data-target="#popup_img">Click to see image</a>
+		
 		<div class="modal fade" id="popup_img" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	   		<button type="button" class="close" data-dismiss="modal">
 	   			<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -78,7 +147,8 @@
         		<img src="https://d13yacurqjgara.cloudfront.net/users/141092/screenshots/2379154/never-too-old_1x.jpg" alt="" >
     		</div>
   			<div class="col-md-3"></div>
-  		</div><!-- end popup contain -->
+  		</div> -->
+
 
 		<h4>จัดการเอกสารอาจารย์</h4>
 		<hr>
@@ -112,7 +182,7 @@
 				</div>
 				<!-- ========================= right column ========================= -->
 				<div class="col-12 col-md-6" style="padding: 20px;">
-					<form method="POST" action="http://localhost:5000/uploader" enctype="multipart/form-data">
+					<form method="POST" action="http://127.0.0.1:5000/uploader" enctype="multipart/form-data">
 						
 						<div class="row">
 							<div class="col-12 col-md-6">
@@ -163,11 +233,11 @@
 							<div class="col-12 col-md-6">
 								<div class="form-froup" style="white-space: nowrap;">
 									<label for="txtnumber" class="form-control-label">เลขที่:</label>
-									<input type="text" id="txtnumber" placeholder="เลขที่ กรอกหรือไม่ก็ได้" class="form-control">	
+									<input type="text" id="txtnumber" placeholder="เลขที่ กรอกหรือไม่ก็ได้" class="form-control" autocomplete="off">	
 								</div>
 								<div class="form-froup">
 									<label for="txtstory" class="form-control-label">เรื่อง:</label>
-									<input type="text" id="txtstory" placeholder="ชื่อเรื่อง" class="form-control">
+									<input type="text" id="txtstory" placeholder="ชื่อเรื่อง" class="form-control" autocomplete="off">
 									<div id="error" style="display: none; color: red;">กรุณากรอกข้อมูล</div>
 						            <script type="text/javascript">
 						            	$("#txtstory").blur(function(){
@@ -251,7 +321,7 @@
 		
 	
 	<div class="container">
-		<div class="row">  
+		<div class="row">
 	    	<!-- <div class="col-12 col-md-1"></div> -->   
 	    	<div class="col-12 col-md-12">   	   	       
 		        <table id="example" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
@@ -270,7 +340,14 @@
 		                <td>{{row[1]}}</td>
 		                <td>{{row[2]}}</td>
 		                <td>{{row[3]}}</td>
-		                <td>{{row[4]}}</td>
+		                <!-- <a href="{{row[4]}}"><td>{{row[4]}}</td></a> -->
+		                <td>
+		                <a target="_blank" href="{{ url_for('static', filename='UPLOAD/' + row[4]) }}">
+						    <div>
+						      {{row[4]}}
+						    </div>
+						</a>
+						</td>
 		                <td>{{row[5]}}</td>                
 		            </tr>
 		            {% endfor %}
