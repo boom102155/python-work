@@ -138,83 +138,81 @@
     </div> -->
     <br /><br /> 
     <center>
-    <div class="content">
-
-        <div class="container">
+    
+    <div class="container">
+        <div class="wrapper">     
+            <div class="box1 hvr-grow" style="cursor: pointer;" onclick="window.location='/lend';">
+                <div style="text-align: left; padding-bottom: 1rem;">
+                    <h4>เพิ่มรายการยืม-คืน</h4>
+                </div>
+                <img src="{{ url_for('static',filename="imgs/newmenu1.png")}}" alt="เพิ่มรายการยืม-คืน" width="300" >
+            </div>
             
-            <div class="wrapper">     
-                <div class="box1 hvr-grow" style="cursor: pointer;" onclick="window.location='/lend';">
-                    <div style="text-align: left; padding-bottom: 1rem;">
-                        <h4>เพิ่มรายการยืม-คืน</h4>
-                    </div>
-                    <img src="{{ url_for('static',filename="imgs/newmenu1.png")}}" alt="เพิ่มรายการยืม-คืน" width="300" >
-                </div>
-                
-                <div class="box2">
-                    <div style="text-align: left; padding-bottom: 1rem;">
-                        <h4>สวัสดี</h4>
-                    </div>     
-                        <h4 style="padding-bottom: 2rem;">
-                            <a href="profile" style="text-decoration: none; color: #EEEEEE;">{{ username }}</a>
-                        </h4>
-                    <div class="btn-group">
-                        <button class="btn btn-default hvr-grow" type="submit" id="btnLogout">ลงชื่อออก</button>
-                        <script type="text/javascript">
-                            $('#btnLogout').click(function(){
-                                $.ajax({
-                                    url: '/logout',
-                                    contentType: 'application/json; charset=utf-8',
-                                    success: function(response){
-                                        console.log(response);
-                                        window.location = "login";
-                                    },
-                                    error: function(error){
-                                        console.log(error);
-                                    }
-                                });
+            <div class="box2">
+                <div style="text-align: left; padding-bottom: 1rem;">
+                    <h4>สวัสดี</h4>
+                </div>     
+                    <h4 style="padding-bottom: 2rem;">
+                        <a href="profile" style="text-decoration: none; color: #EEEEEE;">{{ username }}</a>
+                    </h4>
+                <div class="btn-group">
+                    <button class="btn btn-default hvr-grow" type="submit" id="btnLogout">ลงชื่อออก</button>
+                    <script type="text/javascript">
+                        $('#btnLogout').click(function(){
+                            $.ajax({
+                                url: '/logout',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function(response){
+                                    console.log(response);
+                                    window.location = "login";
+                                },
+                                error: function(error){
+                                    console.log(error);
+                                }
                             });
-                        </script>
-                        <button class="btn btn-default hvr-grow" type="button" id="btnAdminManage">ส่วนของแอดมิน</button>
-                        <script type="text/javascript">
-                            $('#btnAdminManage').click(function(){
-                                window.location = "/adminmanagement";
-                            });
-                        </script>
-                    </div>
-                </div>
-
-                <div class="box3 hvr-grow" style="cursor: pointer;" onclick="window.location='/equipment';">
-                    <div style="text-align: left; padding-bottom: 1rem;">
-                        ค้นหาอุปกรณ์
-                    </div>
-                    <img src="{{ url_for('static',filename="imgs/newmenu2.png")}}" alt="เพิ่มรายการยืม-คืน" width="100" >
-                </div>
-                <div class="box4 hvr-grow" style="cursor: pointer;" onclick="window.location='/category';">
-                    <div style="text-align: left; padding-bottom: 1rem;">
-                        หมวดหมู่อุปกรณ์
-                    </div>
-                    <img src="{{ url_for('static',filename="imgs/newmenu3.png")}}" alt="หมวดหมู่" width="100" >
-                </div>
-                <div class="box5 hvr-grow" style="cursor: pointer;" onclick="window.location='/person';">
-                    <div style="text-align: left; padding-bottom: 1rem;">
-                        รายชื่อบุคคล
-                    </div>
-                    <img src="{{ url_for('static',filename="imgs/newmenu4.png")}}" alt="บุคคล" width="100" >
-                </div>
-                <div class="box6 hvr-grow" style="cursor: pointer;" onclick="window.location='/room';">
-                    <div style="text-align: left; padding-bottom: 1rem;">
-                        ตรวจห้อง
-                    </div>
-                    <img src="{{ url_for('static',filename="imgs/newmenu5.png")}}" alt="ตรวจห้อง" width="100" >
-                </div>
-                <div class="box7 hvr-grow" style="cursor: pointer;" onclick="window.location='/preport';">
-                    <div style="text-align: left; padding-bottom: 1rem;">
-                        จัดการเอกสาร
-                    </div>
-                    <img src="{{ url_for('static',filename="imgs/newmenu6.png")}}" alt="จัดการเอกสาร" width="100" >
+                        });
+                    </script>
+                    <button class="btn btn-default hvr-grow" type="button" id="btnAdminManage">ส่วนของแอดมิน</button>
+                    <script type="text/javascript">
+                        $('#btnAdminManage').click(function(){
+                            window.location = "/adminmanagement";
+                        });
+                    </script>
                 </div>
             </div>
+
+            <div class="box3 hvr-grow" style="cursor: pointer;" onclick="window.location='/equipment';">
+                <div style="text-align: left; padding-bottom: 1rem;">
+                    ค้นหาอุปกรณ์
+                </div>
+                <img src="{{ url_for('static',filename="imgs/newmenu2.png")}}" alt="เพิ่มรายการยืม-คืน" width="100" >
+            </div>
+            <div class="box4 hvr-grow" style="cursor: pointer;" onclick="window.location='/category';">
+                <div style="text-align: left; padding-bottom: 1rem;">
+                    หมวดหมู่อุปกรณ์
+                </div>
+                <img src="{{ url_for('static',filename="imgs/newmenu3.png")}}" alt="หมวดหมู่" width="100" >
+            </div>
+            <div class="box5 hvr-grow" style="cursor: pointer;" onclick="window.location='/person';">
+                <div style="text-align: left; padding-bottom: 1rem;">
+                    รายชื่อบุคคล
+                </div>
+                <img src="{{ url_for('static',filename="imgs/newmenu4.png")}}" alt="บุคคล" width="100" >
+            </div>
+            <div class="box6 hvr-grow" style="cursor: pointer;" onclick="window.location='/room';">
+                <div style="text-align: left; padding-bottom: 1rem;">
+                    ตรวจห้อง
+                </div>
+                <img src="{{ url_for('static',filename="imgs/newmenu5.png")}}" alt="ตรวจห้อง" width="100" >
+            </div>
+            <div class="box7 hvr-grow" style="cursor: pointer;" onclick="window.location='/preport';">
+                <div style="text-align: left; padding-bottom: 1rem;">
+                    จัดการเอกสาร
+                </div>
+                <img src="{{ url_for('static',filename="imgs/newmenu6.png")}}" alt="จัดการเอกสาร" width="100" >
+            </div>
         </div>
+    </div>
 
        
  
@@ -284,8 +282,7 @@
                 </div>
             </div>
         </div> -->
-
-    </div>             
+             
     
     <!-- <script type="text/javascript">
         $(function() {

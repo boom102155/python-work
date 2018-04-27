@@ -2,10 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c20361aa-bc4c-4168-96a9-abe8686d6c37" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/python work.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python work.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/941.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/941.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/953.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/953.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/982.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/982.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/983.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/983.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/adminmanagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/adminmanagement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/category.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/equipment.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/equipment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/equipmentlocate.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/equipmentlocate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/lend.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lend.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/navbar.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/person.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/person.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/preport.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/preport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/room-check-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/room-check-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/room.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/room.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,8 +42,8 @@
       <file leaf-file-name="test2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
+            <state relative-caret-position="770">
+              <caret line="748" selection-start-line="748" selection-end-line="748" />
               <folding>
                 <element signature="e#0#92#0" expanded="true" />
               </folding>
@@ -40,8 +56,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -49,6 +65,7 @@
     <findStrings>
       <find>print</find>
       <find>datareport</find>
+      <find>test</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -70,6 +87,9 @@
         <option value="$PROJECT_DIR$/test3.py" />
         <option value="$PROJECT_DIR$/line.py" />
         <option value="$PROJECT_DIR$/linetest.py" />
+        <option value="$PROJECT_DIR$/testReportlab.py" />
+        <option value="$PROJECT_DIR$/testreportlab.py" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/test2.py" />
       </list>
     </option>
@@ -80,9 +100,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="221" />
-    <option name="y" value="45" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="139" />
+    <option name="y" value="53" />
     <option name="width" value="1193" />
     <option name="height" value="780" />
   </component>
@@ -99,10 +119,6 @@
               <item name="python work" type="b2602c69:ProjectViewProjectNode" />
               <item name="python work" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="python work" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -111,10 +127,10 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHubDesktop/GitHubDesktop.exe" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -141,24 +157,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.test2">
-    <configuration name="Rest" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="python work" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Rest.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration name="linetest" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="python work" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -172,24 +170,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/linetest.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="python work" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -213,7 +193,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="test3" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="testreportlab" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="python work" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -225,26 +205,22 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test3.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testreportlab.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
-      <item itemvalue="Python.Rest" />
-      <item itemvalue="Python.test (1)" />
       <item itemvalue="Python.test2" />
-      <item itemvalue="Python.test3" />
       <item itemvalue="Python.linetest" />
+      <item itemvalue="Python.testreportlab" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.test2" />
+        <item itemvalue="Python.testreportlab" />
         <item itemvalue="Python.linetest" />
-        <item itemvalue="Python.test3" />
-        <item itemvalue="Python.test (1)" />
-        <item itemvalue="Python.Rest" />
       </list>
     </recent_temporary>
   </component>
@@ -271,14 +247,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="139" y="53" width="1193" height="780" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15525982" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21212122" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3287037" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.3287037" />
       <window_info anchor="bottom" id="Python Console" order="8" weight="0.3287037" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.34139785" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29475307" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.3287037" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -297,22 +273,22 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18479088" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3402985" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" id="Data View" order="4" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32957748" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3994778" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32957748" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,28 +306,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10914">
-          <caret line="642" lean-forward="true" selection-start-line="642" selection-end-line="642" />
-          <folding>
-            <element signature="e#0#92#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/linetest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="104" selection-start-line="16" selection-start-column="104" selection-end-line="16" selection-end-column="104" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RestFul.py" />
-    <entry file="file://$PROJECT_DIR$/RestFul.py" />
     <entry file="file://$PROJECT_DIR$/RestFul.py" />
     <entry file="file://$PROJECT_DIR$/RestFul.py" />
     <entry file="file://$PROJECT_DIR$/RestFul.py" />
@@ -431,16 +385,35 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="104" selection-start-line="16" selection-start-column="104" selection-end-line="16" selection-end-column="104" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reportlab.py" />
+    <entry file="file://$USER_HOME$/Downloads/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="40" lean-forward="true" selection-end-line="78" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testreportlab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="54" column="5" selection-start-line="54" selection-end-line="54" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="24" lean-forward="true" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
+        <state relative-caret-position="770">
+          <caret line="748" selection-start-line="748" selection-end-line="748" />
           <folding>
             <element signature="e#0#92#0" expanded="true" />
           </folding>

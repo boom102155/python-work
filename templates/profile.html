@@ -1,11 +1,12 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html>
 <head>
+	{% block title %}
 	<title>profile</title>
 	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
     <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
@@ -17,12 +18,6 @@
 		  max-width: 300px;
 		  margin: auto;
 		  text-align: center;
-		  font-family: arial;
-		}
-
-		body {
-			padding-top: 5rem; 
-			padding-bottom: 5rem;
 		}
 	</style>
 	
@@ -35,78 +30,10 @@
 	 		$("#btnCancel").hide()	
 	 	});
 	</script>
+	{% endblock %}
 </head>
 <body>
-	<!-- ++++++++++++++++++++++navbar++++++++++++++++++++++ -->
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="\index">
-            <img src="{{ url_for('static',filename="imgs/band.png")}}" alt="Logo" width="45" height="30" />
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index">หน้าหลัก <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="lend">เพิ่มรายการยืม-คืน</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="equipment">ค้นหาอุปกรณ์</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="category">หมวดหมู่</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="person">รายชื่อนักศึกษา/อาจารย์</a>
-                </li>
-                <li class="nav-item dropdown">
-			        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			          ตรวจห้อง LAB
-			        </a>
-			        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-			        	<a class="dropdown-item" href="room">รายชื่อห้อง</a>
-			        	<div class="dropdown-divider"></div>
-			          	<a class="dropdown-item" href="room941">ห้อง 941</a>
-			          	<a class="dropdown-item" href="room953">ห้อง 953</a>
-			          	<a class="dropdown-item" href="room982">ห้อง 982</a>
-			          	<a class="dropdown-item" href="room983">ห้อง 983</a>
-			          	<div class="dropdown-divider"></div>
-			          	<a class="dropdown-item" href="roomchecklist">รายการตรวจห้อง</a>
-			        </div>
-			    </li>
-			    <li class="nav-item">
-                    <a class="nav-link" href="preport">จัดการเอกสาร</a>
-                </li>
-            </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
-                    <a href="profile">
-                    	<label class="form-control-label mr-sm-2" style="color: white;">{{ username }}</label>
-                    </a>
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnLogout">ลงชื่อออก</button>
-                    <script type="text/javascript">
-                    	$('#btnLogout').click(function(){
-                    		$.ajax({
-								url: '/logout',
-								contentType: 'application/json; charset=utf-8',
-								success: function(response){
-									console.log(response);
-									window.location = "login";
-								},
-								error: function(error){
-									console.log(error);
-								}
-							});
-                    	});
-                    </script>
-                </form>
-        </div>
-    </nav>
-    <!-- ++++++++++++++++++++++end navbar++++++++++++++++++++++ -->
+	{% block body %}
 
 	<h2 style="text-align:center">Profile</h2>
 
@@ -114,15 +41,15 @@
   	<img src="{{ url_for('static',filename="imgs/avapro.png")}}" alt="profile image" style="width:100%">
   	
   	<h4 style="padding-top: 2rem; padding-bottom: 2rem;">
-  		<div id="n" style="display: inline; font-family: 'Prompt', sans-serif;">
+  		<div id="n" style="display: inline;">
   			{{ name }}
   		</div> 
-  		<div id="surn" style="display: inline; font-family: 'Prompt', sans-serif;">
+  		<div id="surn" style="display: inline;">
   			{{ surname }}
   		</div>
   	</h4>
 
-  	<div class="row" style="font-family: 'Prompt', sans-serif;">
+  	<div class="row">
   		<div class="col-12 col-md-6" style="text-align: right; font-weight: bold;">
   			Username:
   		</div>
@@ -131,11 +58,11 @@
   		</div>
   	</div>
   	<div class="row">
-  		<div class="col-12 col-md-6" style="font-family: 'Prompt', sans-serif; text-align: right; font-weight: bold;">
+  		<div class="col-12 col-md-6" style="text-align: right; font-weight: bold;">
   			Password:
   		</div>
   		<div class="col-12 col-md-6" style="text-align: left;">
-  			<div id="passw" style="font-family: 'Prompt', sans-serif;">{{ pw }}</div>
+  			<div id="passw">{{ pw }}</div>
   			<input type="text" placeholder="รหัสผ่านปัจจุบัน" id="txtpw" class="form-control" autocomplete="off" />
   		</div>
   	</div>
@@ -230,5 +157,6 @@
 		});
 	</script>
 </div>
+{% endblock %}
 </body>
 </html>
