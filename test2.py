@@ -19,14 +19,27 @@ def adminmanagement():
         username = session['user']
         query1 = conn.execute("SELECT STAFF_ID, NAME, SURNAME, USER_NAME, TYPE, PASSWORD FROM STAFF")
         query2 = conn.execute("SELECT TYPE FROM STAFF WHERE USER_NAME = '" + username + "'")
+        query3 = conn.execute("SELECT LEND_NO, EQUIPMENT_ID, INSPECTION FROM INSPECTION_DETAIL")
+
         rows1 = query1.fetchall()
         rows2 = query2.fetchall()
+        rows3 = query3.fetchall()
+
         for row in rows2:
             utype = row["type"]
-        return render_template("adminmanagement.html", username=username, rows1=rows1, utype=utype)
+        return render_template("adminmanagement.html", username=username, rows1=rows1, utype=utype, rows3=rows3)
 
     return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
            "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
+@app.route('/dellendinspection' , methods = ['POST' , 'GET'])
+def dellendinspection():
+    data = request.get_json()
+    conn = db_connect.connect()
+    conn.execute("DELETE FROM INSPECTION_DETAIL WHERE LEND_NO = " + (data["lendid"]))
+    conn.execute("DELETE FROM LEND_INSPECTION WHERE LEND_NO = " + (data["lendid"]))
+    return json.dumps(data)
+
 
 @app.route('/adduser' , methods = ['POST' , 'GET'])
 def adduser():
@@ -231,6 +244,7 @@ def addinspection():
     finally:
         return json.dumps(data)
         conn.close()
+
 
 @app.route('/equipment', methods = ['POST', 'GET'])
 def equipment():
