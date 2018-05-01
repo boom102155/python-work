@@ -430,33 +430,38 @@ def editcategory():
 
 @app.route('/addlend' , methods = ['POST' , 'GET'])
 def addlend():
-    data = request.get_json()
-    conn = db_connect.connect()
-    conn.execute("MERGE INTO PERSON P USING (SELECT " + (data["pid"]) + " PERSON_ID," +
-                                             "'" + (data["pname"]) + "' NAME," +
-                                             "'" + (data["psurname"]) + "' SURNAME," +
-                                             "'" + (data["pstatus"]) + "' TYPE," +
-                                             "'" + (data["pfaculty"]) + "' FACULTY," +
-                                             "'" + (data["pclass"]) + "' CLASS" +
-                                             " FROM DUAL) val "
-                 "ON ( P.PERSON_ID = " + (data["pid"]) + ") "
-                 "WHEN MATCHED THEN UPDATE SET P.NAME = '" + (data["pname"]) + "', " +
-                                                "P.SURNAME = '" + (data["psurname"]) + "', " +
-                                                "P.TYPE = '" + (data["pstatus"]) + "', " +
-                                                "P.FACULTY = '" + (data["pfaculty"]) + "', " +
-                                                "P.CLASS = '" + (data["pclass"]) + "'" +
-                 " WHEN NOT MATCHED THEN INSERT (PERSON_ID, NAME, SURNAME, TYPE, FACULTY, CLASS) "
-                 "VALUES (val.PERSON_ID, val.NAME, val.SURNAME, val.TYPE, val.FACULTY, val.CLASS)")
+    try:
+        data = request.get_json()
+        conn = db_connect.connect()
+        conn.execute("MERGE INTO PERSON P USING (SELECT " + (data["pid"]) + " PERSON_ID," +
+                                                 "'" + (data["pname"]) + "' NAME," +
+                                                 "'" + (data["psurname"]) + "' SURNAME," +
+                                                 "'" + (data["pstatus"]) + "' TYPE," +
+                                                 "'" + (data["pfaculty"]) + "' FACULTY," +
+                                                 "'" + (data["pclass"]) + "' CLASS" +
+                                                 " FROM DUAL) val "
+                     "ON ( P.PERSON_ID = " + (data["pid"]) + ") "
+                     "WHEN MATCHED THEN UPDATE SET P.NAME = '" + (data["pname"]) + "', " +
+                                                    "P.SURNAME = '" + (data["psurname"]) + "', " +
+                                                    "P.TYPE = '" + (data["pstatus"]) + "', " +
+                                                    "P.FACULTY = '" + (data["pfaculty"]) + "', " +
+                                                    "P.CLASS = '" + (data["pclass"]) + "'" +
+                     " WHEN NOT MATCHED THEN INSERT (PERSON_ID, NAME, SURNAME, TYPE, FACULTY, CLASS) "
+                     "VALUES (val.PERSON_ID, val.NAME, val.SURNAME, val.TYPE, val.FACULTY, val.CLASS)")
 
-    conn.execute("INSERT INTO LEND_HEAD (PERSON_ID, STAFF_ID, LEND_DATE, DETAIL, CREATE_DATE, UPDATE_DATE) "
-                 "VALUES (:1, :2, TO_DATE(:3, 'yyyy-mm-dd'), :4, TO_DATE(:5, 'yyyy-mm-dd'), TO_DATE(:6, 'yyyy-mm-dd'))",
-                 (data["pid"], data["sid"], data["ldate"], data["ldetail"], data["cdate"], data["udate"]))
+        conn.execute("INSERT INTO LEND_HEAD (PERSON_ID, STAFF_ID, LEND_DATE, DETAIL, CREATE_DATE, UPDATE_DATE) "
+                     "VALUES (:1, :2, TO_DATE(:3, 'yyyy-mm-dd'), :4, TO_DATE(:5, 'yyyy-mm-dd'), TO_DATE(:6, 'yyyy-mm-dd'))",
+                     (data["pid"], data["sid"], data["ldate"], data["ldetail"], data["cdate"], data["udate"]))
 
-    conn.execute("INSERT INTO LEND_DETAIL (LEND_NO, EQUIPMENT_ID, CREATE_DATE, UPDATE_DATE) "
-                 "SELECT MAX(LEND_NO)as LEND_NO, :3, TO_DATE(:4, 'yyyy-mm-dd'), TO_DATE(:5, 'yyyy-mm-dd') FROM LEND_HEAD",
-                 (data["eid"], data["cdate"], data["udate"]))
-    conn.commit()
-    return json.dumps(data)
+        conn.execute("INSERT INTO LEND_DETAIL (LEND_NO, EQUIPMENT_ID, CREATE_DATE, UPDATE_DATE) "
+                     "SELECT MAX(LEND_NO)as LEND_NO, :3, TO_DATE(:4, 'yyyy-mm-dd'), TO_DATE(:5, 'yyyy-mm-dd') FROM LEND_HEAD",
+                     (data["eid"], data["cdate"], data["udate"]))
+        conn.commit()
+    except:
+        conn.rollback()
+    finally:
+        return json.dumps(data)
+        conn.close()
 
 @app.route('/searchstu' , methods = ['POST' , 'GET'])
 def searchstu():
