@@ -21,26 +21,24 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- data table script -->
+	<script type="application/javascript" src="{{ url_for('static',filename="js/jquery.tabletojson.js")}}"></script>
     <!-- <script type="text/javascript" src="{{ url_for('static',filename="js/lendTable.js")}}"></script> -->
     <script type="text/javascript">
 	    $(document).ready(function() {
-			var oTable = $('#example').DataTable({
+			var oTable = $('#example').dataTable({
 				"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [0] }],
 				stateSave: true
 			});
 			
-			var allPages = oTable.cells().nodes();
-			// $('#selectAll').click(function () {
+			var allPages = oTable.fnGetNodes();
 			$('body').on('click', '#checkAll', function () {
-		        if ($(this).hasClass('allChecked')) {
-		            // $(allPages).find('input[type="checkbox"]').prop('checked', false);
-		            $('input[type="checkbox"]', allPages).prop('checked', false);		            
-		        } else {
-		            // $(allPages).find('input[type="checkbox"]').prop('checked', true);
-		            $('input[type="checkbox"]', allPages).prop('checked', true);		            
-		        }
-		        $(this).toggleClass('allChecked');
-		    });    
+				if ($(this).hasClass('allChecked')) {
+					$('input[type="checkbox"]', allPages).prop('checked', false);
+				} else {
+					$('input[type="checkbox"]', allPages).prop('checked', true);
+				}
+				$(this).toggleClass('allChecked');
+			});   
 			
 			
 			$('#example tbody').on('click', 'tr', 'td', function () {
@@ -393,111 +391,29 @@
 	    	
 			<script type="text/javascript">
 				$('#btnReport').click(function(){  				
-					//window.location = "report";	
-				
+					//window.location = "report";
+					
+//					var table = $('#example').tableToJSON();
+//					var jsonstring = JSON.stringify(data,null,'\t');
+//					document.getElementById("txtlenddetails").value = jsonstring;
+					
+					
 					var result = $("tr:has(:checked)")
+					
 					if (result.length == 0) {
 						alert("กรุณาเลือกข้อมูลที่ต้องการทำรายงาน");
 					}else{
-						console.log(result);
+//						console.log(result);
 
 						var json = result.map(function () { 
-							return [$(this).children().slice(1).map(function () { 
-								return $(this).text().trim()
-							}).get()];
+							return    $(this).children().slice(1).map(function () { 
+								return $(this).text().trim()}).get() ;
 						}).get();
-
-
-						// console.log(JSON.stringify(json,0,"\t"))
-
-
-						// var obj = {};
-						// 	obj['รหัสใบยืม'] = JSON.stringify(json[0]);
-						// 	obj['วันที่ยืม'] = JSON.stringify(json[1]);
-						// 	obj['ผู้ให้ยืม'] = JSON.stringify(json[2]);
-						// 	obj['ผู้ยืม'] = JSON.stringify(json[3]);
-						// 	obj['สถานะ'] = JSON.stringify(json[4]);
-						// 	obj['สาขา'] = JSON.stringify(json[5]);
-						// 	obj['ชั้นปี'] = JSON.stringify(json[6]);
-						// 	obj['รหัสอุปกรณ์'] = JSON.stringify(json[7]);
-						// 	obj['เลขซีเรียล'] = JSON.stringify(json[8]);
-						// 	obj['ชื่ออุปกรณ์'] = JSON.stringify(json[9]);
-						// 	obj['สถานะ'] = JSON.stringify(json[10]);
-
-						var myJsonData = {};
-						myJsonData = JSON.stringify(json,0,"\t");
+						
+						var myJsonData = JSON.stringify(json,null,'\t');
 						document.getElementById("txtlenddetails").value = myJsonData;
-
-
-
-
-						// ========== send data to flask ===========
-						// var formData = new FormData();
-						// for(i = 0; i < json.length; i++){
-						// 	formData.append(i,JSON.stringify(json[i]))
-						// }
-
-						// var xmlhttp = new XMLHttpRequest();   
-						// xmlhttp.onreadystatechange = function() {
-						// 	if (this.readyState == 4 && this.status == 200) {
-						// 		// alert(this.responseText)
-						// 	}
-						// };
-									
-						// xmlhttp.open("POST", "/getreport")
-						// xmlhttp.send(formData)
-						// ================ end code =================
-
-
-						// var form = document.createElement("form");
-						// form.setAttribute("method", "post");
-						// form.setAttribute("action", "http://localhost:5000/report");
-
-						// var Field = document.createElement("input");
-
-						// Field.setAttribute("type", "hidden");
-						// Field.setAttribute("name", "json");
-						// Field.setAttribute("value", "test");
-
-						// form.appendChild(Field);
-
-						// document.body.appendChild(form);
-						// form.submit();
-
-
-						// var col = [];
-				  //       for (var i = 0; i < myjson.length; i++) {
-				  //           for (var key in myjson[i]) {
-				  //               if (col.indexOf(key) === -1) {
-				  //                   col.push(key);
-				  //               }
-				  //           }
-				  //       }
-
-						// var table = document.createElement("example");
-						// var tr = table.append(-1); 
-						// for (var i = 0; i < col.length; i++) {
-				  //           var th = document.createElement("th");      // TABLE HEADER.
-				  //           th.innerHTML = col[i];
-				  //           tr.appendChild(th);
-				  //       }
-
-				  //        for (var i = 0; i < myjson.length; i++) {
-
-				  //           tr = table.append(-1);
-
-				  //           for (var j = 0; j < col.length; j++) {
-				  //               var tabCell = tr.insertCell(-1);
-				  //               tabCell.innerHTML = myjson[i][col[j]];
-				  //           }
-				  //       }
-
-				  //       var divContainer = document.getElementById("showData");
-				  //       divContainer.innerHTML = "";
-				  //       divContainer.appendChild(table);
-
-
-					}														
+							
+					}															
 				});
 			</script>
 	    </div> 
@@ -508,7 +424,7 @@
 		        <table id="example" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 		            <thead>
 		            	<th>
-		            		<!-- <input type="checkbox" id="checkAll"> -->
+<!--		            		 <input type="checkbox" id="checkAll"> -->
 		            	</th>  
 		            	<th>รหัสใบยืม</th>
 		                <th>วันที่ยืม</th>
@@ -544,9 +460,11 @@
 	    </div> 
     <!-- </div> -->
 
-    <!-- <div class="container" style="padding-top: 2rem;">
-	    <textarea id="txtlenddetails" class="form-control" style="height: 800px;"></textarea>
-	</div> -->
+<!--
+    <div class="container" style="padding-top: 2rem;">
+	    <textarea id="txtlenddetails" class="form-control" rows="15"></textarea>
+	</div>
+-->
 
     <div class="modal fade" id="myModal">
 	  	<div class="modal-dialog modal-lg">
