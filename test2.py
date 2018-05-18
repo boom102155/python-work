@@ -5,7 +5,7 @@ import os
 
 
 os.environ["NLS_LANG"] = ".UTF8"
-db_connect = create_engine('oracle://ADBOOM:125478@127.0.0.1:1521/xe')
+db_connect = create_engine('oracle://ADBOOM:boom125478@127.0.0.1:1521/xe')
 
 app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
