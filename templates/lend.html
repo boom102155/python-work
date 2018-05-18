@@ -303,7 +303,7 @@
 		
 		<br />
 		<div class="row" style="border-style: solid; border-radius: 5px; border-color: #F6E687; background-color: #FFF6B2">
-		    <div class="col-12 col-md-6">
+		    <div class="col-12 col-md-4">
 		      	<div class="form-group">
 		      		<label for="equipment" class="form-control-label">ยืมอุปกรณ์</label>
 	        		<select class="form-control" id="sequip">
@@ -314,6 +314,32 @@
 	        		</select>
 		      	</div>
 		    </div>
+			<div class="col-12 col-md-2">
+				<div class="form-group">
+					<label for="showequipnum" class="form-control-label">มีจำนวน</label>
+					<input id="showequipnum" class="form-control" type="text" readonly>
+				</div>
+			</div>
+			<script type="application/javascript">
+				$('#sequip').on('change', function() {
+					var getval = document.getElementById("sequip").value;		
+					$.ajax({
+						url: '/showequipnum',
+						data: JSON.stringify({"getval" : getval}),
+						type: 'POST',
+						processData: false,
+						contentType: 'application/json; charset=utf-8',
+						success: function(response){
+							console.log(response);
+							var equipqty = (response['QTY']);
+							document.getElementById("showequipnum").value = equipqty;
+						},
+						error: function(error){
+							console.log(error);
+						}
+					});
+				});
+			</script>
 		    <div class="col-12 col-md-6">
 		      	<label for="ldetail" class="form-control-label">รายละเอียด</label>
 	        	<textarea id="ldetail" class="form-control"></textarea><br/>
