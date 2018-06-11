@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c20361aa-bc4c-4168-96a9-abe8686d6c37" name="Default" comment="">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -11,6 +12,10 @@
 >>>>>>> abbb8a30c21d6db43437e6877f1ef26be189dd55
 =======
 >>>>>>> abbb8a30c21d6db43437e6877f1ef26be189dd55
+=======
+      <change beforePath="$PROJECT_DIR$/templates/lend.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lend.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
+>>>>>>> parent of abbb8a3... Update 11/6/2561
 =======
       <change beforePath="$PROJECT_DIR$/templates/lend.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lend.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
@@ -272,7 +277,11 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3287037" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Run" order="2" weight="0.2913386" />
+=======
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29166666" />
+>>>>>>> parent of abbb8a3... Update 11/6/2561
 =======
       <window_info anchor="bottom" id="Run" order="2" weight="0.29166666" />
 >>>>>>> parent of abbb8a3... Update 11/6/2561
