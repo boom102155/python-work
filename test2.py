@@ -5,7 +5,7 @@ import os
 
 
 os.environ["NLS_LANG"] = ".UTF8"
-db_connect = create_engine('oracle://ADBOOM:boom125478@127.0.0.1:1521/xe')
+db_connect = create_engine('oracle://ADBOOM:125478@127.0.0.1:1521/xe')
 
 app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -225,6 +225,20 @@ def lend():
     return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
            "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 
+@app.route('/showequipnum' , methods = ['POST' , 'GET'])
+def showequipnum():
+    data = request.get_json()
+    conn = db_connect.connect()
+    query = conn.execute("SELECT QTY FROM EQUIPMENT WHERE EQUIPMENT_ID = " + (data["getval"]))
+    rows = query.fetchall()
+
+    for row in rows:
+        list1 = ["QTY"]
+        list2 = [row["qty"]]
+        data = zip(list1, list2)
+        d = dict(data)
+        print(d)
+    return jsonify(d)
 
 @app.route('/addinspection', methods = ['POST', 'GET'])
 def addinspection():
