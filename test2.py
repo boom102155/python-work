@@ -674,6 +674,15 @@ def preport():
     return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
       "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 
+@app.route('/persondoc' , methods = ['POST' , 'GET'])
+def persondoc():
+    conn = db_connect.connect()
+    query = conn.execute("SELECT d.DOC_ID, TO_CHAR(d.DOC_DATE,'yyyy-mm-dd') as docdate, d.DOC_NO, d.TOPIC, d.PATH_PIC, (p.NAME || ' ' || p.SURNAME) as person "
+                          "FROM DOCUMENT d , PERSON_DOC pd , PERSON p "
+                          "WHERE d.DOC_ID = pd.DOC_ID AND pd.PERSON_ID = p.PERSON_ID")
+    rows = query.fetchall()
+    return render_template("persondoc.html", rows=rows)
+
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload():
    if request.method == 'POST':
@@ -764,5 +773,5 @@ def delperson():
     return json.dumps(data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True)
 
