@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c20361aa-bc4c-4168-96a9-abe8686d6c37" name="Default" comment="">
-<<<<<<< HEAD
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
-=======
->>>>>>> abbb8a30c21d6db43437e6877f1ef26be189dd55
-=======
->>>>>>> abbb8a30c21d6db43437e6877f1ef26be189dd55
-=======
-      <change beforePath="$PROJECT_DIR$/templates/lend.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lend.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
->>>>>>> parent of abbb8a3... Update 11/6/2561
-=======
-      <change beforePath="$PROJECT_DIR$/templates/lend.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lend.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
->>>>>>> parent of abbb8a3... Update 11/6/2561
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,21 +23,8 @@
       <file leaf-file-name="test2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test2.py">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <state relative-caret-position="187">
-              <caret line="11" column="31" lean-forward="true" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-=======
-            <state relative-caret-position="119">
-              <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
->>>>>>> abbb8a30c21d6db43437e6877f1ef26be189dd55
-=======
-            <state relative-caret-position="119">
-              <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
->>>>>>> abbb8a30c21d6db43437e6877f1ef26be189dd55
-              <folding>
-                <element signature="e#0#92#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="204">
+              <caret line="133" column="31" lean-forward="true" selection-start-line="133" selection-start-column="31" selection-end-line="133" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -69,18 +39,7 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>print</find>
-      <find>datareport</find>
-      <find>test</find>
-      <find>addlend</find>
-      <find>lend</find>
-      <find>searchs</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -95,16 +54,6 @@
         <option value="$PROJECT_DIR$/templates/test2.html" />
         <option value="$PROJECT_DIR$/dbconnection.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="D:/test2.py" />
-        <option value="$PROJECT_DIR$/test3.py" />
-        <option value="$PROJECT_DIR$/line.py" />
-        <option value="$PROJECT_DIR$/linetest.py" />
-        <option value="$PROJECT_DIR$/testReportlab.py" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
-        <option value="$PROJECT_DIR$/testreportlab.py" />
-        <option value="$PROJECT_DIR$/create_pdf.py" />
-        <option value="$PROJECT_DIR$/pdfs.py" />
-        <option value="$PROJECT_DIR$/testprintpdf.py" />
         <option value="$PROJECT_DIR$/test2.py" />
       </list>
     </option>
@@ -116,10 +65,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="193" />
-    <option name="y" value="35" />
-    <option name="width" value="1062" />
-    <option name="height" value="771" />
+    <option name="x" value="113" />
+    <option name="y" value="33" />
+    <option name="width" value="1331" />
+    <option name="height" value="780" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -127,6 +76,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -138,25 +88,24 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\python work\templates" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\python work\datepicker" />
       <recent name="D:\python work" />
       <recent name="D:\python work\templates\bootstrap-datepicker" />
       <recent name="D:\python work\templates" />
       <recent name="D:\python work\static" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\python work\templates" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -172,7 +121,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.test2">
-    <configuration name="linetest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Rest" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="python work" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -184,7 +133,63 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/linetest.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Rest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="RestFul" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="python work" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RestFul.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="python work" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="python work" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -208,34 +213,20 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="testprintpdf" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="python work" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testprintpdf.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <list>
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.RestFul" />
+      <item itemvalue="Python.Rest" />
+      <item itemvalue="Python.test (1)" />
       <item itemvalue="Python.test2" />
-      <item itemvalue="Python.linetest" />
-      <item itemvalue="Python.testprintpdf" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.test2" />
-        <item itemvalue="Python.testprintpdf" />
-        <item itemvalue="Python.linetest" />
+        <item itemvalue="Python.test (1)" />
+        <item itemvalue="Python.Rest" />
+        <item itemvalue="Python.RestFul" />
+        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -252,45 +243,19 @@
     </task>
     <servers />
   </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <layout>
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13030747" />
-=======
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13434727" />
->>>>>>> abbb8a30c21d6db43437e6877f1ef26be189dd55
-=======
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13434727" />
->>>>>>> abbb8a30c21d6db43437e6877f1ef26be189dd55
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3287037" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19011407" />
+      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2913386" />
-=======
-      <window_info anchor="bottom" id="Run" order="2" weight="0.29166666" />
->>>>>>> parent of abbb8a3... Update 11/6/2561
-=======
-      <window_info anchor="bottom" id="Run" order="2" weight="0.29166666" />
->>>>>>> parent of abbb8a3... Update 11/6/2561
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.3287037" />
-      <window_info anchor="bottom" id="Python Console" order="8" weight="0.3287037" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32957748" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2594086" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3287037" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39506173" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39814815" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -299,8 +264,29 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3287037" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3402985" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18479088" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="right" id="Data View" order="4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994778" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32957748" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -313,10 +299,31 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="66" />
+      <option name="time" value="13" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/RestFul.py" />
+    <entry file="file://$PROJECT_DIR$/test" />
+    <entry file="file://$PROJECT_DIR$/RestFul.py" />
+    <entry file="file://$PROJECT_DIR$/test" />
+    <entry file="file://$PROJECT_DIR$/RestFul.py" />
+    <entry file="file://$PROJECT_DIR$/test" />
+    <entry file="file://$PROJECT_DIR$/RestFul.py" />
+    <entry file="file://$PROJECT_DIR$/test" />
+    <entry file="file://$PROJECT_DIR$/RestFul.py" />
+    <entry file="file://$PROJECT_DIR$/test" />
+    <entry file="file://$PROJECT_DIR$/RestFul.py" />
+    <entry file="file://$PROJECT_DIR$/test" />
+    <entry file="file://$PROJECT_DIR$/RestFul.py" />
+    <entry file="file://$PROJECT_DIR$/test" />
+    <entry file="file://$PROJECT_DIR$/RestFul.py" />
+    <entry file="file://$PROJECT_DIR$/test" />
+    <entry file="file://$PROJECT_DIR$/RestFul.py" />
+    <entry file="file://$PROJECT_DIR$/RestFul.py" />
+    <entry file="file://$PROJECT_DIR$/RestFul.py" />
+    <entry file="file://$PROJECT_DIR$/RestFul.py" />
+    <entry file="file://$PROJECT_DIR$/RestFul.py" />
     <entry file="file://$PROJECT_DIR$/test" />
     <entry file="file://$PROJECT_DIR$/RestFul.py" />
     <entry file="file://$PROJECT_DIR$/test" />
@@ -331,13 +338,7 @@
     <entry file="file://$USER_HOME$/Downloads/Compressed/REST-tutorial-0.3/rest-server.py" />
     <entry file="file://$USER_HOME$/Downloads/Compressed/REST-tutorial-0.6/rest-server.py" />
     <entry file="file://$USER_HOME$/Downloads/Compressed/REST-tutorial-0.5/rest-server.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/sqlalchemy/engine/url.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="242" selection-start-line="242" selection-end-line="242" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/sqlalchemy/engine/url.py" />
     <entry file="file://$USER_HOME$/Downloads/Compressed/REST-tutorial-0.4/rest-server.py" />
     <entry file="file://$PROJECT_DIR$/test" />
     <entry file="file://$PROJECT_DIR$/RestFul.py" />
@@ -358,68 +359,10 @@
     <entry file="file://$PROJECT_DIR$/bootstrap-datepicker/js/bootstrap-datepicker.js" />
     <entry file="file://$PROJECT_DIR$/datepicker/css/bootstrap-datepicker.css" />
     <entry file="file://$PROJECT_DIR$/Rest.py" />
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test3.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/flask/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="1597" selection-start-line="1597" selection-end-line="1597" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/test2.py" />
-    <entry file="file://$PROJECT_DIR$/schedule.png" />
-    <entry file="file://$PROJECT_DIR$/UPLOAD/test.jpg" />
-    <entry file="file://$PROJECT_DIR$/UPLOAD/14032018_050117.jpg" />
-    <entry file="file://$PROJECT_DIR$/UPLOAD/16032018_013222.png" />
-    <entry file="file://$PROJECT_DIR$/UPLOAD/22032018_041937.jpg" />
-    <entry file="file://$PROJECT_DIR$/UPLOAD/26032018_015623.png" />
-    <entry file="file://$PROJECT_DIR$/UPLOAD/26032018_030346.jpg" />
-    <entry file="file://$PROJECT_DIR$/UPLOAD/26032018_030608.jpg" />
-    <entry file="file://$PROJECT_DIR$/line.py" />
-    <entry file="file://$PROJECT_DIR$/linetest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="104" selection-start-line="16" selection-start-column="104" selection-end-line="16" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reportlab.py" />
-    <entry file="file://$USER_HOME$/Downloads/test.py" />
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="24" lean-forward="true" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testreportlab.py" />
-    <entry file="file://$PROJECT_DIR$/create_pdf.py" />
-    <entry file="file://$PROJECT_DIR$/pdfs.py" />
-    <entry file="file://$PROJECT_DIR$/testprintpdf.py" />
     <entry file="file://$PROJECT_DIR$/test2.py">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <state relative-caret-position="187">
-          <caret line="11" column="31" lean-forward="true" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-=======
-        <state relative-caret-position="119">
-          <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
->>>>>>> abbb8a30c21d6db43437e6877f1ef26be189dd55
-=======
-        <state relative-caret-position="119">
-          <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
->>>>>>> abbb8a30c21d6db43437e6877f1ef26be189dd55
-          <folding>
-            <element signature="e#0#92#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="204">
+          <caret line="133" column="31" lean-forward="true" selection-start-line="133" selection-start-column="31" selection-end-line="133" selection-end-column="31" />
         </state>
       </provider>
     </entry>
