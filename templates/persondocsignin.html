@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ลงชื่อเข้าใช้งาน</title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="775272923869-rlks2trj3sntdhd7880csqojlpb0n741.apps.googleusercontent.com">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+   
+    <script type="text/javascript">
+        function onSignIn(googleUser) {
+            // var profile = googleUser.getBasicProfile();
+            // $(".g-signin2").css("display", "none");
+            // $(".data").css("display", "block");
+            // $("#pic").attr('src',profile.getImageUrl());
+            // $("#email").text(profile.getEmail());
+
+            // var email = document.getElementById("email").value;
+            // $.ajax({
+            //     url: '/persondoc',
+            //     data: JSON.stringify({"email" : email}),
+            //     type: 'POST',
+            //     processData: false,
+            //     contentType: 'application/json; charset=utf-8',
+            //     success: function(response){
+            //         console.log(response);
+            //     },
+            //     error: function(error){
+            //         console.log(error);
+            //     }
+            // });
+
+            window.location = "persondoc";
+        }
+    </script>
+</head>
+<body>
+	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <label id="email" class="form-control-label" style="margin-right: 1rem; display: none;"></label>
+</body>
+</html>

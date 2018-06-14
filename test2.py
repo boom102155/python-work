@@ -674,6 +674,10 @@ def preport():
     return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
       "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 
+@app.route('/signinpersondoc' , methods = ['POST' , 'GET'])
+def signinpersondoc():
+    return render_template("persondocsignin.html")
+
 @app.route('/persondoc' , methods = ['POST' , 'GET'])
 def persondoc():
     conn = db_connect.connect()
@@ -682,6 +686,7 @@ def persondoc():
                           "WHERE d.DOC_ID = pd.DOC_ID AND pd.PERSON_ID = p.PERSON_ID")
     rows = query.fetchall()
     return render_template("persondoc.html", rows=rows)
+
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload():
