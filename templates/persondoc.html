@@ -6,7 +6,7 @@
 	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
     <meta name="google-signin-client_id" content="775272923869-rlks2trj3sntdhd7880csqojlpb0n741.apps.googleusercontent.com">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
@@ -23,83 +23,95 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
 
     <style type="text/css">
+    	body{
+    		font-family: 'Athiti', serif;
+    	}
     	.data{
     		display: none;
     	}
-    	.g-signin2{
+    	/*.g-signin2{
     		display: none;
-    	}
+    	}*/
+
+    	.centered {
+		  	position: fixed;
+		  	top: 50%;
+		  	left: 50%;
+		  	/* bring your own prefixes */
+		  	transform: translate(-50%, -50%);
+		  	text-align: center;
+		}
     </style>
 
    <!--  <script type="text/javascript">
     	$(document).ready(function() {
-    		
+ 
     	});
-
     </script> -->
 
     <script type="text/javascript">
     	function onSignIn(googleUser) {
 			var profile = googleUser.getBasicProfile();
 			// $(".g-signin2").css("display", "none");
+			$(".centered").css("display", "none");
 			$(".data").css("display", "block");
 			$("#pic").attr('src',profile.getImageUrl());
-			$("#email").text(profile.getEmail());
+			$("#email").val(profile.getEmail());
 		}
 		function signOut(){
 			var auth2 = gapi.auth2.getAuthInstance();
 			auth2.signOut().then(function(){
 				alert("You have been successfully signed out");
 				// $(".g-signin2").css("display","block");
+				$(".centered").css("display","block");
 				$(".data").css("display","none");
-				window.location = "signinpersondoc"
+				// window.location = "signinpersondoc"
 			});
 		}
     </script>
     
 </head>
 <body>
-	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	<div class="centered">
+		<h5><b>อ่านเอกสารของคุณ</b></h5>
+		<img src="{{ url_for('static',filename="imgs/document.png")}}" alt="logo" width="120" height="120" />
+		<div class="g-signin2" data-onsuccess="onSignIn" data-width="200" style="margin-top: 1rem;"></div>
+	</div>
+	
 	<div class="data">
 		<div class="container">
 			<form class="form-inline" style="padding-bottom: 2rem;">
 			    <div class="form-group">
 			      	<img id="pic" class="rounded-circle" width="100" height="100" style="margin-right: 1rem;">
-			      	<label id="email" class="form-control-label" style="margin-right: 1rem;"></label>
-					<button onclick="signOut()" class="btn btn-danger">Sign Out</button>
+			      	<!-- <label id="email" class="form-control-label" style="margin-right: 1rem;"></label> -->
+			      	<input type="text" id="email" class="form-control" autocomplete="off" readonly style="margin-right: 1rem; width: 250px;">
+					<button onclick="signOut()" class="btn btn-danger">ลงชื่อออก</button>
 			    </div> 
 			</form>
 			
-			<h3>เอกสารของคุณ</h3>
-			<table id="example" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-	            <thead> 
-	            	<th>เลขใบ</th>
-	                <th>วันที่เอกสาร</th>
-	                <th>เลขที่เอกสาร</th>
-	                <th>หัวข้อเรื่อง</th>
-	                <th>ชื่อไฟล์</th>
-	                <th>ผู้เกี่ยวข้อง</th>
-	      	               
-	            </thead>
-	            {% for row in rows %}
-	            <tr>
-	            	<td>{{row[0]}}</td>
-	                <td>{{row[1]}}</td>
-	                <td>{{row[2]}}</td>
-	                <td>{{row[3]}}</td>
-	                <!-- <a href="{{row[4]}}"><td>{{row[4]}}</td></a> -->
-	                <td>
-	                <a target="_blank" href="{{ url_for('static', filename='UPLOAD/' + row[4]) }}">
-					    <div>
-					      {{row[4]}}
-					    </div>
-					</a>
-					</td>
-	                <td>{{row[5]}}</td>                
-	            </tr>
-	            {% endfor %}
-	        </table> 
+			<button type="submit" id="btnShowDoc" class="btn btn-primary" style="margin-bottom: 1rem;">แสดงเอกสาร</button>
+			<script type="text/javascript">
+				$('#btnShowDoc').click(function(){
+					var getemail = document.getElementById("email").value;
+		            $.ajax({
+		                url: '/showpersondoc',
+		                data: JSON.stringify({"getemail" : getemail}),
+		                type: 'POST',
+		                processData: false,
+		                contentType: 'application/json; charset=utf-8',
+		                success: function(response){
+		                    console.log(response);
+		                },
+		                error: function(error){
+		                    console.log(error);
+		                }
+		            });
+		            window.location = "showpersondoc";
+				});
+			</script>
 		</div>
-	</div>	
+	</div>
+
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
 </html>
