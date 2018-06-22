@@ -690,7 +690,6 @@ def getsessionemail():
         data = zip(list1, list2)
         d = dict(data)
         session['useremail'] = ''.join(list2)
-        print(session['useremail'])
     return jsonify(d)
 
 @app.route('/showpersondoc' , methods = ['POST' , 'GET'])
