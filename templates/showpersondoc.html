@@ -21,12 +21,16 @@
     <style type="text/css">
         body{
             font-family: 'Athiti', serif;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
         }
     </style>
     
 </head>
 <body>
     <div class="container">
+        <button type="button" onclick="window.open('', '_self', ''); window.close();" class="btn btn-primary" style="margin-bottom: 1rem;">ปิดหน้านี้</button>
+        
         <h3>เอกสารของคุณ</h3>
         <table id="example" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
             <thead> 
@@ -44,7 +48,7 @@
                 <td>{{row[1]}}</td>
                 <td>{{row[2]}}</td>
                 <td>{{row[3]}}</td>
-                <a href="{{row[4]}}"><td>{{row[4]}}</td></a>
+                <!-- <a href="{{row[4]}}"><td>{{row[4]}}</td></a> -->
                 <td>
                 <a target="_blank" href="{{ url_for('static', filename='UPLOAD/' + row[4]) }}">
                     <div>

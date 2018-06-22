@@ -28,6 +28,12 @@
     	}
     	.data{
     		display: none;
+    		position: fixed;
+		  	top: 50%;
+		  	left: 50%;
+		  	/* bring your own prefixes */
+		  	transform: translate(-50%, -50%);
+		  	text-align: center;
     	}
     	/*.g-signin2{
     		display: none;
@@ -61,11 +67,23 @@
 		function signOut(){
 			var auth2 = gapi.auth2.getAuthInstance();
 			auth2.signOut().then(function(){
-				alert("You have been successfully signed out");
+				alert("คุณออกจากระบบเรียบร้อย");
 				// $(".g-signin2").css("display","block");
 				$(".centered").css("display","block");
 				$(".data").css("display","none");
 				// window.location = "signinpersondoc"
+			});
+
+			$.ajax({
+				url: '/dropsessionuseremail',
+				contentType: 'application/json; charset=utf-8',
+				success: function(response){
+					console.log(response);
+					// window.location = "login";
+				},
+				error: function(error){
+					console.log(error);
+				}
 			});
 		}
     </script>
@@ -80,35 +98,39 @@
 	
 	<div class="data">
 		<div class="container">
-			<form class="form-inline" style="padding-bottom: 2rem;">
-			    <div class="form-group">
+			<form>
+			    <div class="form-group">	
 			      	<img id="pic" class="rounded-circle" width="100" height="100" style="margin-right: 1rem;">
-			      	<!-- <label id="email" class="form-control-label" style="margin-right: 1rem;"></label> -->
-			      	<input type="text" id="email" class="form-control" autocomplete="off" readonly style="margin-right: 1rem; width: 250px;">
-					<button onclick="signOut()" class="btn btn-danger">ลงชื่อออก</button>
 			    </div> 
+			    <div class="form-group">
+			    	<!-- <label id="email" class="form-control-label" style="margin-right: 1rem;"></label> -->
+		    		<input type="text" id="email" class="form-control" autocomplete="off" readonly style="margin-right: 1rem; width: 220px; text-align: center;">
+		    	</div>
+		    	<div class="form-group">
+					<button onclick="signOut()" class="btn btn-danger">ลงชื่อออก</button>
+					<button type="submit" id="btnShowDoc" class="btn btn-primary" style="margin-left: 1rem;">ดูเอกสาร</button>
+				</div>
+				<script type="text/javascript">
+					$('#btnShowDoc').click(function(){
+						var getemail = document.getElementById("email").value;
+			            $.ajax({
+			                url: '/getsessionemail',
+			                data: JSON.stringify({"getemail" : getemail}),
+			                type: 'POST',
+			                processData: false,
+			                contentType: 'application/json; charset=utf-8',
+			                success: function(response){
+			                    console.log(response);
+			                    window.open("showpersondoc", '_blank');
+			                },
+			                error: function(error){
+			                    console.log(error);
+			                    // alert("คุณไม่มีสิทธิ์เข้าถึงข้อมูล หรือไม่ได้อยู่ในระบบ")
+			                }
+			            });   
+					});
+				</script>  
 			</form>
-			
-			<button type="submit" id="btnShowDoc" class="btn btn-primary" style="margin-bottom: 1rem;">แสดงเอกสาร</button>
-			<script type="text/javascript">
-				$('#btnShowDoc').click(function(){
-					var getemail = document.getElementById("email").value;
-		            $.ajax({
-		                url: '/showpersondoc',
-		                data: JSON.stringify({"getemail" : getemail}),
-		                type: 'POST',
-		                processData: false,
-		                contentType: 'application/json; charset=utf-8',
-		                success: function(response){
-		                    console.log(response);
-		                },
-		                error: function(error){
-		                    console.log(error);
-		                }
-		            });
-		            window.location = "showpersondoc";
-				});
-			</script>
 		</div>
 	</div>
 

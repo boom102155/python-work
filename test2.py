@@ -678,16 +678,38 @@ def preport():
 def persondoc():
     return render_template("persondoc.html")
 
-@app.route('/showpersondoc' , methods = ['POST' , 'GET'])
-def showpersondoc():
+@app.route('/getsessionemail' , methods = ['POST' , 'GET'])
+def getsessionemail():
     data = request.get_json()
     conn = db_connect.connect()
-    # print(data["getemail"])
-    query = conn.execute("SELECT d.DOC_ID, TO_CHAR(d.DOC_DATE,'yyyy-mm-dd') as docdate, d.DOC_NO, d.TOPIC, d.PATH_PIC, (p.NAME || ' ' || p.SURNAME) as person "
-                            "FROM DOCUMENT d , PERSON_DOC pd , PERSON p "
-                            "WHERE d.DOC_ID = pd.DOC_ID AND pd.PERSON_ID = p.PERSON_ID AND p.EMAIL = '" + (data["getemail"]) + "'")
+    query = conn.execute("SELECT p.EMAIL FROM PERSON p WHERE p.EMAIL = '" + (data["getemail"]) + "'")
     rows = query.fetchall()
-    return render_template("showpersondoc.html" , rows=rows)
+    for row in rows:
+        list1 = ["EMAIL"]
+        list2 = [row["email"]]
+        data = zip(list1, list2)
+        d = dict(data)
+        session['useremail'] = ''.join(list2)
+        print(session['useremail'])
+    return jsonify(d)
+
+@app.route('/showpersondoc' , methods = ['POST' , 'GET'])
+def showpersondoc():
+    if 'useremail' in session:
+        useremail = session['useremail']
+        conn = db_connect.connect()
+        query = conn.execute("SELECT d.DOC_ID, TO_CHAR(d.DOC_DATE,'yyyy-mm-dd') as docdate, d.DOC_NO, d.TOPIC, d.PATH_PIC, (p.NAME || ' ' || p.SURNAME) as person "
+                                "FROM DOCUMENT d , PERSON_DOC pd , PERSON p "
+                                "WHERE d.DOC_ID = pd.DOC_ID AND pd.PERSON_ID = p.PERSON_ID AND p.EMAIL = '" + useremail + "'")
+        rows = query.fetchall()
+        return render_template("showpersondoc.html" , rows=rows)
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/persondoc'></b>" + \
+           "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
+@app.route('/dropsessionuseremail' , methods = ['POST' , 'GET'])
+def dropsessionuseremail():
+    session.pop('useremail', None)
+    return 'Dropped'
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload():
