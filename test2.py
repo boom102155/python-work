@@ -229,12 +229,15 @@ def lend():
 def showequipnum():
     data = request.get_json()
     conn = db_connect.connect()
-    query = conn.execute("SELECT QTY FROM EQUIPMENT WHERE EQUIPMENT_ID = " + (data["getval"]))
+    query = conn.execute("SELECT "
+                          "SUMMARY "
+                          "FROM TB_EQUIP "
+                          "WHERE EQUIPMENT_ID = " + (data["getval"]))
     rows = query.fetchall()
 
     for row in rows:
-        list1 = ["QTY"]
-        list2 = [row["qty"]]
+        list1 = ["SUMMARY"]
+        list2 = [row["summary"]]
         data = zip(list1, list2)
         d = dict(data)
         print(d)
