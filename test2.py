@@ -802,6 +802,10 @@ def delperson():
     conn.execute("DELETE FROM PERSON WHERE PERSON_ID = "+ (data["pid"]))
     return json.dumps(data)
 
+@app.route('/holidayform' , methods = ['POST' , 'GET'])
+def holidayform():
+    return render_template("holidayform.html")
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=True)
 

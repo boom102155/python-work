@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>แบบฟอร์มใบลาพักผ่อน</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="css/bootstrap.min.css")}}">
+	<script type="text/javascript" src="{{ url_for('static',filename="js/bootstrap.min.js")}}"></script>
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="css/popup-img.css")}}">
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="css/datepicker/bootstrap-datepicker3.min.css")}}">
+	<script type="text/javascript" src="{{ url_for('static',filename="js/bootstrap-datepicker.min.js")}}"></script>
+	<script type="text/javascript" src="{{ url_for('static',filename="js/locales/bootstrap-datepicker.th.min.js")}}" charset="UTF-8"></script>
+
+	<style type="text/css">
+		body{
+			margin-top: 3rem;
+			margin-bottom: 5rem;
+		}
+		img{
+			display: block;
+			margin-left: auto;
+    		margin-right: auto;
+			width: 100%;
+			max-width: 300px;
+		}
+		.center{
+			display: block;
+			margin-left: auto;
+    		margin-right: auto;
+		}
+		
+		/*A4 CSS*/
+		page[size="A4"] {
+		  	background: white;
+		 	width: 21cm;
+		  	height: 29.7cm;
+		  	display: block;
+		  	margin: 0 auto;
+		  	margin-bottom: 0.5cm;
+		  	box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+		  	border: 1cm solid #fff;
+		}
+		@media print {
+		  	body, page[size="A4"] {
+				margin: 0;
+				box-shadow: 0;
+		  	}
+		}
+
+		/*.dotted-gradient {
+		  	background-image: linear-gradient(to right, #333 40%, rgba(255, 255, 255, 0) 20%);
+		  	background-position: bottom;
+		  	background-size: 3px 1px;
+		  	background-repeat: repeat-x;
+		}*/
+
+		.dotted-gradient{
+			border-bottom: 1px #333 dotted;
+		}
+
+	</style>
+
+</head>
+
+	
+<body>
+	<div class="container">
+
+		<h3>แบบฟอร์มลาพักผ่อน</h3>
+		<hr>
+
+		<button class="accordion">ตัวอย่างแบบฟอร์ม</button>
+		<div class="panel">
+			<h4 style="text-align: center;">ตัวอย่างแบบฟอร์ม</h4>
+			<img id="myImg" src="{{ url_for('static',filename="imgs/simpledoc.jpg")}}" alt="Document">
+			<!-- The Modal -->
+			<div id="myModal" class="modal">
+			  	<span class="close">&times;</span>
+			  	<img class="modal-content" id="img01">
+			  	<div id="caption"></div>
+			</div>
+		</div>
+
+		<br>
+		<h3>รายละเอียดการลา</h3>
+		<hr>
+
+		<ul class="nav nav-tabs">
+		  	<li class="nav-item tablinks" onclick="openTab(event, 'sec1')" id="defaultOpen">
+		    	<a class="nav-link active" href="#">รายละเอียดการลา</a>
+		  	</li>
+		  	<li class="nav-item tablinks" onclick="openTab(event, 'sec2')">
+		    	<a class="nav-link" href="#">แบบใบลาพักผ่อน</a>
+		  	</li>
+		</ul>
+		<br>
+		<div id="sec1" class="tabcontent">
+			<form class="form-horizontal">
+				<div class="form-group">
+			    	<label class="control-label col-sm-3" for="writewhere">เขียนที่:</label>
+			    	<div class="col-sm-3">
+			    		<input type="text" class="form-control" id="writewhere" placeholder="เขียนที่" required>
+			    	</div>    
+			  	</div>
+			  	<div class="form-group">
+			    	<label class="control-label col-sm-3" for="date">วันที่:</label>
+			    	<div class="col-sm-3">
+			    		<input class="form-control today">
+			    	</div>      
+			  	</div>
+			  	
+			  	<br>
+
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="name">ข้าพเจ้า:</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="name" placeholder="ชื่อ-นามสกุล" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="position">ตำแหน่ง:</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="position" placeholder="ตำแหน่ง" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="department">สังกัด:</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="department" placeholder="สังกัด" required>
+					</div>
+				</div>
+
+				<hr>
+		
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="totalday">มีวันลาพักผ่อนสะสม:</label>
+					<div class="col-sm-2">
+						<input type="number" class="form-control subt" id="totalday" placeholder="วันลาสะสม" required>
+					</div>
+					<label class="control-label">วันทำการ</label>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="availableday">มีสิทธิลาพักผ่อนประจำปีนี้อีก:</label>
+					<div class="col-sm-2">
+						<input type="number" class="form-control subt" id="availableday" placeholder="มีสิทธิลา" required>
+					</div>
+					<label class="control-label">วันทำการ</label>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="dayresult">รวมเป็น:</label>
+					<div class="col-sm-2">
+						<!-- <output class="form-control" id="dayresult"></output> -->
+						<input type="number" class="form-control" id="dayresult" required>
+					</div>
+					<label class="control-label">วันทำการ</label>
+				</div>
+			
+				<br>
+			
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="firstdate">ขอลาพักผ่อนตั้งแต่วันที่:</label>
+					<div class="col-sm-2">
+						<input class="form-control fromdate" placeholder="วว/ดด/ปปปป">
+						<!-- <p class="time1"></p> -->
+						<!-- <input type="text" class="time1"> -->
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="seconddate">ถึงวันที่:</label>
+					<div class="col-sm-2">
+						<input class="form-control todate" placeholder="วว/ดด/ปปปป">
+						<!-- <p class="time2"></p> -->
+						<!-- <input type="text" class="time2"> -->
+					</div>	
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="dateresult">มีกำหนด:</label>
+					<div class="col-sm-2">
+						<!-- <input type="number" class="form-control" id="dateresult"> -->
+						<output class="form-control dateresult"></output>
+					</div>
+					<label class="control-label">วัน</label>
+				</div>
+				
+				<hr>
+
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="contact">ระหว่างลาติดต่อข้าพเจ้าได้ที่:</label>
+					<div class="col-sm-4">
+						<!-- <input type="text" class="form-control" id="contact" placeholder="ที่อยู่"> -->
+						<textarea maxlength="80" class="form-control" id="contact" placeholder="ที่อยู่"></textarea>
+						<p class="textlength"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="phonenumber">เบอร์โทรติดต่อ:</label>
+					<div class="col-sm-4">
+						<input maxlength="10" type="text" class="form-control" id="phonenumber" placeholder="ตัวอย่าง 0901119999" required>
+						<p class="numberlength"></p>
+					</div>
+				</div>
+			</form>
+		</div> <!-- end sec1 -->
+
+		<div id="sec2" class="tabcontent">
+			<br>
+			<div style="text-align: center;">
+				<button type="button" id="btnPrint" class="btn btn-primary" onClick="printContent('doc')">พิมพ์เอกสาร</button>
+			</div>
+			<br>
+			<div id="doc">
+				<page size="A4">
+					<h4 style="text-align: center;"><u>แบบใบลาพักผ่อน</u></h4>
+					<br>
+					<table>
+						<tr>
+							<td style="width: 480px; text-align: right;">เขียนที่&nbsp;&nbsp;</td>
+							<td style="width: 240px; text-align: left;" id="cont1" class="dotted-gradient"></td>
+						</tr>
+						
+					</table>
+					<table>
+						<tr>
+							<td style="width: 480px; text-align: right; padding-top: 5px;">วันที่&nbsp;&nbsp;</td>
+							<td style="text-align: center; padding-top: 5px; width: 55px;" id="cont2" class="dotted-gradient"></td>
+							<td>เดือน</td>
+							<td style="text-align: center; padding-top: 5px; width: 55px;" id="cont2-1" class="dotted-gradient"></td>
+							<td>พ.ศ.</td>	
+							<td style="text-align: center; padding-top: 5px; width: 70px;" id="cont2-2" class="dotted-gradient"></td>		
+						</tr>
+					</table>
+
+					<table>
+						<tr>
+							<td>เรื่อง&nbsp;&nbsp;</td>
+							<td>ขอลาพักผ่อน</td>
+						</tr>
+
+						<tr>
+							<td>เรียน</td>
+							<td>คณบดีคณะบริหารธุรกิจและเทคโนโลยีสารสนเทศ</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td></td>
+							<td style="width: 150px; text-align: right;">ข้าพเจ้า</td>
+							<td style="width: 300px; text-align: center;" id="cont3" class="dotted-gradient"></td>
+							<td>ตำแหน่ง</td>
+							<td style="width: 220px; text-align: center;" id="cont4" class="dotted-gradient"></td>	
+						</tr>
+						<tr>
+							<td colspan="1" style="padding-top: 5px;">สังกัด&nbsp;</td>
+							<td colspan="4" style="width: 700px; padding-top: 5px;" id="cont5" class="dotted-gradient"></td>
+						</tr>
+						
+					</table>
+
+					<table>
+						<tr>
+							<td style="padding-top: 5px;">มีวันลาพักผ่อนสะสม</td>
+							<td style="width: 70px; text-align: center; padding-top: 5px;" id="cont6" class="dotted-gradient"></td>
+							<td style="padding-top: 5px;">วันทำการ มีสิทธิลาพักผ่อนประจำปีนี้อีก</td>
+							<td style="width: 70px; text-align: center; padding-top: 5px;" id="cont7" class="dotted-gradient"></td>
+							<td style="padding-top: 5px;">วันทำการ&nbsp;รวมเป็น</td>
+							<td style="width: 85px; text-align: center; padding-top: 5px;" id="cont8" class="dotted-gradient"></td>
+							<td style="padding-top: 5px;">วันทำการ</td>
+						</tr>
+					</table>
+					
+					<table>
+						<tr>
+							<td style="padding-top: 5px;">ขอลาพักผ่อนตั้งแต่วันที่</td>
+							<td style="width: 180px; text-align: center; padding-top: 5px;" id="cont9" class="dotted-gradient"></td>
+							<td style="padding-top: 5px;">ถึงวันที่</td>
+							<td style="width: 180px; text-align: center; padding-top: 5px;" id="cont10" class="dotted-gradient"></td>
+							<td style="padding-top: 5px;">มีกำหนด</td>
+							<td style="width: 110px; text-align: center; padding-top: 5px;" id="cont11" class="dotted-gradient"></td>
+							<td style="padding-top: 5px;">วัน</td>
+						</tr>
+					</table>
+
+					<table>
+						<tr>
+							<td style="width: 200px; padding-top: 5px;">ในระหว่างลาจะติดต่อข้าพเจ้าได้ที่&nbsp;</td>
+							<td style="width: 515px; padding-top: 5px;" id="cont12" class="dotted-gradient"></td>
+						</tr>
+					</table>
+
+					<table>
+						<tr>
+							<td style="width: 350px; padding-top: 5px;" class="dotted-gradient"></td>
+							<td style="padding-top: 5px;">หมายเลขโทรศัพท์</td>
+							<td style="width: 260px; text-align: center; padding-top: 5px;" id="cont13" class="dotted-gradient"></td>
+						</tr>
+					</table>
+					<br>
+					<table>
+						<tr>
+							<td style="text-align: right; width: 720px;">
+								<p>(ลงชื่อ).............................................................</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: right; width: 720px;">
+								<p>(..........................................................)</p>
+							</td>
+						</tr>
+					</table>
+
+					<table>
+						<tr>
+							<td><p><u>สถิติการลาในปีงบประมาณนี้</u></p></td>
+						</tr>
+					</table>
+
+					<table border="1">
+						<tr>
+							<td style="width: 100px;text-align: center;">
+								ลามาแล้ว<br> (วันทำการ)
+							</td>
+							<td style="width: 100px; text-align: center;">
+								ลาครั้งนี้<br>(วันทำการ)
+								
+							</td>
+							<td style="width: 100px; text-align: center;">
+								รวมเป็น<br>(วันทำการ)
+								
+							</td>
+						</tr>
+						<tr>
+							<td style="height: 40px;">&nbsp;</td>
+							<td style="height: 40px;">&nbsp;</td>
+							<td style="height: 40px;">&nbsp;</td>
+						</tr>
+					</table>
+
+					<table style="margin-top: 2rem;">
+						<tr>
+							<td style="width: 440px;">
+								<p>(ลงชื่อ)...................................................ผู้ตรวจสอบ</p>
+							</td>
+							<td style="width: 280px;">
+								<p><u>ความคิดเห็นผู้บังคับบัญชา</u></p>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-left: 35px;">
+								<p>(...................................................)</p>
+							</td>
+							<td>
+								<p>........................................................................</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>ตำแหน่ง.................................................</p>
+							</td>
+							<td>
+								<p>........................................................................</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>วันที่................./.................../.................</p>
+							</td>
+						</tr>
+					</table>
+
+					<table>
+						<tr>
+							<td style="width: 720px; text-align: right;">
+								<p>(ลงชื่อ).............................................................</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: right;">
+								<p>(............................................................)</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: right;">
+								<p>ตำแหน่ง...........................................................</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: right;">
+								<p>วันที่...................../...................../.....................</p>
+							</td>
+						</tr>
+					</table>
+
+					<table style="margin-top: 1rem;">
+						<tr>
+							<td style="width: 440px;"></td>
+							<td style="width: 280px; text-align: left;">
+								<p><u>คำสั่ง</u></p>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td style="text-align: center;">
+								<p>❒ อณุญาต
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									
+								❒ ไม่อณุญาต</p>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" style="text-align: right;">
+								<p>........................................................................</p>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" style="text-align: right;">
+								<p>........................................................................</p>
+							</td>
+						</tr>
+					</table>
+
+					<table style="margin-top: 1rem;">
+						<tr>
+							<td style="width: 720px; text-align: right;">
+								<p>(ลงชื่อ).............................................................</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: right;">
+								<p>(............................................................)</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: right;">
+								<p>ตำแหน่ง...........................................................</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: right;">
+								<p>วันที่...................../...................../.....................</p>
+							</td>
+						</tr>
+					</table>
+				</page>
+			</div> <!-- doc -->
+		</div><!-- end sec2 -->
+	</div> <!-- end container -->
+	
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="css/accordion.css")}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="css/nav-tab.css")}}">
+	<script type="text/javascript" src="{{ url_for('static',filename="js/popup-img.js")}}"></script>
+	<script type="text/javascript" src="{{ url_for('static',filename="js/between-date.js")}}"></script>
+	<script type="text/javascript" src="{{ url_for('static',filename="js/content-values.js")}}"></script>
+	<script type="application/javascript">
+		function printContent(el){
+			var r = confirm("กรุณาตรวจสอบเอกสารของท่านก่อนทำการปริ้น\nหากต้องการปริ้นกด 'ตกลง'");
+			if (r == true) {
+				var restorepage = document.body.innerHTML;
+				var printcontent = document.getElementById(el).innerHTML;
+				document.body.innerHTML = printcontent;
+				window.print();
+				document.body.innerHTML = restorepage;
+				window.location.reload(true);
+			}else{
+
+			}
+				
+		}
+		
+	</script>
+
+	<script type="text/javascript">
+		function openTab(evt, tapName) {
+		    var i, tabcontent, tablinks;
+		    tabcontent = document.getElementsByClassName("tabcontent");
+		    for (i = 0; i < tabcontent.length; i++) {
+		        tabcontent[i].style.display = "none";
+		    }
+		    tablinks = document.getElementsByClassName("tablinks");
+		    for (i = 0; i < tablinks.length; i++) {
+		        tablinks[i].className = tablinks[i].className.replace(" active", "");
+		    }
+		    document.getElementById(tapName).style.display = "block";
+		    evt.currentTarget.className += " active";
+		}
+		document.getElementById("defaultOpen").click();
+	</script>
+
+	<script>
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		  acc[i].addEventListener("click", function() {
+		    this.classList.toggle("active");
+		    var panel = this.nextElementSibling;
+		    if (panel.style.maxHeight){
+		      panel.style.maxHeight = null;
+		    } else {
+		      panel.style.maxHeight = panel.scrollHeight + "px";
+		    } 
+		  });
+		}
+	</script>
+	<!-- <script type="text/javascript">
+		++++++++++++Sum++++++++++++
+		$('.form-group').on('input','.subt',function(){
+			var totalSum = 0;
+			$('.form-group .subt').each(function(){
+				var inputVal = $(this).val();
+				if($.isNumeric(inputVal)){
+					totalSum += parseFloat(inputVal);
+				}
+			});
+			$('#result').text(totalSum);
+		});
+		++++++++++++Subtract++++++++++++
+		$(document).ready(function() {
+		    //this calculates values automatically 
+		    sum();
+		    $("#totalday, #availableday").on("keydown keyup", function() {
+		        sum();
+		    });
+		});
+		function sum() {
+	        var num1 = document.getElementById('totalday').value;
+	        var num2 = document.getElementById('availableday').value;
+			var result = parseInt(num1) - parseInt(num2);
+	        if (!isNaN(result)) {
+				document.getElementById('dayresult').value = result;
+	        }
+	    }
+
+	</script> -->
+	
+
+</body>
+</html>

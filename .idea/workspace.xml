@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c20361aa-bc4c-4168-96a9-abe8686d6c37" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/953.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/953.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/982.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/982.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,8 +24,8 @@
       <file leaf-file-name="test2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="689" column="20" lean-forward="true" selection-start-line="689" selection-start-column="20" selection-end-line="689" selection-end-column="20" />
+            <state relative-caret-position="492">
+              <caret line="806" column="46" lean-forward="true" selection-start-line="806" selection-start-column="46" selection-end-line="806" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -51,6 +51,7 @@
       <find>equipment</find>
       <find>showeq</find>
       <find>getsess</find>
+      <find>login</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -381,8 +382,8 @@
     <entry file="file://$PROJECT_DIR$/Rest.py" />
     <entry file="file://$PROJECT_DIR$/test2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="689" column="20" lean-forward="true" selection-start-line="689" selection-start-column="20" selection-end-line="689" selection-end-column="20" />
+        <state relative-caret-position="492">
+          <caret line="806" column="46" lean-forward="true" selection-start-line="806" selection-start-column="46" selection-end-line="806" selection-end-column="46" />
         </state>
       </provider>
     </entry>
