@@ -16,29 +16,44 @@
     <!-- data table style script -->
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+
+
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
 
     <!-- data table script -->
-	<script type="application/javascript" src="{{ url_for('static',filename="js/jquery.tabletojson.js")}}"></script>
+	<!-- <script type="application/javascript" src="{{ url_for('static',filename="js/jquery.tabletojson.js")}}"></script> -->
     <!-- <script type="text/javascript" src="{{ url_for('static',filename="js/lendTable.js")}}"></script> -->
+
     <script type="text/javascript">
 	    $(document).ready(function() {
-			var oTable = $('#example').dataTable({
-				"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [0] }],
-				stateSave: true
+			var oTable = $('#example').DataTable({
+				// "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [0] }],
+				// stateSave: true
+				buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
 			});
+			oTable.buttons().container()
+        	.appendTo( '#example_wrapper .col-md-6:eq(0)' );
 			
-			var allPages = oTable.fnGetNodes();
-			$('body').on('click', '#checkAll', function () {
-				if ($(this).hasClass('allChecked')) {
-					$('input[type="checkbox"]', allPages).prop('checked', false);
-				} else {
-					$('input[type="checkbox"]', allPages).prop('checked', true);
-				}
-				$(this).toggleClass('allChecked');
-			});   
+			// var allPages = oTable.fnGetNodes();
+			// $('body').on('click', '#checkAll', function () {
+			// 	if ($(this).hasClass('allChecked')) {
+			// 		$('input[type="checkbox"]', allPages).prop('checked', false);
+			// 	} else {
+			// 		$('input[type="checkbox"]', allPages).prop('checked', true);
+			// 	}
+			// 	$(this).toggleClass('allChecked');
+			// });   
 			
 			
 			$('#example tbody').on('click', 'tr', 'td', function () {
@@ -414,7 +429,7 @@
 	<hr>
 	
 	<!-- <div class="container"> -->
-	    <div class="row" style="padding-bottom: 1rem; padding-left: 2rem;">
+	    <!-- <div class="row" style="padding-bottom: 1rem; padding-left: 2rem;">
 	    	<div class="btn-group">
 			  	<button type="button" value="submit" class="btn btn-default" id="checkAll">เลือกทั้งหมด</button>
 			  	<button type="button" value="submit" class="btn btn-primary" id="btnReport">จัดทำรายงาน</button>
@@ -434,7 +449,7 @@
 					if (result.length == 0) {
 						alert("กรุณาเลือกข้อมูลที่ต้องการทำรายงาน");
 					}else{
-//						console.log(result);
+						console.log(result);
 
 						var json = result.map(function () { 
 							return    $(this).children().slice(1).map(function () { 
@@ -447,16 +462,16 @@
 					}															
 				});
 			</script>
-	    </div> 
+	    </div>  -->
     
 	    <div class="row">  
 	    	<!-- <div class="col-12 col-md-1"></div> -->   
 	    	<div class="col-12 col-md-12">   	   	       
 		        <table id="example" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 		            <thead>
-		            	<th>
-<!--		            		 <input type="checkbox" id="checkAll"> -->
-		            	</th>  
+		            	<!-- <th>
+		            		 <input type="checkbox" id="checkAll"> 
+		            	</th> -->  
 		            	<th>รหัสใบยืม</th>
 		                <th>วันที่ยืม</th>
 		                <th>ผู้ให้ยืม</th>
@@ -471,7 +486,7 @@
 		            </thead>
 		            {% for row in rows1 %}
 		            <tr>
-		            	<td style="text-align: center;"><input type="checkbox" id="eachCheck"></td>	
+		            	<!-- <td style="text-align: center;"><input type="checkbox" id="eachCheck"></td>	 -->
 		            	<td>{{row[0]}}</td>
 		                <td>{{row[1]}}</td>
 		                <td>{{row[2]}}</td>
