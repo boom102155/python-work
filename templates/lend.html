@@ -42,7 +42,13 @@
 			var oTable = $('#example').DataTable({
 				// "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [0] }],
 				// stateSave: true
-				buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
+				buttons: [ 'copy', 'excel', 'pdf', 'colvis' ],
+				createdRow : function(row, data, dataIndex) {							
+					if (data[10] == "ยังไม่ได้คืน") {
+						$('td', row).eq(10).addClass('highlight');				
+					}	
+				}
+
 			});
 			oTable.buttons().container()
         	.appendTo( '#example_wrapper .col-md-6:eq(0)' );
@@ -77,8 +83,8 @@
 		});
 	</script>   
 	
-	<!-- <style type="text/css">
-		.content{
+	 <style type="text/css">
+		/* .content{
             display: none;
         }
 
@@ -89,8 +95,12 @@
             left: 50%;
             margin-right: -50%;
             transform: translate(-50%, -50%);
-        }
-	</style> -->
+        } */
+		td.highlight {
+        	font-weight: bold;
+        	color: red;
+    	}
+	</style> 
 
     <!-- script date picker -->   
     <link rel="stylesheet" href="{{ url_for('static',filename="datepicker/dist/css/bootstrap-datepicker.css")}}">
