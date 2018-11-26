@@ -248,6 +248,7 @@ def addinspection():
     try:
         data = request.get_json()
         conn = db_connect.connect()
+
         conn.execute("INSERT INTO LEND_INSPECTION (LEND_NO, INSPECTION_DATE, INSPECTION_STATUS, STAFF_ID, CREATE_DATE, UPDATE_DATE) "
                      "VALUES (:1, TO_DATE(:2, 'yyyy-mm-dd'), :3, :4, TO_DATE(:5, 'yyyy-mm-dd'), TO_DATE(:6, 'yyyy-mm-dd'))",
                      (data["lendno"], data["inspdate"], data["sta"], data["staff"], data["createdate"], data["update"]))
