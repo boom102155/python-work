@@ -409,9 +409,11 @@
 						// lend-detail
 						var eid = document.getElementById("sequip").value;
 
+						var numofequip = document.getElementById("showequipnum").value;
 
-						if (pid == "" || pname == "" || psurname == "" || sid == "") {
-							alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+
+						if (pid == "" || pname == "" || psurname == "" || sid == "" || numofequip == 0) {
+							alert("ไม่สามารถบันทึกข้อมูลได้เนื่องจาก \n - กรอกข้อมูลไม่ครบถ้วน \n - จำนวนอุปกรณ์ไม่เพียงพอ");
 							return false;
 						}
 						else{
