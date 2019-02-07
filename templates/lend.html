@@ -73,12 +73,21 @@
 			    $("#txtType").val($(this).closest('tr').children()[4].textContent);
 			    $("#sFaculty").val($(this).closest('tr').children()[5].textContent);
 			    $("#sClass").val($(this).closest('tr').children()[6].textContent);
+				$("#txtEID").val($(this).closest('tr').children()[7].textContent);
+				$("#txtSerial").val($(this).closest('tr').children()[8].textContent);
+			    $("#txtEquipment").val($(this).closest('tr').children()[9].textContent);
 
 			    $("#txtILendNO").val($(this).closest('tr').children()[0].textContent);
-			    $("#txtEID").val($(this).closest('tr').children()[7].textContent);
 			    $("#txtIeid").val($(this).closest('tr').children()[7].textContent);
-			    $("#txtSerial").val($(this).closest('tr').children()[8].textContent);
-			    $("#txtEquipment").val($(this).closest('tr').children()[9].textContent);
+				$("#txtstatus").text($(this).closest('tr').children()[10].textContent);	
+				
+				if ($("#txtstatus").text() == "คืนแล้ว") {
+					$("#txtstatus").css("color", "green");
+					document.getElementById("btnUpdate").disabled = true;
+				} else {
+					$("#txtstatus").css("color", "red");
+					document.getElementById("btnUpdate").disabled = false;
+				}	    
 		    });			
 		});
 	</script>   
@@ -645,7 +654,13 @@
 						            		}
 						               	})
 						            </script>
-				      			</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="txtstatus" class="form-control-label">สถานะ:</label>
+									<label type="text" class="form-control-label" id="txtstatus" readonly="readonly"></label>
+								</div>
+								
 				      			<div class="form-group">
 				      				<label for="txtInspection" class="form-control-label">รายละเอียด</label>
 				      				<textarea class="form-control" id="txtInspection"></textarea>  
@@ -730,7 +745,7 @@
 	        		<button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
 	      		</div>
 	    	</div><!-- /.modal-content -->
-  		</div><!-- /.modal-dialog -->
+		</div><!-- /.modal-dialog -->
   	</div><!-- /.modal -->
   	</div>
   	<!-- <script type="text/javascript">
@@ -739,7 +754,9 @@
                 $(".content").fadeIn(500);
             })
         })
-    </script> -->
+	</script> -->
+	
+	
     {% endblock %}
 </body>
 </html>
