@@ -42,6 +42,7 @@
 			var oTable = $('#example').DataTable({
 				// "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [0] }],
 				// stateSave: true
+				"order": [[ 0, "desc" ]],
 				buttons: [ 'copy', 'excel', 'pdf', 'colvis' ],
 				createdRow : function(row, data, dataIndex) {							
 					if (data[10] == "ยังไม่ได้คืน") {
