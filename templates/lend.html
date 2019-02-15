@@ -94,11 +94,11 @@
 	</script>   
 	
 	 <style type="text/css">
-		/* .content{
+		/*.content{
             display: none;
         }
 
-        .preload{
+         .preload{
             margin: 0;
             position: absolute;
             top: 50%;
@@ -106,10 +106,29 @@
             margin-right: -50%;
             transform: translate(-50%, -50%);
         } */
+
 		td.highlight {
         	font-weight: bold;
         	color: red;
     	}
+
+		.mycontent-left {
+		  border-right: 1px solid #EEEEEE;
+		}
+		.ui-autocomplete {
+			max-height: 100px;
+			overflow-y: auto;
+			/* prevent horizontal scrollbar */
+			overflow-x: hidden;
+		}
+		
+		* html .ui-autocomplete {
+			height: 100px;
+		}
+
+		body{
+			display: none;
+		}
 	</style> 
 
     <!-- script date picker -->   
@@ -126,28 +145,12 @@
             }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
         }); 		
   	</script>
-    <style type="text/css">
-    	.mycontent-left {
-		  border-right: 1px solid #EEEEEE;
-		}
-		.ui-autocomplete {
-			max-height: 100px;
-			overflow-y: auto;
-			/* prevent horizontal scrollbar */
-			overflow-x: hidden;
-		}
-		/* IE 6 doesn't support max-height
-		 * we use height instead, but this forces the menu to always be this tall
-		 */
-		* html .ui-autocomplete {
-			height: 100px;
-		}
-    </style>
+    
     {% endblock %}
 </head>
 <body>
 	<!-- <div class="preload">
-        <img src="{{ url_for('static',filename="imgs/loading.gif")}}" width="130px" height="100px">
+        <img src="{{ url_for('static',filename="imgs/loadingpage.gif")}}" width="130px" height="100px">
     </div> -->
     <div class="content">
     	   
@@ -756,6 +759,11 @@
             })
         })
 	</script> -->
+	<script>
+		$(function(){
+			$('body').fadeIn(1000);
+		});
+	</script>
 	
 	
     {% endblock %}
