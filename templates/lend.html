@@ -45,8 +45,8 @@
 				"order": [[ 0, "desc" ]],
 				buttons: [ 'copy', 'excel', 'pdf', 'colvis' ],
 				createdRow : function(row, data, dataIndex) {							
-					if (data[10] == "ยังไม่ได้คืน") {
-						$('td', row).eq(10).addClass('highlight');				
+					if (data[11] == "ยังไม่ได้คืน") {
+						$('td', row).eq(11).addClass('highlight');				
 					}	
 				}
 
@@ -71,16 +71,16 @@
 		        $("#txtDate").val($(this).closest('tr').children()[1].textContent);
 			    $("#txtName").val($(this).closest('tr').children()[2].textContent);
 			    $("#txtSurname").val($(this).closest('tr').children()[3].textContent);
-			    $("#txtType").val($(this).closest('tr').children()[4].textContent);
-			    $("#sFaculty").val($(this).closest('tr').children()[5].textContent);
-			    $("#sClass").val($(this).closest('tr').children()[6].textContent);
-				$("#txtEID").val($(this).closest('tr').children()[7].textContent);
-				$("#txtSerial").val($(this).closest('tr').children()[8].textContent);
-			    $("#txtEquipment").val($(this).closest('tr').children()[9].textContent);
+			    $("#txtType").val($(this).closest('tr').children()[5].textContent);
+			    $("#sFaculty").val($(this).closest('tr').children()[6].textContent);
+			    $("#sClass").val($(this).closest('tr').children()[7].textContent);
+				$("#txtEID").val($(this).closest('tr').children()[8].textContent);
+				$("#txtSerial").val($(this).closest('tr').children()[9].textContent);
+			    $("#txtEquipment").val($(this).closest('tr').children()[10].textContent);
 
 			    $("#txtILendNO").val($(this).closest('tr').children()[0].textContent);
-			    $("#txtIeid").val($(this).closest('tr').children()[7].textContent);
-				$("#txtstatus").text($(this).closest('tr').children()[10].textContent);	
+			    $("#txtIeid").val($(this).closest('tr').children()[8].textContent);
+				$("#txtstatus").text($(this).closest('tr').children()[11].textContent);	
 				
 				if ($("#txtstatus").text() == "คืนแล้ว") {
 					$("#txtstatus").css("color", "green");
@@ -502,7 +502,8 @@
 		            	<th>รหัสใบยืม</th>
 		                <th>วันที่ยืม</th>
 		                <th>ผู้ให้ยืม</th>
-		                <th>ผู้ยืม</th>
+						<th>ผู้ยืม</th>
+						<th>รหัสผู้ยืม</th>
 		                <th>สถานะ</th>
 		                <th>สาขา</th>
 		                <th>ชั้นปี</th>
@@ -517,14 +518,15 @@
 		            	<td>{{row[0]}}</td>
 		                <td>{{row[1]}}</td>
 		                <td>{{row[2]}}</td>
-		                <td>{{row[3]}}</td>
-		                <td>{{row[4]}}</td>
+						<td>{{row[3]}}</td>
+						<td>{{row[4]}}</td>
 		                <td>{{row[5]}}</td>
 		                <td>{{row[6]}}</td>
-		                <td>{{row[7]}}</td> 
-		                <td>{{row[8]}}</td>                    
-		                <td>{{row[9]}}</td>
-		                <td>{{row[10]}}</td>	                
+		                <td>{{row[7]}}</td>
+		                <td>{{row[8]}}</td> 
+		                <td>{{row[9]}}</td>                    
+		                <td>{{row[10]}}</td>
+		                <td>{{row[11]}}</td>	                
 					</tr>
 		            {% endfor %}
 
