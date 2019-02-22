@@ -138,7 +138,7 @@
 								else{
 									alert("บันทึกข้อมูลเรียบร้อย");
 									$.ajax({
-										url: '/saveroom941',
+										url: '/saveroom',
 										data: JSON.stringify({"rname" : rname ,"locate" : locate , "status" : status , "description" : description , "checker" : checker , "cdate" : cdate}),
 										type: 'POST',
 										processData: false,

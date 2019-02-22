@@ -575,6 +575,25 @@ def room953():
     return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
            "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 
+# ================= 953 ===================
+@app.route('/room962' , methods = ['POST' , 'GET'])
+def room962():
+    conn = db_connect.connect()
+    if 'user' in session:
+        username = session['user']
+        query = conn.execute("SELECT STAFF_ID FROM STAFF "
+                             "WHERE USER_NAME = '" + username + "'")
+        rows = query.fetchall()
+        for row in rows:
+            list1 = ["STAFF_ID"]
+            list2 = [row["staff_id"]]
+            # data = zip(list1, list2)
+            # d = dict(data)
+            staffid = ', '.join(str(x) for x in list2)
+            return render_template("962.html", username=username, staffid=staffid)
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+           "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
 # ================= 982 ===================
 @app.route('/room982' , methods = ['POST' , 'GET'])
 def room982():
@@ -636,8 +655,8 @@ def roomchecklist():
     return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
            "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 
-@app.route('/saveroom941' , methods = ['POST' , 'GET'])
-def saveroom941():
+@app.route('/saveroom' , methods = ['POST' , 'GET'])
+def saveroom():
     data = request.get_json()
     conn = db_connect.connect()
     conn.execute("INSERT INTO ROOM_CHECKER "
