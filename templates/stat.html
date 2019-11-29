@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    {% block title %}
+	<title>หน้าหลัก</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script type="text/javascript" src="{{ url_for('static',filename="js/jquery.js")}}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+    <link href="https://canvasjs.com/assets/css/jquery-ui.1.11.2.min.css" rel="stylesheet" />
+
+    <style type="text/css">
+    	.header{
+    		text-align: center;
+    		padding-bottom: 5rem;
+    	}
+    	.alert{
+    		text-align: center;
+    	}
+    </style>
+
+    <script>
+    window.onload = function () {
+
+    var options = {
+        title: {
+            text: "สถิติการใช้งานในปี {{year}}"
+        },
+
+        animationEnabled: true,
+        data: [{
+            type: "pie",
+            startAngle: 40,
+            toolTipContent: "<b>{label}</b>: {y}%",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 16,
+            indexLabel: "{label} - {y}%",
+
+            dataPoints: [
+               {% for row in rows %}
+                { y: {{row[0]}}, label: "{{row[1]}}" },
+                {% endfor %}
+            ]
+
+        }]
+    };
+    $("#chartContainer").CanvasJSChart(options);
+
+    }
+    </script>
+</head>
+{% endblock %}
+
+<body>
+	{% block body %}
+	<div class="container">
+		<div class="header">
+<!--			<h3>สถิติการใช้งานครุภัณฑ์</h3>-->
+		</div>
+
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
+
+
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<!--    <script src="https://canvasjs.com/assets/script/jquery-ui.1.11.2.min.js"></script>-->
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+	</div>
+
+    {% endblock %}
+</body>
+</html>

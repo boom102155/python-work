@@ -826,6 +826,17 @@ def delperson():
     conn.execute("DELETE FROM PERSON WHERE PERSON_ID = "+ (data["pid"]))
     return json.dumps(data)
 
+@app.route('/stat/<year>', methods = ['POST' , 'GET'])
+def stat(year):
+    conn = db_connect.connect()
+    query = conn.execute("SELECT CAL, EQUIPMENT_NAME FROM REPORTYEARLY WHERE YEARLEND = '"+year+"'")
+    rows = query.fetchall()
+    if 'user' in session:
+        username = session['user']
+        return render_template("stat.html", rows=rows, year=year)
+    return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
+      "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
+
 @app.route('/holidayform' , methods = ['POST' , 'GET'])
 def holidayform():
     return render_template("holidayform.html")
