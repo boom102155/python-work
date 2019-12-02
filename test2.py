@@ -829,11 +829,16 @@ def delperson():
 @app.route('/stat/<year>', methods = ['POST' , 'GET'])
 def stat(year):
     conn = db_connect.connect()
-    query = conn.execute("SELECT CAL, EQUIPMENT_NAME FROM REPORTYEARLY WHERE YEARLEND = '"+year+"'")
-    rows = query.fetchall()
+    query1 = conn.execute("SELECT * FROM "
+                         "(SELECT CAL, EQUIPMENT_NAME FROM REPORTYEARLY WHERE YEARLEND = '"+year+"' "
+                         "ORDER BY CAL DESC) test "
+                         "WHERE ROWNUM <=5")
+    query2 = conn.execute("SELECT EQUIPMENT_NAME, CAL, YEARLEND FROM REPORTYEARLY WHERE YEARLEND = '" + year + "' ")
+    rows1 = query1.fetchall()
+    rows2 = query2.fetchall()
     if 'user' in session:
         username = session['user']
-        return render_template("stat.html", rows=rows, year=year)
+        return render_template("stat.html", rows1=rows1, rows2=rows2, year=year)
     return "คุณยังไม่ได้ลงชื่อเข้าใช้งานระบบ <a href = '/login'></b>" + \
       "คลิกที่นี่เพื่อลงชื่อเข้าใช้งาน</b></a>"
 
