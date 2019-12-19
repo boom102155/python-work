@@ -833,7 +833,7 @@ def stat(year):
                          "(SELECT CAL, EQUIPMENT_NAME FROM REPORTYEARLY WHERE YEARLEND = '"+year+"' "
                          "ORDER BY CAL DESC) test "
                          "WHERE ROWNUM <=5")
-    query2 = conn.execute("SELECT EQUIPMENT_NAME, CAL, YEARLEND FROM REPORTYEARLY WHERE YEARLEND = '" + year + "' ")
+    query2 = conn.execute("SELECT EQUIPMENT_NAME, CAL, YEARLEND FROM REPORTYEARLY WHERE YEARLEND = '"+year+"' ")
     rows1 = query1.fetchall()
     rows2 = query2.fetchall()
     if 'user' in session:
